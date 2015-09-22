@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using okboba.Models;
 
+//some comments
+
 namespace okboba.Controllers
 {
     [Authorize]
