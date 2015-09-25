@@ -8,11 +8,25 @@ namespace okboba.MatchApi.Helpers
 {
     public class UserAnswerBulkDataReader : BulkDataReader
     {
+        int rowCount = 1;
+        int numOfUsers;
+        int numOfQuesPerUser;
+        string schemaName;
+        string tableName;
+
+        public UserAnswerBulkDataReader(int numOfUsers, int numOfQuesPerUser, string schemaName, string tableName)
+        {
+            this.numOfUsers = numOfUsers;
+            this.numOfQuesPerUser = numOfQuesPerUser;
+            this.schemaName = schemaName;
+            this.tableName = tableName;
+        }
+
         protected override string SchemaName
         {
             get
             {
-                throw new NotImplementedException();
+                return schemaName;
             }
         }
 
@@ -20,23 +34,46 @@ namespace okboba.MatchApi.Helpers
         {
             get
             {
-                throw new NotImplementedException();
+                return tableName;
             }
         }
 
         public override object GetValue(int i)
         {
-            throw new NotImplementedException();
+            switch (i)
+            {
+                case 1:
+                    return (rowCount / numOfQuesPerUser) + 1;
+                case 2:
+                    return (rowCount % numOfQuesPerUser) + 1;
+                case 3:
+                    return 1;
+                case 4:
+                    return 1;
+                case 5:
+                    return 1;
+                case 6:
+                    return DateTime.Now;
+                default:
+                    break;
+            }
+
+            throw new IndexOutOfRangeException();
         }
 
         public override bool Read()
         {
-            throw new NotImplementedException();
+            return rowCount++ < numOfUsers * numOfQuesPerUser;
         }
 
         protected override void AddSchemaTableRows()
         {
-            throw new NotImplementedException();
+            AddSchemaTableRow("UserProfileId", null, null, null, false, true, false, System.Data.SqlDbType.Int, null, null, null, null, null);
+            AddSchemaTableRow("QuestionId", null, null, null, false, true, false, System.Data.SqlDbType.SmallInt, null, null, null, null, null);
+            AddSchemaTableRow("ChoiceIndex", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
+            AddSchemaTableRow("ChoiceWeight", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
+            AddSchemaTableRow("ChoiceAcceptable", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
+            AddSchemaTableRow("LastAnswered", null, null, null, false, false, false, System.Data.SqlDbType.SmallDateTime, null, null, null, null, null);
         }
     }
 }

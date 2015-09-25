@@ -8,6 +8,8 @@ namespace okboba.MatchApi.Migrations
     using okboba.MatchApi.Models;
     using System.Diagnostics;
     using DataUtilities;
+    using System.Data.SqlClient;
+    using Helpers;
 
     internal sealed class Configuration : DbMigrationsConfiguration<OkbDbContext>
     {
@@ -39,6 +41,8 @@ namespace okboba.MatchApi.Migrations
             const int NUM_OF_USERS = 10000;
             const int NUM_OF_QUES = 1000;
             const int BATCH_INSERT_SIZE = 100;
+            const int NUM_OF_USERS_ANSWERED = 1000;
+            const int NUM_OF_QUES_PER_USER = 100;
 
             /////////////////////// Seed Users /////////////////////////////////////
             var ctx = new OkbDbContext();
@@ -97,6 +101,16 @@ namespace okboba.MatchApi.Migrations
             }
 
             ///////////////// Seed User Answers ///////////////////////////
+            UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(NUM_OF_USERS_ANSWERED, NUM_OF_QUES_PER_USER, "", "UserAnswers");            
+            SqlBulkCopy sbc = new SqlBulkCopy(context.Database.Connection.ConnectionString);
+            sbc.BatchSize = 1000;
+            sbc.DestinationTableName = "UserAnswers";
+
+            foreach (var col in bulkReader.ColumnMappings)
+            {
+                sbc.ColumnMappings.Add(col);
+            }
+            sbc.WriteToServer(bulkReader);
 
         }
 
