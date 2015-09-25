@@ -88,6 +88,15 @@ namespace okboba.MatchApi.Helpers
         /// <param name="numOfAnswersPerUser"></param>
         public void SeedAnswers(int numOfUsers, int numOfAnswersPerUser)
         {
+            //Skip if answers exist
+            OkbDbContext context = new OkbDbContext();
+            if (context.UserAnswers.Count() > 0)
+            {
+                context.Dispose();
+                return;
+            }
+            context.Dispose();
+
             UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(numOfUsers, numOfAnswersPerUser, "", "UserAnswers");
 
             using (SqlBulkCopy sbc = new SqlBulkCopy(connString,
@@ -106,7 +115,7 @@ namespace okboba.MatchApi.Helpers
             }
         }        
 
-        private UserProfile CreateUser(string name, char gender, DateTime dob, string location)
+        private UserProfile CreateUser(string name, string gender, DateTime dob, string location)
         {
             return new UserProfile
             {

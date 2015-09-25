@@ -14,7 +14,9 @@ namespace okboba.Entities
         [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
 
-        public char Gender { get; set; }
+        [StringLength(1)]
+        public string Gender { get; set; }
+
         public Int16 Height { get; set; }
 
         [StringLength(15)]

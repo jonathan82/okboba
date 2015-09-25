@@ -13,15 +13,25 @@ namespace ConsoleApp
     class Program
     {
         private static int NUM_OF_USERS = 500000;
-        private static int NUM_OF_QUES_PER_USER = 10;
-        private static int NUM_OF_USERS_ANSWERED = 1000;
+        private static int NUM_OF_QUES_PER_USER = 200;
+        private static int NUM_OF_QUES = 1000;
         private static string connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=okboba;Integrated Security=True";
 
         static void Main(string[] args)
         {
             SeedDb db = new SeedDb(connString);
-            db.SeedQuestions(500);
+            Stopwatch timer = new Stopwatch();
 
+            db.SeedQuestions(NUM_OF_QUES);
+            db.SeedUsers(NUM_OF_USERS);
+
+            Console.WriteLine("Seeding answers...");
+            timer.Start();
+            db.SeedAnswers(NUM_OF_USERS, NUM_OF_QUES_PER_USER);
+            timer.Stop();
+
+            Console.WriteLine("Total time: " + timer.ElapsedMilliseconds / 1000 + "s ");          
+            Console.ReadKey();
             //var timer = new Stopwatch();
 
             /////////////////// Seed Users ///////////////////////////

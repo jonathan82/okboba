@@ -8,7 +8,7 @@ namespace okboba.MatchApi.Helpers
 {
     public class UserAnswerBulkDataReader : BulkDataReader
     {
-        int rowCount = 1;
+        int rowCount = 0;
         int numOfUsers;
         int numOfQuesPerUser;
         string schemaName;
@@ -63,7 +63,7 @@ namespace okboba.MatchApi.Helpers
 
         public override bool Read()
         {
-            return rowCount++ < numOfUsers * numOfQuesPerUser;
+            return rowCount++ < (numOfUsers * numOfQuesPerUser) - 1;
         }
 
         protected override void AddSchemaTableRows()

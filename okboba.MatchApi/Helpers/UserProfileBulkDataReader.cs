@@ -23,8 +23,8 @@ namespace okboba.MatchApi.Helpers
             this.tableName = tableName;
 
             userProfiles = new UserProfile[] {
-                new UserProfile { Name = "Jonathan", Birthdate = new DateTime(1982, 3, 24), Gender = 'M', Height = 155, Location = "SF" },
-                new UserProfile { Name = "Maggie", Birthdate = new DateTime(1980, 12, 15), Gender = 'F', Height = 145, Location = "SF" } };
+                new UserProfile { Name = "Jonathan", Birthdate = new DateTime(1982, 3, 24), Gender = "M", Height = 155, Location = "SF" },
+                new UserProfile { Name = "Maggie", Birthdate = new DateTime(1980, 12, 15), Gender = "F", Height = 145, Location = "SF" } };
         }
 
         protected override string SchemaName
@@ -48,15 +48,15 @@ namespace okboba.MatchApi.Helpers
             switch (i)
             {
                 case 0:
-                    return userProfiles[i % 2].Name;
+                    return userProfiles[rowCount % 2].Name;
                 case 1:
-                    return userProfiles[i % 2].Birthdate;
+                    return userProfiles[rowCount % 2].Birthdate;
                 case 2:
-                    return userProfiles[i % 2].Gender;
+                    return userProfiles[rowCount % 2].Gender;
                 case 3:
-                    return userProfiles[i % 2].Height;
+                    return userProfiles[rowCount % 2].Height;
                 case 4:
-                    return userProfiles[i % 2].Location;
+                    return userProfiles[rowCount % 2].Location;
                 default:
                     break;
             }
@@ -72,7 +72,7 @@ namespace okboba.MatchApi.Helpers
         {
             AddSchemaTableRow("Name", 10, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
             AddSchemaTableRow("Birthdate", null, null, null, false, false, false, SqlDbType.Date, null, null, null, null, null);
-            AddSchemaTableRow("Gender", null, null, null, false, false, false, SqlDbType.NChar, null, null, null, null, null);
+            AddSchemaTableRow("Gender", 1, null, null, false, false, false, SqlDbType.NChar, null, null, null, null, null);
             AddSchemaTableRow("Height", null, null, null, false, false, true, SqlDbType.SmallInt, null, null, null, null, null);
             AddSchemaTableRow("Location", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
         }
