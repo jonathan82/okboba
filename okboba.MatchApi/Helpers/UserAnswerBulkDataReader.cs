@@ -42,17 +42,17 @@ namespace okboba.MatchApi.Helpers
         {
             switch (i)
             {
-                case 1:
+                case 0:
                     return (rowCount / numOfQuesPerUser) + 1;
-                case 2:
+                case 1:
                     return (rowCount % numOfQuesPerUser) + 1;
+                case 2:
+                    return 1;
                 case 3:
                     return 1;
                 case 4:
                     return 1;
                 case 5:
-                    return 1;
-                case 6:
                     return DateTime.Now;
                 default:
                     break;

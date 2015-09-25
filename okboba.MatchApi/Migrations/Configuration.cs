@@ -101,16 +101,16 @@ namespace okboba.MatchApi.Migrations
             }
 
             ///////////////// Seed User Answers ///////////////////////////
-            UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(NUM_OF_USERS_ANSWERED, NUM_OF_QUES_PER_USER, "", "UserAnswers");            
-            SqlBulkCopy sbc = new SqlBulkCopy(context.Database.Connection.ConnectionString);
-            sbc.BatchSize = 1000;
-            sbc.DestinationTableName = "UserAnswers";
+            //UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(NUM_OF_USERS_ANSWERED, NUM_OF_QUES_PER_USER, "", "UserAnswers");            
+            //SqlBulkCopy sbc = new SqlBulkCopy(context.Database.Connection.ConnectionString);
+            //sbc.BatchSize = 1000;
+            //sbc.DestinationTableName = "UserAnswers";
 
-            foreach (var col in bulkReader.ColumnMappings)
-            {
-                sbc.ColumnMappings.Add(col);
-            }
-            sbc.WriteToServer(bulkReader);
+            //foreach (var col in bulkReader.ColumnMappings)
+            //{
+            //    sbc.ColumnMappings.Add(col);
+            //}
+            //sbc.WriteToServer(bulkReader);
 
         }
 
