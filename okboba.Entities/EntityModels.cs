@@ -7,12 +7,17 @@ namespace okboba.Entities
     public class UserProfile
     {
         public int Id { get; set; }
+
         [StringLength(10)]
         public string Name { get; set; }
+
+        [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
+
         public char Gender { get; set; }
-        public int Height { get; set; }
-        [StringLength(20)]
+        public Int16 Height { get; set; }
+
+        [StringLength(15)]
         public string Location { get; set; }
     }
 
@@ -40,12 +45,15 @@ namespace okboba.Entities
         [Key]
         [Column(Order =1)]
         public int UserProfileId { get; set; }
+
         [Key]
         [Column(Order = 2)]
         public Int16 QuestionId { get; set; }
+
         public byte ChoiceIndex { get; set; }
         public byte ChoiceWeight { get; set; }
         public byte ChoiceAcceptable { get; set; }
+
         [Column(TypeName ="smalldatetime")]
         public DateTime LastAnswered { get; set; }
 
