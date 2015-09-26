@@ -1,4 +1,5 @@
-﻿using okboba.MatchApi.Models;
+﻿using okboba.Entities;
+using okboba.MatchApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,12 @@ namespace okboba.MatchLoader
 {
     class MatchLoader
     {
+        List<UserProfile> userProfiles;
+
+        private MatchLoader() { }
+
         public void LoadInitial()
-        {
+        {       
             // scan the database and load all the records into memory 
             OkbDbContext db = new OkbDbContext();
 
@@ -29,7 +34,7 @@ namespace okboba.MatchLoader
 
             foreach (var item in query)
             {
-
+                //
             }
 
         }
