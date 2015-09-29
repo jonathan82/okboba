@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace okboba.MatchLoader.Models
 {
-    class AnswerInMem
+    public class AnswerInMem
     {
         public Int16 QuestionId { get; set; }
         public byte ChoiceIndex { get; set; }

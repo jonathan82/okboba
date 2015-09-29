@@ -64,6 +64,10 @@
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\okboba.MatchLoader\okboba.MatchLoader.csproj">
+      <Project>{0072e31e-3d21-48ac-b76c-09a7634697f2}</Project>
+      <Name>okboba.MatchLoader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
