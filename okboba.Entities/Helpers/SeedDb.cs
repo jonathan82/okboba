@@ -1,5 +1,4 @@
 ﻿using okboba.Entities;
-using okboba.MatchApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
-namespace okboba.MatchApi.Helpers
+namespace okboba.Entities.Helpers
 {
     public class SeedDb
     {

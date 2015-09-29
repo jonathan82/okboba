@@ -1,14 +1,14 @@
-﻿using okboba.MatchApi.Models;
-using System;
-using System.Collections.Generic;
+﻿using okboba.Entities.Helpers;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using okboba.MatchLoader.Models;
+using System.Collections.Generic;
 
 namespace okboba.MatchLoader
 {
     class MatchLoader
     {
+        public List<UserInMem> UsersInMem { get; set; }
+
         public void LoadInitial()
         {
             // scan the database and load all the records into memory 
@@ -20,18 +20,16 @@ namespace okboba.MatchLoader
                 on user.Id equals ans.UserProfileId into uGroup
                 from ans in uGroup.DefaultIfEmpty()
                 orderby user.Id
-                select new
+                select new UserInMem
                 {
                     Id = user.Id,
                     Name = user.Name,
-                    QuestionId = ans.QuestionId
                 };
 
-            foreach (var item in query)
+            foreach (var user in query)
             {
-
+                UsersInMem.Add(user);
             }
-
         }
 
     }

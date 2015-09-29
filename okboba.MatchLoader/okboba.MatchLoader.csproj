@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MatchLoader.cs" />
+    <Compile Include="Models\AnswerInMem.cs" />
+    <Compile Include="Models\UserInMem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

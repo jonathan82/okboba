@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace okboba.MatchApi.Models
+namespace okboba.Entities.Helpers
 {
     public class OkbDbContext : DbContext
     {

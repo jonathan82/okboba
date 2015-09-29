@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using DataUtilities;
 
-namespace okboba.MatchApi.Helpers
+namespace okboba.Entities.Helpers
 {
     public class UserAnswerBulkDataReader : BulkDataReader
     {

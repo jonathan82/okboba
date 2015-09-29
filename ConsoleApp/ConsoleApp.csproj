@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DataUtilities">
-      <HintPath>..\okboba.MatchApi\lib\DataUtilities.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -63,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\okboba.MatchApi\okboba.MatchApi.csproj">
-      <Project>{70a4dd1b-815f-4a71-99f9-4bcca29bc0c2}</Project>
-      <Name>okboba.MatchApi</Name>
+    <ProjectReference Include="..\okboba.Entities\okboba.Entities.csproj">
+      <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
+      <Name>okboba.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

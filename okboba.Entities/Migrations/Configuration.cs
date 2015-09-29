@@ -1,11 +1,11 @@
-namespace okboba.MatchApi.Migrations
+namespace okboba.Entities.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<okboba.MatchApi.Models.OkbDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<okboba.Entities.Helpers.OkbDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace okboba.MatchApi.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(okboba.MatchApi.Models.OkbDbContext context)
+        protected override void Seed(okboba.Entities.Helpers.OkbDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

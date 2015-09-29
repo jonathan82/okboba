@@ -6,7 +6,7 @@ using DataUtilities;
 using System.Data;
 using okboba.Entities;
 
-namespace okboba.MatchApi.Helpers
+namespace okboba.Entities.Helpers
 {
     public class UserProfileBulkDataReader : BulkDataReader
     {
