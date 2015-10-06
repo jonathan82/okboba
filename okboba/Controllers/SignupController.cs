@@ -6,12 +6,12 @@ using System.Web.Mvc;
 
 namespace okboba.Controllers
 {
-    public class HomeController : Controller
+    public class SignupController : Controller
     {
+        // GET: Signup
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
