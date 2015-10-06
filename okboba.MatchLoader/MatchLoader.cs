@@ -3,6 +3,7 @@ using System.Linq;
 using okboba.MatchLoader.Models;
 using System.Collections.Generic;
 using System;
+using okboba.Entities;
 
 namespace okboba.MatchLoader
 {

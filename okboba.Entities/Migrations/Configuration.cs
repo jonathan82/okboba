@@ -5,7 +5,7 @@ namespace okboba.Entities.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<okboba.Entities.Helpers.OkbDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<okboba.Entities.OkbDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace okboba.Entities.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(okboba.Entities.Helpers.OkbDbContext context)
+        protected override void Seed(okboba.Entities.OkbDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
