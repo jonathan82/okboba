@@ -154,7 +154,9 @@ namespace okboba.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new OkbobaUser { UserName = model.Email, Email = model.Email };
+                var userProfile = new UserProfile { Gender = model.Gender, Birthdate = model.Birthdate, Name = model.Name };
+                user.UserProfile = userProfile;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -370,7 +372,7 @@ namespace okboba.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new OkbobaUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

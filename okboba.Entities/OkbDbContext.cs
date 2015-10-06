@@ -9,7 +9,7 @@ using System.Web;
 namespace okboba.Entities
 {
 
-    public class OkbDbContext : IdentityDbContext<ApplicationUser>
+    public class OkbDbContext : IdentityDbContext<OkbobaUser>
     {
         public OkbDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

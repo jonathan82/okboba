@@ -61,6 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels.cs" />
+    <Compile Include="Migrations\201510062052431_Initial.cs" />
+    <Compile Include="Migrations\201510062052431_Initial.Designer.cs">
+      <DependentUpon>201510062052431_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510062057539_Initial1.cs" />
+    <Compile Include="Migrations\201510062057539_Initial1.Designer.cs">
+      <DependentUpon>201510062057539_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="OkbDbContext.cs" />
     <Compile Include="Helpers\SeedDb.cs" />
     <Compile Include="Helpers\UserAnswerBulkDataReader.cs" />
@@ -72,6 +80,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510062052431_Initial.resx">
+      <DependentUpon>201510062052431_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510062057539_Initial1.resx">
+      <DependentUpon>201510062057539_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
