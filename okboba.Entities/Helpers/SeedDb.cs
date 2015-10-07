@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -37,7 +38,7 @@ namespace okboba.Entities.Helpers
 
                 var choices = "This is Choice A;This is Choice B;This is Choice C;This is Choice D;This is Choice E";
 
-                for (int i = 1; i < numOfQues; i++)
+                for (int i = 1; i <= numOfQues; i++)
                 {
                     Question q = CreateQuestion("What's your favorite color?", choices, i);
                     context.Questions.Add(q);
@@ -114,14 +115,53 @@ namespace okboba.Entities.Helpers
             }
         }        
 
+        public void SeedLocations(string filename)
+        {
+            OkbDbContext db = new OkbDbContext();
+            if(db.Locations.Count() > 0)
+            {
+                db.Dispose();
+                return;
+            }
+
+            //Read from file
+            using (StreamReader sr = new StreamReader(filename))
+            {
+                string line;
+                Int16 provinceCount = 1;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    var cities = line.Split(' ');
+
+                    //First entry is the province
+                    string province = cities[0];
+
+                    for(Int16 districtCount = 1; districtCount < cities.Length; districtCount++)
+                    {
+                        string district = cities[districtCount];
+
+                        var loc = new Location { LocationId1 = provinceCount,
+                                                 LocationId2 = districtCount,
+                                                 LocationName1 = province,
+                                                 LocationName2 = district };
+                        //Update the database
+                        db.Locations.Add(loc);
+                        db.SaveChanges();
+                    }
+                    provinceCount++;
+                }
+            }
+            
+        }
+
         private UserProfile CreateUser(string name, string gender, DateTime dob, string location)
         {
             return new UserProfile
             {
                 Name = name,
                 Gender = gender,
-                Birthdate = dob,
-                Location = location
+                Birthdate = dob
             };
         }
 

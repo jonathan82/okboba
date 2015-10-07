@@ -1,4 +1,5 @@
-﻿using okboba.MatchLoader;
+﻿using okboba.Entities.Helpers;
+using okboba.MatchLoader;
 using System;
 using System.Diagnostics;
 
@@ -14,44 +15,55 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //////////////////// Test the match loader /////////////////
-            MatchLoader matches = new MatchLoader();
-            Stopwatch timer = new Stopwatch();
-
-            Console.WriteLine("Loading...");
-            timer.Start();
-            matches.LoadInitial();
-            timer.Stop();
-            Console.WriteLine("{0} users loaded", matches.UsersInMem.Count);
-            Console.WriteLine("{0} sec", timer.ElapsedMilliseconds / 1000);
-
-            while (true)
-            {
-                Console.WriteLine("scanning...");
-                timer.Reset();
-                timer.Start();
-                matches.ScanAll();
-                timer.Stop();
-                Console.WriteLine("{0} ms", timer.ElapsedMilliseconds);
-                Console.ReadKey();
-            }
-            
-            Console.WriteLine("Done!");
-            Console.ReadKey();
-
-            //////////////////// Seed the database ///////////////////////
-            //SeedDb db = new SeedDb(connString);
+            //MatchLoader matches = new MatchLoader();
             //Stopwatch timer = new Stopwatch();
 
-            //db.SeedQuestions(NUM_OF_QUES);
-            //db.SeedUsers(NUM_OF_USERS);
-
-            //Console.WriteLine("Seeding answers...");
+            //Console.WriteLine("Loading...");
             //timer.Start();
-            //db.SeedAnswers(NUM_OF_USERS, NUM_OF_QUES_PER_USER);
+            //matches.LoadInitial();
             //timer.Stop();
+            //Console.WriteLine("{0} users loaded", matches.UsersInMem.Count);
+            //Console.WriteLine("{0} sec", timer.ElapsedMilliseconds / 1000);
 
-            //Console.WriteLine("Total time: " + timer.ElapsedMilliseconds / 1000 + "s ");          
-            //Console.ReadKey();            
+            //while (true)
+            //{
+            //    Console.WriteLine("scanning...");
+            //    timer.Reset();
+            //    timer.Start();
+            //    matches.ScanAll();
+            //    timer.Stop();
+            //    Console.WriteLine("{0} ms", timer.ElapsedMilliseconds);
+            //    Console.ReadKey();
+            //}
+
+            //Console.WriteLine("Done!");
+            //Console.ReadKey();
+
+            //////////////////// Seed the database ///////////////////////
+            SeedDb db = new SeedDb(connString);
+            Stopwatch timer = new Stopwatch();
+
+            // Questions
+            Console.WriteLine("Seeding Questions...");
+            db.SeedQuestions(500);
+
+            // Chinese Cities
+            Console.WriteLine("Seeding Locations...");
+            db.SeedLocations("../../data/china_cities.txt");
+
+            // Users
+            Console.WriteLine("Seeding Users...");
+            db.SeedUsers(1000);            
+
+            // User answers
+            Console.WriteLine("Seeding answers...");
+            timer.Start();
+            db.SeedAnswers(400, 100);
+            timer.Stop();
+            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+
+            //Pause so screen won't go away
+            Console.ReadKey();
         }
     }
 }
