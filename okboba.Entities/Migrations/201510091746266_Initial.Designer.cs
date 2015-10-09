@@ -13,7 +13,7 @@ namespace okboba.Entities.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201510090518360_Initial"; }
+            get { return "201510091746266_Initial"; }
         }
         
         string IMigrationMetadata.Source

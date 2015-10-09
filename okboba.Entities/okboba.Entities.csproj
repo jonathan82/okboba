@@ -69,13 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels.cs" />
-    <Compile Include="Migrations\201510090518360_Initial.cs" />
-    <Compile Include="Migrations\201510090518360_Initial.Designer.cs">
-      <DependentUpon>201510090518360_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201510091746266_Initial.cs" />
+    <Compile Include="Migrations\201510091746266_Initial.Designer.cs">
+      <DependentUpon>201510091746266_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
-    <Compile Include="MySqlHistoryContext.cs" />
     <Compile Include="OkbDbContext.cs" />
     <Compile Include="Helpers\SeedDb.cs" />
     <Compile Include="Helpers\UserAnswerBulkDataReader.cs" />
@@ -85,11 +84,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510090518360_Initial.resx">
-      <DependentUpon>201510090518360_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510091746266_Initial.resx">
+      <DependentUpon>201510091746266_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
