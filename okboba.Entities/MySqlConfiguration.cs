@@ -1,8 +1,9 @@
-﻿using System.Data.Entity;
+﻿using MySql.Data.Entity;
+using System.Data.Entity;
 
 namespace okboba.Entities
 {
-    public class MySqlConfiguration : DbConfiguration
+    public class MySqlConfiguration : MySqlEFConfiguration
     {
         public MySqlConfiguration()
         {

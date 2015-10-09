@@ -35,7 +35,7 @@ namespace okboba.Entities.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
                         Name = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
-                    })
+                    }, new { Engine = "NDBCLUSTER" })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
