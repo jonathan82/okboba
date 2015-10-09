@@ -19,8 +19,7 @@ namespace okboba.Entities
 
         public Int16 Height { get; set; }
 
-        [StringLength(15)]
-        public string Location { get; set; }
+        public virtual Location Location { get; set; }
     }
 
     public class Question
@@ -62,5 +61,17 @@ namespace okboba.Entities
         //References
         public virtual UserProfile UserProfile { get; set; }
         public virtual Question Question { get; set; }
+    }
+
+    public class Location
+    {
+        [Key]
+        [Column(Order = 1)]
+        public Int16 LocationId1 { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public Int16 LocationId2 { get; set; }
+        public string LocationName1 { get; set; }
+        public string LocationName2 { get; set; }
     }
 }

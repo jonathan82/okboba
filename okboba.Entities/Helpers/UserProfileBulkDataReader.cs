@@ -23,8 +23,8 @@ namespace okboba.Entities.Helpers
             this.tableName = tableName;
 
             userProfiles = new UserProfile[] {
-                new UserProfile { Name = "Jonathan", Birthdate = new DateTime(1982, 3, 24), Gender = "M", Height = 155, Location = "SF" },
-                new UserProfile { Name = "Maggie", Birthdate = new DateTime(1980, 12, 15), Gender = "F", Height = 145, Location = "SF" } };
+                new UserProfile { Name = "Jonathan", Birthdate = new DateTime(1982, 3, 24), Gender = "M", Height = 155 },
+                new UserProfile { Name = "Maggie", Birthdate = new DateTime(1980, 12, 15), Gender = "F", Height = 145 } };
         }
 
         protected override string SchemaName
@@ -74,7 +74,7 @@ namespace okboba.Entities.Helpers
             AddSchemaTableRow("Birthdate", null, null, null, false, false, false, SqlDbType.Date, null, null, null, null, null);
             AddSchemaTableRow("Gender", 1, null, null, false, false, false, SqlDbType.NChar, null, null, null, null, null);
             AddSchemaTableRow("Height", null, null, null, false, false, true, SqlDbType.SmallInt, null, null, null, null, null);
-            AddSchemaTableRow("Location", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
+            //AddSchemaTableRow("Location", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
         }
     }
 }
