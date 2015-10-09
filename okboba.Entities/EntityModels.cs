@@ -55,7 +55,8 @@ namespace okboba.Entities
         public byte ChoiceWeight { get; set; }
         public byte ChoiceAcceptable { get; set; }
 
-        [Column(TypeName ="smalldatetime")]
+        //[Column(TypeName ="smalldatetime")] //SQL Server
+        [Column(TypeName = "timestamp")] //MySQL 
         public DateTime LastAnswered { get; set; }
 
         //References

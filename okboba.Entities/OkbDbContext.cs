@@ -8,7 +8,7 @@ using System.Web;
 
 namespace okboba.Entities
 {
-
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))] //MySQL
     public class OkbDbContext : IdentityDbContext<OkbobaUser>
     {
         public OkbDbContext()
