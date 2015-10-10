@@ -1,0 +1,134 @@
+﻿/******************
+    Less Variables
+*******************/
+@primary-color-1: #FCE4EC;
+@primary-color-2: #F06292;
+@primary-color-3: #880E4F;
+@accent-color: #FFEB3B;
+
+/*****************
+    Shadows
+******************/
+.shadow-z-1 {
+  box-shadow:
+    0 1px 6px 0 rgba(0, 0, 0, 0.12),
+    0 1px  6px 0 rgba(0, 0, 0, 0.12);
+}
+
+.shadow-z-1-hover {
+  box-shadow:
+    0 5px 11px 0 rgba(0, 0, 0, 0.18),
+    0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.shadow-z-2 {
+  box-shadow:
+    0 8px 17px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.shadow-z-3 {
+  box-shadow:
+    0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.shadow-z-4 {
+  box-shadow:
+    0 16px 28px 0 rgba(0, 0, 0, 0.22),
+    0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+
+.shadow-z-5 {
+  box-shadow:
+    0 27px 24px 0 rgba(0, 0, 0, 0.2),
+    0 40px 77px 0 rgba(0, 0, 0, 0.22);
+}
+
+/******************************
+    Font, Icon, Divider colors
+*******************************/
+.opacity-text {
+    opacity: .87;
+    color: #000;
+}
+
+.opacity-secondary-text {
+    opacity: .54;
+    color: #000;
+}
+
+.opacity-disabled {
+    opacity: .38;
+}
+
+.opacity-divider {
+    opacity: .12;
+}
+
+.opacity-inverse-text {
+    opacity: 1.0;
+}
+
+.opacity-inverse-secondary-text {
+    opacity: .7;
+}
+
+.opacity-inverse-disabled {
+    opacity: .3;
+}
+
+.opacity-inverse-divider {
+    opacity: .12;
+}
+
+/**********************
+    Bootstrap Overrides
+***********************/
+body {
+    padding-top: 80px;
+    background-color: @primary-color-3;
+}
+
+.navbar-default {
+    background-color: @primary-color-1;
+    border-color: @primary-color-1;
+    .shadow-z-3;
+}
+
+/***************************
+    Okboba Specific Sytles
+****************************/
+.profile-thumbnail {
+    .shadow-z-2;
+    width: 200px;
+    margin: 15px;    
+}
+
+.profile-thumbnail-blurb {
+    padding: 10px;
+    .opacity-secondary-text;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+.matches-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.splash {
+    background-image: url('Images/Shanghai-Skyline.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+body.splash {
+    background-color: white;
+    padding-top: 0px;
+}

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using okboba.Models;
 using okboba.Entities;
+using System.Collections.Generic;
 
 //some comments
 
@@ -25,11 +26,11 @@ namespace okboba.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
         public ApplicationSignInManager SignInManager
         {
@@ -142,6 +143,18 @@ namespace okboba.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            OkbDbContext db = new OkbDbContext();
+            var provinceDict = new Dictionary<Int16, string>();
+            string districtJson = "{";
+            foreach (var loc in db.Locations.ToList())
+            {
+                if(!provinceDict.ContainsKey(loc.LocationId1))
+                {
+                    provinceDict.Add(loc.LocationId1, loc.LocationName1);
+                    districtJson += loc.LocationId1 + ":{";
+                }
+                districtJson += loc.LocationId2 + ": '" + loc.LocationName2 + "'";
+            }
             return View();
         }
 

@@ -1,28 +1,97 @@
-﻿body {
-    padding-top: 70px;
-    padding-bottom: 20px;
+﻿/******************
+    Less Variables
+*******************/
+/*****************
+    Shadows
+******************/
+.shadow-z-1 {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.shadow-z-1-hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
-
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.shadow-z-2 {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.shadow-z-3 {
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
-
+.shadow-z-4 {
+  box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+.shadow-z-5 {
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+}
+/******************************
+    Font, Icon, Divider colors
+*******************************/
+.opacity-text {
+  opacity: .87;
+  color: #000;
+}
+.opacity-secondary-text {
+  opacity: .54;
+  color: #000;
+}
+.opacity-disabled {
+  opacity: .38;
+}
+.opacity-divider {
+  opacity: .12;
+}
+.opacity-inverse-text {
+  opacity: 1.0;
+}
+.opacity-inverse-secondary-text {
+  opacity: .7;
+}
+.opacity-inverse-disabled {
+  opacity: .3;
+}
+.opacity-inverse-divider {
+  opacity: .12;
+}
+/**********************
+    Bootstrap Overrides
+***********************/
+body {
+  padding-top: 80px;
+  background-color: #880E4F;
+}
 .navbar-default {
-    background-color: aqua;
+  background-color: #FCE4EC;
+  border-color: #FCE4EC;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+/***************************
+    Okboba Specific Sytles
+****************************/
+.profile-thumbnail {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 200px;
+  margin: 15px;
+}
+.profile-thumbnail-blurb {
+  padding: 10px;
+  opacity: .54;
+  color: #000;
+}
+.row-centered {
+  text-align: center;
+}
+.matches-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  background-color: white;
+  border-radius: 15px;
+}
+.splash {
+  background-image: url('Images/Shanghai-Skyline.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+body.splash {
+  background-color: white;
+  padding-top: 0px;
 }
