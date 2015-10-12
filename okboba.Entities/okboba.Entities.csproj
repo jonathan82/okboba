@@ -69,13 +69,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels.cs" />
-    <Compile Include="Migrations\201510091746266_Initial.cs" />
-    <Compile Include="Migrations\201510091746266_Initial.Designer.cs">
-      <DependentUpon>201510091746266_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201510121719445_Initial.cs" />
+    <Compile Include="Migrations\201510121719445_Initial.Designer.cs">
+      <DependentUpon>201510121719445_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510120502410_Location.cs" />
-    <Compile Include="Migrations\201510120502410_Location.Designer.cs">
-      <DependentUpon>201510120502410_Location.cs</DependentUpon>
+    <Compile Include="Migrations\201510122244110_Rename.cs" />
+    <Compile Include="Migrations\201510122244110_Rename.Designer.cs">
+      <DependentUpon>201510122244110_Rename.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510122255368_ProfileText.cs" />
+    <Compile Include="Migrations\201510122255368_ProfileText.Designer.cs">
+      <DependentUpon>201510122255368_ProfileText.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -93,11 +97,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510091746266_Initial.resx">
-      <DependentUpon>201510091746266_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510121719445_Initial.resx">
+      <DependentUpon>201510121719445_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510120502410_Location.resx">
-      <DependentUpon>201510120502410_Location.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510122244110_Rename.resx">
+      <DependentUpon>201510122244110_Rename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510122255368_ProfileText.resx">
+      <DependentUpon>201510122255368_ProfileText.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.MatchLoader", "okboba.MatchLoader\okboba.MatchLoader.csproj", "{0072E31E-3D21-48AC-B76C-09A7634697F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Resources", "okboba.Resources\okboba.Resources.csproj", "{7FB93755-0B4C-46E7-974C-BA68A4EC949F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0072E31E-3D21-48AC-B76C-09A7634697F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0072E31E-3D21-48AC-B76C-09A7634697F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0072E31E-3D21-48AC-B76C-09A7634697F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FB93755-0B4C-46E7-974C-BA68A4EC949F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FB93755-0B4C-46E7-974C-BA68A4EC949F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FB93755-0B4C-46E7-974C-BA68A4EC949F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FB93755-0B4C-46E7-974C-BA68A4EC949F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,21 +15,21 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             /////////////////// Json.NET ///////////////////////////
-            OkbDbContext db = new OkbDbContext();
+            //OkbDbContext db = new OkbDbContext();
 
-            Dictionary<Int16, string> provinceDict = new Dictionary<short, string>();
-            Dictionary<Int16, string> districtDict = new Dictionary<short, string>();
+            //Dictionary<Int16, string> provinceDict = new Dictionary<short, string>();
+            //Dictionary<Int16, string> districtDict = new Dictionary<short, string>();
 
-            foreach (var loc in db.Locations)
-            {
-                //provinceDict.Add(loc.LocationId1, loc.LocationName1);
-                provinceDict[loc.LocationId1] = loc.LocationName1;
-                districtDict.Add(loc.LocationId2, loc.LocationName2);                
-            }
+            //foreach (var loc in db.Locations)
+            //{
+            //    //provinceDict.Add(loc.LocationId1, loc.LocationName1);
+            //    provinceDict[loc.LocationId1] = loc.LocationName1;
+            //    districtDict.Add(loc.LocationId2, loc.LocationName2);                
+            //}
 
-            string str = JsonConvert.SerializeObject(provinceDict);
+            //string str = JsonConvert.SerializeObject(provinceDict);
 
-            Console.WriteLine(str);
+            //Console.WriteLine(str);
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();
@@ -54,27 +54,27 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            //SeedDb db = new SeedDb(connString);
-            //Stopwatch timer = new Stopwatch();
+            SeedDb db = new SeedDb(connString);
+            Stopwatch timer = new Stopwatch();
 
-            //// Questions
-            //Console.WriteLine("Seeding Questions...");
-            //db.SeedQuestions(500);
+            // Questions
+            Console.WriteLine("Seeding Questions...");
+            db.SeedQuestions(500);
 
-            //// Chinese Cities
-            //Console.WriteLine("Seeding Locations...");
-            //db.SeedLocations("../../data/china_cities.txt");
+            // Chinese Cities
+            Console.WriteLine("Seeding Locations...");
+            db.SeedLocations("../../data/china_cities.txt");
 
-            //// Users
-            //Console.WriteLine("Seeding Users...");
-            //db.SeedUsers(1000);            
+            // Users
+            Console.WriteLine("Seeding Users...");
+            db.SeedUsers(500000);
 
-            //// User answers
-            //Console.WriteLine("Seeding answers...");
-            //timer.Start();
-            //db.SeedAnswers(400, 100);
-            //timer.Stop();
-            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            // User answers
+            Console.WriteLine("Seeding answers...");
+            timer.Start();
+            db.SeedAnswers(400, 100);
+            timer.Stop();
+            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Pause so screen won't go away
             Console.ReadKey();

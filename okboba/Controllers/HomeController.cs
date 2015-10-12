@@ -11,6 +11,7 @@ namespace okboba.Controllers
     {
         public ActionResult Index()
         {
+            var str = okboba.Resources.Name;
             return View();
         }
 

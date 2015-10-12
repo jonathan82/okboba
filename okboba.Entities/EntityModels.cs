@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace okboba.Entities
 {
-    public class UserProfile
+    public class Profile
     {
         public int Id { get; set; }
 
@@ -23,6 +23,7 @@ namespace okboba.Entities
 
         //Navigation properties
         public virtual Location Location { get; set; }
+        public virtual ProfileText ProfileText { get; set; }
     }
 
     public class Question
@@ -44,11 +45,11 @@ namespace okboba.Entities
         public string Description { get; set; }
     }
 
-    public class UserAnswer
+    public class Answer
     {
         [Key]
         [Column(Order =1)]
-        public int UserProfileId { get; set; }
+        public int ProfileId { get; set; }
 
         [Key]
         [Column(Order = 2)]
@@ -63,7 +64,7 @@ namespace okboba.Entities
         public DateTime LastAnswered { get; set; }
 
         //References
-        public virtual UserProfile UserProfile { get; set; }
+        public virtual Profile Profile { get; set; }
         public virtual Question Question { get; set; }
     }
 
@@ -77,5 +78,19 @@ namespace okboba.Entities
         public Int16 LocationId2 { get; set; }
         public string LocationName1 { get; set; }
         public string LocationName2 { get; set; }
+    }
+
+    public class ProfileText
+    {
+        [Key, ForeignKey("Profile")]
+        public int ProfileId { get; set; }
+        public string Question1 { get; set; }
+        public string Question2 { get; set; }
+        public string Question3 { get; set; }
+        public string Question4 { get; set; }
+        public string Question5 { get; set; }
+
+        //Navigation property
+        public virtual Profile Profile { get; set; }
     }
 }

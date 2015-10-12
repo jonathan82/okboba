@@ -18,9 +18,9 @@ namespace okboba.MatchLoader
             UsersInMem = new List<UserInMem>();
 
             var results =
-                (from user in db.UserProfiles
-                 join ans in db.UserAnswers
-                 on user.Id equals ans.UserProfileId into uGroup
+                (from user in db.Profiles
+                 join ans in db.Answers
+                 on user.Id equals ans.ProfileId into uGroup
                  from ans in uGroup.DefaultIfEmpty()
                  orderby user.Id
                  select new

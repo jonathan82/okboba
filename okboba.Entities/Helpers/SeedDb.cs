@@ -56,7 +56,7 @@ namespace okboba.Entities.Helpers
         {
             //Skip if users exist
             OkbDbContext context = new OkbDbContext();
-            if(context.UserProfiles.Count() > 0)
+            if(context.Profiles.Count() > 0)
             {
                 context.Dispose();
                 return;
@@ -90,7 +90,7 @@ namespace okboba.Entities.Helpers
         {
             //Skip if answers exist
             OkbDbContext context = new OkbDbContext();
-            if (context.UserAnswers.Count() > 0)
+            if (context.Answers.Count() > 0)
             {
                 context.Dispose();
                 return;
@@ -155,9 +155,9 @@ namespace okboba.Entities.Helpers
             
         }
 
-        private UserProfile CreateUser(string name, string gender, DateTime dob, string location)
+        private Profile CreateUser(string name, string gender, DateTime dob, string location)
         {
-            return new UserProfile
+            return new Profile
             {
                 Name = name,
                 Gender = gender,

@@ -7,13 +7,13 @@ namespace okboba.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Location : IMigrationMetadata
+    public sealed partial class Rename : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Location));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Rename));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510120502410_Location"; }
+            get { return "201510122244110_Rename"; }
         }
         
         string IMigrationMetadata.Source

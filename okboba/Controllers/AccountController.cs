@@ -178,7 +178,7 @@ namespace okboba.Controllers
                     LocationId2 = model.LocationId2
                 };
 
-                var userProfile = new UserProfile {
+                var userProfile = new Profile {
                     Gender = model.Gender,
                     Birthdate = model.Birthdate,
                     Name = model.Name,
@@ -487,6 +487,11 @@ namespace okboba.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private void SaveUserInSession()
+        {
+
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
