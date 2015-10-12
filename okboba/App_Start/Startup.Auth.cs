@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using okboba.Models;
+using okboba.Web.Models;
 using okboba.Entities;
 using okboba.Entities.Helpers;
 

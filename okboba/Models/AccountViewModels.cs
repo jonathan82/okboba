@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc.Html;
 
-namespace okboba.Models
+namespace okboba.Web.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

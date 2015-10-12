@@ -17,7 +17,7 @@ namespace okboba.Entities
             return userIdentity;
         }
 
-        public virtual Profile UserProfile { get; set; }
+        public virtual Profile Profile { get; set; }
         
     }
 

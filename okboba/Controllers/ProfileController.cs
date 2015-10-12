@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using okboba.Web.Models;
 
 namespace okboba.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         // GET: Profile
@@ -14,13 +17,16 @@ namespace okboba.Controllers
         public ActionResult Index()
         {
             //Get the currently logged in user
-            //User.Identity.
+            var profileId = Session["ProfileId"];
 
             //Get the user profile from DB
-            OkbDbContext db = new OkbDbContext();            
+            OkbDbContext db = new OkbDbContext();
+            var profile = db.Profiles.Find(profileId);
+
+            var vm = new ProfileViewModel { Profile = profile };
 
             //Return the view model
-            return View();
+            return View(vm);
         }
     }
 }

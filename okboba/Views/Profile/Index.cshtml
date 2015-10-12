@@ -1,4 +1,4 @@
-﻿@model okboba.Models.ProfileViewModel
+﻿@model okboba.Web.Models.ProfileViewModel
     @{
         ViewBag.Title = "Profile";
     }
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-4"><img src="~/Content/Images/wedding_beach.jpg" /></div>
                 <div class="col-sm-4">
-                    <p class="h3">Jonathan</p>
+                    <p class="h3">@Model.Profile.Name</p>
                     <p>30 M - Shanghai, China</p>
                 </div>
                 <div class="col-sm-4"><h1>87 %</h1></div>
@@ -37,6 +37,7 @@
         </div>
         <div class="col-md-3">
             <div class="profile-details">
+                <!--- Dump out all the user info -->
                 some details<br />
                 some details<br />
                 some details<br />

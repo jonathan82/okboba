@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using okboba.Models;
+using okboba.Web.Models;
 using okboba.Entities;
 using System.Collections.Generic;
 
@@ -83,6 +83,7 @@ namespace okboba.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    SaveUserInSession();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -186,7 +187,7 @@ namespace okboba.Controllers
                     LocationId2 = model.LocationId2
                 };
 
-                user.UserProfile = userProfile;
+                user.Profile = userProfile;
 
                 var result = await UserManager.CreateAsync(user, model.Password);
 
@@ -490,8 +491,9 @@ namespace okboba.Controllers
         }
 
         private void SaveUserInSession()
-        {
-
+        {            
+            OkbobaUser user = UserManager.FindById(User.Identity.GetUserId());
+            Session["ProfileId"] = user.Profile.Id;
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

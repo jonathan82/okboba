@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using okboba.Models;
+using okboba.Web.Models;
 using okboba.Entities;
 using okboba.Entities.Helpers;
 
