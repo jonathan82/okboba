@@ -143,18 +143,19 @@ namespace okboba.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // Get a list of all the provinces
             OkbDbContext db = new OkbDbContext();
-            var provinceDict = new Dictionary<Int16, string>();
-            string districtJson = "{";
+            var provinceDict = new Dictionary<string, string>();
             foreach (var loc in db.Locations.ToList())
             {
-                if(!provinceDict.ContainsKey(loc.LocationId1))
+                if(!provinceDict.ContainsKey(loc.LocationId1.ToString()))
                 {
-                    provinceDict.Add(loc.LocationId1, loc.LocationName1);
-                    districtJson += loc.LocationId1 + ":{";
+                    provinceDict.Add(loc.LocationId1.ToString(), loc.LocationName1);
                 }
-                districtJson += loc.LocationId2 + ": '" + loc.LocationName2 + "'";
             }
+
+            ViewBag.ProvinceList = provinceDict;
+
             return View();
         }
 
@@ -162,15 +163,33 @@ namespace okboba.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new OkbobaUser { UserName = model.Email, Email = model.Email };
-                var userProfile = new UserProfile { Gender = model.Gender, Birthdate = model.Birthdate, Name = model.Name };
+                var user = new OkbobaUser {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+
+                var loc = new Location {
+                    LocationId1 = model.LocationId1,
+                    LocationId2 = model.LocationId2
+                };
+
+                var userProfile = new UserProfile {
+                    Gender = model.Gender,
+                    Birthdate = model.Birthdate,
+                    Name = model.Name,
+                    LocationId1 = model.LocationId1,
+                    LocationId2 = model.LocationId2
+                };
+
                 user.UserProfile = userProfile;
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

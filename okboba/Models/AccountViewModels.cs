@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc.Html;
 
 namespace okboba.Models
 {
@@ -76,14 +77,25 @@ namespace okboba.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        //[DataType(DataType.Password)]
+        //[Display(Name = "Confirm password")]
+        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        //public string ConfirmPassword { get; set; }
 
+        [Required]
         public string Gender { get; set; }
+
+        [Required]
         public DateTime Birthdate { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
+        public Int16 LocationId1 { get; set; }
+
+        [Required]
+        public Int16 LocationId2 { get; set; }
     }
 
     public class ResetPasswordViewModel

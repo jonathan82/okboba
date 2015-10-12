@@ -18,7 +18,10 @@ namespace okboba.Entities
         public string Gender { get; set; }
 
         public Int16 Height { get; set; }
+        public Int16 LocationId1 { get; set; }
+        public Int16 LocationId2 { get; set; }
 
+        //Navigation properties
         public virtual Location Location { get; set; }
     }
 

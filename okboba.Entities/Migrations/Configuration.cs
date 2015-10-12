@@ -9,7 +9,7 @@ namespace okboba.Entities.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(okboba.Entities.OkbDbContext context)

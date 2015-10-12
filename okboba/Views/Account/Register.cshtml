@@ -1,68 +1,126 @@
 ﻿@model okboba.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "OkBoba - The Premier Dating Site for Smart Singles";
 }
 
-<h2>@ViewBag.Title.</h2>
+<div class="row" style="height: 100px;">
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+</div>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
 {
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
+    <div id="register-step-1" style="height:450px;">
+        <center>
+            <div class="row">
+                <img src="~/Content/images/Logo/okboba-logo-lg-2.png" alt="Alternate Text" style="opacity:0.8;" />
+            </div>
+            <div class="form-inline" style="margin-top: 20px;">
+                <div class="form-group" style="margin-right: 20px;">
+                    <label for="Gender" class="">我是： </label>
+                    <select class="form-control input-lg" name="Gender" style="width: 200px;">
+                        <option value="F">女</option>
+                        <option value="M">男</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-right: 20px;">
+                    <label for="Birthdate" class="">生日：</label>
+                    @Html.TextBoxFor(m => m.Birthdate, new { @class = "form-control input-lg" })
+                    @Html.ValidationMessageFor(m => m.Birthdate, "", new { @class = "text-danger" })
+                    @*<input name="Birthdate" class="form-control input-lg" />*@
+                </div>
+                <button class="btn btn-lg" id="NextButton">Next</button>
+            </div>
+        </center>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+
+    <div class="row" id="register-step-2" style="display: none; height:450px;">
+        <div class="col-md-4 col-md-offset-1">
+            <p>只需填写几个字段上手。或者用你最喜欢的社交网络。</p>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        <div class="col-md-5">
+            <span class="h3">登记.</span>
+            <hr />
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="Email" class="col-sm-3 control-label">电子邮件</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        @*<input type="text" name="Email" value=" " class="form-control" />*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="col-sm-3 control-label">密码</label>
+                    <div class="col-sm-9">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        @*<input type="text" name="Password" value=" " class="form-control" />*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Name" class="col-sm-3 control-label">名字</label>
+                    <div class="col-sm-9">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                        @*<input type="text" name="Name" value=" " class="form-control" />*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Location" class="col-sm-3 control-label">城市</label>
+                    <div class="col-sm-5">
+                        @*@Html.DropDownListFor(m => m.LocationId1, new SelectList(ViewBag.ProvinceList,"Key","Value"))
+                            <input type="text" name="LocationId1" value=" " class="form-control" />*@
+                        @Html.TextBoxFor(m => m.LocationId1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.LocationId1, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.LocationId2, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.LocationId2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-default">加入!</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Gender" class="col-md-2 control-label">Gender</label>
-        <div class="col-md-10">
-            <select name="Gender" id="Gender" class="form-control">
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="Birthdate" class="col-md-2 control-label">Birthdate</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(b => b.Birthdate, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Name</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">Location</label>
-        <div class="col-md-10">
-            Province: District:
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
+        <div class="col-md-2"></div>
     </div>
 }
+
+<div class="row">
+    <center><h2>根据您解答问题的网上约会。</h2></center>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Some text
+    </div>
+    <div class="col-md-4">
+        Some text
+    </div>
+    <div class="col-md-4">
+        some text
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('#NextButton').click(function (e) {
+            e.preventDefault();
+
+            //Validate the Birthdate field
+            if (!$('#Birthdate').valid()) {
+                return;
+            }
+
+            $('#register-step-1').fadeOut('fast', function (e) {
+                $('#register-step-2').fadeIn('fast');
+            });
+        });
+
+        $('#Birthdate').datepicker();
+    </script>
 }

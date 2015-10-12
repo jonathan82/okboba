@@ -55,8 +55,8 @@
     Bootstrap Overrides
 ***********************/
 body {
-  padding-top: 80px;
   background-color: #880E4F;
+  font-family: 'Microsoft YaHei';
 }
 .navbar-default {
   background-color: #FCE4EC;
