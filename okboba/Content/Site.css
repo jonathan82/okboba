@@ -101,3 +101,13 @@ body.splash {
   border-color: #F06292;
   padding: 10px;
 }
+.profile-text {
+  min-height: 100px;
+}
+.profile-text:hover {
+  border: 1px solid;
+}
+.profile-text-edit {
+  width: 100%;
+  min-height: 100px;
+}

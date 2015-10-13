@@ -10,18 +10,13 @@ using okboba.Web.Models;
 namespace okboba.Controllers
 {
     [Authorize]
-    public class ProfileController : Controller
+    public class ProfileController : OkbBaseController
     {
         // GET: Profile
         // Show my own Profile
         public ActionResult Index()
         {
-            //Get the currently logged in user
-            var profileId = Session["ProfileId"];
-
-            //Get the user profile from DB
-            OkbDbContext db = new OkbDbContext();
-            var profile = db.Profiles.Find(profileId);
+            var profile = GetUserProfile();
 
             var vm = new ProfileViewModel { Profile = profile };
 

@@ -70,11 +70,56 @@ namespace okboba {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 米吗.
+        ///   Looks up a localized string similar to 密码.
         /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 关于你自己一点点.
+        /// </summary>
+        public static string Question1 {
+            get {
+                return ResourceManager.GetString("Question1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你做什么工作？上学？.
+        /// </summary>
+        public static string Question2 {
+            get {
+                return ResourceManager.GetString("Question2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你有什么爱好和兴趣？.
+        /// </summary>
+        public static string Question3 {
+            get {
+                return ResourceManager.GetString("Question3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你有什么想法？.
+        /// </summary>
+        public static string Question4 {
+            get {
+                return ResourceManager.GetString("Question4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我的理想匹配.
+        /// </summary>
+        public static string Question5 {
+            get {
+                return ResourceManager.GetString("Question5", resourceCulture);
             }
         }
     }

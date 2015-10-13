@@ -83,7 +83,6 @@ namespace okboba.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    SaveUserInSession();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -488,12 +487,6 @@ namespace okboba.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
-        }
-
-        private void SaveUserInSession()
-        {            
-            OkbobaUser user = UserManager.FindById(User.Identity.GetUserId());
-            Session["ProfileId"] = user.Profile.Id;
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

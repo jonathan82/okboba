@@ -1,53 +1,78 @@
 ﻿@model okboba.Web.Models.ProfileViewModel
-    @{
-        ViewBag.Title = "Profile";
-    }
+@{
+    ViewBag.Title = "Profile";
+}
 
-    <!-- Profile Header -->
-    <div class="row">
-        <div class="col-md-9">
-            <div class="row">
-                <div class="col-sm-4"><img src="~/Content/Images/wedding_beach.jpg" /></div>
-                <div class="col-sm-4">
-                    <p class="h3">@Model.Profile.Name</p>
-                    <p>30 M - Shanghai, China</p>
-                </div>
-                <div class="col-sm-4"><h1>87 %</h1></div>
+<!-- Profile Header -->
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-sm-4"><img src="~/Content/Images/wedding_beach.jpg" /></div>
+            <div class="col-sm-4">
+                <p class="h3">@Model.Profile.Name</p>
+                <p>30 M - Shanghai, China</p>
             </div>
-            <hr />
+            <div class="col-sm-4"><h1>87 %</h1></div>
         </div>
-        <div class="col-md-3">
-            <!--Empty spacer-->
+        <hr />
+    </div>
+    <div class="col-md-3">
+        <!--Empty spacer-->
+    </div>
+</div>
+
+<!-- Profile Details -->
+<div class="row">
+    <div class="col-md-9">
+        <h2>@okboba.Resources.Question1</h2>
+        <div class="profile-text">
+            @Model.Profile.ProfileText.Question1
+        </div>
+
+        <h2>@okboba.Resources.Question2</h2>
+        <div class="profile-text">
+            @Model.Profile.ProfileText.Question2
+        </div>
+
+        <h2>@okboba.Resources.Question3</h2>
+        <div class="profile-text">
+            @Model.Profile.ProfileText.Question3
+        </div>
+
+        <h2>@okboba.Resources.Question4</h2>
+        <div class="profile-text">
+            @Model.Profile.ProfileText.Question4
+        </div>
+
+        <h2>@okboba.Resources.Question5</h2>
+        <div class="profile-text">
+            @Model.Profile.ProfileText.Question5
         </div>
     </div>
-
-    <!-- Profile Details -->
-    <div class="row">
-        <div class="col-md-9">
-            <h2></h2>
-            <p>This is some text</p>
-            <h2>About Yourself</h2>
-            <p>This is some text</p>
-            <h2>About Yourself</h2>
-            <p>This is some text</p>
-            <h2>About Yourself</h2>
-            <p>This is some text</p>
-            <h2>About Yourself</h2>
-            <p>This is some text</p>
-        </div>
-        <div class="col-md-3">
-            <div class="profile-details">
-                <!--- Dump out all the user info -->
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-                some details<br />
-            </div>
+    <div class="col-md-3">
+        <div class="profile-details">
+            <!--- Dump out all the user info -->
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
+            some details<br />
         </div>
     </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $('.profile-text').click(function (e) {
+            var txt = $(e.target).text;
+            $(e.target).replaceWith('<textarea class="profile-text-edit">'+ txt + '</textarea>');
+        });
+    </script>    
+}

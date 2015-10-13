@@ -121,6 +121,21 @@
     <value>名字</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>米吗</value>
+    <value>密码</value>
+  </data>
+  <data name="Question1" xml:space="preserve">
+    <value>关于你自己一点点</value>
+  </data>
+  <data name="Question2" xml:space="preserve">
+    <value>你做什么工作？上学？</value>
+  </data>
+  <data name="Question3" xml:space="preserve">
+    <value>你有什么爱好和兴趣？</value>
+  </data>
+  <data name="Question4" xml:space="preserve">
+    <value>你有什么想法？</value>
+  </data>
+  <data name="Question5" xml:space="preserve">
+    <value>我的理想匹配</value>
   </data>
 </root>
