@@ -25,29 +25,37 @@
 <div class="row">
     <div class="col-md-9">
         <h2>@okboba.Resources.Question1</h2>
-        <div class="profile-text">
-            @Model.Profile.ProfileText.Question1
+        <div class="profile-text" data-editinplace="q1">
+            @Model.ProfileText.Question1
         </div>
 
         <h2>@okboba.Resources.Question2</h2>
-        <div class="profile-text">
-            @Model.Profile.ProfileText.Question2
+        <div class="profile-text" data-editinplace="q2">
+            @Model.ProfileText.Question2
         </div>
 
         <h2>@okboba.Resources.Question3</h2>
         <div class="profile-text">
-            @Model.Profile.ProfileText.Question3
+            @Model.ProfileText.Question3
         </div>
 
         <h2>@okboba.Resources.Question4</h2>
         <div class="profile-text">
-            @Model.Profile.ProfileText.Question4
+            @Model.ProfileText.Question4
         </div>
 
         <h2>@okboba.Resources.Question5</h2>
         <div class="profile-text">
-            @Model.Profile.ProfileText.Question5
+            @Model.ProfileText.Question5
         </div>
+
+        <h2>Test</h2>
+        <div style="text-align: right;">
+            <textarea class="profile-text-edit">This is some text</textarea>
+            <button class="btn btn-default">Cancel</button>
+            <button class="btn btn-primary">Save</button>
+        </div>
+        
     </div>
     <div class="col-md-3">
         <div class="profile-details">
@@ -68,11 +76,34 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/bundles/okboba")
+    
     <script>
-        $('.profile-text').click(function (e) {
-            var txt = $(e.target).text;
-            $(e.target).replaceWith('<textarea class="profile-text-edit">'+ txt + '</textarea>');
-        });
+        $().editinplace();
+        //$('.profile-text').click(function (e) {
+
+        //    var $this = $(this);
+
+        //    var txt = $this.text();
+
+        //    //Replace the text with the form
+        //    var $newElement = $('<div><textarea class="profile-text-edit">' + txt + '</textarea> \
+        //                         <button class="btn btn-default">Cancel</button> \
+        //                         <button class="btn btn-primary">Save</button></div>');
+
+        //    $this.after($newElement);
+
+        //    var $savedElement = $this.detach();
+
+        //    //Setup event handler for the Save button
+        //    $newElement.children('button:nth-of-type(2)').click(function (e) {
+        //        alert('save me!');
+        //    });
+
+        //    //setup event handler for the Cancel button
+        //    $newElement.children('button:first').click(function (e) {
+        //        $newElement.replaceWith($savedElement);
+        //    });
+        //});
     </script>    
 }
