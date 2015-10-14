@@ -5,6 +5,7 @@ using okboba.MatchLoader;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace ConsoleApp
 {
@@ -14,6 +15,11 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+            for(int i=0; i < 100; i++)
+            {
+                Console.WriteLine(Path.GetRandomFileName());
+            }
+            
             /////////////////// Json.NET ///////////////////////////
             //OkbDbContext db = new OkbDbContext();
 
@@ -54,27 +60,27 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            SeedDb db = new SeedDb(connString);
-            Stopwatch timer = new Stopwatch();
+            //SeedDb db = new SeedDb(connString);
+            //Stopwatch timer = new Stopwatch();
 
-            // Questions
-            Console.WriteLine("Seeding Questions...");
-            db.SeedQuestions(500);
+            //// Questions
+            //Console.WriteLine("Seeding Questions...");
+            //db.SeedQuestions(500);
 
-            // Chinese Cities
-            Console.WriteLine("Seeding Locations...");
-            db.SeedLocations("../../data/china_cities.txt");
+            //// Chinese Cities
+            //Console.WriteLine("Seeding Locations...");
+            //db.SeedLocations("../../data/china_cities.txt");
 
-            // Users
-            Console.WriteLine("Seeding Users...");
-            db.SeedUsers(500000);
+            //// Users
+            //Console.WriteLine("Seeding Users...");
+            //db.SeedUsers(500000);
 
-            // User answers
-            Console.WriteLine("Seeding answers...");
-            timer.Start();
-            db.SeedAnswers(400, 100);
-            timer.Stop();
-            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            //// User answers
+            //Console.WriteLine("Seeding answers...");
+            //timer.Start();
+            //db.SeedAnswers(400, 100);
+            //timer.Stop();
+            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Pause so screen won't go away
             Console.ReadKey();

@@ -11,4 +11,15 @@ namespace okboba.Web.Models
         public Profile Profile { get; set; }
         public ProfileText ProfileText { get; set; }
     }
+
+    public class PhotoViewModel
+    {
+        public PhotoViewModel()
+        {
+            Photos = new List<ProfileImage>();
+        }
+
+        public string ContentUrl { get; set; }
+        public List<ProfileImage> Photos { get; set; }
+    }
 }

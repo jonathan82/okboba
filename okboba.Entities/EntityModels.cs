@@ -93,4 +93,21 @@ namespace okboba.Entities
         //Navigation property
         public virtual Profile Profile { get; set; }
     }
+
+    public class ProfileImage
+    {
+        [Key]
+        [StringLength(12)]
+        public string ImageFilename { get; set; } 
+
+        [ForeignKey("Profile")]
+        public int ProfileId { get; set; }
+                
+        public Int16 LeftThumb { get; set; } 
+        public Int16 TopThumb { get; set; } 
+        public Int16 WidthThumb { get; set; }  
+
+        //Navigation
+        public virtual Profile Profile { get; set; }
+    }
 }
