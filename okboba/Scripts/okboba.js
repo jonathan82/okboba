@@ -1,4 +1,13 @@
 ﻿/*
+ *  Utitlity Functions
+ * 
+ */
+function encodeHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+
+/*
  *  Plugin : Edit in place for OkBoba
  *  Author : Jonathan Lin
  *  Date   : 10/13/2015
@@ -36,7 +45,6 @@
 
                 e.preventDefault();
 
-                //var postData = $newElement.children('form:first').serialize();
                 var postData = $newElement.serialize();
 
                 alert('save me! - ' + postData);
@@ -47,15 +55,14 @@
 
                 //Submit the question text
                 $.post(url, postData, function (data) {
-                    alert('success!');
 
                     //Replace form with the new text
-                    var txt = $newElement.children('textarea:first').val();
+                    var txt = $newElement.children('textarea:first').val();                    
                     $savedElement.text(txt);
                     $newElement.replaceWith($savedElement);
 
-                }).fail(function (data) {
-                    alert('failed!');
+                }).fail(function (data, status) {
+                    alert('failed! - ' + status);
 
                     //Re-enable save button
                     $submitBtn.prop("disabled", false);
@@ -75,3 +82,4 @@
     }
 
 })(jQuery);
+

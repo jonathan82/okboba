@@ -11,9 +11,10 @@ using System.Linq.Expressions;
 
 namespace okboba.Controllers
 {
+
     [Authorize]
     public class ProfileController : OkbBaseController
-    {
+    {      
         // GET: Profile
         // Show my own Profile
         public ActionResult Index()
@@ -35,45 +36,46 @@ namespace okboba.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult EditProfileText(string qText, string whichQuestion)
         {
-            var p = new ProfileText();
+            //Massage the input
+            qText = HttpContext.Server.HtmlEncode(qText);
+            qText = Truncate(qText, 4000);
 
-            p.ProfileId = GetProfileId();
+            var db = new OkbDbContext();
 
-            Expression<Func<ProfileText, object>> whichQuesExpr = null;
+            //Check if we are adding or updating
+            var currProfileText = db.ProfileTexts.Find(GetProfileId());
 
+            if(currProfileText==null)
+            {
+                currProfileText = new ProfileText { ProfileId = GetProfileId() };
+                db.ProfileTexts.Add(currProfileText);
+            }
+            
             switch (whichQuestion)
             {
                 case "q1":
-                    p.Question1 = qText;
-                    whichQuesExpr = q => q.Question1;
+                    currProfileText.Question1 = qText;
                     break;
                 case "q2":
-                    p.Question2 = qText;
-                    whichQuesExpr = q => q.Question2;
+                    currProfileText.Question2 = qText;
                     break;
                 case "q3":
-                    p.Question3 = qText;
-                    whichQuesExpr = q => q.Question3;
+                    currProfileText.Question3 = qText;
                     break;
                 case "q4":
-                    p.Question4 = qText;
-                    whichQuesExpr = q => q.Question4;
+                    currProfileText.Question4 = qText;
                     break;
                 case "q5":
-                    p.Question5 = qText;
-                    whichQuesExpr = q => q.Question5;
+                    currProfileText.Question5 = qText;
                     break;
                 default:
                     Response.StatusCode = 400; //Client error
                     break;
             }
 
-
-            OkbDbContext db = new OkbDbContext();
-
-            db.ProfileTexts.AddOrUpdate(whichQuesExpr, p);
             db.SaveChanges();
 
             return Content("{}");

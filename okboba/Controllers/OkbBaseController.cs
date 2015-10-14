@@ -10,6 +10,11 @@ namespace okboba.Controllers
 {
     public class OkbBaseController : Controller
     {
+        public string Truncate(string value, int maxChars)
+        {
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars);
+        }
+
         protected int GetProfileId()
         {            
             int profileId;
