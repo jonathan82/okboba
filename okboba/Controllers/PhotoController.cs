@@ -33,5 +33,11 @@ namespace okboba.Controllers
 
             return View(vm);
         }
+
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
