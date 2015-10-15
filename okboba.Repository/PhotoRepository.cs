@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace okboba.Repository
 {
-    public class Class1
+    public class PhotoRepository
     {
     }
 }
