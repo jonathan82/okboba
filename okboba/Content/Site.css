@@ -54,6 +54,9 @@
 /**********************
     Bootstrap Overrides
 ***********************/
+.navbar-brand {
+  padding: 8px 30px;
+}
 .navbar-default {
   background-color: #FCE4EC;
   border-color: #FCE4EC;
