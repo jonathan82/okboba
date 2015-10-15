@@ -213,6 +213,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\boba.png" />
+    <Content Include="Content\Images\logo\boba-sm.png" />
+    <Content Include="Content\Images\logo\okboba-logo-lg-2.png" />
+    <Content Include="Content\Images\logo\okboba-logo-lg.png" />
+    <Content Include="Content\Images\logo\okboba-logo-sm-2.png" />
+    <Content Include="Content\Images\logo\okboba-logo.png" />
     <Content Include="Content\Images\Penguins.jpg" />
     <Content Include="Content\Images\Shanghai-Skyline.jpg" />
     <Content Include="Content\Images\wedding_beach.jpg" />
@@ -264,6 +269,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <Content Include="Content\config-bootstrap.json" />
+    <Content Include="Content\Images\logo\okboba-logo.pdn" />
     <None Include="Content\Site.less" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
