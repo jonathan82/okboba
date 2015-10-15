@@ -7,16 +7,16 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="splash">
+<body class="body-anon">
     <nav class="navbar">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/Account/Login?ReturnUrl=/Home" class="btn btn-default">登录</a></li>
+                <li><a href="/Account/Login" class="btn btn-default">登录</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container container-anon">
         @RenderBody()
     </div>
 

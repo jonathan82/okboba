@@ -212,7 +212,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\56326-200.png" />
+    <Content Include="Content\Images\boba.png" />
     <Content Include="Content\Images\Penguins.jpg" />
     <Content Include="Content\Images\Shanghai-Skyline.jpg" />
     <Content Include="Content\Images\wedding_beach.jpg" />
@@ -263,6 +263,7 @@
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
+    <Content Include="Content\config-bootstrap.json" />
     <None Include="Content\Site.less" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -294,7 +295,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutAuth.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -318,8 +319,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Matches\matches.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_LayoutRegister.cshtml" />
-    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutSplash.cshtml" />
+    <Content Include="Views\Shared\_LayoutAnon.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
   </ItemGroup>

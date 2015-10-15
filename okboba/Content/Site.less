@@ -85,10 +85,6 @@
 /**********************
     Bootstrap Overrides
 ***********************/
-body {
-    background-color: @primary-color-3;
-    font-family: 'Microsoft YaHei';
-}
 
 .navbar-default {
     background-color: @primary-color-1;
@@ -99,6 +95,43 @@ body {
 /***************************
     Okboba Specific Sytles
 ****************************/
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+body {
+    padding-bottom: 25px;
+}
+.body-auth {
+    padding-top: 90px;
+    background-color: @primary-color-3;
+}
+.body-splash {
+    background-image: url('Images/Shanghai-Skyline.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.body-anon {
+    background-color: @primary-color-2;
+}
+.container-auth {
+    background-color: #FFF;
+    padding: 40px;
+}
+.container-anon {
+    background-color: #fff;
+}
+
+///////// Testing ////////////////////
+.chinese-serif {
+    font-family: KaiTi;
+}
+.chinese-sans {
+    font-family: SimSun;
+}
+/////////////////////////////////////
+
+
 .profile-thumbnail {
     .shadow-z-2;
     width: 200px;
@@ -120,17 +153,6 @@ body {
     display: inline-block;
     background-color: white;
     border-radius: 15px;
-}
-
-.splash {
-    background-image: url('Images/Shanghai-Skyline.jpg');
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
-
-body.splash {
-    background-color: white;
-    padding-top: 0px;
 }
 
 .profile-details {

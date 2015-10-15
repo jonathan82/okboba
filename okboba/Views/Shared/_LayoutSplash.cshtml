@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -7,16 +6,18 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+
+<body class="body-splash">
+
     <nav class="navbar">
         <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/Account/Login" class="btn btn-default">登录</a></li>
+                <li><a href="/Account/Login?ReturnUrl=/Home" class="btn btn-default">登录</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container" style="background-color: #FFF;">
+    <div class="container">
         @RenderBody()
     </div>
 
