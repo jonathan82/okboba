@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -79,6 +80,10 @@
     <ProjectReference Include="..\okboba.MatchLoader\okboba.MatchLoader.csproj">
       <Project>{0072e31e-3d21-48ac-b76c-09a7634697f2}</Project>
       <Name>okboba.MatchLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\okboba.Repository\okboba.Repository.csproj">
+      <Project>{1b313364-e757-4197-9683-7acb2c4a574b}</Project>
+      <Name>okboba.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

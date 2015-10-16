@@ -20,6 +20,8 @@ function encodeHtml(str) {
     const MAX_SCREEN_WIDTH = 800;
 
     var photoArea;
+    var origImageWidth;
+    var scaledImageWidth;
 
     // Options for thumbnail selector
     var dragOpts = {
@@ -59,11 +61,15 @@ function encodeHtml(str) {
                             return;
                         }
 
-                        //Everythign OK, create thumbnail selector and add to DOM
+                        origImageWidth = scaledImageWidth = this.width;
+
+                        // Limit the on screen size
                         if (this.width > MAX_SCREEN_WIDTH) {
                             $(this).width(MAX_SCREEN_WIDTH);
-                        }
+                            scaledImageWidth = MAX_SCREEN_WIDTH;
+                        }                        
 
+                        //Everythign OK, create thumbnail selector and add to DOM
                         var $thumbDiv = $('<div class="photo-upload-container"> \
                         <div class="photo-upload-innercontainer"><div class="photo-thumbnail-selector"></div></div> \
                         </div>');
@@ -112,14 +118,19 @@ function encodeHtml(str) {
             var pos = $thumb.position();
 
             // Set the thumbnail values in the form
-            $('#topThumb').val(pos.top);
-            $('#leftThumb').val(pos.left);
-            $('#widthThumb').val($thumb.width());
+            // Compute the scaled thumbnail coordinates base on original image
+            var intTop = Math.round(origImageWidth / scaledImageWidth * pos.top);
+            var intLeft = Math.round(origImageWidth / scaledImageWidth * pos.left);
+            var intThumbWidth = Math.round(origImageWidth / scaledImageWidth * $thumb.width())
+
+            $('#topThumb').val(intTop);
+            $('#leftThumb').val(intLeft);
+            $('#widthThumb').val(intThumbWidth);
 
             alert("submitting form. \
-                   \nleft: " + pos.left +
-                   '\ntop: ' + pos.top +
-                   '\nwidth: ' + $thumb.width());
+                   \nleft: " + intTop +
+                   '\ntop: ' + intLeft +
+                   '\nwidth: ' + intThumbWidth);
         });
     }
 

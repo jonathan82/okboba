@@ -2,8 +2,10 @@
 using okboba.Entities;
 using okboba.Entities.Helpers;
 using okboba.MatchLoader;
+using okboba.Repository;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
@@ -15,10 +17,22 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            for(int i=0; i < 100; i++)
-            {
-                Console.WriteLine(Path.GetRandomFileName());
-            }
+            //////////////// Test Microsoft Azure Storage /////////////////
+
+            // Get the storage connection string
+            var str = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
+            Console.WriteLine(str);
+
+            //get the filestream            
+            var fileStream = File.OpenRead(@"C:\Users\Public\Pictures\Sample Pictures\desert.jpg");            
+
+            //Get the photo repo
+            var repo = PhotoRepository.Instance;
+            repo.StorageConnectionString = str;
+            repo.UploadPhoto(fileStream, 0, 0, 300);
+
+            Console.WriteLine("done!");
+
             
             /////////////////// Json.NET ///////////////////////////
             //OkbDbContext db = new OkbDbContext();

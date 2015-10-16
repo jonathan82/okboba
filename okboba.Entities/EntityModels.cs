@@ -21,6 +21,9 @@ namespace okboba.Entities
         public Int16 LocationId1 { get; set; }
         public Int16 LocationId2 { get; set; }
 
+        [StringLength(60)]
+        public string PhotosInternal { get; set; } //list of semicolon separated filenames
+
         //Navigation properties
         public virtual Location Location { get; set; }
         public virtual ProfileText ProfileText { get; set; }
