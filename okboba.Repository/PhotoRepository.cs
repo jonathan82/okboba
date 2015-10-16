@@ -39,8 +39,8 @@ namespace okboba.Repository
         }
 
         public string StorageConnectionString { get; set; }
-
-        public bool AddPhotoToDb(string filename, int profileId)
+      
+        public int AddPhotoToDb(string filename, int profileId)
         {
             var db = new OkbDbContext();
             var p = db.Profiles.Find(profileId);
@@ -51,12 +51,14 @@ namespace okboba.Repository
             if (filenames.Length >= MAX_PHOTOS_PER_USER)
             {
                 //We've reached the maximum allowed photos per user. return error
-                return false;
+                return 0;
             }
 
             p.PhotosInternal += ';' + filename;
 
-            return true;
+            db.SaveChanges();
+
+            return 1;
         }
 
         public void UploadPhoto(Stream upload, int leftThumb, int topThumb, int widthThumb)
