@@ -1,55 +1,40 @@
 ﻿@model okboba.Web.Models.ProfileViewModel
 @{
     ViewBag.Title = "Profile";
+    ViewBag.Section = "profile";
 }
 
-<!-- Profile Header -->
-<div class="row">
-    <div class="col-md-9">
-        <div class="row">
-            <div class="col-sm-4"><img src="~/Content/Images/wedding_beach.jpg" /></div>
-            <div class="col-sm-4">
-                <p class="h3">@Model.Profile.Name</p>
-                <p>30 M - Shanghai, China</p>
-            </div>
-            <div class="col-sm-4"><h1>87 %</h1></div>
-        </div>
-        <hr />
-    </div>
-    <div class="col-md-3">
-        <!--Empty spacer-->
-    </div>
-</div>
+@Html.Partial("_ProfileHeader")
 
 <!-- Profile Details -->
-<div class="row">
+<div class="row top-buffer">
     <div class="col-md-9">
-        <h2>@okboba.Resources.Question1</h2>
+        <h3>@okboba.Resources.Question1</h3>
         <div class="profile-text" data-editinplace="q1">
             @Model.ProfileText.Question1
         </div>
 
-        <h2>@okboba.Resources.Question2</h2>
+        <h3>@okboba.Resources.Question2</h3>
         <div class="profile-text" data-editinplace="q2">
             @Model.ProfileText.Question2
         </div>
 
-        <h2>@okboba.Resources.Question3</h2>
+        <h3>@okboba.Resources.Question3</h3>
         <div class="profile-text" data-editinplace="q3">
             @Model.ProfileText.Question3
         </div>
 
-        <h2>@okboba.Resources.Question4</h2>
+        <h3>@okboba.Resources.Question4</h3>
         <div class="profile-text" data-editinplace="q4">
             @Model.ProfileText.Question4
         </div>
 
-        <h2>@okboba.Resources.Question5</h2>
+        <h3>@okboba.Resources.Question5</h3>
         <div class="profile-text" data-editinplace="q5">
             @Model.ProfileText.Question5
-        </div>
-        
+        </div>        
     </div>
+
     <div class="col-md-3">
         <div class="profile-details">
             <!--- Dump out all the user info -->

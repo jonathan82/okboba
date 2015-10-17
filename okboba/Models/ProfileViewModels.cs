@@ -1,6 +1,7 @@
 ﻿using okboba.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 
@@ -10,16 +11,26 @@ namespace okboba.Web.Models
     {
         public Profile Profile { get; set; }
         public ProfileText ProfileText { get; set; }
-    }
+        public List<string> Photos { get; set; }
+        public string StorageUrl { get; set; }
 
-    public class PhotoViewModel
-    {
-        public PhotoViewModel()
+        public ProfileViewModel(Profile profile)
         {
-            Photos = new List<ProfileImage>();
-        }
+            this.Photos = new List<string>();
+            this.Profile = profile;
+            this.ProfileText = profile.ProfileText;
+            this.StorageUrl = ConfigurationManager.AppSettings["StorageUrl"];
 
-        public string ContentUrl { get; set; }
-        public List<ProfileImage> Photos { get; set; }
+            if(profile.PhotosInternal != null)
+            {
+                var photos =  profile.PhotosInternal.Split(';');
+
+                foreach (var p in photos)
+                {
+                    this.Photos.Add(p);
+                }
+            }
+        }
     }
+
 }

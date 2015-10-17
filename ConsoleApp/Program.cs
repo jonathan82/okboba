@@ -29,7 +29,7 @@ namespace ConsoleApp
             //Get the photo repo
             var repo = PhotoRepository.Instance;
             repo.StorageConnectionString = str;
-            repo.UploadPhoto(fileStream, 0, 0, 300);
+            //repo.UploadPhoto(fileStream, 0, 0, 300, 2002);
 
             Console.WriteLine("done!");
 

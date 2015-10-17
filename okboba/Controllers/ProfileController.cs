@@ -15,13 +15,15 @@ namespace okboba.Controllers
     [Authorize]
     public class ProfileController : OkbBaseController
     {      
-        // GET: Profile
-        // Show my own Profile
+        /// <summary>
+        /// View your own profile
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var profile = GetUserProfile();
 
-            var vm = new ProfileViewModel { Profile = profile };
+            var vm = new ProfileViewModel(profile);
 
             vm.ProfileText = profile.ProfileText;
 
@@ -31,10 +33,13 @@ namespace okboba.Controllers
                 vm.ProfileText = new ProfileText();
             }
 
-            //Return the view model
             return View(vm);
         }
 
+        /// <summary>
+        /// API: Update profile text
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult EditProfileText(string qText, string whichQuestion)

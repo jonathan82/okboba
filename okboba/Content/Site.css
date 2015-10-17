@@ -127,6 +127,40 @@ label.photo-upload-label input[type="file"] {
   z-index: 1;
   padding: 10px;
 }
+.profile-header-photo {
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin-right: 20px;
+}
+.profile-details {
+  border: 1px solid;
+  background-color: #FCE4EC;
+  border-color: #F06292;
+  padding: 10px;
+}
+.profile-text {
+  min-height: 150px;
+}
+.profile-text:hover {
+  border: 1px dashed;
+  border-color: #F06292;
+  cursor: pointer;
+}
+.profile-text-edit {
+  width: 100%;
+  min-height: 150px;
+}
+.top-buffer {
+  margin-top: 20px;
+}
+#listThumbnails > div {
+  float: left;
+  margin: 5px;
+}
+#listThumbnails > div:hover {
+  cursor: pointer;
+}
 .chinese-serif {
   font-family: KaiTi;
 }
@@ -152,20 +186,4 @@ label.photo-upload-label input[type="file"] {
   display: inline-block;
   background-color: white;
   border-radius: 15px;
-}
-.profile-details {
-  border: 1px solid;
-  background-color: #FCE4EC;
-  border-color: #F06292;
-  padding: 10px;
-}
-.profile-text {
-  min-height: 100px;
-}
-.profile-text:hover {
-  border: 1px solid;
-}
-.profile-text-edit {
-  width: 100%;
-  min-height: 100px;
 }

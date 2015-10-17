@@ -19,13 +19,17 @@ namespace okboba.Repository
 {
     public class PhotoRepository
     {
+        //////////////////////////////////////// Private variables ////////////////////////
         const int THUMB_WIDTH = 200;
         const int MAX_PHOTOS_PER_USER = 10;
-
+        const int MAX_IMAGE_WIDTH = 900;
+        const int MAX_FILENAME_RETRY = 3;
         private static PhotoRepository instance;
+        private PhotoRepository() { }
 
-        private PhotoRepository() {}
 
+        ///////////////////////////////////// Public Properties ///////////////////////////
+        public string StorageConnectionString { get; set; }
         public static PhotoRepository Instance
         {
             get
@@ -38,69 +42,155 @@ namespace okboba.Repository
             }
         }
 
-        public string StorageConnectionString { get; set; }
-      
-        public int AddPhotoToDb(string filename, int profileId)
+
+        /////////////////////////////////////// Private Methods ////////////////////////
+
+        /// <summary>
+        /// Gets the Windows Azure Storage container
+        /// </summary>
+        /// <returns></returns>
+        private CloudBlobContainer GetBlobContainer()
+        {
+            var cont = CloudStorageAccount.Parse(StorageConnectionString)
+                .CreateCloudBlobClient()
+                .GetContainerReference("photos");
+
+            return cont;
+        }
+
+        /// <summary>
+        /// Adds a Photo to the database
+        /// </summary>
+        /// <param name="filename">The filename of the photo</param>
+        /// <param name="profileId">The profild ID of the user this photo belongs to</param>
+        /// <returns>An integer indicating how many photos were added.  1 or 0</returns>
+        private int AddPhotoToDb(string filename, int profileId)
         {
             var db = new OkbDbContext();
             var p = db.Profiles.Find(profileId);
 
-            //Check if uploading more than max allowed photos
-            var filenames = p.PhotosInternal.Split(';');
-
-            if (filenames.Length >= MAX_PHOTOS_PER_USER)
+            if (p.PhotosInternal == "" || p.PhotosInternal == null)
             {
-                //We've reached the maximum allowed photos per user. return error
-                return 0;
+                p.PhotosInternal = filename;
             }
-
-            p.PhotosInternal += ';' + filename;
-
+            else
+            {
+                p.PhotosInternal += ';' + filename;
+            }
+            
             db.SaveChanges();
 
             return 1;
         }
 
-        public void UploadPhoto(Stream upload, int leftThumb, int topThumb, int widthThumb)
+        private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width)
         {
-            //Generate a random filename
-            var fileName = Path.GetRandomFileName().Split('.')[0];
+            var outStream = new MemoryStream();
 
-            using (var imgFactory = new ImageFactory())
-            using (var outStream = new MemoryStream())
+            imgFactory
+                .Crop(new Rectangle(left, top, width, width))
+                .Resize(new Size(THUMB_WIDTH, THUMB_WIDTH))
+                .Save(outStream);
+
+            return outStream;
+        }
+
+        private MemoryStream ResizeImage(ImageFactory imgFactory, int width)
+        {
+            var outStream = new MemoryStream();
+
+            //Maintain aspect ratio
+            int height = (int)(((float)width / (float)imgFactory.Image.Width) * (float)imgFactory.Image.Height);
+
+            imgFactory
+                .Resize(new Size(width, height))
+                .Save(outStream);
+
+            return outStream;
+        }
+
+        private string GenerateUniqueFilename(CloudBlobContainer cont)
+        {
+            for (int i = 0; i < MAX_FILENAME_RETRY; i++)
             {
-                // Create thumbnail
-                imgFactory
-                    .Load(upload)
-                    .Crop(new Rectangle(leftThumb, topThumb, widthThumb, widthThumb))
-                    .Resize(new Size(THUMB_WIDTH,THUMB_WIDTH))
-                    .Save(outStream);
-
-                // Save to Azure                
-                var f = fileName + "." + imgFactory.CurrentImageFormat.DefaultExtension;
-                Console.WriteLine(f);
+                var filename = Path.GetRandomFileName().Split('.')[0];
+                if (!cont.GetBlockBlobReference(filename).Exists())
+                {
+                    return filename;
+                }
             }
 
+            //Got here, couldn't generate filename
+            throw new Exception("Couldn't generate unique filename");
+        }
 
-            // Resize Image
 
-            // Upload to Microsoft Azure
+        //////////////////////////////////////// Public Methods ///////////////////////
 
-            // Update the database
-            //var cont = CloudStorageAccount.Parse(StorageConnectionString)
-            //    .CreateCloudBlobClient()
-            //    .GetContainerReference("photos");
+        /// <summary>
+        /// Get the number of photos the user already has
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
+        public int GetNumOfPhotos(int profileId)
+        {
+            var db = new OkbDbContext();
+            var profile = db.Profiles.Find(profileId);
+            int numOfPhotos = 0;
 
-            //var storageAccount = CloudStorageAccount.Parse(StorageConnectionString);
-            //var blobClient = storageAccount.CreateCloudBlobClient();
-            //var container = blobClient.GetContainerReference("photos");
-            //var blob = container.GetBlockBlobReference("test.jpg");
+            if(profile.PhotosInternal == "" || profile.PhotosInternal == null)
+            {
+                numOfPhotos = 0;
+            }
+            else
+            {
+                numOfPhotos = profile.PhotosInternal.Split(';').Count();
+            }
+            
+            return numOfPhotos;
+        }
 
-            //// Create or overwrite the "myblob" blob with contents from a local file.
-            //using (var fileStream = File.OpenRead(@"C:\Users\Public\Pictures\Sample Pictures\desert.jpg"))
-            //{
-            //    blob.UploadFromStream(fileStream);
-            //}
+        /// <summary>
+        /// Uploads a photo to the database as well as Azure cloud.  Creates a thumbnail and r
+        /// resizes image before doing so.  Also generates a random filename.
+        /// </summary>
+        /// <param name="upload"></param>
+        /// <param name="leftThumb"></param>
+        /// <param name="topThumb"></param>
+        /// <param name="widthThumb"></param>
+        public void UploadPhoto(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId)
+        {
+            using (var imgFactory = new ImageFactory())
+            {
+                Stream thumbStream, origStream;
+                CloudBlockBlob thumbBlob, origBlob;
+
+                //Setup
+                var cont = GetBlobContainer();
+                var filePrefix = GenerateUniqueFilename(cont);
+                imgFactory.Load(upload);
+
+                // Create and Upload the thumbnail
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb);
+                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_t");
+                thumbBlob.UploadFromStream(thumbStream);
+
+                // Upload resized image if necessary
+                if (imgFactory.Image.Width > MAX_IMAGE_WIDTH)
+                {
+                    imgFactory.Reset();
+                    origStream = ResizeImage(imgFactory, MAX_IMAGE_WIDTH);
+                }
+                else
+                {
+                    origStream = upload;
+                }
+                origBlob = cont.GetBlockBlobReference(filePrefix);
+                origBlob.UploadFromStream(origStream);
+
+                //Finally Save filename to DB
+                AddPhotoToDb(filePrefix, profileId);
+            }
         }
     }
 }

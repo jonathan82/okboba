@@ -189,6 +189,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\OkbobaConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
@@ -329,6 +330,7 @@
     <Content Include="Views\Shared\_LayoutAnon.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Shared\_ProfileHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,6 +348,10 @@
     <ProjectReference Include="..\okboba.Entities\okboba.Entities.csproj">
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\okboba.Repository\okboba.Repository.csproj">
+      <Project>{1b313364-e757-4197-9683-7acb2c4a574b}</Project>
+      <Name>okboba.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\okboba.Resources\okboba.Resources.csproj">
       <Project>{7fb93755-0b4c-46e7-974c-ba68a4ec949f}</Project>

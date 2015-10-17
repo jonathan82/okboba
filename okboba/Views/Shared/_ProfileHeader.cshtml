@@ -1,0 +1,56 @@
+﻿@model okboba.Web.Models.ProfileViewModel
+
+<!-- Profile Header -->
+<div class="row">
+
+    <!--Image and Details -->
+    <div class="col-md-7">
+        @if (Model.Photos.Count > 0)
+        {
+            <img src="https://okboba.blob.core.windows.net/photos/@(Model.Photos[0] + "_t")" alt="Photo of @Model.Profile.Name" class="profile-header-photo" />
+        }
+        else
+        {
+            <img src="~/Content/Images/none.gif" alt="Photo of @Model.Profile.Name" class="profile-header-photo" />
+        }
+        <p class="h4">@Model.Profile.Name</p>
+        <p>@Model.Profile.Birthdate - @Model.Profile.LocationId1, @Model.Profile.LocationId1</p>
+    </div>
+
+    <!-- Percent match -->
+    <div class="col-md-2">
+        <span class="h3">XX %</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-md-3">
+        <button class="btn btn-primary">Message User</button>
+        <button class="btn btn-default">Favorite User</button>
+    </div>
+
+</div>
+
+@{ 
+    var profileActive = "";
+    var photoActive = "";
+}
+
+@if(ViewBag.Section == "profile")
+{
+    profileActive = "active";
+}
+else if(ViewBag.Section == "photos")
+{
+    photoActive = "active";
+}
+
+<div class="row top-buffer">
+    <div class="col-md-12">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="@profileActive"><a href="/profile">Profile</a></li>
+            <li role="presentation" class="@photoActive"><a href="/photo">Photos</a></li>
+            <li role="presentation"><a href="#">Questions</a></li>
+            <li role="presentation"><a href="#">Personality Matrix</a></li>
+        </ul>
+    </div>
+</div>

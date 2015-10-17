@@ -26,6 +26,5 @@ namespace okboba.Entities
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<ProfileText> ProfileTexts { get; set; }
-        public DbSet<ProfileImage> ProfileImages { get; set; }
     }
 }

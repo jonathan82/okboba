@@ -21,7 +21,7 @@ namespace okboba.Entities
         public Int16 LocationId1 { get; set; }
         public Int16 LocationId2 { get; set; }
 
-        [StringLength(60)]
+        [StringLength(90)]
         public string PhotosInternal { get; set; } //list of semicolon separated filenames
 
         //Navigation properties
@@ -97,20 +97,20 @@ namespace okboba.Entities
         public virtual Profile Profile { get; set; }
     }
 
-    public class ProfileImage
-    {
-        [Key]
-        [StringLength(12)]
-        public string ImageFilename { get; set; } 
+    //public class ProfileImage
+    //{
+    //    [Key]
+    //    [StringLength(12)]
+    //    public string ImageFilename { get; set; } 
 
-        [ForeignKey("Profile")]
-        public int ProfileId { get; set; }
+    //    [ForeignKey("Profile")]
+    //    public int ProfileId { get; set; }
                 
-        public Int16 LeftThumb { get; set; } 
-        public Int16 TopThumb { get; set; } 
-        public Int16 WidthThumb { get; set; }  
+    //    public Int16 LeftThumb { get; set; } 
+    //    public Int16 TopThumb { get; set; } 
+    //    public Int16 WidthThumb { get; set; }  
 
-        //Navigation
-        public virtual Profile Profile { get; set; }
-    }
+    //    //Navigation
+    //    public virtual Profile Profile { get; set; }
+    //}
 }
