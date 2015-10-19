@@ -171,7 +171,7 @@ namespace okboba.Entities.Helpers
             {
                 Text = text,
                 Rank = rank,
-                Choices = choices
+                ChoicesInternal = choices
             };
         }
     }

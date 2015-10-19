@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,9 +25,13 @@ namespace okboba.Entities
         [StringLength(90)]
         public string PhotosInternal { get; set; } //list of semicolon separated filenames
 
+        [ForeignKey("CurrentQuestion")]
+        public Int16? CurrentQuestionId { get; set; }
+
         //Navigation properties
         public virtual Location Location { get; set; }
         public virtual ProfileText ProfileText { get; set; }
+        public Question CurrentQuestion { get; set; }
     }
 
     public class Question
@@ -35,16 +40,24 @@ namespace okboba.Entities
         [StringLength(255)]
         public string Text { get; set; }
         public int Rank { get; set; }
-        public string Choices { get; set; } //semicolon delimited array of strings
-        //public string TraitScores { get; set; } //semicolon delimited array of integers representing trait score for each answer choice
+        public Int16? NextQuestionId { get; set; }
+        public string ChoicesInternal { get; set; } //semicolon delimited array of strings
+        //public string TraitScoresInternal { get; set; } //semicolon delimited array of integers representing trait score for each answer choice
+        [MaxLength(10)]
+        public byte[] TraitScores { get; set; }
+        [ForeignKey("Trait")]
+        public Int16? TraitId { get; set; }
+        
+        // Convenience properties for view model
+        public List<string> Choices { get; set; }
 
-        //References
-        //public virtual TraitModel Trait { get; set; }
+        // Navigation properties
+        public virtual Trait Trait { get; set; }
     }
 
-    public class TraitModel
+    public class Trait
     {
-        public int Id { get; set; }
+        public Int16 Id { get; set; }
         public string Description { get; set; }
     }
 

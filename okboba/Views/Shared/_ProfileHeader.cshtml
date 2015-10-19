@@ -33,6 +33,7 @@
 @{ 
     var profileActive = "";
     var photoActive = "";
+    var questionActive = "";
 }
 
 @if(ViewBag.Section == "profile")
@@ -43,13 +44,17 @@ else if(ViewBag.Section == "photos")
 {
     photoActive = "active";
 }
+else if(ViewBag.Section == "questions")
+{
+    questionActive = "active";
+}
 
 <div class="row top-buffer">
     <div class="col-md-12">
         <ul class="nav nav-tabs">
             <li role="presentation" class="@profileActive"><a href="/profile">Profile</a></li>
             <li role="presentation" class="@photoActive"><a href="/photo">Photos</a></li>
-            <li role="presentation"><a href="#">Questions</a></li>
+            <li role="presentation" class="@questionActive"><a href="/question">Questions</a></li>
             <li role="presentation"><a href="#">Personality Matrix</a></li>
         </ul>
     </div>

@@ -9,10 +9,16 @@ namespace okboba.Web.Models
 {
     public class ProfileViewModel
     {
+        // Common to all pages
         public Profile Profile { get; set; }
-        public ProfileText ProfileText { get; set; }
         public List<string> Photos { get; set; }
         public string StorageUrl { get; set; }
+
+        // Profile Main page
+        public ProfileText ProfileText { get; set; }
+
+        // Question page
+        public Question CurrentQuestion { get; set; }
 
         public ProfileViewModel(Profile profile)
         {

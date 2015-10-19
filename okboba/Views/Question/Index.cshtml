@@ -1,0 +1,111 @@
+﻿@model okboba.Web.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Questions";
+    ViewBag.Section = "questions";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form class="question-form" id="questionForm" action="/question/AnswerQuestion">
+            <p id="questionText">@Model.CurrentQuestion.Text</p>
+
+            @for (int i = 0; i < Model.CurrentQuestion.Choices.Count; i++)
+            {
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="answerIndex" id="choice@(i)" value="@i">
+                        @Model.CurrentQuestion.Choices[i]
+                    </label>
+                </div>
+            }
+
+            <p>Which answers are acceptable to you?</p>
+
+            @for (int i = 0; i < Model.CurrentQuestion.Choices.Count; i++)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="true" name="answerAccept" />
+                        <input type="hidden" value="false" name="answerAccept" id="acceptHidden@(i)"/>
+                        @Model.CurrentQuestion.Choices[i]
+                    </label>
+                </div>
+            }
+
+            <p>How important are your match's answers?</p>
+
+            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                <label class="btn btn-default">
+                    <input type="radio" name="weight" id="option1" autocomplete="off" value="1">A Little Important
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="weight" id="option2" autocomplete="off" value="2">Somewhat Important
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="weight" id="option3" autocomplete="off" value="3">Very Important
+                </label>
+            </div>
+
+            <input type="hidden" name="rank" value="@Model.CurrentQuestion.Rank" />
+            <input type="hidden" name="questionId" value="@Model.CurrentQuestion.Id" />
+            <div style="text-align: right; padding: 5px;">
+                <button type="button" class="btn bottom-right btn-primary" data-target="#questionForm" id="btnSubmitQuestion">Submit</button>
+                <button type="button" class="btn bottom-right" data-target="#questionForm" id="btnSkipQuestion">Skip Question</button>                                
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/okboba")
+
+    <script>
+        $('#questionForm').validate({
+            rules: {
+                answerIndex: "required"
+            },
+            errorPlacement: function (error, element) {
+                if (element.attr('name') == 'answerIndex') {
+                    //Place error below the question
+                    error.insertAfter('#questionText');
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            errorClass: "text-danger"
+        });
+        
+        $('#btnSubmitQuestion').click(function (e) {
+
+            var target = $(this).data('target');
+            var $form = $(target);
+
+            // Check if input is valid
+            if (!$form.valid()) {
+                return;
+            }
+
+            // Disable all the hidden fields for checked checkboxes
+            $form.find('input[type="checkbox"]').each(function (index, elem) {
+                // The sibling element is the hidden one
+                $(this).next().prop("disabled", this.checked);
+            });
+
+            var data = $form.serialize();
+            var url = $form.attr('action');
+
+            $.post(url, data, function (data, status, jqxhr) {
+
+                console.log(data);
+
+            }).fail(function (data, status, jqxhr) {
+
+                alert('failed: ' + status + ' ' + data);
+
+            });
+
+        });
+
+    </script>
+}

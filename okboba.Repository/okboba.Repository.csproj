@@ -94,7 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PhotoRepository.cs" />
+    <Compile Include="ProfileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
