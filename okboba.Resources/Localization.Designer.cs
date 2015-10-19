@@ -22,14 +22,14 @@ namespace okboba.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class Localization {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Localization() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace okboba.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("okboba.Resources.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("okboba.Resources.Localization", typeof(Localization).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,74 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 名字.
+        ///   Looks up a localized string similar to 取消.
         /// </summary>
-        public static string Name {
+        public static string Common_Cancel {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("Common_Cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 密码.
+        ///   Looks up a localized string similar to 关闭.
         /// </summary>
-        public static string Password {
+        public static string Common_Close {
             get {
-                return ResourceManager.GetString("Password", resourceCulture);
+                return ResourceManager.GetString("Common_Close", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 关于你自己一点点.
+        ///   Looks up a localized string similar to 保存.
         /// </summary>
-        public static string Question1 {
+        public static string Common_Save {
             get {
-                return ResourceManager.GetString("Question1", resourceCulture);
+                return ResourceManager.GetString("Common_Save", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 你做什么工作？上学？.
+        ///   Looks up a localized string similar to 提交.
         /// </summary>
-        public static string Question2 {
+        public static string Common_Submit {
             get {
-                return ResourceManager.GetString("Question2", resourceCulture);
+                return ResourceManager.GetString("Common_Submit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 你有什么爱好和兴趣？.
+        ///   Looks up a localized string similar to 有点重要.
         /// </summary>
-        public static string Question3 {
+        public static string Question_ALittleImportant {
             get {
-                return ResourceManager.GetString("Question3", resourceCulture);
+                return ResourceManager.GetString("Question_ALittleImportant", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 你有什么想法？.
+        ///   Looks up a localized string similar to 不重要.
         /// </summary>
-        public static string Question4 {
+        public static string Question_Irrelevant {
             get {
-                return ResourceManager.GetString("Question4", resourceCulture);
+                return ResourceManager.GetString("Question_Irrelevant", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 我的理想匹配.
+        ///   Looks up a localized string similar to 重要.
         /// </summary>
-        public static string Question5 {
+        public static string Question_SomewhatImportant {
             get {
-                return ResourceManager.GetString("Question5", resourceCulture);
+                return ResourceManager.GetString("Question_SomewhatImportant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 很重要.
+        /// </summary>
+        public static string Question_VeryImportant {
+            get {
+                return ResourceManager.GetString("Question_VeryImportant", resourceCulture);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿@model okboba.Web.Models.ProfileViewModel
+@using okboba.Resources
 @{
     ViewBag.Title = "Questions";
     ViewBag.Section = "questions";
@@ -32,17 +33,20 @@
                 </div>
             }
 
-            <p>How important are your match's answers?</p>
+            <p id="questionImportance">How important are your match's answers?</p>
 
             <div class="btn-group btn-group-justified" data-toggle="buttons">
                 <label class="btn btn-default">
-                    <input type="radio" name="weight" id="option1" autocomplete="off" value="1">A Little Important
+                    <input type="radio" name="weight" id="impIrrelevant" autocomplete="off" value="0">@Localization.Question_Irrelevant
                 </label>
                 <label class="btn btn-default">
-                    <input type="radio" name="weight" id="option2" autocomplete="off" value="2">Somewhat Important
+                    <input type="radio" name="weight" autocomplete="off" value="1">@Localization.Question_ALittleImportant
                 </label>
                 <label class="btn btn-default">
-                    <input type="radio" name="weight" id="option3" autocomplete="off" value="3">Very Important
+                    <input type="radio" name="weight" autocomplete="off" value="2">@Localization.Question_SomewhatImportant
+                </label>
+                <label class="btn btn-default">
+                    <input type="radio" name="weight" autocomplete="off" value="3">@Localization.Question_VeryImportant
                 </label>
             </div>
 
@@ -61,14 +65,26 @@
     @Scripts.Render("~/bundles/okboba")
 
     <script>
+        //Setup the 'Irrelevant' handler
+        $('#impIrrelevant').change(function (e) {
+
+            // Disable/Enable the checkboxes
+            $('input[type="checkbox"]').disabled = this.checked;
+
+        });
+
         $('#questionForm').validate({
             rules: {
-                answerIndex: "required"
+                answerIndex: "required",
+                weight: "required"
             },
             errorPlacement: function (error, element) {
                 if (element.attr('name') == 'answerIndex') {
                     //Place error below the question
                     error.insertAfter('#questionText');
+                } else if (element.attr('name') == 'weight') {
+                    //Place error below importance question
+                    error.insertAfter('#questionImportance');
                 } else {
                     error.insertAfter(element);
                 }
