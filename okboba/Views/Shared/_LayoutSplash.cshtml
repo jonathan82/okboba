@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using okboba.Resources;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -6,10 +8,45 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/datepicker")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        @@media (max-width: 800px) {
+            .body-splash {
+                background-image: none;
+            }
+            .splash-buffer {
+                display: none;
+            }
+            .splash-container {
+                position: relative;
+                background-color: #FCE4EC;
+            }
+            .splash-container .container {
+                padding-top: 0;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    
+<body class="body-splash">
+
+    <div class="splash-buffer">
+    </div>
+
+    <div class="splash-container">
+
+        <!-- Navbar -->
+        <div class="splash-navbar">
+            <a href="/account/login" class="btn btn-default">@Localization.Common_Login</a>
+        </div>
+
+        <!-- Registration form -->
+        <div class="container">
+            @RenderSection("registrationform", required: true);
+        </div>
+
+    </div>
+
     @RenderBody()
 
 

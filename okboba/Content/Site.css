@@ -95,24 +95,22 @@ body {
 .container-anon {
   background-color: #fff;
 }
-.splash-background {
-  background-image: url('Images/Shanghai-Skyline.jpg');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-  height: 0;
-  padding-top: 49.21%;
+.splash-buffer {
+  position: relative;
+  padding-top: 50%;
 }
 .splash-container {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 100%;
 }
 .splash-navbar {
   padding: 10px;
   text-align: right;
+}
+.splash-container .container {
+  padding-top: 8%;
 }
 .photo-upload-background {
   background-color: lightgray;
