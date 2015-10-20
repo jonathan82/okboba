@@ -18,6 +18,10 @@ namespace okboba
             bundles.Add(new ScriptBundle("~/bundles/filereader").Include(
                         "~/Scripts/filereader.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+                "~/Scripts/bootstrap-datepicker.js",
+                "~/Scripts/locales/bootstrap-datepicker.zh-CN.min.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
@@ -34,6 +38,10 @@ namespace okboba
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/all.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                "~/Content/datepicker/bootstrap-datepicker.css",
+                "~/Content/datepicker/bootstrap-datepicker3.css"));
         }
     }
 }

@@ -4,7 +4,7 @@
 <div class="row">
 
     <!--Image and Details -->
-    <div class="col-md-7">
+    <div class="col-sm-9 col-md-10">
         @if (Model.Photos.Count > 0)
         {
             <img src="https://okboba.blob.core.windows.net/photos/@(Model.Photos[0] + "_t")" alt="Photo of @Model.Profile.Name" class="profile-header-photo" />
@@ -17,15 +17,10 @@
         <p>@Model.Profile.Birthdate - @Model.Profile.LocationId1, @Model.Profile.LocationId1</p>
     </div>
 
-    <!-- Percent match -->
-    <div class="col-md-2">
-        <span class="h3">XX %</span>
-    </div>
-
     <!-- Buttons -->
-    <div class="col-md-3">
-        <button class="btn btn-primary">Message User</button>
-        <button class="btn btn-default">Favorite User</button>
+    <div class="col-sm-3 col-md-2">
+        <button class="btn btn-primary btn-block">Message User</button>
+        <button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
     </div>
 
 </div>

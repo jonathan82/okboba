@@ -9,29 +9,36 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
+[assembly: log4net.Config.XmlConfigurator(Watch =true)]
+
 namespace ConsoleApp
 {
+
+
     class Program
     {
         private static string connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=okboba;Integrated Security=True";
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static void Main(string[] args)
         {
+            ////////////////// Test Log4Net ////////////////////////////            
+            log.Error("This is my error message");
+
             //////////////// Test Microsoft Azure Storage /////////////////
+            //// Get the storage connection string
+            //var str = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
+            //Console.WriteLine(str);
 
-            // Get the storage connection string
-            var str = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
-            Console.WriteLine(str);
+            ////get the filestream            
+            //var fileStream = File.OpenRead(@"C:\Users\Public\Pictures\Sample Pictures\desert.jpg");            
 
-            //get the filestream            
-            var fileStream = File.OpenRead(@"C:\Users\Public\Pictures\Sample Pictures\desert.jpg");            
+            ////Get the photo repo
+            //var repo = PhotoRepository.Instance;
+            //repo.StorageConnectionString = str;
+            ////repo.UploadPhoto(fileStream, 0, 0, 300, 2002);
 
-            //Get the photo repo
-            var repo = PhotoRepository.Instance;
-            repo.StorageConnectionString = str;
-            //repo.UploadPhoto(fileStream, 0, 0, 300, 2002);
-
-            Console.WriteLine("done!");
+            //Console.WriteLine("done!");
 
             
             /////////////////// Json.NET ///////////////////////////

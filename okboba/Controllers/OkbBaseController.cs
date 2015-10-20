@@ -25,6 +25,13 @@ namespace okboba.Controllers
                 var db = new OkbDbContext();
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Find(userId);
+
+                if (user == null)
+                {
+                    // No profile exists for user!??!?
+                    throw new Exception("No profile exists for user");
+                }
+
                 profileId = user.Profile.Id;
                 Session["ProfileId"] = profileId;
             }

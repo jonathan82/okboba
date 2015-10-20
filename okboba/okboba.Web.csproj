@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -214,6 +218,14 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker.min.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker3.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\datepicker\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\Images\boba.png" />
     <Content Include="Content\Images\logo\boba-sm.png" />
     <Content Include="Content\Images\logo\okboba-logo-lg-2.png" />
@@ -273,6 +285,8 @@
     <Content Include="Content\config-bootstrap.json" />
     <Content Include="Content\Images\logo\okboba-logo.pdn" />
     <None Include="Content\Site.less" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -286,6 +300,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\okboba.js" />
     <Content Include="Scripts\respond.js" />

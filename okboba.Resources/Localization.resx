@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account_Name" xml:space="preserve">
+    <value>名字</value>
+  </data>
+  <data name="Account_Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
   <data name="Common_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
   <data name="Common_Close" xml:space="preserve">
     <value>关闭</value>
+  </data>
+  <data name="Common_Login" xml:space="preserve">
+    <value>登录</value>
   </data>
   <data name="Common_Save" xml:space="preserve">
     <value>保存</value>
@@ -129,8 +138,26 @@
   <data name="Common_Submit" xml:space="preserve">
     <value>提交</value>
   </data>
+  <data name="Profile_Question1" xml:space="preserve">
+    <value>关于你自己一点点</value>
+  </data>
+  <data name="Profile_Question2" xml:space="preserve">
+    <value>你做什么工作？上学？</value>
+  </data>
+  <data name="Profile_Question3" xml:space="preserve">
+    <value>你有什么爱好和兴趣？</value>
+  </data>
+  <data name="Profile_Question4" xml:space="preserve">
+    <value>你有什么想法？</value>
+  </data>
+  <data name="Profile_Question5" xml:space="preserve">
+    <value>我的理想匹配</value>
+  </data>
   <data name="Question_ALittleImportant" xml:space="preserve">
     <value>有点重要</value>
+  </data>
+  <data name="Question_Any" xml:space="preserve">
+    <value>上述任何</value>
   </data>
   <data name="Question_Irrelevant" xml:space="preserve">
     <value>不重要</value>

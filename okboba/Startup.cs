@@ -2,6 +2,8 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(okboba.Startup))]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace okboba
 {
     public partial class Startup

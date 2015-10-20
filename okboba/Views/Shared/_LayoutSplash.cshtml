@@ -4,25 +4,18 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datepicker")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 
-<body class="body-splash">
+<body>
+    
+    @RenderBody()
 
-    <nav class="navbar">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/Account/Login?ReturnUrl=/Home" class="btn btn-default">登录</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container">
-        @RenderBody()
-    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datepicker")
     @RenderSection("scripts", required: false)
 </body>
 </html>

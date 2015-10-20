@@ -5,8 +5,10 @@
     ViewBag.Section = "questions";
 }
 
-<div class="row">
-    <div class="col-md-8">
+@Html.Partial("_ProfileHeader")
+
+<div class="row top-buffer">
+    <div class="col-md-6">
         <form class="question-form" id="questionForm" action="/question/AnswerQuestion">
             <p id="questionText">@Model.CurrentQuestion.Text</p>
 
@@ -33,12 +35,16 @@
                 </div>
             }
 
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="true" name="anyAccept" id="anyAccept" />
+                    @Localization.Question_Any
+                </label>
+            </div>
+
             <p id="questionImportance">How important are your match's answers?</p>
 
             <div class="btn-group btn-group-justified" data-toggle="buttons">
-                <label class="btn btn-default">
-                    <input type="radio" name="weight" id="impIrrelevant" autocomplete="off" value="0">@Localization.Question_Irrelevant
-                </label>
                 <label class="btn btn-default">
                     <input type="radio" name="weight" autocomplete="off" value="1">@Localization.Question_ALittleImportant
                 </label>
@@ -58,6 +64,10 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-6">
+
+    </div>
 </div>
 
 @section Scripts {
@@ -66,10 +76,10 @@
 
     <script>
         //Setup the 'Irrelevant' handler
-        $('#impIrrelevant').change(function (e) {
+        $('#anyAccept').change(function (e) {
 
             // Disable/Enable the checkboxes
-            $('input[type="checkbox"]').disabled = this.checked;
+            $('input[type="checkbox"][name="answerAccept"]').prop('disabled', this.checked);
 
         });
 

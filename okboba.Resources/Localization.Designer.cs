@@ -61,6 +61,24 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 名字.
+        /// </summary>
+        public static string Account_Name {
+            get {
+                return ResourceManager.GetString("Account_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 密码.
+        /// </summary>
+        public static string Account_Password {
+            get {
+                return ResourceManager.GetString("Account_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 取消.
         /// </summary>
         public static string Common_Cancel {
@@ -75,6 +93,15 @@ namespace okboba.Resources {
         public static string Common_Close {
             get {
                 return ResourceManager.GetString("Common_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 登录.
+        /// </summary>
+        public static string Common_Login {
+            get {
+                return ResourceManager.GetString("Common_Login", resourceCulture);
             }
         }
         
@@ -97,11 +124,65 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 关于你自己一点点.
+        /// </summary>
+        public static string Profile_Question1 {
+            get {
+                return ResourceManager.GetString("Profile_Question1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你做什么工作？上学？.
+        /// </summary>
+        public static string Profile_Question2 {
+            get {
+                return ResourceManager.GetString("Profile_Question2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你有什么爱好和兴趣？.
+        /// </summary>
+        public static string Profile_Question3 {
+            get {
+                return ResourceManager.GetString("Profile_Question3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你有什么想法？.
+        /// </summary>
+        public static string Profile_Question4 {
+            get {
+                return ResourceManager.GetString("Profile_Question4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我的理想匹配.
+        /// </summary>
+        public static string Profile_Question5 {
+            get {
+                return ResourceManager.GetString("Profile_Question5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 有点重要.
         /// </summary>
         public static string Question_ALittleImportant {
             get {
                 return ResourceManager.GetString("Question_ALittleImportant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 上述任何.
+        /// </summary>
+        public static string Question_Any {
+            get {
+                return ResourceManager.GetString("Question_Any", resourceCulture);
             }
         }
         
