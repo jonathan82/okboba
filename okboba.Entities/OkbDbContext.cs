@@ -26,5 +26,8 @@ namespace okboba.Entities
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<ProfileText> ProfileTexts { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<ConversationMap> ConversationMap { get; set; }
     }
 }

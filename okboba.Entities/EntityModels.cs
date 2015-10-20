@@ -110,6 +110,62 @@ namespace okboba.Entities
         public virtual Profile Profile { get; set; }
     }
 
+    public class ConversationMap
+    {
+        public int Id { get; set; }
+
+        [ForeignKey("Profile")]
+        public int ProfileId { get; set; }
+
+        [ForeignKey("Conversation")]
+        public int ConversationId { get; set; }
+
+        [ForeignKey("ToProfile")]
+        public int ToProfileId { get; set; }
+
+        [StringLength(10)]
+        public string ToPhoto { get; set; }
+
+        public bool HasRead { get; set; }
+
+        //Navigation properties
+        public Conversation Conversation { get; set; }
+        public Profile Profile { get; set; }
+        public Profile ToProfile { get; set; }
+    }
+
+    public class Conversation
+    {
+        public int Id { get; set; }
+        public int UserId1 { get; set; }        
+        public int UserId2 { get; set; }
+        [StringLength(10)]
+        public string UserPhoto1 { get; set; }
+        [StringLength(10)]
+        public string UserPhoto2 { get; set; }
+        [StringLength(255)]
+        public string Subject { get; set; }
+        public DateTime LastMessageDate { get; set; }
+        [StringLength(255)]
+        public string LastMessageBlurb { get; set; }
+    }
+
+    public class Message
+    {
+        public int Id { get; set; }
+        [ForeignKey("Conversation")]
+        public int ConversationId { get; set; }
+        [ForeignKey("FromProfile")]
+        public int FromProfileId { get; set; }
+        [StringLength(1000)]
+        public string MessageText { get; set; }
+        public DateTime Timestamp { get; set; }
+
+        // Navigation properties
+        public Conversation Conversation { get; set; }
+        public Profile FromProfile { get; set; }
+    }
+
     //public class ProfileImage
     //{
     //    [Key]
