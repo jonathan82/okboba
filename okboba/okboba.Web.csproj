@@ -241,6 +241,8 @@
     <Content Include="Content\Images\logo\okboba-logo-lg.png" />
     <Content Include="Content\Images\logo\okboba-logo-sm-2.png" />
     <Content Include="Content\Images\logo\okboba-logo.png" />
+    <Content Include="Content\Images\none.gif" />
+    <Content Include="Content\Images\none.jpg" />
     <Content Include="Content\Images\Penguins.jpg" />
     <Content Include="Content\Images\Shanghai-Skyline.jpg" />
     <Content Include="Content\Images\wedding_beach.jpg" />
@@ -359,10 +361,11 @@
     <Content Include="Views\Photo\Index.cshtml" />
     <Content Include="Views\Shared\_ProfileHeader.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\Compose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Messages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

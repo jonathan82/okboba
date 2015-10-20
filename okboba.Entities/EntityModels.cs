@@ -112,21 +112,27 @@ namespace okboba.Entities
 
     public class ConversationMap
     {
-        public int Id { get; set; }
-
+        [Key]
+        [Column(Order = 1)]
         [ForeignKey("Profile")]
         public int ProfileId { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
         [ForeignKey("Conversation")]
         public int ConversationId { get; set; }
 
         [ForeignKey("ToProfile")]
-        public int ToProfileId { get; set; }
+        public int? ToProfileId { get; set; }
 
         [StringLength(10)]
         public string ToPhoto { get; set; }
 
-        public bool HasRead { get; set; }
+        [StringLength(10)]
+        public string ToName { get; set; }
+
+        public bool HasBeenRead { get; set; }
+        public bool HasReplies { get; set; }
 
         //Navigation properties
         public Conversation Conversation { get; set; }
@@ -137,17 +143,15 @@ namespace okboba.Entities
     public class Conversation
     {
         public int Id { get; set; }
-        public int UserId1 { get; set; }        
-        public int UserId2 { get; set; }
-        [StringLength(10)]
-        public string UserPhoto1 { get; set; }
-        [StringLength(10)]
-        public string UserPhoto2 { get; set; }
-        [StringLength(255)]
         public string Subject { get; set; }
-        public DateTime LastMessageDate { get; set; }
+        public DateTime? LastMessageDate { get; set; }
         [StringLength(255)]
         public string LastMessageBlurb { get; set; }
+        [ForeignKey("Profile")]
+        public int? LastMessageFrom { get; set; }
+
+        //Navigation properties
+        public virtual Profile Profile { get; set; }
     }
 
     public class Message
