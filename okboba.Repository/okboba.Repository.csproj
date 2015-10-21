@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocationRepository.cs" />
     <Compile Include="MessageRepository.cs" />
     <Compile Include="PhotoRepository.cs" />
     <Compile Include="ProfileRepository.cs" />

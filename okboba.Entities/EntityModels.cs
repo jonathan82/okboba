@@ -84,7 +84,7 @@ namespace okboba.Entities
         public virtual Question Question { get; set; }
     }
 
-    public class Location
+    public class Location : IEquatable<Location>
     {
         [Key]
         [Column(Order = 1)]
@@ -94,6 +94,17 @@ namespace okboba.Entities
         public Int16 LocationId2 { get; set; }
         public string LocationName1 { get; set; }
         public string LocationName2 { get; set; }
+
+        public bool Equals(Location other)
+        {
+            if (other == null) return false;
+            return other.LocationId1 == this.LocationId1;
+        }
+
+        public override int GetHashCode()
+        {
+            return LocationId1.GetHashCode();
+        }
     }
 
     public class ProfileText

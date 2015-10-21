@@ -1,0 +1,9 @@
+tagline: A dating website that's smarter.  
+
+p1: A dating website that give you matches based on questions you answer.  You design your own matching algorithm by answering questions.  With hundreds of questions to answer on many topics we will be able to rank potential dates and show you the best matches.
+
+p2: Based on psychology research of hundreds of couples.  When you answer enough questions we can construct a peronality profile based on the <a href="">twelve personality traits</a> that affect marriages.  You can also compare your answers with others to see how other people answered!
+
+p2: FREE!  You do not have to subscribe or pay anything to find and message matches.  
+
+p3: 
