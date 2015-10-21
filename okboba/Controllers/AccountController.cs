@@ -12,6 +12,7 @@ using okboba.Web.Models;
 using okboba.Entities;
 using System.Collections.Generic;
 using okboba.Repository;
+using Newtonsoft.Json;
 
 //some comments
 
@@ -146,23 +147,17 @@ namespace okboba.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            //// Get a list of all the provinces
-            //OkbDbContext db = new OkbDbContext();
-            //var provinceDict = new Dictionary<string, string>();
-            //foreach (var loc in db.Locations.ToList())
-            //{
-            //    if(!provinceDict.ContainsKey(loc.LocationId1.ToString()))
-            //    {
-            //        provinceDict.Add(loc.LocationId1.ToString(), loc.LocationName1);
-            //    }
-            //}
+            var locationList = locationRepo.GetProvinceList();
+            var provinceList = new List<object>();
 
-            //ViewBag.ProvinceList = provinceDict;
+            foreach (var loc in locationList)
+            {
+                provinceList.Add(new { id = loc.LocationId1, name = loc.LocationName1 });
+            }
 
-            var prov = locationRepo.GetProvinceList();
-            var selectProv = new SelectList(prov, "LocationId1", "LocationName1");
+            var json = JsonConvert.SerializeObject(provinceList);
 
-            ViewBag.ProvinceList = selectProv;
+            ViewBag.JsonProvinces = json;
 
             return View();
         }

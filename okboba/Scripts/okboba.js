@@ -66,7 +66,9 @@ function encodeHtml(str) {
     // Popover options
     var opts = {
         html: true,
-        trigger: 'click focus'
+        trigger: 'click focus',
+        placement: 'bottom',
+        container: 'body'
     }
 
     // Init the plugin

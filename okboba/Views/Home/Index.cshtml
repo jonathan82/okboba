@@ -79,30 +79,6 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 
     <script>
         var provinces = @Html.Raw(ViewBag.JsonProvinces);
-        var numCols = 6;
-
-        function buildProvinceHtml(prov) {
-            html = '<table class="table"><tr><th colspan="'+numCols+'">Province</th></tr>';
-
-            for(var i=0; i < prov.length; i++) {
-                if(i % numCols == 0) html += '<tr>';
-                html += '<td><a href="#" data-locationid="'+prov[i].id+'">' + prov[i].name + '</a></td>';
-                if(i == prov.length-1 || i % numCols == numCols-1) html += '</tr>';
-            }
-
-            html += '</table>';
-
-            return html;
-        }
-
-        var provinceHtml = buildProvinceHtml(provinces);
-
-        //alert(provinceHtml);
-
-        var opts = {
-            html: true,
-            content: provinceHtml
-        }
 
         //setup the popover
         //$('[data-toggle="popover"]').popover(opts);
