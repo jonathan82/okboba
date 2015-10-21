@@ -1,8 +1,9 @@
-﻿@{
+﻿@using okboba.Entities
+@{
     ViewBag.Title = "Home Page";
 }
 
-<input type="text" name="name" value=" " class="form-control" data-container="body" data-toggle="popover" data-placement="bottom"  />
+<input id="location" type="text" name="name" value=" " class="form-control" data-container="body" data-toggle="popover" data-placement="bottom" />
 
 <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
 sagittis lacus vel augue laoreet rutrum faucibus.">
@@ -61,6 +62,14 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
 <p>Brisket swine ham hock ball tip filet mignon, picanha tri-tip beef ribs flank venison short ribs cupim pork loin.  Frankfurter prosciutto pork loin capicola pancetta boudin.  Picanha boudin beef ribs, shankle turducken beef capicola.  Flank spare ribs jowl landjaeger, tenderloin salami doner shankle sausage ham ribeye hamburger jerky.  Bresaola strip steak andouille venison ham spare ribs alcatra frankfurter.  Rump tongue t-bone bresaola, flank ground round boudin porchetta venison tri-tip filet mignon pig doner pork frankfurter.</p>
 <p>Andouille beef chuck, pastrami rump leberkas meatball strip steak beef ribs capicola boudin turkey.  Brisket drumstick picanha short ribs, frankfurter fatback ribeye meatball tail.  Pork belly ham kielbasa, shankle biltong shank fatback shoulder cow corned beef cupim kevin brisket swine pastrami.  Picanha leberkas jerky pig beef sausage strip steak kevin ground round turducken capicola shank.  Ham hock pork belly beef chicken brisket filet mignon picanha kielbasa short ribs pork chop.  T-bone shank ham hock ribeye, alcatra sirloin flank shankle tenderloin swine salami.</p><p>Tri-tip short ribs bresaola corned beef, pork loin porchetta hamburger venison rump ground round cow flank kielbasa picanha.  Pork belly turkey short loin ground round, venison drumstick biltong fatback strip steak picanha.  Prosciutto filet mignon alcatra kielbasa short loin porchetta ribeye, shankle spare ribs strip steak rump salami short ribs.  Bresaola capicola ribeye short ribs beef ribs.  Cow fatback leberkas boudin spare ribs filet mignon drumstick kevin t-bone tail shank.  Ground round capicola prosciutto pig ball tip boudin.</p><p>Short loin shank shoulder, picanha pancetta turducken flank beef ribs pork chop tri-tip t-bone sirloin boudin ham ribeye.  Bacon beef porchetta, turducken strip steak pork chop pork kielbasa.  Cow ham drumstick ham hock strip steak andouille kielbasa meatloaf turkey fatback pork loin.  Pig swine filet mignon cupim boudin chicken landjaeger tongue fatback rump.  Chicken pastrami ball tip, tri-tip shankle venison flank spare ribs shoulder alcatra beef ribs tongue capicola sirloin chuck.  Prosciutto andouille beef bresaola filet mignon short ribs meatloaf pork hamburger tri-tip short loin shoulder.  Capicola tail pig cupim, landjaeger bresaola kevin t-bone pancetta sirloin.</p><p>Capicola pig meatloaf, ball tip jowl chuck frankfurter filet mignon rump.  Sirloin pancetta fatback ground round pork belly shank, salami alcatra.  Ham cupim pig, swine pork belly pancetta t-bone porchetta salami andouille shoulder.  Leberkas tri-tip turducken flank brisket tenderloin ribeye short ribs filet mignon short loin turkey shank ham hock.  Ham hock beef flank, cow ribeye porchetta meatball kielbasa jowl tri-tip capicola cupim filet mignon.</p><p>Meatloaf pancetta shank pork.  Drumstick ground round fatback prosciutto, tenderloin ham pancetta porchetta tri-tip.  Tail salami shank pork chop hamburger, swine kevin frankfurter.  Tail beef ribs pancetta pig shoulder turkey spare ribs pork bacon chuck sirloin sausage picanha t-bone.  Sirloin filet mignon pig leberkas ground round, beef ribs corned beef tenderloin ribeye pastrami brisket.  Capicola swine beef shank.  Shank bresaola ribeye shoulder, prosciutto pork boudin chicken pork chop ham sirloin short loin kevin kielbasa.</p><p>Leberkas tongue rump chicken, t-bone pork belly turkey kevin ribeye.  Tail strip steak meatloaf ham.  Rump ground round pork loin ball tip shoulder kevin turducken cow porchetta filet mignon.  Rump cow kevin pig salami bresaola frankfurter short loin ground round leberkas corned beef pork loin.</p>
 
+<table cellpadding="5">
+    <tr><td colspan="8">Province</td></tr>
+    <tr><td><a href="#" data-locationid="1">北京</a></td><td><a href="#" data-locationid="2">天津</a></td><td><a href="#" data-locationid="3">重庆</a></td><td><a href="#" data-locationid="4">安徽</a></td><td><a href="#" data-locationid="5">福建</a></td><td><a href="#" data-locationid="6">甘肃</a></td><td><a href="#" data-locationid="7">广东</a></td><td><a href="#" data-locationid="8">广西</a></td></tr>
+    <tr><td><a href="#" data-locationid="9">贵州</a></td><td><a href="#" data-locationid="10">海南</a></td><td><a href="#" data-locationid="11">河北</a></td><td><a href="#" data-locationid="12">河南</a></td><td><a href="#" data-locationid="13">黑龙江</a></td><td><a href="#" data-locationid="14">湖北</a></td><td><a href="#" data-locationid="15">湖南</a></td><td><a href="#" data-locationid="16">吉林</a></td></tr>
+    <tr><td><a href="#" data-locationid="17">江苏</a></td><td><a href="#" data-locationid="18">江西</a></td><td><a href="#" data-locationid="19">辽宁</a></td><td><a href="#" data-locationid="20">内蒙古</a></td><td><a href="#" data-locationid="21">宁夏</a></td><td><a href="#" data-locationid="22">青海</a></td><td><a href="#" data-locationid="23">山东</a></td><td><a href="#" data-locationid="24">山西</a></td></tr>
+    <tr><td><a href="#" data-locationid="25">陕西</a></td><td><a href="#" data-locationid="26">四川</a></td><td><a href="#" data-locationid="27">西藏</a></td><td><a href="#" data-locationid="28">新疆</a></td><td><a href="#" data-locationid="29">云南</a></td><td><a href="#" data-locationid="30">浙江</a></td><td><a href="#" data-locationid="31">香港</a></td><td><a href="#" data-locationid="32">澳门</a></td></tr>
+    <tr><td><a href="#" data-locationid="33">台湾</a></td></tr>
+</table>
 
 
 @section Scripts {
@@ -69,15 +78,35 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     @Scripts.Render("~/bundles/datepicker")
 
     <script>
+        var provinces = @Html.Raw(ViewBag.JsonProvinces);
+        var numCols = 6;
+
+        function buildProvinceHtml(prov) {
+            html = '<table class="table"><tr><th colspan="'+numCols+'">Province</th></tr>';
+
+            for(var i=0; i < prov.length; i++) {
+                if(i % numCols == 0) html += '<tr>';
+                html += '<td><a href="#" data-locationid="'+prov[i].id+'">' + prov[i].name + '</a></td>';
+                if(i == prov.length-1 || i % numCols == numCols-1) html += '</tr>';
+            }
+
+            html += '</table>';
+
+            return html;
+        }
+
+        var provinceHtml = buildProvinceHtml(provinces);
+
+        //alert(provinceHtml);
+
         var opts = {
             html: true,
-            content: function () {
-                return '<b>this is teh content</b>';
-            }
+            content: provinceHtml
         }
 
         //setup the popover
-        $('[data-toggle="popover"]').popover(opts);
+        //$('[data-toggle="popover"]').popover(opts);
+        $('#location').locationpicker(provinces);
 
     </script>
 }

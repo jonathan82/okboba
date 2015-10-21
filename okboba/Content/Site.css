@@ -65,6 +65,9 @@
 .container {
   border-radius: 6px;
 }
+.popover {
+  max-width: 100%;
+}
 /***************************
     Okboba Specific Sytles
 ****************************/
