@@ -181,6 +181,13 @@ namespace okboba.Entities
         public Profile FromProfile { get; set; }
     }
 
+    public class TranslateQuestion
+    {
+        public int Id { get; set; }
+        public string QuestionText { get; set; }
+        public string ChoicesInternal { get; set; }
+    }
+
     //public class ProfileImage
     //{
     //    [Key]

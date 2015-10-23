@@ -43,6 +43,11 @@ namespace okboba
                       "~/Content/themes/base/all.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                      "~/Content/bootstrap.css",
+                      "~/Content/themes/base/all.css",
+                      "~/Content/admin.css"));
+
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
                 "~/Content/datepicker/bootstrap-datepicker.css",
                 "~/Content/datepicker/bootstrap-datepicker3.css"));

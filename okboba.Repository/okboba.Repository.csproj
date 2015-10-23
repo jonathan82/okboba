@@ -103,6 +103,7 @@
   <ItemGroup>
     <Compile Include="LocationRepository.cs" />
     <Compile Include="MessageRepository.cs" />
+    <Compile Include="Models\QuestionViewModels.cs" />
     <Compile Include="PhotoRepository.cs" />
     <Compile Include="ProfileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,7 +4,7 @@
             <div className="questionHeaderEdit">
                 <div className="row">
                     <div className="form-group col-md-9">
-                        <input type="text" name="name" value={this.props.english} className="form-control" />
+                        <input type="text" name="name" value={this.props.q.quesEnglish} className="form-control" />
                     </div>
                     <div className="col-md-3 form-group">
                         <select className="form-control">
@@ -14,7 +14,7 @@
                 </div>
                 <div className="row">
                     <div className="col-md-9 form-group">
-                        <input type="text" name="name" value={this.props.chinese} className="form-control" />
+                        <input type="text" name="name" defaultValue={this.props.q.quesChinese} className="form-control" />
                     </div>
                     <div className="col-md-3"></div>
                 </div>
@@ -26,28 +26,27 @@
 var QuestionHeader = React.createClass({
     handleClick: function () {
         alert('clicked');
-    },
-    
+    },    
     render: function () {
         return (
-            <div className="questionHeader" onClick={this.handleClick}>
+            <div onClick={this.props.headerClick}>
                 <div className="row">
                     <div className="col-sm-9">
-                        {this.props.english}
+                        {this.props.q.quesEnglish}
                     </div>
                     <div className="col-sm-3">
-                        <b>{this.props.trait}</b>
+                        <b>{this.props.q.trait}</b>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-12">
-                        {this.props.chinese}
+                        {this.props.q.quesChinese}
                     </div>
                 </div>
                 
             </div>
             );
-}
+    }
 });
 
 var ChoiceEdit = React.createClass({
@@ -72,18 +71,44 @@ var ChoiceEdit = React.createClass({
 
 var QuestionBoxEdit = React.createClass({
     render: function () {
+        var props = this.props;
+        var choiceNodes = this.props.q.choicesEnglish.map(function (choiceEng, index) {
+
+            var english = choiceEng;
+            var chinese = props.q.choicesChinese[index];
+            var score = props.q.scores[index];
+
+            return <ChoiceEdit i={index} english={english} chinese={chinese} score={score} />
+        });
         return (
-            <div className="questionBoxEdit">
-                <QuestionHeaderEdit english="English quesiton" chinese="chinese question" />
-                <ChoiceEdit i={1} english="test" chinese="test" score={-2} />
-                <ChoiceEdit i={2} english="test" chinese="test" score={-2} />
-                <ChoiceEdit i={3} english="test" chinese="test" score={-2} />
+            <form action="">
+                <QuestionHeaderEdit q={this.props.q} />
+                {choiceNodes}
                 <div className="pull-right">
-                    <button className="btn btn-default">Cancel</button>
-                    <button className="btn btn-primary">Save</button>
+                    <button type="button" className="btn btn-default" onClick={this.props.onQuestionCancel}>Cancel</button>
+                    <button type="button" className="btn btn-primary">Save</button>
                 </div>
-            </div>
+            </form>
             );
+    }
+});
+
+var QuestionBox = React.createClass({
+    handleCancel: function () {
+        this.setState({ isEditing: false });
+    },
+    handleClick: function () {       
+        this.setState({isEditing: true});
+    },
+    getInitialState: function () {
+        return { isEditing: false };
+    },
+    render: function () {
+        if (this.state.isEditing) {
+            return <QuestionBoxEdit q={this.props.q} onQuestionCancel={this.handleCancel} />;
+        } else {
+            return <QuestionHeader q={this.props.q} headerClick={this.handleClick} />;
+        }
     }
 });
 
@@ -91,65 +116,49 @@ var QuestionList = React.createClass({
     render: function () {
         var quesNodes = this.props.data.map(function (q) {
             return (
-                <tr>
+                <tr className="question-row">
                     <td>
-                        <QuestionHeader english={q.quesEnglish} chinese={q.quesChinese} trait={q.trait} />
+                        <QuestionBox q={q} />
                     </td>
                 </tr>
                 );
-});
-return (
-        <table className="table">
-            <tbody>
-                {quesNodes}
-            </tbody>
-        </table>
-            );
-}
+        });
+        return (
+                <table className="table">
+                    <tbody id="questionList">
+                        {quesNodes}
+                    </tbody>
+                </table>
+                    );
+    }
 });
 
 var data = [{
-    quesEnglish: "What is your favorite color?",
+    quesEnglish: "1What is your favorite color?",
     quesChinese: "什么是你的最喜欢的颜色？",
     trait: "Kinkiness",
     choicesEnglish: ['Blue', 'Yellow', 'Green'],
     choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3]
+    scores: [1, 2, null],
 },
 {
-    quesEnglish: "What is your favorite color?",
+    quesEnglish: "2What is your favorite color?",
     quesChinese: "什么是你的最喜欢的颜色？",
     trait: "Kinkiness",
     choicesEnglish: ['Blue', 'Yellow', 'Green'],
     choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3]
+    scores: [1, 2, 3],
 },
 {
-    quesEnglish: "What is your favorite color?",
+    quesEnglish: "3What is your favorite color?",
     quesChinese: "什么是你的最喜欢的颜色？",
     trait: "Kinkiness",
     choicesEnglish: ['Blue', 'Yellow', 'Green'],
     choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3]
-},
-{
-    quesEnglish: "What is your favorite color?",
-    quesChinese: "什么是你的最喜欢的颜色？",
-    trait: "Kinkiness",
-    choicesEnglish: ['Blue', 'Yellow', 'Green'],
-    choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3]
-},
-{
-    quesEnglish: "What is your favorite color?",
-    quesChinese: "什么是你的最喜欢的颜色？",
-    trait: "Kinkiness",
-    choicesEnglish: ['Blue', 'Yellow', 'Green'],
-    choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3]
+    scores: [1, 2, 3],
 }];
 
 ReactDOM.render(
-    <QuestionList data={data} />,
+    <QuestionList data={data} url="/admin/editquestion" />,
     $('#content')[0]
 );

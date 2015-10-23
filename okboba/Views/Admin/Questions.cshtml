@@ -1,23 +1,13 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
+﻿
     <div id="content">    
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/react")
-    <script src="~/Scripts/jsx/questions.jsx"></script>
-</body>
-</html>
+    
+@section Scripts {
+<script src="~/Scripts/jsx/questions.jsx"></script>
+    <script>
+        $('#questionList').sortable();
+    </script>
+    }
+    
+

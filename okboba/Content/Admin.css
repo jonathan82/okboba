@@ -1,0 +1,7 @@
+﻿.container-admin {
+  padding: 50px;
+}
+tr.question-row:hover {
+  cursor: pointer;
+  background-color: lightcyan;
+}

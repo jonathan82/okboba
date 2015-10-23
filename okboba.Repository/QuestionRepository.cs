@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,29 @@ namespace okboba.Repository
 
             db.SaveChanges();
         }
+
+        public List<TranslateQuestionViewModel> GetTranslateQuestions()
+        {
+            var db = new OkbDbContext();
+
+            var result = from q in db.Questions
+                         join qt in db.TranslateQuestions on q.Id equals qt.Id
+                         orderby q.Rank ascending
+                         select new TranslateQuestionViewModel
+                         {
+                             Id = q.Id,
+                             QuesEng = qt.QuestionText,
+                             QuesChin = q.Text,
+                             ChoicesEng = qt.ChoicesInternal == null ? null : qt.ChoicesInternal.Split(';'),
+                             ChoicesChin = q.ChoicesInternal == null ? null : q.ChoicesInternal.Split(';'),
+                             Scores = q.TraitScores == null ? null : q.TraitScores,
+                             TraitId = q.TraitId,
+                             Rank = q.Rank                             
+                         };
+
+            return result.ToList();
+        }
+
         #endregion
 
         #region Private Methods
