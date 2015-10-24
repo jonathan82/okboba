@@ -22,8 +22,43 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+            ////////////////// Insert Okcupid questions ////////////////////
+            //var sr = new StreamReader("okc_questions.txt");
+            //int count = 0;
+            //var quesList = new List<TranslateQuestion>();
+
+            //while (!sr.EndOfStream)
+            //{
+            //    var ques = sr.ReadLine();
+            //    string ans, ansInternal = "";
+            //    while ((ans=sr.ReadLine()) != "" && !sr.EndOfStream)
+            //    {
+            //        ansInternal += ans + ";";
+            //    }
+            //    //remove trailing semicolon
+            //    ansInternal = ansInternal.TrimEnd(';');
+
+            //    var addQues = new TranslateQuestion
+            //    {
+            //        QuesEng = ques,
+            //        ChoicesInternalEng = ansInternal
+            //    };
+
+            //    quesList.Add(new TranslateQuestion
+            //    {
+            //        QuesEng = ques,
+            //        ChoicesInternalEng = ansInternal,
+            //        Rank = ++count,
+            //        Delete = false
+            //    });
+            //}
+
+            //Console.WriteLine("Inserting {0} questions to database...", quesList.Count);
+            //var db = new SeedDb(connString);
+            //db.SeedTranslateQuestions(quesList);
+
             ////////////////// Test Log4Net ////////////////////////////            
-            log.Error("This is my error message");
+            //log.Error("This is my error message");
 
             //////////////// Test Microsoft Azure Storage /////////////////
             //// Get the storage connection string
@@ -40,7 +75,7 @@ namespace ConsoleApp
 
             //Console.WriteLine("done!");
 
-            
+
             /////////////////// Json.NET ///////////////////////////
             //OkbDbContext db = new OkbDbContext();
 
@@ -104,6 +139,7 @@ namespace ConsoleApp
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Pause so screen won't go away
+            Console.WriteLine("done!");
             Console.ReadKey();
         }
     }

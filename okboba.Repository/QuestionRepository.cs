@@ -103,23 +103,28 @@ namespace okboba.Repository
         public List<TranslateQuestionViewModel> GetTranslateQuestions()
         {
             var db = new OkbDbContext();
+            var quesList = new List<TranslateQuestionViewModel>();
 
-            var result = from q in db.Questions
-                         join qt in db.TranslateQuestions on q.Id equals qt.Id
+            var result = from q in db.TranslateQuestions
                          orderby q.Rank ascending
-                         select new TranslateQuestionViewModel
-                         {
-                             Id = q.Id,
-                             QuesEng = qt.QuestionText,
-                             QuesChin = q.Text,
-                             ChoicesEng = qt.ChoicesInternal == null ? null : qt.ChoicesInternal.Split(';'),
-                             ChoicesChin = q.ChoicesInternal == null ? null : q.ChoicesInternal.Split(';'),
-                             Scores = q.TraitScores == null ? null : q.TraitScores,
-                             TraitId = q.TraitId,
-                             Rank = q.Rank                             
-                         };
+                         select q;
 
-            return result.ToList();
+            foreach (var q in result)
+            {
+                quesList.Add(new TranslateQuestionViewModel
+                {
+                    Id = q.Id,
+                    QuesEng = q.QuesEng,
+                    QuesChin = q.QuesChin,
+                    ChoicesEng = q.ChoicesInternalEng == null ? null : q.ChoicesInternalEng.Split(';'),
+                    ChoicesChin = q.ChoicesInternalChin == null ? null : q.ChoicesInternalChin.Split(';'),
+                    Rank = q.Rank,
+                    TraitId = q.TraitId,
+                    Scores = (sbyte[])(Array)q.TraitScores
+                });
+            }
+
+            return quesList;
         }
 
         #endregion

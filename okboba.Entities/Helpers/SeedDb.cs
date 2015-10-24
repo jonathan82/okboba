@@ -13,6 +13,17 @@ namespace okboba.Entities.Helpers
     {
         private string connString;
 
+        public void SeedTranslateQuestions(List<TranslateQuestion> quesList)
+        {
+            var db = new OkbDbContext();
+
+            foreach (var q in quesList)
+            {
+                db.TranslateQuestions.Add(q);                
+            }
+            var ret = db.SaveChanges();
+        }
+
         /// <summary>
         /// Constructor 
         /// </summary>

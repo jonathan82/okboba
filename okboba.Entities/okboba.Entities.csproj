@@ -69,25 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels.cs" />
-    <Compile Include="Migrations\201510121719445_Initial.cs" />
-    <Compile Include="Migrations\201510121719445_Initial.Designer.cs">
-      <DependentUpon>201510121719445_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510122244110_Rename.cs" />
-    <Compile Include="Migrations\201510122244110_Rename.Designer.cs">
-      <DependentUpon>201510122244110_Rename.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510122255368_ProfileText.cs" />
-    <Compile Include="Migrations\201510122255368_ProfileText.Designer.cs">
-      <DependentUpon>201510122255368_ProfileText.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510181920180_Change.cs" />
-    <Compile Include="Migrations\201510181920180_Change.Designer.cs">
-      <DependentUpon>201510181920180_Change.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510201706251_Messages.cs" />
-    <Compile Include="Migrations\201510201706251_Messages.Designer.cs">
-      <DependentUpon>201510201706251_Messages.cs</DependentUpon>
+    <Compile Include="Migrations\201510240514341_Initial.cs" />
+    <Compile Include="Migrations\201510240514341_Initial.Designer.cs">
+      <DependentUpon>201510240514341_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -105,20 +89,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510121719445_Initial.resx">
-      <DependentUpon>201510121719445_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510122244110_Rename.resx">
-      <DependentUpon>201510122244110_Rename.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510122255368_ProfileText.resx">
-      <DependentUpon>201510122255368_ProfileText.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510181920180_Change.resx">
-      <DependentUpon>201510181920180_Change.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510201706251_Messages.resx">
-      <DependentUpon>201510201706251_Messages.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510240514341_Initial.resx">
+      <DependentUpon>201510240514341_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

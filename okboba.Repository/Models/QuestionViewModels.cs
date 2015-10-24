@@ -13,7 +13,7 @@ namespace okboba.Repository.Models
         public string QuesChin { get; set; }
         public string[] ChoicesEng { get; set; }
         public string[] ChoicesChin { get; set; }
-        public byte[] Scores { get; set; }
+        public SByte[] Scores { get; set; }
         public int? TraitId { get; set; }
         public int? Rank { get; set; }
     }

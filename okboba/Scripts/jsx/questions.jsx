@@ -4,7 +4,7 @@
             <div className="questionHeaderEdit">
                 <div className="row">
                     <div className="form-group col-md-9">
-                        <input type="text" name="name" value={this.props.q.quesEnglish} className="form-control" />
+                        <input type="text" name="name" value={this.props.q.QuesEng} className="form-control" />
                     </div>
                     <div className="col-md-3 form-group">
                         <select className="form-control">
@@ -14,7 +14,7 @@
                 </div>
                 <div className="row">
                     <div className="col-md-9 form-group">
-                        <input type="text" name="name" defaultValue={this.props.q.quesChinese} className="form-control" />
+                        <input type="text" name="name" defaultValue={this.props.q.QuesChin} className="form-control" />
                     </div>
                     <div className="col-md-3"></div>
                 </div>
@@ -32,15 +32,15 @@ var QuestionHeader = React.createClass({
             <div onClick={this.props.headerClick}>
                 <div className="row">
                     <div className="col-sm-9">
-                        {this.props.q.quesEnglish}
+                        {this.props.q.QuesEng}
                     </div>
                     <div className="col-sm-3">
-                        <b>{this.props.q.trait}</b>
+                        <b>{this.props.q.Trait}</b>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm-12">
-                        {this.props.q.quesChinese}
+                        {this.props.q.QuesChin}
                     </div>
                 </div>
                 
@@ -72,11 +72,11 @@ var ChoiceEdit = React.createClass({
 var QuestionBoxEdit = React.createClass({
     render: function () {
         var props = this.props;
-        var choiceNodes = this.props.q.choicesEnglish.map(function (choiceEng, index) {
+        var choiceNodes = this.props.q.ChoicesEng.map(function (choiceEng, index) {
 
             var english = choiceEng;
-            var chinese = props.q.choicesChinese[index];
-            var score = props.q.scores[index];
+            var chinese = props.q.ChoicesChin == null ? null : props.q.ChoicesChin[index];
+            var score = props.q.Scores == null ? null : props.q.Scores[index];
 
             return <ChoiceEdit i={index} english={english} chinese={chinese} score={score} />
         });
@@ -113,8 +113,20 @@ var QuestionBox = React.createClass({
 });
 
 var QuestionList = React.createClass({
+    loadQuestionsFromServer: function (url) {
+        var myComponent = this;
+        $.get(url, '', function (data, status, jqxhr) {
+            myComponent.setState({data: data})
+        });
+    },
+    getInitialState: function () {
+        return {data:[]};
+    },
+    componentDidMount: function () {
+        this.loadQuestionsFromServer(this.props.url);
+    },
     render: function () {
-        var quesNodes = this.props.data.map(function (q) {
+        var quesNodes = this.state.data.map(function (q) {
             return (
                 <tr className="question-row">
                     <td>
@@ -159,6 +171,6 @@ var data = [{
 }];
 
 ReactDOM.render(
-    <QuestionList data={data} url="/admin/editquestion" />,
+    <QuestionList data={data} url="/admin/gettranslatequestions" />,
     $('#content')[0]
 );

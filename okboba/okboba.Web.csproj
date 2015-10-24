@@ -297,11 +297,14 @@
     <Content Include="Content\datepicker\bootstrap-datepicker3.standalone.css" />
     <Content Include="Content\datepicker\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\Images\boba.png" />
+    <Content Include="Content\Images\girl-studying-math.jpg" />
+    <Content Include="Content\Images\Head-Scratch.png" />
     <Content Include="Content\Images\logo\boba-sm.png" />
     <Content Include="Content\Images\logo\okboba-logo-lg-2.png" />
     <Content Include="Content\Images\logo\okboba-logo-lg.png" />
     <Content Include="Content\Images\logo\okboba-logo-sm-2.png" />
     <Content Include="Content\Images\logo\okboba-logo.png" />
+    <Content Include="Content\Images\nomoney.png" />
     <Content Include="Content\Images\none.gif" />
     <Content Include="Content\Images\none.jpg" />
     <Content Include="Content\Images\Penguins.jpg" />
@@ -363,6 +366,7 @@
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\okboba.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\filereader.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
