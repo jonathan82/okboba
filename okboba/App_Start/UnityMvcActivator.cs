@@ -2,8 +2,8 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(okboba.App_Start.UnityWebActivator), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(okboba.App_Start.UnityWebActivator), "Shutdown")]
+//[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(okboba.App_Start.UnityWebActivator), "Start")]
+//[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(okboba.App_Start.UnityWebActivator), "Shutdown")]
 
 namespace okboba.App_Start
 {

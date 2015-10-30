@@ -52,19 +52,18 @@ var QuestionHeader = React.createClass({
 var ChoiceEdit = React.createClass({
     render: function () {
         return (
-                <div className="row">
-                    <div className="form-inline col-md-12">
+                    <div className="form-inline">
                         <div className="form-group">
-                            <label>Choice {this.props.i}</label>
-                            <input type="text" name="name" value={this.props.english} className="form-control" />
-                            <input type="text" name="name" className="form-control" value={this.props.chinese} />
+                            <label>Choice {this.props.i+1}</label>
+                            <input type="text" name="name" value={this.props.english} className="form-control" size="30"/>
+                            <input type="text" name="name" className="form-control" value={this.props.chinese} size="30"/>
                         </div>
                         <div className="form-group">
                             <label>Score:</label>
-                            <input type="text" name="name" value={this.props.score} className="form-control" />
+                            <input type="text" name="name" value={this.props.score} className="form-control" size="3"/>
                         </div>
                     </div>
-                </div>
+
             );
     }
 });
@@ -112,23 +111,56 @@ var QuestionBox = React.createClass({
     }
 });
 
+var PageNav = React.createClass({
+    handleClick: function (e) {
+        e.preventDefault();
+        var page = $(e.currentTarget).data('page');
+        this.props.pageClickHandler(page);
+    },
+    generateLinks: function (page, numPages) {
+        var liNodes = [];
+        var active = '';
+        for (var i = 1; i <= numPages; i++) {
+            active = i == page ? 'active' : '';
+            liNodes.push(<li key={i} className={active}><a href='#' onClick={this.handleClick} data-page={i}>{i}</a></li>);
+        }
+        return liNodes;
+    },
+    render: function () {
+        if (!this.props.numPages) return null;
+        var liNodes = this.generateLinks(this.props.page, this.props.numPages);
+
+        return (<nav>
+              <ul className="pagination">
+                {liNodes}
+              </ul>
+            </nav>);
+    }
+});
+
 var QuestionList = React.createClass({
-    loadQuestionsFromServer: function (url) {
+    pageClick: function (page) {
+        this.setState({ page: page, loading: true });
+        this.loadQuestionsFromServer(page);
+    },
+    loadQuestionsFromServer: function (page) {
         var myComponent = this;
-        $.get(url, '', function (data, status, jqxhr) {
-            myComponent.setState({data: data})
+        var param = page ? 'page=' + page : '';
+        param += this.props.pageSize ? '&pageSize=' + this.props.pageSize : '';
+        $.get(this.props.url, param, function (data, status, jqxhr) {
+            myComponent.setState({data: data.Questions, loading: false, numPages: data.PageCount})
         });
     },
     getInitialState: function () {
-        return {data:[]};
+        return {data:[], loading: true, page: 1};
     },
     componentDidMount: function () {
-        this.loadQuestionsFromServer(this.props.url);
+        this.loadQuestionsFromServer();
     },
     render: function () {
         var quesNodes = this.state.data.map(function (q) {
             return (
-                <tr className="question-row">
+                <tr className="question-row" key={q.Id}>
                     <td>
                         <QuestionBox q={q} />
                     </td>
@@ -136,41 +168,26 @@ var QuestionList = React.createClass({
                 );
         });
         return (
+            <div>    
+                {this.state.loading ? <h3>Loading...</h3> : ''}
+                <center>
+                <PageNav page={this.state.page} numPages={this.state.numPages} pageClickHandler={this.pageClick} />
+                </center>
                 <table className="table">
                     <tbody id="questionList">
                         {quesNodes}
                     </tbody>
                 </table>
-                    );
+                <center>
+                <PageNav page={this.state.page} numPages={this.state.numPages} pageClickHandler={this.pageClick} />
+                </center>
+             </div>    
+                );
     }
 });
 
-var data = [{
-    quesEnglish: "1What is your favorite color?",
-    quesChinese: "什么是你的最喜欢的颜色？",
-    trait: "Kinkiness",
-    choicesEnglish: ['Blue', 'Yellow', 'Green'],
-    choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, null],
-},
-{
-    quesEnglish: "2What is your favorite color?",
-    quesChinese: "什么是你的最喜欢的颜色？",
-    trait: "Kinkiness",
-    choicesEnglish: ['Blue', 'Yellow', 'Green'],
-    choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3],
-},
-{
-    quesEnglish: "3What is your favorite color?",
-    quesChinese: "什么是你的最喜欢的颜色？",
-    trait: "Kinkiness",
-    choicesEnglish: ['Blue', 'Yellow', 'Green'],
-    choicesChinese: ['兰', '率', '红'],
-    scores: [1, 2, 3],
-}];
 
 ReactDOM.render(
-    <QuestionList data={data} url="/admin/gettranslatequestions" />,
+    <QuestionList url="/admin/gettranslatequestions" pageSize={75} />,
     $('#content')[0]
 );

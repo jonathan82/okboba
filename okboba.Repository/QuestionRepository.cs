@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace okboba.Repository
 {
@@ -100,31 +101,16 @@ namespace okboba.Repository
             db.SaveChanges();
         }
 
-        public List<TranslateQuestionViewModel> GetTranslateQuestions()
+        public IQueryable<TranslateQuestion> GetTranslateQuestions()
         {
             var db = new OkbDbContext();
-            var quesList = new List<TranslateQuestionViewModel>();
 
             var result = from q in db.TranslateQuestions
                          orderby q.Rank ascending
                          select q;
 
-            foreach (var q in result)
-            {
-                quesList.Add(new TranslateQuestionViewModel
-                {
-                    Id = q.Id,
-                    QuesEng = q.QuesEng,
-                    QuesChin = q.QuesChin,
-                    ChoicesEng = q.ChoicesInternalEng == null ? null : q.ChoicesInternalEng.Split(';'),
-                    ChoicesChin = q.ChoicesInternalChin == null ? null : q.ChoicesInternalChin.Split(';'),
-                    Rank = q.Rank,
-                    TraitId = q.TraitId,
-                    Scores = (sbyte[])(Array)q.TraitScores
-                });
-            }
-
-            return quesList;
+            return result;
+            
         }
 
         #endregion
