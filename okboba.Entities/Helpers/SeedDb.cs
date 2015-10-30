@@ -63,25 +63,24 @@ namespace okboba.Entities.Helpers
         /// </summary>
         /// <param name="numOfUsers"></param>
         /// <param name="connString"></param>
-        public void SeedUsers(int numOfUsers)
+        public void SeedUsers(int numOfUsers, List<Location> provinces)
         {
             //Skip if users exist
-            OkbDbContext context = new OkbDbContext();
-            if(context.Profiles.Count() > 0)
+            OkbDbContext db = new OkbDbContext();
+            if(db.Profiles.Count() > 0)
             {
-                context.Dispose();
+                db.Dispose();
                 return;
             }
-            context.Dispose();
 
-            UserProfileBulkDataReader profileReader = new UserProfileBulkDataReader(numOfUsers, "", "UserProfiles");
+            UserProfileBulkDataReader profileReader = new UserProfileBulkDataReader(numOfUsers, "", "Profiles", provinces);
 
             using (SqlBulkCopy sbc = new SqlBulkCopy(connString,
                 SqlBulkCopyOptions.TableLock |
                 SqlBulkCopyOptions.UseInternalTransaction))
             {
                 sbc.BatchSize = 1000;
-                sbc.DestinationTableName = "UserProfiles";
+                sbc.DestinationTableName = "Profiles";
 
                 foreach (var col in profileReader.ColumnMappings)
                 {
@@ -108,14 +107,14 @@ namespace okboba.Entities.Helpers
             }
             context.Dispose();
 
-            UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(numOfUsers, numOfAnswersPerUser, "", "UserAnswers");
+            UserAnswerBulkDataReader bulkReader = new UserAnswerBulkDataReader(numOfUsers, numOfAnswersPerUser, "", "Answers");
 
             using (SqlBulkCopy sbc = new SqlBulkCopy(connString,
                 SqlBulkCopyOptions.TableLock |
                 SqlBulkCopyOptions.UseInternalTransaction))
             {
                 sbc.BatchSize = 4000;
-                sbc.DestinationTableName = "UserAnswers";
+                sbc.DestinationTableName = "Answers";
 
                 foreach (var col in bulkReader.ColumnMappings)
                 {
@@ -162,8 +161,102 @@ namespace okboba.Entities.Helpers
                     }
                     provinceCount++;
                 }
+            }            
+        }
+
+        public void SeedOkcQuestions(string filename)
+        {
+            var db = new OkbDbContext();
+            if(db.Questions.Count() > 0)
+            {
+                return;
+            }            
+
+            //////////////// Insert Okcupid questions ////////////////////
+            var sr = new StreamReader(filename);
+            int count = 0;            
+
+            while (!sr.EndOfStream)
+            {
+                var ques = sr.ReadLine();
+                string ans, ansInternal = "";
+                while ((ans = sr.ReadLine()) != "" && !sr.EndOfStream)
+                {
+                    ansInternal += ans + ";";
+                }
+                //remove trailing semicolon
+                ansInternal = ansInternal.TrimEnd(';');
+
+                var addQues = new Question
+                {
+                    Text = ques,
+                    ChoicesInternal = ansInternal,
+                    Rank = ++count                    
+                };
+
+                db.Questions.Add(addQues);
             }
-            
+
+            db.SaveChanges();
+        }
+
+        private Dictionary<int,Answer> GetUserAnswers(int profileId)
+        {
+            var db = new OkbDbContext();
+            var result = from ans in db.Answers
+                         where ans.ProfileId == profileId
+                         select ans;
+            var answers = new Dictionary<int, Answer>();
+
+            foreach (var ans in result)
+            {
+                answers.Add(ans.QuestionId, ans);                
+            }
+            return answers;
+        }
+
+        public Dictionary<int,Profile> SimulateMatchSearch(int profileId, string gender)
+        {
+            var db = new OkbDbContext();
+            var matches = new Dictionary<int, Profile>();
+
+            var result = (from p in db.Profiles
+                         join a in db.Answers on p.Id equals a.ProfileId
+                         where p.Gender == gender
+                         select new { Profile = p, Answer = a }).Take(20000);
+
+            var myAnswers = GetUserAnswers(profileId);
+
+            foreach (var ans in result)
+            {
+                //calculate match between two users
+                if(!matches.ContainsKey(ans.Profile.Id))
+                {
+                    matches.Add(ans.Profile.Id, ans.Profile);
+                }
+
+                // do some calculation     
+                int x = ans.Answer.ChoiceIndex & myAnswers[ans.Answer.QuestionId].ChoiceAcceptable;       
+            }
+            return matches;
+        }
+
+        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, string gender)
+        {
+            var db = new OkbDbContext();
+            var matches = new List<Profile>();
+
+            var result = (from p in db.Profiles
+                          where p.Gender == gender
+                          select p).Take(15000);
+
+            var myAnswers = GetUserAnswers(profileId);
+
+            foreach (var p in result)
+            {
+                matches.Add(p);
+            }
+            return matches;
         }
 
         private Profile CreateUser(string name, string gender, DateTime dob, string location)

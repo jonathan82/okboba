@@ -22,76 +22,6 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            ////////////////// Insert Okcupid questions ////////////////////
-            //var sr = new StreamReader("okc_questions.txt");
-            //int count = 0;
-            //var quesList = new List<TranslateQuestion>();
-
-            //while (!sr.EndOfStream)
-            //{
-            //    var ques = sr.ReadLine();
-            //    string ans, ansInternal = "";
-            //    while ((ans=sr.ReadLine()) != "" && !sr.EndOfStream)
-            //    {
-            //        ansInternal += ans + ";";
-            //    }
-            //    //remove trailing semicolon
-            //    ansInternal = ansInternal.TrimEnd(';');
-
-            //    var addQues = new TranslateQuestion
-            //    {
-            //        QuesEng = ques,
-            //        ChoicesInternalEng = ansInternal
-            //    };
-
-            //    quesList.Add(new TranslateQuestion
-            //    {
-            //        QuesEng = ques,
-            //        ChoicesInternalEng = ansInternal,
-            //        Rank = ++count,
-            //        Delete = false
-            //    });
-            //}
-
-            //Console.WriteLine("Inserting {0} questions to database...", quesList.Count);
-            //var db = new SeedDb(connString);
-            //db.SeedTranslateQuestions(quesList);
-
-            ////////////////// Test Log4Net ////////////////////////////            
-            //log.Error("This is my error message");
-
-            //////////////// Test Microsoft Azure Storage /////////////////
-            //// Get the storage connection string
-            //var str = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
-            //Console.WriteLine(str);
-
-            ////get the filestream            
-            //var fileStream = File.OpenRead(@"C:\Users\Public\Pictures\Sample Pictures\desert.jpg");            
-
-            ////Get the photo repo
-            //var repo = PhotoRepository.Instance;
-            //repo.StorageConnectionString = str;
-            ////repo.UploadPhoto(fileStream, 0, 0, 300, 2002);
-
-            //Console.WriteLine("done!");
-
-
-            /////////////////// Json.NET ///////////////////////////
-            //OkbDbContext db = new OkbDbContext();
-
-            //Dictionary<Int16, string> provinceDict = new Dictionary<short, string>();
-            //Dictionary<Int16, string> districtDict = new Dictionary<short, string>();
-
-            //foreach (var loc in db.Locations)
-            //{
-            //    //provinceDict.Add(loc.LocationId1, loc.LocationName1);
-            //    provinceDict[loc.LocationId1] = loc.LocationName1;
-            //    districtDict.Add(loc.LocationId2, loc.LocationName2);                
-            //}
-
-            //string str = JsonConvert.SerializeObject(provinceDict);
-
-            //Console.WriteLine(str);
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();
@@ -117,11 +47,11 @@ namespace ConsoleApp
 
             //////////////////// Seed the database ///////////////////////
             //SeedDb db = new SeedDb(connString);
-            //Stopwatch timer = new Stopwatch();
+            Stopwatch timer = new Stopwatch();
 
             //// Questions
             //Console.WriteLine("Seeding Questions...");
-            //db.SeedQuestions(500);
+            //db.SeedOkcQuestions("../../../Design/okc_questions.txt");
 
             //// Chinese Cities
             //Console.WriteLine("Seeding Locations...");
@@ -129,18 +59,27 @@ namespace ConsoleApp
 
             //// Users
             //Console.WriteLine("Seeding Users...");
-            //db.SeedUsers(500000);
+            //db.SeedUsers(200000, LocationRepository.Instance.GetProvinceList());
 
             //// User answers
             //Console.WriteLine("Seeding answers...");
             //timer.Start();
-            //db.SeedAnswers(400, 100);
+            //db.SeedAnswers(200000, 200);
             //timer.Stop();
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+
+            //////////////////////// Simulations //////////////////////////
+            var seed = new SeedDb(connString);
+            timer.Start();
+            //seed.SimulateMatchSearch(500, "F");
+            seed.SimulateMatchSearchNoAnswer(500, "F");
+            timer.Stop();
+            Console.WriteLine("Match search took {0} ms", timer.ElapsedMilliseconds);
 
             //Pause so screen won't go away
             Console.WriteLine("done!");
             Console.ReadKey();
+
         }
     }
 }
