@@ -71,7 +71,8 @@ namespace ConsoleApp
             //////////////////////// Simulations //////////////////////////
             var seed = new SeedDb(connString);
             timer.Start();
-            seed.SimulateMatchSearch(500, "F");
+            //seed.SimulateMatchSearch(500, "F");
+            seed.SimulateMatchSearchNoAnswer(500, "F");
             timer.Stop();
             Console.WriteLine("Match search took {0} ms", timer.ElapsedMilliseconds);
 

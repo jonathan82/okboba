@@ -241,6 +241,24 @@ namespace okboba.Entities.Helpers
             return matches;
         }
 
+        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, string gender)
+        {
+            var db = new OkbDbContext();
+            var matches = new List<Profile>();
+
+            var result = (from p in db.Profiles
+                          where p.Gender == gender
+                          select p).Take(15000);
+
+            var myAnswers = GetUserAnswers(profileId);
+
+            foreach (var p in result)
+            {
+                matches.Add(p);
+            }
+            return matches;
+        }
+
         private Profile CreateUser(string name, string gender, DateTime dob, string location)
         {
             return new Profile
