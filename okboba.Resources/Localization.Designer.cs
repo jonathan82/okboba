@@ -61,7 +61,16 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 名字.
+        ///   Looks up a localized string similar to 电子邮件.
+        /// </summary>
+        public static string Account_Email {
+            get {
+                return ResourceManager.GetString("Account_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 绰号.
         /// </summary>
         public static string Account_Name {
             get {

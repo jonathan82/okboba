@@ -14,17 +14,35 @@ namespace okboba.Entities.Helpers
         int numOfUsers;
         string schemaName;
         string tableName;
-        Profile[] userProfiles;
 
-        public UserProfileBulkDataReader(int numOfUsers, string schemaName, string tableName)
+        string[] maleNames = { "EnochGaylord", "Jose", "Hilton", "Damon", "Elvin", "Wilbert", "Hugo", "Allen", "Dudley", "Kent", "Roman", "Dion", "Don",
+            "Ned", "Blaine", "Cary", "Brady", "Jefferey", "Pasquale", "Thanh", "Bruno", "Dustin", "Ulysses", "Wilber", "Jay", "Irving", "Jacinto", "Kristofer",
+            "Gonzalo", "Jimmy", "Ezekiel", "Mariano", "Wilfredo", "Theron", "Jimmie", "Roland", "Jon", "Wilmer", "Nigel", "Josue", "Palmer", "Clifford", "Lance",
+            "Scot", "Ezequiel", "Shawn", "Archie", "Chase", "Daron", "Chance", "Von", "Renato", "Newton", "Donald", "Jaime", "Antony", "Booker", "Jose", "Roosevelt",
+            "Jack", "Harlan", "Hilario", "Milan", "Filiberto", "Curt", "Johnie", "Jamel", "Alejandro", "Bennie", "Nestor", "Al", "Karl", "Vern", "Lazaro", "Roderick",
+            "Emil", "Salvatore", "Edwin", "Pedro", "Ray", "Maurice", "Wallace", "Eugene", "Harry", "Michale", "Guy", "Santos", "Blair", "Boyd", "Brock", "Quintin",
+            "Cyril", "James", "Edmundo", "Ronny", "Anderson", "Mauricio", "Elias", "Darin" };
+
+        string[] femaleNames = { "Alisa", "Sunday", "Molly", "Mireya", "Keira", "Arnette", "Aretha", "Arnita", "Cherryl", "Mana", "Chu", "Breanna", "Susanne", "Elva",
+            "Norma", "Debbra", "Slyvia", "Julee", "Rae", "Dorene", "Candie", "Novella", "Natisha", "Dominga", "Reta", "Venetta", "Amiee", "Willette", "Marcelle",
+            "Rosanna", "Odelia", "Adrianne", "Shalonda", "Iliana", "Angelia", "Maude", "Tracee", "Suanne", "Shantel", "Eve", "Niesha", "Christy", "Hollie", "Shay",
+            "Salley", "Berna", "Emmy", "Nadine", "Clarinda", "Ashlie", "Willetta", "Berenice", "Vera", "Elease", "Josette", "Lori", "Leia", "Robena", "Coletta",
+            "Waltraud", "Margeret", "Annie", "Laveta", "Victoria", "Chanda", "Cherly", "Hee", "Valentina", "Teri", "Holley", "Betsy", "Shakia", "Raelene", "Mae",
+            "Mi", "Rosaria", "Lessie", "Clotilde", "Clelia", "Darleen", "Shayna", "Grazyna", "Porsche", "Malinda", "Lenita", "Star", "Deja", "Catina", "Arlene",
+            "Sharron", "Lenna", "Gwyn", "Allegra", "Leeann", "Dora", "Maudie", "Gemma", "Michell", "Kenia", "Lucia" };
+
+        Profile randomProfile;
+        Random random;
+        List<Location> provinces;
+
+        public UserProfileBulkDataReader(int numOfUsers, string schemaName, string tableName, List<Location> provinces)
         {
             this.numOfUsers = numOfUsers;
             this.schemaName = schemaName;
             this.tableName = tableName;
-
-            userProfiles = new Profile[] {
-                new Profile { Name = "Jonathan", Birthdate = new DateTime(1982, 3, 24), Gender = "M", Height = 155, LocationId1 = 1, LocationId2 = 1 },
-                new Profile { Name = "Maggie", Birthdate = new DateTime(1980, 12, 15), Gender = "F", Height = 145, LocationId1 = 1, LocationId2 = 1 } };
+            this.random = new Random();
+            this.randomProfile = new Profile();
+            this.provinces = provinces;
         }
 
         protected override string SchemaName
@@ -43,22 +61,23 @@ namespace okboba.Entities.Helpers
             }
         }
 
+
         public override object GetValue(int i)
         {
             switch (i)
             {
                 case 0:
-                    return userProfiles[rowCount % 2].Name;
+                    return randomProfile.Name;
                 case 1:
-                    return userProfiles[rowCount % 2].Birthdate;
+                    return randomProfile.Birthdate;
                 case 2:
-                    return userProfiles[rowCount % 2].Gender;
+                    return randomProfile.Gender;
                 case 3:
-                    return userProfiles[rowCount % 2].Height;
+                    return randomProfile.Height;
                 case 4:
-                    return userProfiles[rowCount % 2].LocationId1;
+                    return randomProfile.LocationId1;
                 case 5:
-                    return userProfiles[rowCount % 2].LocationId2;
+                    return randomProfile.LocationId2;
                 default:
                     break;
             }
@@ -67,12 +86,31 @@ namespace okboba.Entities.Helpers
 
         public override bool Read()
         {
+            //Generate a new random profile
+            if(random.Next() % 2 == 0)
+            {
+                //Male
+                randomProfile.Gender = "M";
+                randomProfile.Name = maleNames[random.Next() % maleNames.Length];                
+            }
+            else
+            {
+                //Female
+                randomProfile.Gender = "F";
+                randomProfile.Name = femaleNames[random.Next() % maleNames.Length];
+            }
+
+            randomProfile.Birthdate = DateTime.Now.AddYears(-random.Next(16, 99));
+            randomProfile.Height = (short)random.Next(120, 215);
+            randomProfile.LocationId1 = provinces[random.Next() % provinces.Count].LocationId1;
+            randomProfile.LocationId2 = 1;
+
             return rowCount++ < numOfUsers;
         }
 
         protected override void AddSchemaTableRows()
         {
-            AddSchemaTableRow("Name", 10, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
+            AddSchemaTableRow("Name", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
             AddSchemaTableRow("Birthdate", null, null, null, false, false, false, SqlDbType.Date, null, null, null, null, null);
             AddSchemaTableRow("Gender", 1, null, null, false, false, false, SqlDbType.NChar, null, null, null, null, null);
             AddSchemaTableRow("Height", null, null, null, false, false, true, SqlDbType.SmallInt, null, null, null, null, null);

@@ -9,7 +9,7 @@ namespace okboba.Entities
     {
         public int Id { get; set; }
 
-        [StringLength(10)]
+        [StringLength(20)]
         public string Name { get; set; }
 
         [Column(TypeName = "date")]
