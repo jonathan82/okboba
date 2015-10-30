@@ -167,23 +167,23 @@ namespace okboba.Entities.Migrations
             //    .Index(t => t.UserId)
             //    .Index(t => t.RoleId);
 
-            CreateTable(
-                "dbo.TranslateQuestions",
-                c => new
-                {
-                    Id = c.Short(nullable: false, identity: true),
-                    QuesEng = c.String(maxLength: 255),
-                    QuesChin = c.String(maxLength: 255),
-                    Rank = c.Int(nullable: false),
-                    ChoicesInternalChin = c.String(),
-                    ChoicesInternalEng = c.String(),
-                    TraitScores = c.Binary(maxLength: 10),
-                    TraitId = c.Short(),
-                    Delete = c.Boolean(nullable: false),
-                })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Traits", t => t.TraitId)
-                .Index(t => t.TraitId);
+            //CreateTable(
+            //    "dbo.TranslateQuestions",
+            //    c => new
+            //    {
+            //        Id = c.Short(nullable: false, identity: true),
+            //        QuesEng = c.String(maxLength: 255),
+            //        QuesChin = c.String(maxLength: 255),
+            //        Rank = c.Int(nullable: false),
+            //        ChoicesInternalChin = c.String(),
+            //        ChoicesInternalEng = c.String(),
+            //        TraitScores = c.Binary(maxLength: 10),
+            //        TraitId = c.Short(),
+            //        Delete = c.Boolean(nullable: false),
+            //    })
+            //    .PrimaryKey(t => t.Id)
+            //    .ForeignKey("dbo.Traits", t => t.TraitId)
+            //    .Index(t => t.TraitId);
 
             //CreateTable(
             //    "dbo.AspNetUsers",

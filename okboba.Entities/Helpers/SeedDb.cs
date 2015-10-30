@@ -12,6 +12,10 @@ namespace okboba.Entities.Helpers
     public class SeedDb
     {
         private string connString;
+        const int LITTLE_IMPORTANT = 1;
+        const int SOMEWHAT_IMPORTANT = 5;
+        const int VERY_IMPORTANT = 25;
+        int[] weights = { 0, LITTLE_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT };
 
         public void SeedTranslateQuestions(List<TranslateQuestion> quesList)
         {
@@ -215,39 +219,165 @@ namespace okboba.Entities.Helpers
             return answers;
         }
 
-        public Dictionary<int,Profile> SimulateMatchSearch(int profileId, string gender)
+        public class Match
+        {
+            public int ProfileId { get; set; }
+            public int PossibleScoreMe { get; set; }
+            public int ScoreMe { get; set; }
+            public int PossibleScoreThem { get; set; }
+            public int ScoreThem { get; set; }
+            public string Name { get; set; }
+            public int PercentageMatch { get; set; }
+        }
+
+        public struct CacheAnswer
+        {
+            public byte ChoiceIndex;
+            public byte ChoiceAccept;
+            public byte ChoiceWeight;
+            public short QuestionId;
+        }
+
+        public Dictionary<int,List<CacheAnswer>> CacheAnswers()
         {
             var db = new OkbDbContext();
-            var matches = new Dictionary<int, Profile>();
+            var cache = new Dictionary<int, List<CacheAnswer>>();
 
-            var result = (from p in db.Profiles
-                         join a in db.Answers on p.Id equals a.ProfileId
-                         where p.Gender == gender
-                         select new { Profile = p, Answer = a }).Take(20000);
+            foreach (var ans in db.Answers.AsNoTracking())
+            {
+                if (!cache.ContainsKey(ans.ProfileId))
+                {
+                    cache.Add(ans.ProfileId, new List<CacheAnswer>());
+                }
+
+                cache[ans.ProfileId].Add(new CacheAnswer
+                {
+                    QuestionId = ans.QuestionId,
+                    ChoiceIndex = ans.ChoiceIndex,
+                    ChoiceAccept = ans.ChoiceAcceptable,
+                    ChoiceWeight = ans.ChoiceWeight
+                });
+            }
+            return cache;
+        }
+
+        private int CalculateMatchPercent(Profile p, Dictionary<int,Answer> myAnswers, Dictionary<int, List<CacheAnswer>> cache)
+        {
+            int scoreMe = 0,
+                scoreThem = 0,
+                possibleScoreMe = 0,
+                possibleScoreThem = 0;
+
+            if(!cache.ContainsKey(p.Id))
+            {
+                return 0;
+            }
+
+            foreach (var them in cache[p.Id])
+            {
+                if (!myAnswers.ContainsKey(them.QuestionId)) continue;
+                var me = myAnswers[them.QuestionId];
+                var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
+                var themAccept = me.ChoiceIndex & them.ChoiceAccept;
+                scoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
+                scoreThem += themAccept != 0 ? weights[them.ChoiceWeight] : 0;
+                possibleScoreMe += weights[me.ChoiceWeight];
+                possibleScoreThem += weights[them.ChoiceWeight];
+            }
+
+            float pctMe, pctThem;
+            pctMe = (float)scoreMe / (float)possibleScoreMe;
+            pctThem = (float)scoreThem / (float)possibleScoreThem;
+
+            return (int)(Math.Sqrt(pctMe * pctThem) * 100);
+        }
+
+        public List<Match> SimulateMatchSearchCache(int profileId, string gender, int loc1, Dictionary<int, List<CacheAnswer>> cache)
+        {
+            var db = new OkbDbContext();
+            var matches = new List<Match>();
+            var query = from p in db.Profiles.AsNoTracking()
+                        where p.Gender == gender && p.LocationId1 == loc1
+                        select p;
+            var myAnswers = GetUserAnswers(profileId);
+
+            foreach (var p in query)
+            {
+                var pctMatch = CalculateMatchPercent(p, myAnswers, cache);
+                matches.Add(new Match
+                {
+                    PercentageMatch = pctMatch,
+                    Name = p.Name
+                });
+            }
+
+            return matches;
+        }
+
+        public Dictionary<int, Match> SimulateMatchSearch(int profileId, string gender, int loc1)
+        {
+            int count = 0;
+            var db = new OkbDbContext();
+            var matches = new Dictionary<int, Match>();
+            int[] weights = { 0, LITTLE_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT };
+
+            var result = (from a in db.Answers
+                         join p in db.Profiles on a.ProfileId equals p.Id
+                         where p.Gender == gender && p.LocationId1 == loc1
+                         select new { Profile = p, Answer = a });
 
             var myAnswers = GetUserAnswers(profileId);
 
             foreach (var ans in result)
             {
+                count++;
                 //calculate match between two users
                 if(!matches.ContainsKey(ans.Profile.Id))
                 {
-                    matches.Add(ans.Profile.Id, ans.Profile);
+                    matches.Add(ans.Profile.Id, new Match());
                 }
 
-                // do some calculation     
-                int x = ans.Answer.ChoiceIndex & myAnswers[ans.Answer.QuestionId].ChoiceAcceptable;       
+                if (!myAnswers.ContainsKey(ans.Answer.QuestionId))
+                {
+                    continue;
+                }
+
+                //cache objects
+                var me = myAnswers[ans.Answer.QuestionId];
+                var them = matches[ans.Profile.Id];
+
+                // do some calculation  
+                var meAccept = me.ChoiceAcceptable & ans.Answer.ChoiceIndex;
+                var themAccept = me.ChoiceIndex & ans.Answer.ChoiceAcceptable;
+
+                them.ScoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
+                them.ScoreThem += themAccept != 0 ? weights[ans.Answer.ChoiceWeight] : 0;
+                them.PossibleScoreMe += weights[me.ChoiceWeight];
+                them.PossibleScoreThem += weights[ans.Answer.ChoiceWeight];
+
             }
+
+            //Calculate the percentages
+            foreach (Match m in matches.Values)
+            {
+                float pctMe, pctThem;
+                pctMe = m.ScoreMe / m.PossibleScoreMe;
+                pctThem = m.ScoreThem / m.PossibleScoreThem;
+                m.PercentageMatch = (int)(Math.Sqrt(pctMe * pctThem) * 100);
+            }
+
+            Console.WriteLine("went thru {0} answers", count);
+
             return matches;
         }
 
-        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, string gender)
+        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, string gender, int loc1)
         {
             var db = new OkbDbContext();
             var matches = new List<Profile>();
 
             var result = (from p in db.Profiles
-                          where p.Gender == gender
+                          where p.Gender == gender && p.LocationId1 == loc1
                           select p).Take(15000);
 
             var myAnswers = GetUserAnswers(profileId);

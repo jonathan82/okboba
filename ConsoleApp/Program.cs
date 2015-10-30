@@ -59,22 +59,42 @@ namespace ConsoleApp
 
             //// Users
             //Console.WriteLine("Seeding Users...");
-            //db.SeedUsers(200000, LocationRepository.Instance.GetProvinceList());
+            //db.SeedUsers(100000, LocationRepository.Instance.GetProvinceList());
 
             //// User answers
             //Console.WriteLine("Seeding answers...");
             //timer.Start();
-            //db.SeedAnswers(200000, 200);
+            //db.SeedAnswers(100000, 200);
             //timer.Stop();
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //////////////////////// Simulations //////////////////////////
             var seed = new SeedDb(connString);
+            var rand = new Random();
+            var provinces = LocationRepository.Instance.GetProvinceList();
+            string[] genders = { "M", "F" };
+
+            Console.WriteLine("Caching answers in memory...");
             timer.Start();
-            //seed.SimulateMatchSearch(500, "F");
-            seed.SimulateMatchSearchNoAnswer(500, "F");
+            var cachedAnswers = seed.CacheAnswers();
             timer.Stop();
-            Console.WriteLine("Match search took {0} ms", timer.ElapsedMilliseconds);
+            Console.WriteLine("{0} sec to cache", timer.ElapsedMilliseconds / 1000);
+
+            for (int i = 0; i < 10; i++)
+            {
+                var loc1 = provinces[rand.Next() % provinces.Count].LocationId1;
+                var gender = genders[rand.Next() % 2];
+                timer.Restart();
+                //var matches = seed.SimulateMatchSearch(500, gender, loc1);
+                var matches = seed.SimulateMatchSearchCache(500, gender, loc1, cachedAnswers);
+                timer.Stop();
+                Console.WriteLine("Found {1} matches in {0} ms", timer.ElapsedMilliseconds, matches.Count);
+                for(int j=0; j < 10; j++)
+                {
+                    Console.Write("{0}-{1}% ", matches[j].Name, matches[j].PercentageMatch);
+                }
+                Console.WriteLine();
+            }
 
             //Pause so screen won't go away
             Console.WriteLine("done!");
