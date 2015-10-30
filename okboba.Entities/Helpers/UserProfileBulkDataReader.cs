@@ -102,7 +102,16 @@ namespace okboba.Entities.Helpers
 
             randomProfile.Birthdate = DateTime.Now.AddYears(-random.Next(16, 99));
             randomProfile.Height = (short)random.Next(120, 215);
-            randomProfile.LocationId1 = provinces[random.Next() % provinces.Count].LocationId1;
+
+            //20% chance in beijing
+            if(random.Next() % 5 == 0)
+            {
+                randomProfile.LocationId1 = 1;
+            }
+            else
+            {
+                randomProfile.LocationId1 = provinces[random.Next() % provinces.Count].LocationId1;
+            }            
             randomProfile.LocationId2 = 1;
 
             return rowCount++ < numOfUsers;

@@ -74,27 +74,45 @@ namespace ConsoleApp
             var provinces = LocationRepository.Instance.GetProvinceList();
             string[] genders = { "M", "F" };
 
-            Console.WriteLine("Caching answers in memory...");
-            timer.Start();
-            var cachedAnswers = seed.CacheAnswers();
-            timer.Stop();
-            Console.WriteLine("{0} sec to cache", timer.ElapsedMilliseconds / 1000);
+            //Console.WriteLine("Caching answers in memory...");
+            //timer.Start();
+            //var cachedAnswers = seed.CacheAnswers();
+            //timer.Stop();
+            //Console.WriteLine("{0} sec to cache", timer.ElapsedMilliseconds / 1000);
 
-            for (int i = 0; i < 10; i++)
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    var loc1 = provinces[rand.Next() % provinces.Count].LocationId1;
+            //    var gender = genders[rand.Next() % 2];
+
+            //    timer.Restart();
+            //    //var matches = seed.SimulateMatchSearch(500, gender, loc1);
+            //    //var matches = seed.SimulateMatchSearchCache(500, gender, loc1, cachedAnswers);
+            //    var matches = seed.SimulateMatchSearchNoJoin(500, gender, loc1);
+            //    timer.Stop();
+
+            //    Console.WriteLine("Found {1} matches in {0} ms", timer.ElapsedMilliseconds, matches.Count);
+
+            //    //Print out first 10 matches
+            //    int cnt = 0;
+            //    foreach (var m in matches)
+            //    {
+            //        if (cnt++ > 10) break;
+            //        Console.Write("{0}-{1}% ", m.Name, m.PercentageMatch);
+            //    }
+
+            //    Console.WriteLine();
+            //}
+
+            ///////////////// Simulate answering questions //////////////////////            
+            const int NUM_OF_QUES_TO_ANSWER = 1000;
+            timer.Start();
+            for(int i=0; i < NUM_OF_QUES_TO_ANSWER; i++)
             {
-                var loc1 = provinces[rand.Next() % provinces.Count].LocationId1;
-                var gender = genders[rand.Next() % 2];
-                timer.Restart();
-                //var matches = seed.SimulateMatchSearch(500, gender, loc1);
-                var matches = seed.SimulateMatchSearchCache(500, gender, loc1, cachedAnswers);
-                timer.Stop();
-                Console.WriteLine("Found {1} matches in {0} ms", timer.ElapsedMilliseconds, matches.Count);
-                for(int j=0; j < 10; j++)
-                {
-                    Console.Write("{0}-{1}% ", matches[j].Name, matches[j].PercentageMatch);
-                }
-                Console.WriteLine();
+                seed.SimulateAnsweringQuestion(rand);
             }
+            timer.Stop();
+            Console.WriteLine("answered 1000 questions in {0} ms, {1} ms / ques", timer.ElapsedMilliseconds, timer.ElapsedMilliseconds / NUM_OF_QUES_TO_ANSWER);
 
             //Pause so screen won't go away
             Console.WriteLine("done!");

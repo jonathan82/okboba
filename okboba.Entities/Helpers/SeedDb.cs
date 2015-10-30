@@ -314,15 +314,95 @@ namespace okboba.Entities.Helpers
             return matches;
         }
 
+        public void SimulateAnsweringQuestion(Random rand)
+        {
+            var db = new OkbDbContext();
+            var ans = new Answer
+            {
+                ProfileId = rand.Next(2, 200000),
+                QuestionId = (short)rand.Next(201, 1243),
+                ChoiceIndex = 1,
+                ChoiceWeight = 1,
+                ChoiceAcceptable = 1,
+                LastAnswered = DateTime.Now
+            };
+            
+            try
+            {
+                db.Answers.Add(ans);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+
+        private int CalculateMatchPercentDb(Profile theirProfile, Dictionary<int,Answer> myAnswers)
+        {
+            var db = new OkbDbContext();
+            var query = from ans in db.Answers.AsNoTracking()
+                        where ans.ProfileId == theirProfile.Id
+                        select ans;
+
+            int scoreMe = 0,
+                scoreThem = 0,
+                possibleScoreMe = 0,
+                possibleScoreThem = 0;
+
+            foreach (var them in query)
+            {
+                if (!myAnswers.ContainsKey(them.QuestionId)) continue;
+                var me = myAnswers[them.QuestionId];
+                var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
+                var themAccept = me.ChoiceIndex & them.ChoiceAcceptable;
+                scoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
+                scoreThem += themAccept != 0 ? weights[them.ChoiceWeight] : 0;
+                possibleScoreMe += weights[me.ChoiceWeight];
+                possibleScoreThem += weights[them.ChoiceWeight];
+            }
+
+            float pctMe, pctThem;
+            pctMe = (float)scoreMe / (float)possibleScoreMe;
+            pctThem = (float)scoreThem / (float)possibleScoreThem;
+
+            return (int)(Math.Sqrt(pctMe * pctThem) * 100);
+        }
+
+        public List<Match> SimulateMatchSearchNoJoin(int profileId, string gender, int loc1)
+        {
+            var db = new OkbDbContext();
+
+            var query = from p in db.Profiles.AsNoTracking()
+                        where p.Gender == gender && p.LocationId1 == loc1
+                        select p;
+
+            var myAnswers = GetUserAnswers(profileId);
+
+            var matches = new List<Match>();
+
+            foreach (var p in query)
+            {
+                matches.Add(new Match
+                {
+                    Name = p.Name,
+                    PercentageMatch = CalculateMatchPercentDb(p, myAnswers)
+                });
+            }
+
+            return matches;
+        }
+
         public Dictionary<int, Match> SimulateMatchSearch(int profileId, string gender, int loc1)
         {
-            int count = 0;
             var db = new OkbDbContext();
             var matches = new Dictionary<int, Match>();
             int[] weights = { 0, LITTLE_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT };
 
-            var result = (from a in db.Answers
-                         join p in db.Profiles on a.ProfileId equals p.Id
+            var result = (from a in db.Answers.AsNoTracking()
+                         join p in db.Profiles.AsNoTracking() on a.ProfileId equals p.Id
                          where p.Gender == gender && p.LocationId1 == loc1
                          select new { Profile = p, Answer = a });
 
@@ -330,8 +410,7 @@ namespace okboba.Entities.Helpers
 
             foreach (var ans in result)
             {
-                count++;
-                //calculate match between two users
+                 //calculate match between two users
                 if(!matches.ContainsKey(ans.Profile.Id))
                 {
                     matches.Add(ans.Profile.Id, new Match());
@@ -345,6 +424,7 @@ namespace okboba.Entities.Helpers
                 //cache objects
                 var me = myAnswers[ans.Answer.QuestionId];
                 var them = matches[ans.Profile.Id];
+                them.Name = ans.Profile.Name;
 
                 // do some calculation  
                 var meAccept = me.ChoiceAcceptable & ans.Answer.ChoiceIndex;
@@ -361,12 +441,10 @@ namespace okboba.Entities.Helpers
             foreach (Match m in matches.Values)
             {
                 float pctMe, pctThem;
-                pctMe = m.ScoreMe / m.PossibleScoreMe;
-                pctThem = m.ScoreThem / m.PossibleScoreThem;
+                pctMe = (float)m.ScoreMe / (float)m.PossibleScoreMe;
+                pctThem = (float)m.ScoreThem / (float)m.PossibleScoreThem;
                 m.PercentageMatch = (int)(Math.Sqrt(pctMe * pctThem) * 100);
             }
-
-            Console.WriteLine("went thru {0} answers", count);
 
             return matches;
         }
