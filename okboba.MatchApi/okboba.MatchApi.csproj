@@ -295,6 +295,10 @@
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\okboba.MatchCalculator\okboba.MatchCalculator.csproj">
+      <Project>{0072e31e-3d21-48ac-b76c-09a7634697f2}</Project>
+      <Name>okboba.MatchCalculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\okboba.Repository\okboba.Repository.csproj">
       <Project>{1b313364-e757-4197-9683-7acb2c4a574b}</Project>
       <Name>okboba.Repository</Name>
