@@ -40,24 +40,26 @@ namespace okboba.Repository.EntityRepository
         /// Peforms a match search for a user given their search preferences and returns a list
         /// of sorted matches.
         /// </summary>
-        List<MatchModel> IMatchRepository.MatchSearch(int profileId, string gender, int locId1)
+        public List<MatchModel> MatchSearch(int profileId, MatchCriteriaModel criteria)
         {
             var db = new OkbDbContext();
             var matches = new List<MatchModel>();
 
             var query = from p in db.Profiles.AsNoTracking()
-                        where p.Gender == gender && p.LocationId1 == locId1
+                        where p.Gender == criteria.Gender && p.LocationId1 == criteria.LocationId1
                         select p;
 
             var myAnswers = _matchCalc.GetUserAnswers(profileId);
 
             foreach (var p in query)
             {
-                var pctMatch = _matchCalc.CalculateMatchPercent(p.Id, myAnswers);
+                var matchResult = _matchCalc.CalculateMatchPercent(p.Id, myAnswers);
 
                 matches.Add(new MatchModel
                 {
-                    MatchPercent = pctMatch,
+                    MatchPercent = matchResult.MatchPercent,
+                    FriendPercent = matchResult.FriendPercent,
+                    EnemyPercent = matchResult.EnemeyPercent,
                     Name = p.Name,
                     ProfileId = p.Id
                 });

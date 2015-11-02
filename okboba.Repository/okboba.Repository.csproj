@@ -105,6 +105,7 @@
     <Compile Include="IMatchRepository.cs" />
     <Compile Include="LocationRepository.cs" />
     <Compile Include="MessageRepository.cs" />
+    <Compile Include="Models\MatchCriteriaModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Models\QuestionViewModels.cs" />
     <Compile Include="PhotoRepository.cs" />

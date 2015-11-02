@@ -11,5 +11,7 @@ namespace okboba.Repository.Models
         public int ProfileId { get; set; }
         public string Name { get; set; }
         public int MatchPercent { get; set; }
+        public int FriendPercent { get; set; }
+        public int EnemyPercent { get; set; }
     }
 }

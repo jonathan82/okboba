@@ -15,6 +15,13 @@ namespace okboba.MatchCalculator
         public short QuestionId;
     }
 
+    public struct MatchResult
+    {
+        public int MatchPercent;
+        public int EnemeyPercent;
+        public int FriendPercent;
+    }
+
     public class MatchCalc
     {
         #region Singelton        
@@ -45,23 +52,37 @@ namespace okboba.MatchCalculator
         ///////////////// Public Methods //////////////////
 
         /// <summary>
-        /// Calculates the Match Percentage between two users. Takes a dictionary of
+        /// Calculates the Match, Enemy, and Friend percentage between two users. Takes a dictionary of
         /// answers for one user to speed up finding the intersection. The number of questions both users 
         /// answered (set S) determine the highest match percentage possible according to the 
-        /// following fomula: Match Pct = raw Pct - 1/S         
+        /// following fomula: Match Pct = raw Pct - 1/S    
+        /// 
+        /// Match Percent : Calculate score based on the users answers and their importance rankings.
+        /// 
+        /// Friend Percent: Calculate score based on similarly answered questions. Disregards importance rankings.
+        /// 
+        /// Enemy Percent : Calculate score based on how dissimilar users answered their questions.
+        ///     case 1 - they answered differently AND either I'm not acceptable to them or they're 
+        ///              not acceptable to me: increase enemyScore
+        ///     case 2 - they answered same AND importance differs greatly: increase enemyScore
+        ///     case 3 - all others don't affect enemyScore
         /// </summary>
-        public int CalculateMatchPercent(int profileId, Dictionary<int, Answer> myAnswers)
+        public MatchResult CalculateMatchPercent(int profileId, Dictionary<int, Answer> myAnswers)
         {
             int scoreMe = 0,
                 scoreThem = 0,
                 possibleScoreMe = 0,
                 possibleScoreThem = 0,
+                friendScore = 0,
+                enemyScore = 0,
                 s = 0;
+
+            var result = new MatchResult(); //default values are zero
 
             if (!_answerCache.ContainsKey(profileId))
             {
                 // User hasn't answered any questions
-                return 0;
+                return result;
             }
 
             foreach (var them in _answerCache[profileId])
@@ -69,26 +90,44 @@ namespace okboba.MatchCalculator
                 if (!myAnswers.ContainsKey(them.QuestionId)) continue; //I haven't answered this question
                 var me = myAnswers[them.QuestionId];
                 if (me.ChoiceIndex == null || them.ChoiceIndex == null) continue; // either of us skipped this question
-                var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
-                var themAccept = me.ChoiceIndex & them.ChoiceAccept;
-                scoreMe += meAccept != 0 ? _weights[(byte)me.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
-                scoreThem += themAccept != 0 ? _weights[(byte)them.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
+                bool meAccept = (me.ChoiceAcceptable & them.ChoiceIndex) != 0 ? true : false;
+                bool themAccept = (me.ChoiceIndex & them.ChoiceAccept) != 0 ? true : false;
+                scoreMe += meAccept ? _weights[(byte)me.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
+                scoreThem += themAccept ? _weights[(byte)them.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
                 possibleScoreMe += _weights[(byte)me.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
                 possibleScoreThem += _weights[(byte)them.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
+                friendScore += me.ChoiceIndex == them.ChoiceIndex ? 1 : 0;
+
+                //enemy score: more complex
+                if( (me.ChoiceIndex != them.ChoiceIndex && (!meAccept || !themAccept)) || //case 1
+                    (me.ChoiceIndex==them.ChoiceIndex && Math.Abs((sbyte)me.ChoiceWeight-(sbyte)them.ChoiceWeight) > 1) ) //case 2
+                {
+                    enemyScore++;
+                }
+
                 s++;
             }
 
             if (s==0)
             {
                 //Users haven't answered any of the same questions
-                return 0;
+                return result;
             }
 
             float pctMe, pctThem;
-            pctMe = (float)scoreMe / (float)possibleScoreMe;
-            pctThem = (float)scoreThem / (float)possibleScoreThem;
+            pctMe = (float)scoreMe / possibleScoreMe;
+            pctThem = (float)scoreThem / possibleScoreThem;            
 
-            return (int)(Math.Sqrt(pctMe * pctThem) - (1.0 / (float)s) * 100);
+            result.MatchPercent = (int)(Math.Sqrt(pctMe * pctThem) - (1 / (float)s) * 100);
+            result.FriendPercent = (int)((float)(friendScore - 1) / s * 100);
+            result.EnemeyPercent = (int)((float)(enemyScore - 1) / s * 100);
+
+            // Normalize negative numbers to zero
+            result.MatchPercent = result.MatchPercent < 0 ? 0 : result.MatchPercent;
+            result.FriendPercent = result.FriendPercent < 0 ? 0 : result.FriendPercent;
+            result.EnemeyPercent = result.EnemeyPercent < 0 ? 0 : result.EnemeyPercent;
+
+            return result;
         }
 
         /// <summary>

@@ -9,6 +9,6 @@ namespace okboba.Repository
 {
     public interface IMatchRepository
     {
-        List<MatchModel> MatchSearch(int profileId, string gender, int locId1);
+        List<MatchModel> MatchSearch(int profileId, MatchCriteriaModel criteria);
     }
 }

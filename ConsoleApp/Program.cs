@@ -12,7 +12,13 @@ using System.IO;
 
 namespace ConsoleApp
 {
-
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string JobTitle { get; set; }
+    }
 
     class Program
     {
@@ -21,6 +27,16 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+
+            var p = new Person
+            {
+                Id = 1,
+                Name = "Jonathan",
+                Age = 33,
+                JobTitle = "Progammer"
+            };
+
+            Console.WriteLine(p.GetHashCode());
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();
@@ -68,10 +84,10 @@ namespace ConsoleApp
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //////////////////////// Simulations //////////////////////////
-            var seed = new SeedDb(connString);
-            var rand = new Random();
-            var provinces = LocationRepository.Instance.GetProvinceList();
-            string[] genders = { "M", "F" };
+            //var seed = new SeedDb(connString);
+            //var rand = new Random();
+            //var provinces = LocationRepository.Instance.GetProvinceList();
+            //string[] genders = { "M", "F" };
 
             //Console.WriteLine("Caching answers in memory...");
             //timer.Start();
@@ -104,14 +120,14 @@ namespace ConsoleApp
             //}
 
             ///////////////// Simulate answering questions //////////////////////            
-            const int NUM_OF_QUES_TO_ANSWER = 1000;
-            timer.Start();
-            for(int i=0; i < NUM_OF_QUES_TO_ANSWER; i++)
-            {
-                seed.SimulateAnsweringQuestion(rand);
-            }
-            timer.Stop();
-            Console.WriteLine("answered 1000 questions in {0} ms, {1} ms / ques", timer.ElapsedMilliseconds, timer.ElapsedMilliseconds / NUM_OF_QUES_TO_ANSWER);
+            //const int NUM_OF_QUES_TO_ANSWER = 1000;
+            //timer.Start();
+            //for(int i=0; i < NUM_OF_QUES_TO_ANSWER; i++)
+            //{
+            //    seed.SimulateAnsweringQuestion(rand);
+            //}
+            //timer.Stop();
+            //Console.WriteLine("answered 1000 questions in {0} ms, {1} ms / ques", timer.ElapsedMilliseconds, timer.ElapsedMilliseconds / NUM_OF_QUES_TO_ANSWER);
 
             //Pause so screen won't go away
             Console.WriteLine("done!");
