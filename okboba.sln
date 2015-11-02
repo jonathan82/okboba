@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Entities", "okboba.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{C7F87236-46DF-4B1F-919E-F3129C0503B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.MatchLoader", "okboba.MatchLoader\okboba.MatchLoader.csproj", "{0072E31E-3D21-48AC-B76C-09A7634697F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.MatchCalculator", "okboba.MatchCalculator\okboba.MatchCalculator.csproj", "{0072E31E-3D21-48AC-B76C-09A7634697F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Resources", "okboba.Resources\okboba.Resources.csproj", "{7FB93755-0B4C-46E7-974C-BA68A4EC949F}"
 EndProject

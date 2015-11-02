@@ -16,10 +16,10 @@ function encodeHtml(str) {
 
     var numCols = 6;
     var locationName = "";
-    var locationId1;
-    var locationId2;
+    var locationId1, locationId2;
     var url = "/location/GetDistrictJson"
     var $locationInput;
+    var locationId1Sel, locationId2Sel;
 
     function buildProvinceHtml(prov, title) {
         var colspan = numCols > prov.length ? prov.length : numCols;
@@ -53,6 +53,8 @@ function encodeHtml(str) {
                 locationId2 = $(this).data('locationid');
 
                 $locationInput.val(locationName);
+                $(locationId1Sel).val(locationId1);
+                $(locationId2Sel).val(locationId2);
 
                 //Close the popover
                 $locationInput.popover('hide');
@@ -72,10 +74,12 @@ function encodeHtml(str) {
     }
 
     // Init the plugin
-    $.fn.locationpicker = function (provJson) {
+    $.fn.locationpicker = function (provJson, locId1Sel, locId2Sel) {
 
         $this = $(this);
         $locationInput = $this;
+        locationId1Sel = locId1Sel;
+        locationId2Sel = locId2Sel;
 
         //Setup the popover
         opts.content = buildProvinceHtml(provJson, '省份');

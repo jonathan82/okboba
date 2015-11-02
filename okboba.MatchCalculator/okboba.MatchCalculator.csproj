@@ -49,19 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MatchLoader.cs" />
-    <Compile Include="Models\AnswerInMem.cs" />
-    <Compile Include="Models\UserInMem.cs" />
+    <Compile Include="MatchCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\okboba.Entities\okboba.Entities.csproj">
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\okboba.MatchApi\okboba.MatchApi.csproj">
-      <Project>{70a4dd1b-815f-4a71-99f9-4bcca29bc0c2}</Project>
-      <Name>okboba.MatchApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -232,9 +232,9 @@ namespace okboba.Entities.Helpers
 
         public struct CacheAnswer
         {
-            public byte ChoiceIndex;
-            public byte ChoiceAccept;
-            public byte ChoiceWeight;
+            public byte? ChoiceIndex;
+            public byte? ChoiceAccept;
+            public byte? ChoiceWeight;
             public short QuestionId;
         }
 
@@ -279,10 +279,10 @@ namespace okboba.Entities.Helpers
                 var me = myAnswers[them.QuestionId];
                 var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
                 var themAccept = me.ChoiceIndex & them.ChoiceAccept;
-                scoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
-                scoreThem += themAccept != 0 ? weights[them.ChoiceWeight] : 0;
-                possibleScoreMe += weights[me.ChoiceWeight];
-                possibleScoreThem += weights[them.ChoiceWeight];
+                scoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
+                scoreThem += themAccept != 0 ? weights[(byte)them.ChoiceWeight] : 0;
+                possibleScoreMe += weights[(byte)me.ChoiceWeight];
+                possibleScoreThem += weights[(byte)them.ChoiceWeight];
             }
 
             float pctMe, pctThem;
@@ -358,10 +358,10 @@ namespace okboba.Entities.Helpers
                 var me = myAnswers[them.QuestionId];
                 var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
                 var themAccept = me.ChoiceIndex & them.ChoiceAcceptable;
-                scoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
-                scoreThem += themAccept != 0 ? weights[them.ChoiceWeight] : 0;
-                possibleScoreMe += weights[me.ChoiceWeight];
-                possibleScoreThem += weights[them.ChoiceWeight];
+                scoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
+                scoreThem += themAccept != 0 ? weights[(byte)them.ChoiceWeight] : 0;
+                possibleScoreMe += weights[(byte)me.ChoiceWeight];
+                possibleScoreThem += weights[(byte)them.ChoiceWeight];
             }
 
             float pctMe, pctThem;
@@ -430,10 +430,10 @@ namespace okboba.Entities.Helpers
                 var meAccept = me.ChoiceAcceptable & ans.Answer.ChoiceIndex;
                 var themAccept = me.ChoiceIndex & ans.Answer.ChoiceAcceptable;
 
-                them.ScoreMe += meAccept != 0 ? weights[me.ChoiceWeight] : 0;
-                them.ScoreThem += themAccept != 0 ? weights[ans.Answer.ChoiceWeight] : 0;
-                them.PossibleScoreMe += weights[me.ChoiceWeight];
-                them.PossibleScoreThem += weights[ans.Answer.ChoiceWeight];
+                them.ScoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
+                them.ScoreThem += themAccept != 0 ? weights[(byte)ans.Answer.ChoiceWeight] : 0;
+                them.PossibleScoreMe += weights[(byte)me.ChoiceWeight];
+                them.PossibleScoreThem += weights[(byte)ans.Answer.ChoiceWeight];
 
             }
 

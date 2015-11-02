@@ -101,8 +101,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityRepository\EntityMatchRepository.cs" />
+    <Compile Include="IMatchRepository.cs" />
     <Compile Include="LocationRepository.cs" />
     <Compile Include="MessageRepository.cs" />
+    <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Models\QuestionViewModels.cs" />
     <Compile Include="PhotoRepository.cs" />
     <Compile Include="ProfileRepository.cs" />
@@ -118,12 +121,15 @@
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\okboba.MatchCalculator\okboba.MatchCalculator.csproj">
+      <Project>{0072e31e-3d21-48ac-b76c-09a7634697f2}</Project>
+      <Name>okboba.MatchCalculator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="EntityRepository\" />
     <Folder Include="InMemoryRepository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

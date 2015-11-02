@@ -70,8 +70,8 @@
                         <label for="Location" class="col-sm-3 control-label">城市</label>
                         <div class="col-sm-9">
                             <input id="locationinput" type="text" name="name" value=" " class="form-control"/>
-                            <input type="hidden" name="locationId1" value=" " />
-                            <input type="hidden" name="locationId2" value=" " />
+                            <input type="hidden" name="locationId1" value="" id="locationId1" />
+                            <input type="hidden" name="locationId2" value="" id="locationId2"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -141,6 +141,6 @@
         //Setup the location picker
         var provinces = @Html.Raw(ViewBag.JsonProvinces);
 
-        $('#locationinput').locationpicker(provinces);
+        $('#locationinput').locationpicker(provinces, "#locationId1", "#locationId2");
     </script>
 }

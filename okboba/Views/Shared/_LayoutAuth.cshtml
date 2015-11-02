@@ -20,21 +20,28 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><img src="~/Content/images/logo/boba-sm.png" alt="Alternate Text" /></a>
+                <a class="navbar-brand" href="#"><img src="~/Content/images/logo/okboba-logo-nav-2.png" alt="Alternate Text" style="opacity:0.7" /></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <!-- Left navigation links -->
+
                 <ul class="nav navbar-nav">
-                    <li><a href="#">QuickMatch</a></li>
-                    <li><a href="#">浏览匹配</a></li>
-                    <li><a href="#">Answer Questions</a></li>
+                    <li><a href="#" class="okb-navbar-text">浏览匹配</a></li>
+                    <li><a href="#" class="text-big">回答提问</a></li>
                 </ul>
+
                 <!-- Right navigation links -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Messages</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-envelope text-big"></span></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user text-big"><span class="caret" style="vertical-align:middle"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">something here</a></li>
+                            <li><a href="#">something there</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-cog text-big"></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
