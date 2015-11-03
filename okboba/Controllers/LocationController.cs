@@ -1,4 +1,5 @@
 ﻿using okboba.Repository;
+using okboba.Repository.EntityRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace okboba.Controllers
 {
     public class LocationController : Controller
     {
-        private LocationRepository locationRepo;
+        private ILocationRepository locationRepo;
 
         public LocationController()
         {
-            this.locationRepo = LocationRepository.Instance;
+            this.locationRepo = EntityLocationRepository.Instance;
         }
 
         // GET: Location

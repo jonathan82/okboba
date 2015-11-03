@@ -6,21 +6,22 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using okboba.Repository.Models;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Controllers
 {
     public class AdminController : OkbBaseController
     {
-        public QuestionRepository quesRepo { get; set; }
+        public IQuestionRepository _quesRepo { get; set; }
 
         public AdminController()
         {
-            this.quesRepo = QuestionRepository.Instance;
+            this._quesRepo = EntityQuestionRepository.Instance;
         }
 
         public JsonResult GetTranslateQuestions(int page = 1, int pageSize = 25)
         {
-            var paged = quesRepo.GetTranslateQuestions().ToPagedList(page, pageSize);
+            var paged = _quesRepo.GetTranslateQuestions().ToPagedList(page, pageSize);
             var quesList = new List<TranslateQuestionViewModel>();
 
             foreach (var q in paged)

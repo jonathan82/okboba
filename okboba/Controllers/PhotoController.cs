@@ -1,5 +1,6 @@
 ﻿using okboba.Entities;
 using okboba.Repository;
+using okboba.Repository.EntityRepository;
 using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,11 @@ namespace okboba.Controllers
     [Authorize]
     public class PhotoController : OkbBaseController
     {
-        private PhotoRepository PhotoRepo
+        IPhotoRepository _photoRepo;
+
+        public PhotoController()
         {
-            get
-            {
-                return PhotoRepository.Instance;
-            }
+            _photoRepo = EntityPhotoRepository.Instance;
         }
 
         // GET: Image
@@ -35,7 +35,7 @@ namespace okboba.Controllers
         {
             //Check if user has more than max allowed photos
 
-            PhotoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, GetProfileId());
+            _photoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, GetProfileId());
 
             return RedirectToAction("Index");
         }

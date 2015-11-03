@@ -5,22 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace okboba.Repository
+namespace okboba.Repository.EntityRepository
 {
-    public class ProfileRepository
+    public class EntityProfileRepository : IProfileRepository
     {
         #region Singleton
+        private static EntityProfileRepository instance;
+        private EntityProfileRepository() { }
 
-        private static ProfileRepository instance;
-        private ProfileRepository() { }
-
-        public static ProfileRepository Instance
+        public static EntityProfileRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ProfileRepository();
+                    instance = new EntityProfileRepository();
                 }
                 return instance;
             }

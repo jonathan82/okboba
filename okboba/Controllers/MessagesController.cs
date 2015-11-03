@@ -21,11 +21,9 @@ namespace okboba.Controllers
     {
         const int MESSAGES_PER_PAGE = 25;
 
-        private MessageRepository msgRepo;
-
         public MessagesController()
         {
-            this.msgRepo = MessageRepository.Instance;
+            
         }
 
         // GET: Messages

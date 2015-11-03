@@ -13,6 +13,7 @@ using okboba.Entities;
 using System.Collections.Generic;
 using okboba.Repository;
 using Newtonsoft.Json;
+using okboba.Repository.EntityRepository;
 
 //some comments
 
@@ -23,11 +24,11 @@ namespace okboba.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private LocationRepository locationRepo;
+        private ILocationRepository locationRepo;
 
         public AccountController()
         {
-            this.locationRepo = LocationRepository.Instance;
+            this.locationRepo = EntityLocationRepository.Instance;
         }
 
         //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )

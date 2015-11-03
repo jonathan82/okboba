@@ -1,40 +1,34 @@
 ﻿using okboba.Entities;
-using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PagedList;
 
-namespace okboba.Repository
+namespace okboba.Repository.EntityRepository
 {
-    public class QuestionRepository
+    public class EntityQuestionRepository : IQuestionRepository
     {
         #region Singelton
-        private static QuestionRepository instance;
-        private QuestionRepository() { }
+        private static EntityQuestionRepository instance;
+        private EntityQuestionRepository() { }
 
-        public static QuestionRepository Instance
+        public static EntityQuestionRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new QuestionRepository();
+                    instance = new EntityQuestionRepository();
                 }
                 return instance;
             }
         }
         #endregion
 
-        #region Public Methods
-
         /// <summary>
         /// Get the question given its ID
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public Question GetQuestion(int? id)
         {
             var db = new OkbDbContext();
@@ -43,22 +37,20 @@ namespace okboba.Repository
             ques.Choices = new List<string>();
 
             //Get the internal representation of choices in the database
-            if(ques.ChoicesInternal != null)
+            if (ques.ChoicesInternal != null)
             {
                 var choices = ques.ChoicesInternal.Split(';');
                 foreach (var c in choices)
                 {
                     ques.Choices.Add(c);
                 }
-            }            
+            }
             return ques;
         }
 
         /// <summary>
         /// Get the question given its rank.
         /// </summary>
-        /// <param name="rank"></param>
-        /// <returns></returns>
         public Question GetQuestionByRank(int rank)
         {
             var db = new OkbDbContext();
@@ -110,19 +102,12 @@ namespace okboba.Repository
                          select q;
 
             return result;
-            
         }
-
-        #endregion
-
-        #region Private Methods
 
         /// <summary>
         /// Converts an array of booleans representing acceptable choices
         /// to a byte representation.
         /// </summary>
-        /// <param name="acc"></param>
-        /// <returns></returns>
         public byte convertBoolToAccept(bool[] bAccept)
         {
             byte encAccept = 0;
@@ -133,6 +118,5 @@ namespace okboba.Repository
             }
             return encAccept;
         }
-        #endregion
     }
 }

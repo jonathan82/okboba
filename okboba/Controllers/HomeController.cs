@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using okboba.Resources;
 using okboba.Repository;
 using Newtonsoft.Json;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Controllers
 {
@@ -13,11 +14,11 @@ namespace okboba.Controllers
     [Authorize]
     public class HomeController : OkbBaseController
     {
-        private LocationRepository locationRepo;
+        private ILocationRepository locationRepo;
 
         public HomeController()
         {
-            this.locationRepo = LocationRepository.Instance;
+            this.locationRepo = EntityLocationRepository.Instance;
         }
 
         public ActionResult Index()

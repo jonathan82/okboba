@@ -1,5 +1,6 @@
 ﻿using okboba.Models.Validation;
 using okboba.Repository;
+using okboba.Repository.EntityRepository;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +16,7 @@ namespace okboba.App_Start
         {
             // Setup the Photo Repository
             var str = ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString;
-            PhotoRepository.Instance.StorageConnectionString = str;
+            EntityPhotoRepository.Instance.StorageConnectionString = str;
 
             //Custom attributes
             DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(LocalRequiredAttribute), typeof(RequiredAttributeAdapter));
