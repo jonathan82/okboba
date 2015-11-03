@@ -2,22 +2,23 @@
 using okboba.Entities;
 using okboba.Entities.Helpers;
 using okboba.Repository;
+using ServiceStack.Redis;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
-[assembly: log4net.Config.XmlConfigurator(Watch =true)]
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace ConsoleApp
 {
-    public class Person
+    class Person
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
-        public string JobTitle { get; set; }
+        public string Description { get; set; }
     }
 
     class Program
@@ -28,15 +29,32 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            var p = new Person
-            {
-                Id = 1,
-                Name = "Jonathan",
-                Age = 33,
-                JobTitle = "Progammer"
-            };
+            var x = new RedisManagerPool("localhost");
+            var client = x.GetClient().As<Person>();
+            client.RemoveEntry("mylist");
 
-            Console.WriteLine(p.GetHashCode());
+            var mylist = client.Lists["mylist"];
+            
+            for(int i=0; i < 10; i++)
+            {
+                mylist.Add(new Person
+                {
+                    Id = client.GetNextSequence(),
+                    Name = "jonahtan",
+                    Age = 33,
+                    Description = "cool guy"
+                });
+            }
+
+            var client2 = x.GetClient();
+            var jsonList = client2.GetRangeFromList("mylist", 1, 4);
+
+            foreach (var p in jsonList)
+            {
+                Console.WriteLine(p);
+            }
+
+            Console.WriteLine("list length: {0}", client2.GetListCount("mylist"));
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();

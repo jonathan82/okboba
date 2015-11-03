@@ -118,7 +118,7 @@ namespace okboba.MatchCalculator
             pctMe = (float)scoreMe / possibleScoreMe;
             pctThem = (float)scoreThem / possibleScoreThem;            
 
-            result.MatchPercent = (int)(Math.Sqrt(pctMe * pctThem) - (1 / (float)s) * 100);
+            result.MatchPercent = (int)(Math.Sqrt(pctMe * pctThem) - (1 / s) * 100);
             result.FriendPercent = (int)((float)(friendScore - 1) / s * 100);
             result.EnemeyPercent = (int)((float)(enemyScore - 1) / s * 100);
 
@@ -131,10 +131,12 @@ namespace okboba.MatchCalculator
         }
 
         /// <summary>
-        /// Loads the inital answer cache from the database
+        /// Loads the inital answer cache from the database. Returns the number of answers
+        /// loaded.
         /// </summary>
-        public void LoadAnswerCache()
+        public int LoadAnswerCache()
         {
+            int count = 0;
             _answerCache = new Dictionary<int, List<CacheAnswer>>();
 
             var db = new OkbDbContext();
@@ -153,7 +155,11 @@ namespace okboba.MatchCalculator
                     ChoiceAccept = ans.ChoiceAcceptable,
                     ChoiceWeight = ans.ChoiceWeight
                 });
+
+                count++;
             }
+
+            return count;
         }
 
         /// <summary>

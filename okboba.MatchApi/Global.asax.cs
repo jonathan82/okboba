@@ -7,11 +7,18 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using okboba.MatchCalculator;
+using System.Configuration;
+using okboba.Repository.RedisRepository;
+using System.Diagnostics;
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace okboba.MatchApi
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -19,7 +26,17 @@ namespace okboba.MatchApi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            MatchCalc.Instance.LoadAnswerCache();
+
+            // Load the answer cache
+            var timer = new Stopwatch();
+            timer.Start();
+            var numAnswersLoaded = MatchCalc.Instance.LoadAnswerCache();
+            timer.Stop();            
+            log.Info(string.Format("{0} answers loaded in {1} s", numAnswersLoaded, timer.ElapsedMilliseconds / 1000));
+
+            // Setup Redis repository
+            var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;
+            RedisMatchRepository.Instance.RedisConnectionString = redisConnStr;
         }
     }
 }
