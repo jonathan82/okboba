@@ -36,16 +36,16 @@ namespace okboba.Repository.RedisRepository
                 _redisClientsManager = new RedisManagerPool(value);
             }
         }
+        public int MatchResultsTTL { get; set; } //seconds
 
         /////////////////////// Methods /////////////////////////////
         /// <summary>
         /// Save the list of match results to the cache with key being a combination of the
         /// profileId and search criteria. 
         /// </summary>
-        public void SaveMatchResults(int profileId, MatchCriteriaModel criteria, List<MatchModel> results)
+        public void SaveMatchResults(string key, List<MatchModel> results)
         {
             var client = _redisClientsManager.GetClient().As<MatchModel>();
-            var key = FormatKey(profileId, criteria);
 
             client.RemoveEntry(key);
 
@@ -57,7 +57,7 @@ namespace okboba.Repository.RedisRepository
             }
 
             //Expire in 5 min
-            client.ExpireIn(key, new TimeSpan(0,5,0));
+            client.ExpireEntryIn(key, new TimeSpan(0,0,MatchResultsTTL));
         }
 
         /// <summary>

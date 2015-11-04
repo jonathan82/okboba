@@ -36,7 +36,9 @@ namespace okboba.MatchApi
 
             // Setup Redis repository
             var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;
+            var matchResultsTTL = ConfigurationManager.AppSettings["MatchResultsTTL"];
             RedisMatchRepository.Instance.RedisConnectionString = redisConnStr;
+            RedisMatchRepository.Instance.MatchResultsTTL = Convert.ToInt32(matchResultsTTL);
         }
     }
 }

@@ -52,6 +52,46 @@ namespace okboba.MatchCalculator
         ///////////////// Public Methods //////////////////
 
         /// <summary>
+        /// Adds or updates a users answer. Creates new user if they're not in the cache,
+        /// creates new answer if not in cache, otherwise update answer.
+        /// </summary>        
+        public void AddOrUpdate(Answer updateAnswer)
+        {
+            // Check for new user
+            if(!_answerCache.ContainsKey(updateAnswer.ProfileId))
+            {
+                _answerCache.Add(updateAnswer.ProfileId, new List<CacheAnswer>());
+            }
+
+            var listAnswers = _answerCache[updateAnswer.ProfileId];
+
+            //Check if updating or adding new answer
+            for(int i=0; i < listAnswers.Count; i++)
+            {
+                var a = listAnswers[i];
+
+                if(a.QuestionId==updateAnswer.QuestionId)
+                {
+                    a.ChoiceIndex = updateAnswer.ChoiceIndex;
+                    a.ChoiceAccept = updateAnswer.ChoiceAcceptable;
+                    a.ChoiceWeight = updateAnswer.ChoiceWeight;
+
+                    //found and updated answer, done
+                    return;
+                }
+            }
+
+            //Got here: New answer
+            listAnswers.Add(new CacheAnswer
+            {
+                QuestionId = updateAnswer.QuestionId,
+                ChoiceIndex = updateAnswer.ChoiceIndex,
+                ChoiceAccept = updateAnswer.ChoiceAcceptable,
+                ChoiceWeight = updateAnswer.ChoiceWeight
+            });
+        }
+
+        /// <summary>
         /// Calculates the Match, Enemy, and Friend percentage between two users. Takes a dictionary of
         /// answers for one user to speed up finding the intersection. The number of questions both users 
         /// answered (set S) determine the highest match percentage possible according to the 
@@ -118,7 +158,7 @@ namespace okboba.MatchCalculator
             pctMe = (float)scoreMe / possibleScoreMe;
             pctThem = (float)scoreThem / possibleScoreThem;            
 
-            result.MatchPercent = (int)(Math.Sqrt(pctMe * pctThem) - (1 / s) * 100);
+            result.MatchPercent = (int)((Math.Sqrt(pctMe * pctThem) - ((float)1 / s)) * 100);
             result.FriendPercent = (int)((float)(friendScore - 1) / s * 100);
             result.EnemeyPercent = (int)((float)(enemyScore - 1) / s * 100);
 

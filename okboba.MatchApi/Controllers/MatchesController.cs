@@ -41,7 +41,7 @@ namespace okboba.MatchApi.Controllers
         /// Gets the matches for a given user for a given page.  Looks in cache first and if not there
         /// calculate the matches and store in cache.  Returns a JSON array.
         /// </summary>        
-        public JsonResult GetMatches(int profileId, int page, MatchCriteriaModel criteria)
+        public ActionResult GetMatches(int profileId, int page, MatchCriteriaModel criteria)
         {
             var key = _redisRepo.FormatKey(profileId, criteria);
             string json;
@@ -61,18 +61,19 @@ namespace okboba.MatchApi.Controllers
                 var matches = _matchRepo.MatchSearch(profileId, criteria);
                 var range = PageRange(page, matches.Count);
 
-                _redisRepo.SaveMatchResults(profileId, criteria, matches);
+                _redisRepo.SaveMatchResults(key, matches);
 
                 json = "[";
                 for (int i = range.Item1; i < range.Item2; i++)
                 {
                     //serialize matches[i] to return to caller                    
-                    json += JsonConvert.SerializeObject(matches[i]);                    
+                    json += JsonConvert.SerializeObject(matches[i]) + ",";                    
                 }
+                json = json.TrimEnd(',');
                 json += "]";
             }
 
-            return Json(json, JsonRequestBehavior.AllowGet);
+            return Content(json, "application/json");
         }
 
         /// <summary>

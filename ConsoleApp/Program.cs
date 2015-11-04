@@ -29,32 +29,11 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            var x = new RedisManagerPool("localhost");
-            var client = x.GetClient().As<Person>();
-            client.RemoveEntry("mylist");
-
-            var mylist = client.Lists["mylist"];
-            
-            for(int i=0; i < 10; i++)
-            {
-                mylist.Add(new Person
-                {
-                    Id = client.GetNextSequence(),
-                    Name = "jonahtan",
-                    Age = 33,
-                    Description = "cool guy"
-                });
-            }
-
-            var client2 = x.GetClient();
-            var jsonList = client2.GetRangeFromList("mylist", 1, 4);
-
-            foreach (var p in jsonList)
-            {
-                Console.WriteLine(p);
-            }
-
-            Console.WriteLine("list length: {0}", client2.GetListCount("mylist"));
+            var client = new RedisManagerPool("localhost").GetClient().As<Person>();
+            var key = "mykey";
+            client.RemoveEntry(key);
+            client.Lists[key].Add(new Person {Id = 3, Name = "jon", Age = 33, Description = "fdsads" });
+            client.ExpireIn(key, new TimeSpan(0, 5, 0));
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();
