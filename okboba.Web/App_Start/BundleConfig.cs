@@ -49,7 +49,7 @@ namespace okboba
                       "~/Content/themes/base/all.css",
                       "~/Content/admin.css"));
 
-            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+            bundles.Add(new StyleBundle("~/Content/datepickercss").Include(
                 "~/Content/datepicker/bootstrap-datepicker.css",
                 "~/Content/datepicker/bootstrap-datepicker3.css"));
         }
