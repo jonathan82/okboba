@@ -2,6 +2,7 @@
 using okboba.Entities;
 using okboba.Entities.Helpers;
 using okboba.Repository;
+using okboba.Repository.EntityRepository;
 using ServiceStack.Redis;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace ConsoleApp
 
     class Program
     {
-        private static string connString = "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=okboba;Integrated Security=True";
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static void Main(string[] args)
@@ -58,25 +58,26 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
+            var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SeedDb db = new SeedDb(connString);
             Stopwatch timer = new Stopwatch();
 
-            //// Questions
-            //Console.WriteLine("Seeding Questions...");
-            //db.SeedOkcQuestions("../../../Design/okc_questions.txt");
+            // Questions
+            Console.WriteLine("Seeding Questions...");
+            db.SeedOkcQuestions("../../../data/okc_questions.txt");
 
-            //// Chinese Cities
-            //Console.WriteLine("Seeding Locations...");
-            //db.SeedLocations("../../data/china_cities.txt");
+            // Chinese Cities
+            Console.WriteLine("Seeding Locations...");
+            db.SeedLocations("../../../data/china_cities.txt");
 
-            //// Users
-            //Console.WriteLine("Seeding Users...");
-            //db.SeedUsers(100000, LocationRepository.Instance.GetProvinceList());
+            // Users
+            Console.WriteLine("Seeding Users...");
+            db.SeedUsers(10000, EntityLocationRepository.Instance.GetProvinceList());
 
             // User answers
             Console.WriteLine("Seeding answers...");
             timer.Start();
-            db.SeedAnswers(100000, 5);
+            db.SeedAnswers(10000, 10);
             timer.Stop();
             Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 

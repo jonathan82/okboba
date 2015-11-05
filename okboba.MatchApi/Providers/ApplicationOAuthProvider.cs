@@ -10,6 +10,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using okboba.MatchApi.Models;
+using okboba.Entities;
 
 namespace okboba.MatchApi.Providers
 {
@@ -31,7 +32,7 @@ namespace okboba.MatchApi.Providers
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            OkbUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {

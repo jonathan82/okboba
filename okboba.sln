@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Web", "okboba\okboba.Web.csproj", "{E94F965A-3C50-443E-913F-40692BBDCA52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Web", "okboba.Web\okboba.Web.csproj", "{E94F965A-3C50-443E-913F-40692BBDCA52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Web.Tests", "okboba.Tests\okboba.Web.Tests.csproj", "{86864455-DFD7-4833-B0C4-3D255848C47E}"
 EndProject

@@ -79,13 +79,9 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Trait.cs" />
     <Compile Include="Entities\TranslateQuestion.cs" />
-    <Compile Include="Migrations\201510240514341_Initial.cs" />
-    <Compile Include="Migrations\201510240514341_Initial.Designer.cs">
-      <DependentUpon>201510240514341_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511020447429_Answers.cs" />
-    <Compile Include="Migrations\201511020447429_Answers.Designer.cs">
-      <DependentUpon>201511020447429_Answers.cs</DependentUpon>
+    <Compile Include="Migrations\201511050517002_Initial.cs" />
+    <Compile Include="Migrations\201511050517002_Initial.Designer.cs">
+      <DependentUpon>201511050517002_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -102,14 +98,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510240514341_Initial.resx">
-      <DependentUpon>201510240514341_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511020447429_Answers.resx">
-      <DependentUpon>201511020447429_Answers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511050517002_Initial.resx">
+      <DependentUpon>201511050517002_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

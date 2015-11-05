@@ -92,7 +92,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\okboba\okboba.Web.csproj">
+    <ProjectReference Include="..\okboba.Web\okboba.Web.csproj">
       <Project>{E94F965A-3C50-443E-913F-40692BBDCA52}</Project>
       <Name>okboba.Web</Name>
     </ProjectReference>
