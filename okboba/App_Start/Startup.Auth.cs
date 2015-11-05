@@ -35,7 +35,9 @@ namespace okboba
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, OkbUser>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
+                },
+                CookieDomain = ".okboba.com",
+                CookiePath = "/"
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

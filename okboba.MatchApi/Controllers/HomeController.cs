@@ -10,7 +10,10 @@ namespace okboba.MatchApi.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            if (User.Identity.IsAuthenticated)
+                ViewBag.Title = "Home Page - authenticated";
+            else
+                ViewBag.Title = "Home Page - anonymous";
 
             return View();
         }

@@ -29,11 +29,11 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
 
-            var client = new RedisManagerPool("localhost").GetClient().As<Person>();
-            var key = "mykey";
-            client.RemoveEntry(key);
-            client.Lists[key].Add(new Person {Id = 3, Name = "jon", Age = 33, Description = "fdsads" });
-            client.ExpireIn(key, new TimeSpan(0, 5, 0));
+            //var client = new RedisManagerPool("localhost").GetClient().As<Person>();
+            //var key = "mykey";
+            //client.RemoveEntry(key);
+            //client.Lists[key].Add(new Person {Id = 3, Name = "jon", Age = 33, Description = "fdsads" });
+            //client.ExpireIn(key, new TimeSpan(0, 5, 0));
 
             //////////////////// Test the match loader /////////////////
             //MatchLoader matches = new MatchLoader();
@@ -58,7 +58,7 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            //SeedDb db = new SeedDb(connString);
+            SeedDb db = new SeedDb(connString);
             Stopwatch timer = new Stopwatch();
 
             //// Questions
@@ -73,12 +73,12 @@ namespace ConsoleApp
             //Console.WriteLine("Seeding Users...");
             //db.SeedUsers(100000, LocationRepository.Instance.GetProvinceList());
 
-            //// User answers
-            //Console.WriteLine("Seeding answers...");
-            //timer.Start();
-            //db.SeedAnswers(100000, 200);
-            //timer.Stop();
-            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            // User answers
+            Console.WriteLine("Seeding answers...");
+            timer.Start();
+            db.SeedAnswers(100000, 5);
+            timer.Stop();
+            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //////////////////////// Simulations //////////////////////////
             //var seed = new SeedDb(connString);
