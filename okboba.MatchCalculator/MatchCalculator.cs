@@ -52,8 +52,19 @@ namespace okboba.MatchCalculator
         ///////////////// Public Methods //////////////////
 
         /// <summary>
+        /// Deletes a user from the answer cache.  For example, if they delete their account.
+        /// </summary>
+        public void DeleteUser(int profileId)
+        {
+            if (_answerCache.ContainsKey(profileId))
+            {
+                _answerCache.Remove(profileId);
+            }          
+        }
+
+        /// <summary>
         /// Adds or updates a users answer. Creates new user if they're not in the cache,
-        /// creates new answer if not in cache, otherwise update answer.
+        /// otherwise update answer.
         /// </summary>        
         public void AddOrUpdate(Answer updateAnswer)
         {
