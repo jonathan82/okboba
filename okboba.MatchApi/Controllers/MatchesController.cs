@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using okboba.Entities;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
 using okboba.Repository.Models;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 
 /// <summary>
@@ -25,6 +28,8 @@ using System.Web.Mvc;
 
 namespace okboba.MatchApi.Controllers
 {        
+    [System.Web.Mvc.Authorize]
+    [EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
     public class MatchesController : Controller
     {
         private IMatchRepository _matchRepo;
@@ -38,11 +43,14 @@ namespace okboba.MatchApi.Controllers
         }
 
         /// <summary>
-        /// Gets the matches for a given user for a given page.  Looks in cache first and if not there
+        /// Gets the matches for the logged in user for a given page.  Looks in cache first and if not there
         /// calculate the matches and store in cache.  Returns a JSON array.
         /// </summary>        
-        public ActionResult GetMatches(int profileId, int page, MatchCriteriaModel criteria)
+        public ActionResult GetMatches(MatchCriteriaModel criteria, int page = 1)
         {
+            //We should be authenticated at this point.  Only allow users to get their own matches
+            var profileId = GetProfileId();
+
             var key = _redisRepo.FormatKey(profileId, criteria);
             string json;
 
@@ -97,6 +105,34 @@ namespace okboba.MatchApi.Controllers
             }
 
             return new Tuple<int, int>(start, end);
+        }
+
+        protected int GetProfileId()
+        {
+            int profileId;
+
+            //Check if ProfileId in session, if not cache it there
+            if (Session["ProfileId"] == null)
+            {
+                var db = new OkbDbContext();
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+
+                if (user == null)
+                {
+                    // No profile exists for user!??!?
+                    throw new Exception("No profile exists for user");
+                }
+
+                profileId = user.Profile.Id;
+                Session["ProfileId"] = profileId;
+            }
+            else
+            {
+                profileId = (int)Session["ProfileId"];
+            }
+
+            return profileId;
         }
     }
 }
