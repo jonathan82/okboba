@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using okboba.Entities;
+using okboba.MatchCalculator;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
 using okboba.Repository.Models;
@@ -34,12 +35,29 @@ namespace okboba.MatchApi.Controllers
     {
         private IMatchRepository _matchRepo;
         private RedisMatchRepository _redisRepo;
+        private MatchCalc _matchCalc;
         const int NUM_MATCHES_PER_PAGE = 25;
 
         public MatchesController()
         {
             _matchRepo = EntityMatchRepository.Instance;
             _redisRepo = RedisMatchRepository.Instance;
+            _matchCalc = MatchCalc.Instance;
+        }
+
+        /// <summary>
+        /// Updates the users cached answer used for matching.  Only allow users to update their own answers.
+        /// </summary>
+        public JsonResult UpdateCacheAnswer(Answer answer)
+        {
+            //We should be authenticated at this point.  Only allow users to update their own answers
+            var profileId = GetProfileId();
+
+            answer.ProfileId = profileId;
+
+            _matchCalc.AddOrUpdate(answer);
+
+            return Json(new { result = "success" });
         }
 
         /// <summary>

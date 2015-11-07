@@ -11,7 +11,7 @@ namespace okboba.Repository
     {
         Question GetQuestion(int? id);
         Question GetQuestionByRank(int rank);
-        void AnswerQuestion(int profileId, int questionId, int answerIndex, bool[] answerAccept, int weight, int nextQuestionId);
+        bool AnswerQuestion(Answer ans);
         IQueryable<TranslateQuestion> GetTranslateQuestions();
     }
 }

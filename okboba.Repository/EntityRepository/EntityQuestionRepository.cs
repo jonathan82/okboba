@@ -62,35 +62,62 @@ namespace okboba.Repository.EntityRepository
             return result.ToList().First();
         }
 
+        private Answer ValidateAnswer(Answer ans)
+        {
+            if (ans.ChoiceBit == null || ans.ChoiceBit == 0)
+            {
+                //skipping question
+                ans.ChoiceBit = null;
+                ans.ChoiceWeight = 0;
+                ans.ChoiceAcceptable = 0;
+            }
+            else
+            {
+                //validate answer
+                if (ans.ChoiceWeight == 0)
+                {
+                    // user chose irrelevant, mark all answers as acceptable
+                    ans.ChoiceAcceptable = 0xFF;
+                }
+            }
+
+            ans.LastAnswered = DateTime.Now;
+
+            return ans;
+        }
+
         /// <summary>
         /// Answer a question by adding it to the Answers table and updates the user's
         /// current question.
         /// </summary>
-        public void AnswerQuestion(int profileId, int questionId, int answerIndex, bool[] answerAccept, int weight, int nextQuestionId)
-        {
+        public bool AnswerQuestion(Answer ans)
+        {           
+            //Are updating a question or adding a new one?
             var db = new OkbDbContext();
+            var dbAns = db.Answers.Find(ans.ProfileId, ans.QuestionId);
 
-            var encAccept = convertBoolToAccept(answerAccept);
-
-            var answer = new Answer
+            if (dbAns==null)
             {
-                QuestionId = (short)questionId,
-                ChoiceIndex = (byte)answerIndex,
-                ChoiceAcceptable = encAccept,
-                ChoiceWeight = (byte)weight,
-                ProfileId = profileId,
-                LastAnswered = DateTime.Now
-            };
-
-            // Transaction - implicit due to DbContext
-            // Add answer to database
-            db.Answers.Add(answer);
-
-            // Update user's current question to next one
-            var user = db.Profiles.Find(profileId);
-            user.CurrentQuestionId = (short)nextQuestionId;
+                //new answer
+                ans = ValidateAnswer(ans);
+                db.Answers.Add(ans);
+            }
+            else
+            {
+                //update answer
+                //make sure user not updating answer they answered in last 24 hrs
+                var diff = DateTime.Now - dbAns.LastAnswered;
+                if (diff.Hours < 24) return false;
+                ans = ValidateAnswer(ans);
+                dbAns.ChoiceBit = ans.ChoiceBit;
+                dbAns.ChoiceWeight = ans.ChoiceWeight;
+                dbAns.ChoiceAcceptable = ans.ChoiceAcceptable;
+                dbAns.LastAnswered = ans.LastAnswered;
+            }
 
             db.SaveChanges();
+
+            return true;
         }
 
         public IQueryable<TranslateQuestion> GetTranslateQuestions()

@@ -46,9 +46,9 @@ namespace okboba.Repository.WebClient
             }
         }
 
-        public void UpdateAnswer(Answer answer)
+        public void UpdateCacheAnswer(Answer answer)
         {
-            CallMatchApiAsync<object>("/answers", true, answer).Wait();
+            CallMatchApiAsync<object>("/matches/updatecacheanswer", true, answer).Wait();
         }
 
         public async Task<List<MatchModel>> GetMatchesAsync(MatchCriteriaModel criteria, int page = 1)

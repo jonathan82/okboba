@@ -9,9 +9,9 @@ namespace okboba.MatchCalculator
 {
     public struct CacheAnswer
     {
-        public byte? ChoiceIndex;
-        public byte? ChoiceAccept;
-        public byte? ChoiceWeight;
+        public byte ChoiceBit;
+        public byte ChoiceAccept;
+        public byte ChoiceWeight;
         public short QuestionId;
     }
 
@@ -83,7 +83,7 @@ namespace okboba.MatchCalculator
 
                 if(a.QuestionId==updateAnswer.QuestionId)
                 {
-                    a.ChoiceIndex = updateAnswer.ChoiceIndex;
+                    a.ChoiceBit = (byte)updateAnswer.ChoiceBit;
                     a.ChoiceAccept = updateAnswer.ChoiceAcceptable;
                     a.ChoiceWeight = updateAnswer.ChoiceWeight;
 
@@ -96,7 +96,7 @@ namespace okboba.MatchCalculator
             listAnswers.Add(new CacheAnswer
             {
                 QuestionId = updateAnswer.QuestionId,
-                ChoiceIndex = updateAnswer.ChoiceIndex,
+                ChoiceBit = (byte)updateAnswer.ChoiceBit,
                 ChoiceAccept = updateAnswer.ChoiceAcceptable,
                 ChoiceWeight = updateAnswer.ChoiceWeight
             });
@@ -140,18 +140,18 @@ namespace okboba.MatchCalculator
             {
                 if (!myAnswers.ContainsKey(them.QuestionId)) continue; //I haven't answered this question
                 var me = myAnswers[them.QuestionId];
-                if (me.ChoiceIndex == null || them.ChoiceIndex == null) continue; // either of us skipped this question
-                bool meAccept = (me.ChoiceAcceptable & them.ChoiceIndex) != 0 ? true : false;
-                bool themAccept = (me.ChoiceIndex & them.ChoiceAccept) != 0 ? true : false;
-                scoreMe += meAccept ? _weights[(byte)me.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
-                scoreThem += themAccept ? _weights[(byte)them.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
-                possibleScoreMe += _weights[(byte)me.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
-                possibleScoreThem += _weights[(byte)them.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
-                friendScore += me.ChoiceIndex == them.ChoiceIndex ? 1 : 0;
+                //if (me.ChoiceBit == null || them.ChoiceBit == null) continue; // either of us skipped this question
+                bool meAccept = (me.ChoiceAcceptable & them.ChoiceBit) != 0 ? true : false;
+                bool themAccept = (me.ChoiceBit & them.ChoiceAccept) != 0 ? true : false;
+                scoreMe += meAccept ? _weights[me.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
+                scoreThem += themAccept ? _weights[them.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
+                possibleScoreMe += _weights[me.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
+                possibleScoreThem += _weights[them.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
+                friendScore += me.ChoiceBit == them.ChoiceBit ? 1 : 0;
 
                 //enemy score: more complex
-                if( (me.ChoiceIndex != them.ChoiceIndex && (!meAccept || !themAccept)) || //case 1
-                    (me.ChoiceIndex==them.ChoiceIndex && Math.Abs((sbyte)me.ChoiceWeight-(sbyte)them.ChoiceWeight) > 1) ) //case 2
+                if( (me.ChoiceBit != them.ChoiceBit && (!meAccept || !themAccept)) || //case 1
+                    (me.ChoiceBit==them.ChoiceBit && Math.Abs((sbyte)me.ChoiceWeight-(sbyte)them.ChoiceWeight) > 1) ) //case 2
                 {
                     enemyScore++;
                 }
@@ -194,6 +194,9 @@ namespace okboba.MatchCalculator
 
             foreach (var ans in db.Answers.AsNoTracking())
             {
+                //Don't load questions the user skipped (ChoiceBit==null)
+                if (ans.ChoiceBit == null) continue;
+
                 if (!_answerCache.ContainsKey(ans.ProfileId))
                 {
                     _answerCache.Add(ans.ProfileId, new List<CacheAnswer>());
@@ -202,7 +205,7 @@ namespace okboba.MatchCalculator
                 _answerCache[ans.ProfileId].Add(new CacheAnswer
                 {
                     QuestionId = ans.QuestionId,
-                    ChoiceIndex = ans.ChoiceIndex,
+                    ChoiceBit = (byte)ans.ChoiceBit,
                     ChoiceAccept = ans.ChoiceAcceptable,
                     ChoiceWeight = ans.ChoiceWeight
                 });

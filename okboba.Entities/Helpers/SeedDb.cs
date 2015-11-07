@@ -253,7 +253,7 @@ namespace okboba.Entities.Helpers
                 cache[ans.ProfileId].Add(new CacheAnswer
                 {
                     QuestionId = ans.QuestionId,
-                    ChoiceIndex = ans.ChoiceIndex,
+                    ChoiceIndex = ans.ChoiceBit,
                     ChoiceAccept = ans.ChoiceAcceptable,
                     ChoiceWeight = ans.ChoiceWeight
                 });
@@ -278,7 +278,7 @@ namespace okboba.Entities.Helpers
                 if (!myAnswers.ContainsKey(them.QuestionId)) continue;
                 var me = myAnswers[them.QuestionId];
                 var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
-                var themAccept = me.ChoiceIndex & them.ChoiceAccept;
+                var themAccept = me.ChoiceBit & them.ChoiceAccept;
                 scoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
                 scoreThem += themAccept != 0 ? weights[(byte)them.ChoiceWeight] : 0;
                 possibleScoreMe += weights[(byte)me.ChoiceWeight];
@@ -321,7 +321,7 @@ namespace okboba.Entities.Helpers
             {
                 ProfileId = rand.Next(2, 200000),
                 QuestionId = (short)rand.Next(201, 1243),
-                ChoiceIndex = 1,
+                ChoiceBit = 1,
                 ChoiceWeight = 1,
                 ChoiceAcceptable = 1,
                 LastAnswered = DateTime.Now
@@ -356,8 +356,8 @@ namespace okboba.Entities.Helpers
             {
                 if (!myAnswers.ContainsKey(them.QuestionId)) continue;
                 var me = myAnswers[them.QuestionId];
-                var meAccept = me.ChoiceAcceptable & them.ChoiceIndex;
-                var themAccept = me.ChoiceIndex & them.ChoiceAcceptable;
+                var meAccept = me.ChoiceAcceptable & them.ChoiceBit;
+                var themAccept = me.ChoiceBit & them.ChoiceAcceptable;
                 scoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
                 scoreThem += themAccept != 0 ? weights[(byte)them.ChoiceWeight] : 0;
                 possibleScoreMe += weights[(byte)me.ChoiceWeight];
@@ -427,8 +427,8 @@ namespace okboba.Entities.Helpers
                 them.Name = ans.Profile.Name;
 
                 // do some calculation  
-                var meAccept = me.ChoiceAcceptable & ans.Answer.ChoiceIndex;
-                var themAccept = me.ChoiceIndex & ans.Answer.ChoiceAcceptable;
+                var meAccept = me.ChoiceAcceptable & ans.Answer.ChoiceBit;
+                var themAccept = me.ChoiceBit & ans.Answer.ChoiceAcceptable;
 
                 them.ScoreMe += meAccept != 0 ? weights[(byte)me.ChoiceWeight] : 0;
                 them.ScoreThem += themAccept != 0 ? weights[(byte)ans.Answer.ChoiceWeight] : 0;

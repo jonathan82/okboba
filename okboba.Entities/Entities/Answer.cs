@@ -34,9 +34,9 @@ namespace okboba.Entities
         [Column(Order = 2)]
         public Int16 QuestionId { get; set; }
 
-        public byte? ChoiceIndex { get; set; }
-        public byte? ChoiceWeight { get; set; }
-        public byte? ChoiceAcceptable { get; set; }
+        public byte? ChoiceBit { get; set; }
+        public byte ChoiceWeight { get; set; }
+        public byte ChoiceAcceptable { get; set; }
 
         [Column(TypeName = "smalldatetime")] //SQL Server
         //[Column(TypeName = "timestamp")] //MySQL 
