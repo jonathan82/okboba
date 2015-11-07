@@ -22,29 +22,29 @@ namespace okboba.Repository.WebClient
             _authCookie = cookie;
         }
 
-        public async Task<List<MatchModel>> GetMatches(MatchCriteriaModel criteria, int page = 1)
-        {
-            var cookieContainer = new CookieContainer();
+        //public async Task<List<MatchModel>> GetMatches(MatchCriteriaModel criteria, int page = 1)
+        //{
+        //    var cookieContainer = new CookieContainer();
 
-            using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
-            using (var client = new HttpClient(handler))
-            {
-                //setup the http client
-                client.BaseAddress = new Uri(_matchBaseAddress);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //    using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+        //    using (var client = new HttpClient(handler))
+        //    {
+        //        //setup the http client
+        //        client.BaseAddress = new Uri(_matchBaseAddress);
+        //        client.DefaultRequestHeaders.Accept.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                cookieContainer.Add(new Uri(_matchBaseAddress), _authCookie);
+        //        cookieContainer.Add(new Uri(_matchBaseAddress), _authCookie);
 
-                var response = await client.GetAsync(FormatMatchQuery(page, criteria));
+        //        var response = await client.GetAsync(FormatMatchQuery(page, criteria));
 
-                response.EnsureSuccessStatusCode();
+        //        response.EnsureSuccessStatusCode();
 
-                var matches = await response.Content.ReadAsAsync<List<MatchModel>>();
+        //        var matches = await response.Content.ReadAsAsync<List<MatchModel>>();
 
-                return matches;
-            }
-        }
+        //        return matches;
+        //    }
+        //}
 
         public void UpdateCacheAnswer(Answer answer)
         {

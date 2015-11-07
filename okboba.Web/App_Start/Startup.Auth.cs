@@ -13,6 +13,8 @@ namespace okboba
 {
     public partial class Startup
     {
+        public const string IDENTITY_COOKIE_NAME = "OkbobaCookie";
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -37,7 +39,7 @@ namespace okboba
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 },
                 CookieDomain = ".okboba.com",
-                CookiePath = "/"
+                CookieName = IDENTITY_COOKIE_NAME
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

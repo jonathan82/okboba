@@ -17,6 +17,8 @@ namespace okboba.MatchApi
 {
     public partial class Startup
     {
+        public const string IDENTITY_COOKIE_NAME = "OkbobaCookie";
+
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
@@ -41,7 +43,8 @@ namespace okboba.MatchApi
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
                 },
-                CookieDomain = ".okboba.com"
+                CookieDomain = ".okboba.com",
+                CookieName = IDENTITY_COOKIE_NAME
             });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

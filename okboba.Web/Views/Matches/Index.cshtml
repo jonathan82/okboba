@@ -1,0 +1,8 @@
+﻿@model List<okboba.Repository.Models.MatchModel>
+<ul>
+    
+    @foreach (var m in Model)
+    {
+        <li>@m.Name - @m.MatchPercent</li>
+    }
+</ul>

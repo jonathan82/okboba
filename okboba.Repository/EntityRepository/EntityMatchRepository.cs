@@ -10,6 +10,7 @@ using okboba.MatchCalculator;
 
 namespace okboba.Repository.EntityRepository
 {
+
     public class EntityMatchRepository : IMatchRepository
     {
         #region Singelton
@@ -64,6 +65,12 @@ namespace okboba.Repository.EntityRepository
                     ProfileId = p.Id
                 });
             }
+
+            //For now just sort the list by match %
+            matches.Sort(delegate(MatchModel m1, MatchModel m2)
+            {
+                return m2.MatchPercent.CompareTo(m1.MatchPercent);
+            });
 
             return matches;
         }

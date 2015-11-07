@@ -444,6 +444,7 @@
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Playground\Index.cshtml" />
+    <Content Include="Views\Matches\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

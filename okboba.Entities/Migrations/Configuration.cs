@@ -10,7 +10,7 @@ namespace okboba.Entities.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(okboba.Entities.OkbDbContext context)
