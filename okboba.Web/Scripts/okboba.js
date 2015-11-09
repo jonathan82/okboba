@@ -46,10 +46,31 @@ function encodeHtml(str) {
                         withCredentials: true
                     }
                 }).done(function (data) {
-                    alert('sucessfully loaded!');
+                    var html = '<div id="p' + pageToLoad + '">';
+
+                    //append next page of matches
+                    for (var i = 0; i < data.lengh; i++) {
+                        html += '<div class="match-result">';
+                        html += '<a href="/profile/'+data[i].ProfileId+'"><img src="@thumbUrl" alt="Profile Photo" width="200" height="200" /></a>';
+                        html += '<p>'+data[i].MatchPercent+'% Match - '+data[i].Age+data[i].Gender+' - @m.Name</p>';
+                        html += '</div>';
+                    }
+                    html += '</div>';
+
+                    //remove loading text
+                    $container.children().remove(':last');
+
+                    //append
+                    $container.append(html);
+
                     loading = false;
                 }).fail(function () {
                     alert('failed loading matches');
+
+                    //remove loading text
+                    $container.children().remove(':last');
+
+                    loading = false;
                 });
 
                 loading = true;
