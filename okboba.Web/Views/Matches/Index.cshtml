@@ -1,13 +1,12 @@
 ﻿@model okboba.Web.Models.MatchesViewModel
 
-<div id="matches-container">
-    <div id="p1" class="clearfix">
+<div id="matches-container" class="matches-container">
+    <div id="p1">
         @{int count = 0; }
         @foreach (var m in Model.Matches)
         {
-            var resultClass = count % 3 == 2 ? "match-result-newline" : "match-result";
             var thumbUrl = "";
-            <div class="@resultClass">
+            <div class="match-result">
                 <!-- thumbnail and profile summary and match %-->
                 @if (m.Photo == "")
                 {
