@@ -44,6 +44,6 @@ namespace okboba.Entities
 
         //References
         public virtual Profile Profile { get; set; }
-        public virtual Question Question { get; set; }
+        public virtual Question Question { get; set; }        
     }
 }

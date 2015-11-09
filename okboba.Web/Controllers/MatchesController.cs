@@ -1,5 +1,8 @@
-﻿using okboba.Repository.Models;
+﻿using okboba.Repository;
+using okboba.Repository.EntityRepository;
+using okboba.Repository.Models;
 using okboba.Repository.WebClient;
+using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,6 +18,12 @@ namespace okboba.Controllers
     public class MatchesController : OkbBaseController
     {
         private MatchApiClient _webClient;
+        private IProfileRepository _profileRepo;
+
+        public MatchesController()
+        {
+            _profileRepo = EntityProfileRepository.Instance;
+        }
 
         private void InitClient()
         {
@@ -29,40 +38,34 @@ namespace okboba.Controllers
             _webClient = new MatchApiClient(url, cookie);
         }
 
-        public MatchesController()
-        {
-            
-        }
 
         // GET: Matches
         public async Task<ActionResult> Index(MatchCriteriaModel criteria)
         {
-            //Get the logged in users matches and returns a view with the first page of results
-            //Takes a MatchSearchCriteria object to search for the matches
-            //  Saves the users search criteria
-            //If MatchSearchCriteria is null then get the users saved search criteria from the database
-            //Criteria can be:
-            //  Gender, location 1
-
             InitClient();
 
             var profileId = GetProfileId();
-
-            if (criteria == null)
+            var profile = _profileRepo.GetProfile(profileId);
+            
+            //For now, if criteria isn't specified lets choose sensible defaults based on user                        
+            if(string.IsNullOrEmpty(criteria.Gender))
             {
-                //Get the criteria from the database
-                //Use default options
-                criteria = new MatchCriteriaModel()
-                {
-                    Gender = "M",
-                    LocationId1 = 1
-                };
+                //criteria.Gender = profile.Gender == "女" ? "男" : "女";
+                criteria.Gender = profile.Gender == "F" ? "M" : "F";
             }
 
             //Call the MatchApi client to get the first page of matches
             var matches = await _webClient.GetMatchesAsync(criteria);
 
-            return View(matches);
+            var vm = new MatchesViewModel
+            {
+                Matches = matches,
+                StorageUrl = ConfigurationManager.AppSettings["StorageUrl"],
+                MatchApiUrl = ConfigurationManager.AppSettings["MatchApiUrl"],
+                MatchCriteria = criteria
+            };
+
+            return View(vm);
         }
     }
 }

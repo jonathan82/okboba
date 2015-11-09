@@ -36,7 +36,7 @@ namespace okboba.MatchApi.Controllers
         private IMatchRepository _matchRepo;
         private RedisMatchRepository _redisRepo;
         private MatchCalc _matchCalc;
-        const int NUM_MATCHES_PER_PAGE = 25;
+        const int NUM_MATCHES_PER_PAGE = 28;
 
         public MatchesController()
         {

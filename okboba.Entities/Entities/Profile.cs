@@ -35,5 +35,20 @@ namespace okboba.Entities
         public virtual Location Location { get; set; }
         public virtual ProfileText ProfileText { get; set; }
         public Question CurrentQuestion { get; set; }
+
+        //Helper methods
+        public string[] GetPhotos()
+        {
+            if (PhotosInternal == null) return new string[0];
+            return PhotosInternal.Split(';');
+        }
+
+        public string GetFirstPhoto()
+        {
+            if (PhotosInternal == null) return "";
+            var index = PhotosInternal.IndexOf(';');
+            if (index == -1) index = PhotosInternal.Length;
+            return PhotosInternal.Substring(0, index);
+        }
     }
 }

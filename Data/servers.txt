@@ -1,0 +1,20 @@
+Development (local)
+===================
+dev.okboba.com
+matchdev.okboba.com
+
+
+Test (azure)
+===================
+test.okboba.com (okboba-test.azurewebsites.net)
+matchtest.okboba.com (okboba-test-match.azurewebsites.net)
+DB: okboba_test (okboba-test.database.windows.net)
+Redis: (okboba-test.redis.cache.windows.net)
+
+
+Production (azure)
+===================
+www.okboba.com (okboba.azurewebsites.net)
+match.okboba.com (okboba-match.azurewebsites.net)
+DB: okboba (okboba.database.windows.net)
+Redis: (okboba.redis.cache.windows.net)

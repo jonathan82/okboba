@@ -35,7 +35,27 @@ namespace okboba.Repository.EntityRepository
 
         //////////////////// Member variables /////////////////
         private MatchCalc _matchCalc;
+        const int MAX_MATCH_RESULTS = 3000;
 
+        private IQueryable<Profile> BuildSearchQuery(OkbDbContext db, MatchCriteriaModel criteria)
+        {
+            var query = from p in db.Profiles.AsNoTracking()
+                        select p;
+
+            if (!string.IsNullOrEmpty(criteria.Gender))
+            {
+                query = query.Where(p => p.Gender == criteria.Gender);
+            }
+            if(criteria.LocationId1 != 0)
+            {
+                query = query.Where(p => p.LocationId1 == criteria.LocationId1);
+            }
+
+            //Limit to 4000 matches
+            query = query.Take(MAX_MATCH_RESULTS);
+
+            return query;
+        }
 
         /// <summary>
         /// Peforms a match search for a user given their search preferences and returns a list
@@ -46,9 +66,10 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var matches = new List<MatchModel>();
 
-            var query = from p in db.Profiles.AsNoTracking()
-                        where p.Gender == criteria.Gender && p.LocationId1 == criteria.LocationId1
-                        select p;
+            //var query = from p in db.Profiles.AsNoTracking()
+            //            where p.Gender == criteria.Gender && p.LocationId1 == criteria.LocationId1
+            //            select p;
+            var query = BuildSearchQuery(db, criteria);
 
             var myAnswers = _matchCalc.GetUserAnswers(profileId);
 
@@ -62,7 +83,10 @@ namespace okboba.Repository.EntityRepository
                     FriendPercent = matchResult.FriendPercent,
                     EnemyPercent = matchResult.EnemeyPercent,
                     Name = p.Name,
-                    ProfileId = p.Id
+                    ProfileId = p.Id,
+                    Photo = p.GetFirstPhoto(),
+                    Age = DateTime.Today.Year - p.Birthdate.Year,
+                    Gender = p.Gender[0]
                 });
             }
 

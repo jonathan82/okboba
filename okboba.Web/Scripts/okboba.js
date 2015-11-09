@@ -7,6 +7,59 @@ function encodeHtml(str) {
 }
 
 /*
+ *  Plugin : Match scroller
+ *  Author : Jonathan Lin
+ *  Date   : 11/8/2015
+ *  Notes  : 
+ */
+(function ($) {
+
+    var currPages = [];
+    var $container;
+    var loading = false;
+    var matchApiUrl = '';
+
+    $.fn.matchscroller = function (pagesLoaded, matchHost, criteria) {
+        currPages = pagesLoaded;
+        $container = this;
+        matchApiUrl = matchHost;
+
+        //setup scroll event handler
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+
+                if (loading) return;
+
+                //append the loading text
+                $container.append('<div class="matches-loading"><span class="opacity-secondary-text">倒入中...</span></div>');
+
+                //get the page to load
+                var pageToLoad = currPages[currPages.length - 1] + 1;
+                criteria.page = pageToLoad;
+
+                //make ajax call to get next page
+                $.ajax(matchApiUrl + '/matches/getmatches', {
+                    data: criteria,
+                    dataType: "json",
+                    traditional: true,
+                    xhrFields: {
+                        withCredentials: true
+                    }
+                }).done(function (data) {
+                    alert('sucessfully loaded!');
+                    loading = false;
+                }).fail(function () {
+                    alert('failed loading matches');
+                });
+
+                loading = true;
+            }
+        });
+    }
+
+})(jQuery);
+
+/*
  *  Plugin : Location picker
  *  Author : Jonathan Lin
  *  Date   : 10/20/2015

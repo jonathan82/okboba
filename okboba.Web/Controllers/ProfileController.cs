@@ -8,20 +8,30 @@ using Microsoft.AspNet.Identity;
 using okboba.Web.Models;
 using System.Data.Entity.Migrations;
 using System.Linq.Expressions;
+using okboba.Repository;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Controllers
 {
 
     [Authorize]
     public class ProfileController : OkbBaseController
-    {      
+    {
+        private IProfileRepository _profileRepo;
+
+        public ProfileController()
+        {
+            _profileRepo = EntityProfileRepository.Instance;
+        }
+
         /// <summary>
         /// View your own profile
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            var profile = GetUserProfile();
+            var profileId = GetProfileId();
+            var profile = _profileRepo.GetProfile(profileId);
 
             var vm = new ProfileViewModel(profile);
 

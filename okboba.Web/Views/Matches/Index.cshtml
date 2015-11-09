@@ -1,8 +1,34 @@
-﻿@model List<okboba.Repository.Models.MatchModel>
-<ul>
+﻿@model okboba.Web.Models.MatchesViewModel
+
+<div id="matches-container">
+    <div id="p1" class="clearfix">
+        @{int count = 0; }
+        @foreach (var m in Model.Matches)
+        {
+            var resultClass = count % 3 == 2 ? "match-result-newline" : "match-result";
+            var thumbUrl = "";
+            <div class="@resultClass">
+                <!-- thumbnail and profile summary and match %-->
+                @if (m.Photo == "")
+                {
+                    thumbUrl = m.Gender == 'M' ? "/content/images/no-avatar-male.png" : "/content/images/no-avatar-female.png";
+                }
+                else
+                {
+                    thumbUrl = Model.StorageUrl + "/" + m.Photo + "_t";
+                }
+                <img src="@thumbUrl" alt="Profile Photo" width="200" height="200" />
+                <p>@m.MatchPercent% Match - @m.Age@m.Gender - @m.Name</p>
+            </div>
+            count++;
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/okboba")
     
-    @foreach (var m in Model)
-    {
-        <li>@m.Name - @m.MatchPercent</li>
-    }
-</ul>
+    <script>
+        $('#matches-container').matchscroller([1], '@Model.MatchApiUrl', @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MatchCriteria)));
+    </script>
+}

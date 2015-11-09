@@ -13,17 +13,20 @@ namespace okboba.Controllers
     [Authorize]
     public class PhotoController : OkbBaseController
     {
-        IPhotoRepository _photoRepo;
+        private IPhotoRepository _photoRepo;
+        private IProfileRepository _profileRepo;
 
         public PhotoController()
         {
             _photoRepo = EntityPhotoRepository.Instance;
+            _profileRepo = EntityProfileRepository.Instance;
         }
 
         // GET: Image
         public ActionResult Index()
         {
-            var profile = GetUserProfile();
+            var profileId = GetProfileId();
+            var profile = _profileRepo.GetProfile(profileId);
 
             var vm = new ProfileViewModel(profile);            
 

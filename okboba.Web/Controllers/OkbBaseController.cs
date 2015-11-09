@@ -43,21 +43,21 @@ namespace okboba.Controllers
             return profileId;
         }
 
-        protected Profile GetUserProfile()
-        {
-            //Check if user is loggged in first
-            if(!User.Identity.IsAuthenticated)
-            {
-                return null;
-            }
+        //protected Profile GetUserProfile()
+        //{
+        //    //Check if user is loggged in first
+        //    if(!User.Identity.IsAuthenticated)
+        //    {
+        //        return null;
+        //    }
 
-            var profileId = GetProfileId();
+        //    var profileId = GetProfileId();
 
-            //Get the profile
-            var db = new OkbDbContext();
-            var profile = db.Profiles.Find(profileId);
+        //    //Get the profile
+        //    var db = new OkbDbContext();
+        //    var profile = db.Profiles.Find(profileId);
 
-            return profile;
-        }
+        //    return profile;
+        //}
     }
 }
