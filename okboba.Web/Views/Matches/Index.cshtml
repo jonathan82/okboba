@@ -28,6 +28,10 @@
     @Scripts.Render("~/bundles/okboba")
     
     <script>
-        $('#matches-container').matchscroller([1], '@Model.MatchApiUrl', @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MatchCriteria)));
+        $('#matches-container').matchscroller(
+            [1], 
+            '@Model.MatchApiUrl', 
+            @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MatchCriteria)),
+            '@Model.StorageUrl');
     </script>
 }

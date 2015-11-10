@@ -245,14 +245,9 @@ label.photo-upload-label input[type="file"] {
 }
 .match-result {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  float: left;
+  display: inline-block;
   margin: 10px 10px;
-}
-.match-result-newline {
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  float: left;
-  margin: 10px 10px;
-  clear: right;
+  text-align: left;
 }
 .matches-loading {
   width: 125px;

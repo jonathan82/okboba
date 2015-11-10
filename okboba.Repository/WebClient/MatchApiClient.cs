@@ -91,7 +91,7 @@ namespace okboba.Repository.WebClient
 
         private string FormatMatchQuery(int page, MatchCriteriaModel criteria)
         {
-            var str = "/matches/getmatches?page=" + page;
+            var str = "/api/matches?page=" + page;
             str += "&Gender=" + criteria.Gender;
             str += "&LocationId1=" + criteria.LocationId1;
             return str;

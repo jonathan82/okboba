@@ -82,7 +82,7 @@ namespace okboba.Repository.RedisRepository
         /// Returns true if the key exists in the cache, false otherwise.
         /// </summary>
         public bool HasMatches(string key)
-        {
+        {           
             var client = _redisClientsManager.GetClient();
             return client.ContainsKey(key);
         }

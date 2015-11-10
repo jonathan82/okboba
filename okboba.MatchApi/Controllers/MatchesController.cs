@@ -65,7 +65,7 @@ namespace okboba.MatchApi.Controllers
         /// Gets the matches for the logged in user for a given page.  Looks in cache first and if not there
         /// calculate the matches and store in cache.  Returns a JSON array.
         /// </summary>        
-        public HttpResponseMessage GetMatches(MatchCriteriaModel criteria, int page = 1)
+        public HttpResponseMessage GetMatches([FromUri]MatchCriteriaModel criteria, int page = 1)
         {
             //We should be authenticated at this point.  Only allow users to get their own matches
             var profileId = GetProfileId();
@@ -79,8 +79,16 @@ namespace okboba.MatchApi.Controllers
                 //Get cached results
                 int count = _redisRepo.GetMatchCount(key);
                 var range = PageRange(page, count);
-                var jsonList = _redisRepo.GetMatches(key, range.Item1, range.Item2);
-                json = "[" + string.Join(",", jsonList) + "]";
+
+                if (range==null)
+                {
+                    json = "[]";
+                }
+                else
+                {
+                    var jsonList = _redisRepo.GetMatches(key, range.Item1, range.Item2);
+                    json = "[" + string.Join(",", jsonList) + "]";
+                }                
             }
             else
             {
@@ -90,29 +98,86 @@ namespace okboba.MatchApi.Controllers
 
                 _redisRepo.SaveMatchResults(key, matches);
 
-                json = "[";
-                for (int i = range.Item1; i < range.Item2; i++)
+                if (range==null)
                 {
-                    //serialize matches[i] to return to caller                    
-                    json += JsonConvert.SerializeObject(matches[i]) + ",";
+                    json = "[]";
                 }
-                json = json.TrimEnd(',');
-                json += "]";
+                else
+                {
+                    json = "[";
+                    for (int i = range.Item1; i < range.Item2; i++)
+                    {
+                        //serialize matches[i] to return to caller                    
+                        json += JsonConvert.SerializeObject(matches[i]) + ",";
+                    }
+                    json = json.TrimEnd(',');
+                    json += "]";
+                }                
             }
 
-            var response = Request.CreateResponse(HttpStatusCode.OK, json, "application/json");
+            //var response = Request.CreateResponse(HttpStatusCode.OK, json, "application/json");
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             return response;
+        }
+
+        //private string CalculateMatchesAndSave()
+        //{
+        //    var json = "";
+        //    //calculate matches and save in cache
+        //    var matches = _matchRepo.MatchSearch(profileId, criteria);
+        //    var range = PageRange(page, matches.Count);
+
+        //    _redisRepo.SaveMatchResults(key, matches);
+
+        //    if (range == null)
+        //    {
+        //        json = "[]";
+        //    }
+        //    else
+        //    {
+        //        json = "[";
+        //        for (int i = range.Item1; i < range.Item2; i++)
+        //        {
+        //            //serialize matches[i] to return to caller                    
+        //            json += JsonConvert.SerializeObject(matches[i]) + ",";
+        //        }
+        //        json = json.TrimEnd(',');
+        //        json += "]";
+        //    }
+        //}
+
+        private string GetCachedResults(int page, string key)
+        {
+            var json = "";
+            //Get cached results
+            int count = _redisRepo.GetMatchCount(key);
+            var range = PageRange(page, count);
+
+            if (range == null)
+            {
+                json = "[]";
+            }
+            else
+            {
+                var jsonList = _redisRepo.GetMatches(key, range.Item1, range.Item2);
+                json = "[" + string.Join(",", jsonList) + "]";
+            }
+            return json;
         }
 
         /// <summary>
         /// Calculates the start and end indexes for a given page.  Checks that page is within range.
+        /// Returns null if page outside of range.
         /// </summary>
         private Tuple<int, int> PageRange(int page, int count)
         {
             // Sanity check for page
             if (page < 1 || page > Math.Ceiling((float)count / NUM_MATCHES_PER_PAGE))
             {
-                page = 1;
+                //return null to indicate page is outside of valid range
+                //page = 1;
+                return null;
             }
 
             int start, end;
