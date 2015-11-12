@@ -178,6 +178,150 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 购车情况.
+        /// </summary>
+        public static string ProfileDetail_CarSituation {
+            get {
+                return ResourceManager.GetString("ProfileDetail_CarSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 饮酒.
+        /// </summary>
+        public static string ProfileDetail_Drink {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Drink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 饮食习惯.
+        /// </summary>
+        public static string ProfileDetail_Eating {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Eating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 学历.
+        /// </summary>
+        public static string ProfileDetail_Education {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Education", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 锻炼习惯.
+        /// </summary>
+        public static string ProfileDetail_Exercise {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Exercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 有无子女.
+        /// </summary>
+        public static string ProfileDetail_HaveChildren {
+            get {
+                return ResourceManager.GetString("ProfileDetail_HaveChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 身高.
+        /// </summary>
+        public static string ProfileDetail_Height {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居住情况.
+        /// </summary>
+        public static string ProfileDetail_LivingSituation {
+            get {
+                return ResourceManager.GetString("ProfileDetail_LivingSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 寻找.
+        /// </summary>
+        public static string ProfileDetail_LookingFor {
+            get {
+                return ResourceManager.GetString("ProfileDetail_LookingFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 月薪.
+        /// </summary>
+        public static string ProfileDetail_MonthlyIncome {
+            get {
+                return ResourceManager.GetString("ProfileDetail_MonthlyIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 民族.
+        /// </summary>
+        public static string ProfileDetail_Nationality {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Nationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 婚姻状况.
+        /// </summary>
+        public static string ProfileDetail_RelationshipStatus {
+            get {
+                return ResourceManager.GetString("ProfileDetail_RelationshipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 宗教信仰.
+        /// </summary>
+        public static string ProfileDetail_Religion {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Religion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 逛街购物.
+        /// </summary>
+        public static string ProfileDetail_Shopping {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Shopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 吸烟.
+        /// </summary>
+        public static string ProfileDetail_Smoke {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Smoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 是否要小孩.
+        /// </summary>
+        public static string ProfileDetail_WantChildren {
+            get {
+                return ResourceManager.GetString("ProfileDetail_WantChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 有点重要.
         /// </summary>
         public static string Question_ALittleImportant {

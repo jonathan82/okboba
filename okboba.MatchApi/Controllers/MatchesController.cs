@@ -62,6 +62,17 @@ namespace okboba.MatchApi.Controllers
         }
 
         /// <summary>
+        /// Calculates match between myself and another user
+        /// </summary>    
+        [System.Web.Http.HttpGet]    
+        public MatchModel CalculateMatch(int otherProfileId)
+        {
+            var myProfileId = GetProfileId();
+            var result = _matchRepo.CalculateMatch(myProfileId, otherProfileId);
+            return result;
+        }
+
+        /// <summary>
         /// Gets the matches for the logged in user for a given page.  Looks in cache first and if not there
         /// calculate the matches and store in cache.  Returns a JSON array.
         /// </summary>        

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using okboba.Repository.WebClient;
+using System.Configuration;
+using System.Net;
 
 namespace okboba.Controllers
 {
@@ -43,21 +46,18 @@ namespace okboba.Controllers
             return profileId;
         }
 
-        //protected Profile GetUserProfile()
-        //{
-        //    //Check if user is loggged in first
-        //    if(!User.Identity.IsAuthenticated)
-        //    {
-        //        return null;
-        //    }
+        protected MatchApiClient GetMatchApiClient()
+        {
+            //get the cookie and base
+            var cookie = new Cookie();
 
-        //    var profileId = GetProfileId();
+            cookie.Name = Startup.IDENTITY_COOKIE_NAME;
+            //cookie.Domain = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Domain;
+            cookie.Value = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Value;
 
-        //    //Get the profile
-        //    var db = new OkbDbContext();
-        //    var profile = db.Profiles.Find(profileId);
+            var url = ConfigurationManager.AppSettings["MatchApiUrl"];
 
-        //    return profile;
-        //}
+            return new MatchApiClient(url, cookie);
+        }
     }
 }

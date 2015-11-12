@@ -10,6 +10,8 @@ using System.Data.Entity.Migrations;
 using System.Linq.Expressions;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
+using okboba.Repository.WebClient;
+using System.Threading.Tasks;
 
 namespace okboba.Controllers
 {
@@ -18,20 +20,47 @@ namespace okboba.Controllers
     public class ProfileController : OkbBaseController
     {
         private IProfileRepository _profileRepo;
+        private MatchApiClient _webClient;
 
         public ProfileController()
         {
             _profileRepo = EntityProfileRepository.Instance;
+            _webClient = GetMatchApiClient();
         }
 
         /// <summary>
-        /// View your own profile
+        /// Return profile page.  Show editing options if viewing own profile.
         /// </summary>
-        /// <returns></returns>
-        public ActionResult Index()
+        public async Task<ActionResult> Index(int? profileId)
         {
-            var profileId = GetProfileId();
-            var profile = _profileRepo.GetProfile(profileId);
+            bool ownProfile = false;
+
+            if (profileId==null)
+            {
+                //Viewing own profile
+                profileId = GetProfileId();
+                ownProfile = true;
+            }
+            
+            // Get profile info
+            var profile = _profileRepo.GetProfile((int)profileId);
+            var profileText = _profileRepo.GetProfileText((int)profileId);
+            var profileDetail = _profileRepo.GetProfileDetail((int)profileId);
+
+            // Calculate match between users
+            var match = await _webClient.CalculateMatchAsync((int)profileId);
+
+            // Get the profile details as a dictionary
+            var detailDict = new Dictionary<string, string>();
+            foreach (var prop in profileDetail.GetType().GetProperties())
+            {
+                var val = _profileRepo.GetOptionValue(prop.Name, (byte)prop.GetValue(profileDetail));
+                detailDict.Add(prop.Name, val);
+            }
+            
+            // Populate the view model
+            
+
 
             var vm = new ProfileViewModel(profile);
 

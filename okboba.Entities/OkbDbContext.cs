@@ -30,5 +30,7 @@ namespace okboba.Entities
         public DbSet<Message> Messages { get; set; }
         public DbSet<ConversationMap> ConversationMap { get; set; }
         public DbSet<TranslateQuestion> TranslateQuestions { get; set; }
+        public DbSet<ProfileDetail> ProfileDetails { get; set; }
+        public DbSet<ProfileDetailOption> ProfileDetailOptions { get; set; }
     }
 }

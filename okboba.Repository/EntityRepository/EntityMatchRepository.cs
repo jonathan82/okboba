@@ -66,9 +66,6 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var matches = new List<MatchModel>();
 
-            //var query = from p in db.Profiles.AsNoTracking()
-            //            where p.Gender == criteria.Gender && p.LocationId1 == criteria.LocationId1
-            //            select p;
             var query = BuildSearchQuery(db, criteria);
 
             var myAnswers = _matchCalc.GetUserAnswers(profileId);
@@ -97,6 +94,21 @@ namespace okboba.Repository.EntityRepository
             });
 
             return matches;
+        }
+
+        /// <summary>
+        /// Calculates match between two users
+        /// </summary>
+        public MatchModel CalculateMatch(int profileId1, int profileId2)
+        {
+            var ans1 = _matchCalc.GetUserAnswers(profileId1);
+            var result = _matchCalc.CalculateMatchPercent(profileId2, ans1);
+            return new MatchModel
+            {
+                MatchPercent = result.MatchPercent,
+                FriendPercent = result.FriendPercent,
+                EnemyPercent = result.EnemeyPercent
+            };
         }
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\OkbUser.cs" />
     <Compile Include="Entities\Profile.cs" />
+    <Compile Include="Entities\ProfileDetail.cs" />
     <Compile Include="Entities\ProfileText.cs" />
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\Trait.cs" />

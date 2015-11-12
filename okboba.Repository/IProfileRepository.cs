@@ -10,5 +10,9 @@ namespace okboba.Repository
     public interface IProfileRepository
     {
         Profile GetProfile(int profileId);
+        ProfileText GetProfileText(int profileId);
+        ProfileDetail GetProfileDetail(int profileId);
+        string GetOptionValue(string colName, byte id);
+        List<ProfileDetailOption> GetOptionValues(string colName);
     }
 }

@@ -271,10 +271,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OkbHtmlHelpers.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
-    <Compile Include="Models\ProfileViewModels.cs" />
+    <Compile Include="Models\Profile\ProfileViewModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

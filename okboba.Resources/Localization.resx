@@ -141,6 +141,54 @@
   <data name="Common_Submit" xml:space="preserve">
     <value>提交</value>
   </data>
+  <data name="ProfileDetail_CarSituation" xml:space="preserve">
+    <value>购车情况</value>
+  </data>
+  <data name="ProfileDetail_Drink" xml:space="preserve">
+    <value>饮酒</value>
+  </data>
+  <data name="ProfileDetail_Eating" xml:space="preserve">
+    <value>饮食习惯</value>
+  </data>
+  <data name="ProfileDetail_Education" xml:space="preserve">
+    <value>学历</value>
+  </data>
+  <data name="ProfileDetail_Exercise" xml:space="preserve">
+    <value>锻炼习惯</value>
+  </data>
+  <data name="ProfileDetail_HaveChildren" xml:space="preserve">
+    <value>有无子女</value>
+  </data>
+  <data name="ProfileDetail_Height" xml:space="preserve">
+    <value>身高</value>
+  </data>
+  <data name="ProfileDetail_LivingSituation" xml:space="preserve">
+    <value>居住情况</value>
+  </data>
+  <data name="ProfileDetail_LookingFor" xml:space="preserve">
+    <value>寻找</value>
+  </data>
+  <data name="ProfileDetail_MonthlyIncome" xml:space="preserve">
+    <value>月薪</value>
+  </data>
+  <data name="ProfileDetail_Nationality" xml:space="preserve">
+    <value>民族</value>
+  </data>
+  <data name="ProfileDetail_RelationshipStatus" xml:space="preserve">
+    <value>婚姻状况</value>
+  </data>
+  <data name="ProfileDetail_Religion" xml:space="preserve">
+    <value>宗教信仰</value>
+  </data>
+  <data name="ProfileDetail_Shopping" xml:space="preserve">
+    <value>逛街购物</value>
+  </data>
+  <data name="ProfileDetail_Smoke" xml:space="preserve">
+    <value>吸烟</value>
+  </data>
+  <data name="ProfileDetail_WantChildren" xml:space="preserve">
+    <value>是否要小孩</value>
+  </data>
   <data name="Profile_Question1" xml:space="preserve">
     <value>关于你自己一点点</value>
   </data>
