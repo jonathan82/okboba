@@ -372,9 +372,9 @@
     <Content Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
-    <Content Include="Content\config-bootstrap.json" />
     <Content Include="Content\Images\logo\okboba-logo.pdn" />
     <Content Include="Content\Admin.less" />
+    <Content Include="Content\config.json" />
     <None Include="Content\Site.less" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
