@@ -5,9 +5,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/datepickercss")
-    @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/bundles/css")
 
     <style>
         @@media (max-width: 800px) {
@@ -50,9 +49,7 @@
     @RenderBody()
 
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
 
     <footer style="padding-top: 100px;">

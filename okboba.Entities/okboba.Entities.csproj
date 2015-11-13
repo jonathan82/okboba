@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201511050517002_Initial.Designer.cs">
       <DependentUpon>201511050517002_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511130609570_ProfileDetails.cs" />
+    <Compile Include="Migrations\201511130609570_ProfileDetails.Designer.cs">
+      <DependentUpon>201511130609570_ProfileDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -101,6 +105,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511050517002_Initial.resx">
       <DependentUpon>201511050517002_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511130609570_ProfileDetails.resx">
+      <DependentUpon>201511130609570_ProfileDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
