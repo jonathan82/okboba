@@ -395,11 +395,15 @@
     <None Include="lib\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="lib\jquery-validate-unobtrusive\jquery.validate.unobtrusive.js" />
     <Content Include="lib\jquery-validate-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\editinplace.js" />
+    <Content Include="Scripts\locationpicker.js" />
+    <Content Include="Scripts\matchscroller.js" />
     <Content Include="Scripts\okboba.js" />
     <Content Include="lib\react\react-dom.js" />
     <Content Include="lib\react\react-dom.min.js" />
     <Content Include="lib\react\react.js" />
     <Content Include="lib\react\react.min.js" />
+    <Content Include="Scripts\photoupload.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
