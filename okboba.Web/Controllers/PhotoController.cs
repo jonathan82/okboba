@@ -25,12 +25,13 @@ namespace okboba.Controllers
         // GET: Image
         public ActionResult Index()
         {
-            var profileId = GetProfileId();
-            var profile = _profileRepo.GetProfile(profileId);
+            //var profileId = GetProfileId();
+            //var profile = _profileRepo.GetProfile(profileId);
 
-            var vm = new ProfileViewModel(profile);            
+            //var vm = new ProfileViewModel(profile);            
 
-            return View(vm);
+            //return View(vm);
+            throw new NotImplementedException();
         }
 
         [HttpPost]

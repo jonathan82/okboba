@@ -3,7 +3,6 @@
 
 <!-- Row 1: Match Percent, Name, Message button -->
 <div class="row">
-
     <!--User Details & Percentages -->
     <div class="col-sm-9 col-md-10">
         @Model.Match.MatchPercent% Match, @Model.Match.FriendPercent% Friend, @Model.Match.EnemyPercent% Enemy,
@@ -20,42 +19,22 @@
 <hr />
 
 <!-- Row 2: Thumbnails - Show the first 4 -->
-<img src="@Html.Avatar(Model.Profile)" alt="Profile Photo" class="profile-header-photo" />
+<div class="profile-header-photo">
+    <a href="~/photo/@Model.Profile.Id">@Html.Avatar(Model.Profile.GetFirstPhoto(), Model.Profile.Gender)</a>
+</div>
 
 @{ var photos = Model.Profile.GetPhotos(); }
 @for (int i = 1; i < photos.Length && i < 4; i++)
 {
-    <img src="@Html.Photo(photos[i], Model.Profile.Gender)" alt="Profile Photo" class="profile-header-photo" />
+    <div class="profile-header-photo">
+        <a href="~/photo/@Model.Profile.Id">@Html.Avatar(photos[i], Model.Profile.Gender)</a>
+    </div>
 }
 
 <!-- Row 3: Navigation tab -->
-
-@{ 
-    var profileActive = "";
-    var photoActive = "";
-    var questionActive = "";
-}
-
-@if(ViewBag.Section == "profile")
-{
-    profileActive = "active";
-}
-else if(ViewBag.Section == "photos")
-{
-    photoActive = "active";
-}
-else if(ViewBag.Section == "questions")
-{
-    questionActive = "active";
-}
-
-<div class="row top-buffer">
-    <div class="col-md-12">
-        <ul class="nav nav-tabs">
-            <li role="presentation" class="@profileActive"><a href="/profile">Profile</a></li>
-            <li role="presentation" class="@photoActive"><a href="/photo">Photos</a></li>
-            <li role="presentation" class="@questionActive"><a href="/question">Questions</a></li>
-            <li role="presentation"><a href="#">Personality Matrix</a></li>
-        </ul>
-    </div>
-</div>
+<ul class="nav nav-tabs">
+    @Html.NavTab((string)ViewBag.Section, "Profile", "~/profile/" + Model.Profile.Id)
+    @Html.NavTab((string)ViewBag.Section, "Photos", "~/photo/" + Model.Profile.Id)
+    @Html.NavTab((string)ViewBag.Section, "Questions", "~/question/" + Model.Profile.Id)
+    @Html.NavTab((string)ViewBag.Section, "Personality Matrix", "~/matrix/" + Model.Profile.Id)
+</ul>

@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - OkBoba Dating</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css/all")
 </head>
 
 <body class="body-auth">
@@ -57,8 +56,8 @@
         <span class="text-info">&copy; @DateTime.Now.Year - Okboba.com</span>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js/vendor")
+    @Scripts.Render("~/bundles/js/okboba")
     @RenderSection("scripts", required: false)
 </body>
 </html>

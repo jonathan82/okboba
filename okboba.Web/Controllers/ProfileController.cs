@@ -29,7 +29,33 @@ namespace okboba.Controllers
         }
 
         [ChildActionOnly]
-        public async Task<ActionResult> ProfileHeader(int profileId, bool ownProfile)
+        public ActionResult ProfileDetailAndText(int profileId, bool isMe)
+        {
+            // Get the profile text
+            var profileText = _profileRepo.GetProfileText(profileId);
+
+            // Get the profile details as a dictionary
+            var profileDetail = _profileRepo.GetProfileDetail(profileId);
+            var detailDict = new Dictionary<string, string>();
+            foreach (var prop in profileDetail.GetType().GetProperties())
+            {
+                var val = _profileRepo.GetOptionValue(prop.Name, (byte)prop.GetValue(profileDetail));
+                detailDict.Add(prop.Name, val);
+            }
+
+            //Populate view model
+            var vm = new ProfileDetailViewModel
+            {
+                ProfileText = profileText,
+                ProfileDetail = profileDetail,
+                isMe = isMe
+            };
+
+            return PartialView(vm);
+        }
+
+        [ChildActionOnly]
+        public async Task<ActionResult> ProfileHeader(int profileId, bool isMe)
         {
             // Get profile info
             var profile = _profileRepo.GetProfile(profileId);
@@ -41,58 +67,76 @@ namespace okboba.Controllers
             {
                 Match = match,
                 Profile = profile,
-                OwnProfile = ownProfile
+                OwnProfile = isMe
             };
 
             return PartialView(vm);
         }
 
-        /// <summary>
-        /// Return profile page.  Show editing options if viewing own profile.
-        /// </summary>
-        public async Task<ActionResult> Index(int? profileId)
+        public ActionResult Index(int? profileId)
         {
-            bool ownProfile = false;
+            var vm = new ProfileViewModel
+            {
+                ProfileId = (int)profileId,
+                IsMe = false
+            };
 
             if (profileId==null)
             {
                 //Viewing own profile
-                profileId = GetProfileId();
-                ownProfile = true;
-            }
-            
-            // Get profile info
-            var profile = _profileRepo.GetProfile((int)profileId);
-            var profileText = _profileRepo.GetProfileText((int)profileId);
-            var profileDetail = _profileRepo.GetProfileDetail((int)profileId);
-
-            // Calculate match between users
-            var match = await _webClient.CalculateMatchAsync((int)profileId);
-
-            // Get the profile details as a dictionary
-            var detailDict = new Dictionary<string, string>();
-            foreach (var prop in profileDetail.GetType().GetProperties())
-            {
-                var val = _profileRepo.GetOptionValue(prop.Name, (byte)prop.GetValue(profileDetail));
-                detailDict.Add(prop.Name, val);
-            }
-            
-            // Populate the view model
-            
-
-
-            var vm = new ProfileViewModel(profile);
-
-            vm.ProfileText = profile.ProfileText;
-
-            //It's possible they don't have any profile text..return empty object
-            if (vm.ProfileText == null)
-            {
-                vm.ProfileText = new ProfileText();
+                vm.ProfileId = GetProfileId();
+                vm.IsMe = true;
             }
 
             return View(vm);
         }
+
+        ///// <summary>
+        ///// Return profile page.  Show editing options if viewing own profile.
+        ///// </summary>
+        //public async Task<ActionResult> Index(int? profileId)
+        //{
+        //    bool ownProfile = false;
+
+        //    if (profileId==null)
+        //    {
+        //        //Viewing own profile
+        //        profileId = GetProfileId();
+        //        ownProfile = true;
+        //    }
+            
+        //    // Get profile info
+        //    var profile = _profileRepo.GetProfile((int)profileId);
+        //    var profileText = _profileRepo.GetProfileText((int)profileId);
+        //    var profileDetail = _profileRepo.GetProfileDetail((int)profileId);
+
+        //    // Calculate match between users
+        //    var match = await _webClient.CalculateMatchAsync((int)profileId);
+
+        //    // Get the profile details as a dictionary
+        //    var detailDict = new Dictionary<string, string>();
+        //    foreach (var prop in profileDetail.GetType().GetProperties())
+        //    {
+        //        var val = _profileRepo.GetOptionValue(prop.Name, (byte)prop.GetValue(profileDetail));
+        //        detailDict.Add(prop.Name, val);
+        //    }
+            
+        //    // Populate the view model
+            
+
+
+        //    var vm = new ProfileViewModel(profile);
+
+        //    vm.ProfileText = profile.ProfileText;
+
+        //    //It's possible they don't have any profile text..return empty object
+        //    if (vm.ProfileText == null)
+        //    {
+        //        vm.ProfileText = new ProfileText();
+        //    }
+
+        //    return View(vm);
+        //}
 
         /// <summary>
         /// API: Update profile text

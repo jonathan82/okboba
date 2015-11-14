@@ -1,0 +1,58 @@
+﻿@import "common";
+
+/********************************************
+    Bootstrap override - Navigation tab
+*********************************************/
+.nav-tabs > li {
+    margin-bottom: -4px;
+}
+
+.nav-tabs > li > a {
+    border: none;
+    font-size: 1.2em;
+    color: #dddddd;
+    margin: 0;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 4px solid pink;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    border: none;
+    border-bottom: 4px solid pink;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #dddddd;
+}
+
+/******************************************
+    Bootstrap override - navigation bar
+*******************************************/
+.navbar-brand {
+    padding: 8px 30px;
+}
+
+.navbar-default {
+    background-color: @primary-color-1;
+    border-color: @primary-color-1;
+    border-width: 0;
+    background-image: none;
+    .shadow-z-3;
+}
+
+.navbar-nav:first-child {
+    padding-left: 25%;
+}
+
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 1.5em;
+    color: @primary-color-3 !important;
+}

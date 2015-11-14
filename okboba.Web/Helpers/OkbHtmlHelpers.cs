@@ -25,7 +25,7 @@ namespace okboba.Web.Helpers
             }
         }
 
-        public static HtmlString Photo(this HtmlHelper htmlHelper, string photo, byte gender)
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender)
         {
             string src;
 
@@ -42,14 +42,37 @@ namespace okboba.Web.Helpers
                 src += photo + "_t";
             }
 
-            return new HtmlString(src);
+            var builder = new TagBuilder("img");
+            builder.MergeAttribute("src", src);
+            builder.MergeAttribute("width", OkbConstants.AVATAR_WIDTH.ToString());
+            builder.MergeAttribute("height", OkbConstants.AVATAR_HEIGHT.ToString());
+
+            return new HtmlString(builder.ToString(TagRenderMode.SelfClosing));
         }
 
-        public static HtmlString Avatar(this HtmlHelper htmlHelper, Profile profile)
+        public static HtmlString NavTab(this HtmlHelper htmlHelper, string currSection, string section, string link)
         {
-            string photo = profile.GetFirstPhoto();
+            //"<li role="presentation" class="@profileActive"><a href=" / profile">Profile</a></li>"
+            var liTag = new TagBuilder("li");
+            if (section==currSection)
+            {
+                liTag.AddCssClass("active");
+            }
 
-            return htmlHelper.Photo(photo, profile.Gender);
+            var aTag = new TagBuilder("a");
+            aTag.MergeAttribute("href", link);
+            aTag.InnerHtml = section;
+
+            liTag.InnerHtml = aTag.ToString();
+
+            return new HtmlString(liTag.ToString());
         }
+
+        //public static HtmlString Avatar(this HtmlHelper htmlHelper, Profile profile)
+        //{
+        //    string photo = profile.GetFirstPhoto();
+
+        //    return htmlHelper.Photo(photo, profile.Gender);
+        //}
     }
 }

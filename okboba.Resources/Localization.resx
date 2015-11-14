@@ -132,14 +132,35 @@
   <data name="Common_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
+  <data name="Common_Enemy" xml:space="preserve">
+    <value>敌对</value>
+  </data>
+  <data name="Common_Friend" xml:space="preserve">
+    <value>朋友</value>
+  </data>
   <data name="Common_Login" xml:space="preserve">
     <value>登录</value>
+  </data>
+  <data name="Common_Match" xml:space="preserve">
+    <value>匹配</value>
   </data>
   <data name="Common_Save" xml:space="preserve">
     <value>保存</value>
   </data>
   <data name="Common_Submit" xml:space="preserve">
     <value>提交</value>
+  </data>
+  <data name="Nav_Personality" xml:space="preserve">
+    <value>性格</value>
+  </data>
+  <data name="Nav_Photos" xml:space="preserve">
+    <value>照片</value>
+  </data>
+  <data name="Nav_Profile" xml:space="preserve">
+    <value>个人信息</value>
+  </data>
+  <data name="Nav_Questions" xml:space="preserve">
+    <value>问题</value>
   </data>
   <data name="ProfileDetail_CarSituation" xml:space="preserve">
     <value>购车情况</value>

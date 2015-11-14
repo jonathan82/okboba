@@ -5,8 +5,13 @@
 @primary-color-2: #F06292;
 @primary-color-3: #880E4F;
 @accent-color: #FFEB3B;
-@light-gray: #F3F3F3;
-@gray: #E8E8E8;
+/*@light-gray: #F3F3F3;
+@gray: #E8E8E8;*/
+@gray-darker:  lighten(#000, 13.5%); // #222
+@gray-dark:    lighten(#000, 20%);   // #333
+@gray:         lighten(#000, 33.5%); // #555
+@gray-light:   lighten(#000, 46.7%); // #777
+@gray-lighter: lighten(#000, 93.5%); // #eee
 
 /*****************
     Shadows
@@ -75,25 +80,7 @@
 /**********************
     Bootstrap Overrides
 ***********************/
-.navbar-brand {
-    padding: 8px 30px;
-}
-.navbar-default {
-    background-color: @primary-color-1;
-    border-color: @primary-color-1;
-    border-width: 0;
-    background-image: none;
-    .shadow-z-3;
-}
-.navbar-nav:first-child {
-    padding-left: 25%;    
-}
-.navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size:1.5em;
-    color: @primary-color-3 !important;
-}
+
 .container {
     border-radius: 6px;
 }
@@ -104,16 +91,6 @@
 /***************************
     Okboba Specific Sytles
 ****************************/
-/*.okb-navbar-text {
-    font-size: 1.5em;
-    color: @primary-color-2;
-}
-.text-normal {
-    font-size: 0.8em;
-}
-.text-big {
-    font-size: 1.5em;
-}*/
 footer {
     margin-top: 20px;
     text-align: center;

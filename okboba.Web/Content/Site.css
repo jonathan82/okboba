@@ -1,6 +1,8 @@
 ﻿/******************
     Less Variables
 *******************/
+/*@light-gray: #F3F3F3;
+@gray: #E8E8E8;*/
 /*****************
     Shadows
 ******************/
@@ -54,25 +56,6 @@
 /**********************
     Bootstrap Overrides
 ***********************/
-.navbar-brand {
-  padding: 8px 30px;
-}
-.navbar-default {
-  background-color: #FCE4EC;
-  border-color: #FCE4EC;
-  border-width: 0;
-  background-image: none;
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-}
-.navbar-nav:first-child {
-  padding-left: 25%;
-}
-.navbar-nav > li > a {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  font-size: 1.5em;
-  color: #880E4F !important;
-}
 .container {
   border-radius: 6px;
 }
@@ -82,16 +65,6 @@
 /***************************
     Okboba Specific Sytles
 ****************************/
-/*.okb-navbar-text {
-    font-size: 1.5em;
-    color: @primary-color-2;
-}
-.text-normal {
-    font-size: 0.8em;
-}
-.text-big {
-    font-size: 1.5em;
-}*/
 footer {
   margin-top: 20px;
   text-align: center;
@@ -148,10 +121,57 @@ body {
 .row-centered {
   text-align: center;
 }
+/********************************************
+    Bootstrap override - Navigation tab
+*********************************************/
+.nav-tabs > li {
+  margin-bottom: -4px;
+}
+.nav-tabs > li > a {
+  border: none;
+  font-size: 1.2em;
+  color: #dddddd;
+  margin: 0;
+}
+.nav-tabs > li > a:hover {
+  background-color: #FFFFFF;
+  border: none;
+  border-bottom: 4px solid pink;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border: none;
+  border-bottom: 4px solid pink;
+}
+.nav-tabs {
+  border-bottom: 1px solid #dddddd;
+}
+/******************************************
+    Bootstrap override - navigation bar
+*******************************************/
+.navbar-brand {
+  padding: 8px 30px;
+}
+.navbar-default {
+  background-color: #FCE4EC;
+  border-color: #FCE4EC;
+  border-width: 0;
+  background-image: none;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.navbar-nav:first-child {
+  padding-left: 25%;
+}
+.navbar-nav > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 1.5em;
+  color: #880E4F !important;
+}
 .profile-header-photo {
-  float: left;
-  width: 200px;
-  height: 200px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  display: inline-block;
   margin-right: 20px;
 }
 .profile-details {
@@ -195,8 +215,8 @@ body {
   width: 125px;
   margin: 10px auto;
   padding: 5px;
-  background-color: #F3F3F3;
-  border: 1px solid #E8E8E8;
+  background-color: #777777;
+  border: 1px solid #555555;
 }
 .question-form {
   background-color: #F5F5F0;

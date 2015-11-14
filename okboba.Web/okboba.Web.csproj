@@ -275,8 +275,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
+    <Compile Include="Models\Profile\ProfileDetailViewModel.cs" />
     <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
-    <Compile Include="Models\Profile\ProfileViewModels.cs" />
+    <Compile Include="Models\Profile\ProfileViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -338,6 +339,7 @@
     <Content Include="Content\profile.less" />
     <Content Include="Content\messages.less" />
     <Content Include="Content\question.less" />
+    <Content Include="Content\nav.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -464,6 +466,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Playground\Index.cshtml" />
     <Content Include="Views\Matches\Index.cshtml" />
+    <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

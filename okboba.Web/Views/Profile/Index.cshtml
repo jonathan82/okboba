@@ -1,61 +1,15 @@
 ﻿@model okboba.Web.Models.ProfileViewModel
-@using okboba.Resources
+
 @{
     ViewBag.Title = "Profile";
-    ViewBag.Section = "profile";
+    ViewBag.Section = "Profile";
 }
 
-@Html.Partial("_ProfileHeader")
+@Html.Action("ProfileHeader", new {profileId = Model.ProfileId, isMe = Model.IsMe })
 
-<!-- Profile Details -->
-<div class="row top-buffer">
-    <div class="col-md-9">
-        <h3>@Localization.Profile_Question1</h3>
-        <div class="profile-text" data-editinplace="q1">
-            @Model.ProfileText.Question1
-        </div>
-
-        <h3>@Localization.Profile_Question2</h3>
-        <div class="profile-text" data-editinplace="q2">
-            @Model.ProfileText.Question2
-        </div>
-
-        <h3>@Localization.Profile_Question3</h3>
-        <div class="profile-text" data-editinplace="q3">
-            @Model.ProfileText.Question3
-        </div>
-
-        <h3>@Localization.Profile_Question4</h3>
-        <div class="profile-text" data-editinplace="q4">
-            @Model.ProfileText.Question4
-        </div>
-
-        <h3>@Localization.Profile_Question5</h3>
-        <div class="profile-text" data-editinplace="q5">
-            @Model.ProfileText.Question5
-        </div>        
-    </div>
-
-    <div class="col-md-3">
-        <div class="profile-details">
-            <!--- Dump out all the user info -->
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-        </div>
-    </div>
-</div>
+@Html.Action("ProfileDetailAndText", new { profileId = Model.ProfileId, isMe = Model.IsMe })
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/okboba")
     
     <script>
         $().editinplace();

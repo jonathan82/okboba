@@ -106,11 +106,38 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 敌对.
+        /// </summary>
+        public static string Common_Enemy {
+            get {
+                return ResourceManager.GetString("Common_Enemy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 朋友.
+        /// </summary>
+        public static string Common_Friend {
+            get {
+                return ResourceManager.GetString("Common_Friend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 登录.
         /// </summary>
         public static string Common_Login {
             get {
                 return ResourceManager.GetString("Common_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 匹配.
+        /// </summary>
+        public static string Common_Match {
+            get {
+                return ResourceManager.GetString("Common_Match", resourceCulture);
             }
         }
         
@@ -129,6 +156,42 @@ namespace okboba.Resources {
         public static string Common_Submit {
             get {
                 return ResourceManager.GetString("Common_Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 性格.
+        /// </summary>
+        public static string Nav_Personality {
+            get {
+                return ResourceManager.GetString("Nav_Personality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 照片.
+        /// </summary>
+        public static string Nav_Photos {
+            get {
+                return ResourceManager.GetString("Nav_Photos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 个人信息.
+        /// </summary>
+        public static string Nav_Profile {
+            get {
+                return ResourceManager.GetString("Nav_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 问题.
+        /// </summary>
+        public static string Nav_Questions {
+            get {
+                return ResourceManager.GetString("Nav_Questions", resourceCulture);
             }
         }
         
