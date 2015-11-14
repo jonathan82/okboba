@@ -1,0 +1,44 @@
+﻿///////////// Photo Upload ////////////////////
+.photo-upload-background {
+    background-color: lightgray;
+    text-align: center;
+    padding-top: 150px;
+    height: 500px;
+}
+/* Hide the file input button */
+label.photo-upload-label input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+.photo-upload-label {
+    font-size: 500%;
+    opacity: 0.8;
+}
+.photo-upload-label:hover {
+    cursor: pointer;
+    color: darkblue;
+}
+.photo-thumbnail-selector { //Used by photo upload plugin
+    height: 200px;
+    width: 200px;
+    opacity: 0.5;
+    background-color: aqua;
+}
+.photo-upload-container { //Used by photo upload plugin
+    display: inline-block;
+    position:relative;
+}
+.photo-upload-innercontainer { //Used by photo upload plugin
+    position:absolute;
+    width: 100%;   
+    height: 100%;
+    z-index: 1;
+    padding: 10px;
+}
+#listThumbnails > div {
+    float: left;
+    margin: 5px;
+}
+#listThumbnails > div:hover {
+    cursor: pointer;
+}

@@ -48,10 +48,10 @@ namespace okboba.Controllers
             var profile = _profileRepo.GetProfile(profileId);
             
             //For now, if criteria isn't specified lets choose sensible defaults based on user                        
-            if(string.IsNullOrEmpty(criteria.Gender))
+            if(criteria.Gender==OkbConstants.UNKNOWN_GENDER)
             {
                 //criteria.Gender = profile.Gender == "女" ? "男" : "女";
-                criteria.Gender = profile.Gender == "F" ? "M" : "F";
+                criteria.Gender = profile.Gender == OkbConstants.FEMALE ? OkbConstants.MALE : OkbConstants.FEMALE;
             }
 
             //Call the MatchApi client to get the first page of matches

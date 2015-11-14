@@ -8,7 +8,7 @@ namespace okboba.Repository.Models
 {
     public class MatchCriteriaModel
     {
-        public string Gender { get; set; }
+        public byte Gender { get; set; }
         public int LocationId1 { get; set; }
     }
 }

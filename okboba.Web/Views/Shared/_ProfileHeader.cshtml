@@ -1,20 +1,13 @@
-﻿@model okboba.Web.Models.ProfileViewModel
+﻿@model okboba.Web.Models.ProfileHeaderViewModel
+@using okboba.Web.Helpers
 
-<!-- Profile Header -->
+<!-- Row 1: Match Percent, Name, Message button -->
 <div class="row">
 
-    <!--Image and Details -->
+    <!--User Details & Percentages -->
     <div class="col-sm-9 col-md-10">
-        @if (Model.Photos.Count > 0)
-        {
-            <img src="https://okboba.blob.core.windows.net/photos/@(Model.Photos[0] + "_t")" alt="Photo of @Model.Profile.Name" class="profile-header-photo" />
-        }
-        else
-        {
-            <img src="~/Content/Images/none.gif" alt="Photo of @Model.Profile.Name" class="profile-header-photo" />
-        }
-        <p class="h4">@Model.Profile.Name</p>
-        <p>@Model.Profile.Birthdate - @Model.Profile.LocationId1, @Model.Profile.LocationId1</p>
+        @Model.Match.MatchPercent% Match, @Model.Match.FriendPercent% Friend, @Model.Match.EnemyPercent% Enemy,
+        @Model.Profile.Name,
     </div>
 
     <!-- Buttons -->
@@ -22,8 +15,20 @@
         <button class="btn btn-primary btn-block">Message User</button>
         <button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
     </div>
-
 </div>
+
+<hr />
+
+<!-- Row 2: Thumbnails - Show the first 4 -->
+<img src="@Html.Avatar(Model.Profile)" alt="Profile Photo" class="profile-header-photo" />
+
+@{ var photos = Model.Profile.GetPhotos(); }
+@for (int i = 1; i < photos.Length && i < 4; i++)
+{
+    <img src="@Html.Photo(photos[i], Model.Profile.Gender)" alt="Profile Photo" class="profile-header-photo" />
+}
+
+<!-- Row 3: Navigation tab -->
 
 @{ 
     var profileActive = "";

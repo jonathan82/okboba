@@ -1,0 +1,177 @@
+﻿/******************
+    Less Variables
+*******************/
+@primary-color-1: #FCE4EC;
+@primary-color-2: #F06292;
+@primary-color-3: #880E4F;
+@accent-color: #FFEB3B;
+@light-gray: #F3F3F3;
+@gray: #E8E8E8;
+
+/*****************
+    Shadows
+******************/
+.shadow-z-1 {
+  box-shadow:
+    0 1px 6px 0 rgba(0, 0, 0, 0.12),
+    0 1px  6px 0 rgba(0, 0, 0, 0.12);
+}
+.shadow-z-1-hover {
+  box-shadow:
+    0 5px 11px 0 rgba(0, 0, 0, 0.18),
+    0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+.shadow-z-2 {
+  box-shadow:
+    0 8px 17px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.shadow-z-3 {
+  box-shadow:
+    0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+.shadow-z-4 {
+  box-shadow:
+    0 16px 28px 0 rgba(0, 0, 0, 0.22),
+    0 25px 55px 0 rgba(0, 0, 0, 0.21);
+}
+.shadow-z-5 {
+  box-shadow:
+    0 27px 24px 0 rgba(0, 0, 0, 0.2),
+    0 40px 77px 0 rgba(0, 0, 0, 0.22);
+}
+
+/******************************
+    Font, Icon, Divider colors
+*******************************/
+.opacity-text {
+    opacity: .87;
+    color: #000;
+}
+.opacity-secondary-text {
+    opacity: .54;
+    color: #000;
+}
+.opacity-disabled {
+    opacity: .38;
+}
+.opacity-divider {
+    opacity: .12;
+}
+.opacity-inverse-text {
+    opacity: 1.0;
+}
+.opacity-inverse-secondary-text {
+    opacity: .7;
+}
+.opacity-inverse-disabled {
+    opacity: .3;
+}
+.opacity-inverse-divider {
+    opacity: .12;
+}
+
+/**********************
+    Bootstrap Overrides
+***********************/
+.navbar-brand {
+    padding: 8px 30px;
+}
+.navbar-default {
+    background-color: @primary-color-1;
+    border-color: @primary-color-1;
+    border-width: 0;
+    background-image: none;
+    .shadow-z-3;
+}
+.navbar-nav:first-child {
+    padding-left: 25%;    
+}
+.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size:1.5em;
+    color: @primary-color-3 !important;
+}
+.container {
+    border-radius: 6px;
+}
+.popover {
+    max-width: 100%;
+}
+
+/***************************
+    Okboba Specific Sytles
+****************************/
+/*.okb-navbar-text {
+    font-size: 1.5em;
+    color: @primary-color-2;
+}
+.text-normal {
+    font-size: 0.8em;
+}
+.text-big {
+    font-size: 1.5em;
+}*/
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+body {
+    padding-bottom: 25px;
+}
+.body-auth {
+    padding-top: 90px;
+    background-color: @primary-color-3;
+}
+.body-splash {
+    background-image: url('Images/Shanghai-Skyline.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.body-anon {
+    background-color: @primary-color-2;
+}
+.container-auth {
+    background-color: #FFF;
+    padding: 40px;
+    min-height: 700px;
+}
+.container-anon {
+    background-color: #fff;
+}
+.splash-buffer {
+  	position: relative;
+  	padding-top: 48%;
+}
+.splash-container {
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	width: 100%;
+}
+.splash-navbar {
+    padding: 10px;
+    text-align: right;
+}
+.splash-container .container {
+    padding-top: 8%;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+.top-buffer-100 {
+    margin-top: 100px;
+}
+.top-buffer-50 {
+    margin-top: 50px;
+}
+
+.row-centered {
+    text-align: center;
+}
+
+
+

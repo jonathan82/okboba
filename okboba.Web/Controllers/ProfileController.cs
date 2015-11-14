@@ -28,6 +28,25 @@ namespace okboba.Controllers
             _webClient = GetMatchApiClient();
         }
 
+        [ChildActionOnly]
+        public async Task<ActionResult> ProfileHeader(int profileId, bool ownProfile)
+        {
+            // Get profile info
+            var profile = _profileRepo.GetProfile(profileId);
+
+            // Calculate match between users
+            var match = await _webClient.CalculateMatchAsync(profileId);
+
+            var vm = new ProfileHeaderViewModel
+            {
+                Match = match,
+                Profile = profile,
+                OwnProfile = ownProfile
+            };
+
+            return PartialView(vm);
+        }
+
         /// <summary>
         /// Return profile page.  Show editing options if viewing own profile.
         /// </summary>

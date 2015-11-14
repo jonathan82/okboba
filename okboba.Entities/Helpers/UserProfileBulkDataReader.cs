@@ -90,13 +90,13 @@ namespace okboba.Entities.Helpers
             if(random.Next() % 2 == 0)
             {
                 //Male
-                randomProfile.Gender = "M";
+                randomProfile.Gender = 1;
                 randomProfile.Name = maleNames[random.Next() % maleNames.Length];                
             }
             else
             {
                 //Female
-                randomProfile.Gender = "F";
+                randomProfile.Gender = 2;
                 randomProfile.Name = femaleNames[random.Next() % maleNames.Length];
             }
 

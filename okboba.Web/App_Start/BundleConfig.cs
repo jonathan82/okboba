@@ -8,7 +8,7 @@ namespace okboba
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js/vendor").Include(
                 "~/lib/jquery/jquery-{version}.js",
                 "~/lib/jquery-ui/jquery-ui.js",
                 "~/lib/jquery-validate/jquery.validate.js",
@@ -19,7 +19,14 @@ namespace okboba
                 "~/lib/filereader/filereader.js",
                 "~/Scripts/okboba.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/css").Include(
+            bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
+                "~/Scripts/utilities.js",
+                "~/Scripts/editinplace.js",
+                "~/Scripts/locationpicker.js",
+                "~/Scripts/matchscroller.js",
+                "~/Scripts/photoupload.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",
                 "~/lib/bootstrap/css/bootstrap-theme.css",
                 "~/lib/datepicker/css/bootstrap-datepicker3.css",

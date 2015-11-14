@@ -1,0 +1,6 @@
+The profile page should show the user's profile as well as % scores with the person viewing their profile.  If viewing their own profile they should be able to edit it.
+
+- Display details (match/enemy/friend %, name, age, location, etc) in the header
+- Show editing icon if viewing on profile
+- Show Message user button in header
+- Show thum

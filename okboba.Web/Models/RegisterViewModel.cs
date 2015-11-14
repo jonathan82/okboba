@@ -27,7 +27,7 @@ namespace okboba.Web.Models
         //public string ConfirmPassword { get; set; }
 
         [Required]
-        public string Gender { get; set; }
+        public byte Gender { get; set; }
 
         [Required]
         public DateTime Birthdate { get; set; }

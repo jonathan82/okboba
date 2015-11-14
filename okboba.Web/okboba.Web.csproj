@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>okboba</RootNamespace>
-    <AssemblyName>okboba</AssemblyName>
+    <RootNamespace>okboba.Web</RootNamespace>
+    <AssemblyName>okboba.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -275,6 +275,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
+    <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModels.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
@@ -295,7 +296,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Content\Admin.css">
-      <DependentUpon>Admin.less</DependentUpon>
+      <DependentUpon>admin.less</DependentUpon>
     </Content>
     <Content Include="Content\Admin.min.css">
       <DependentUpon>Admin.css</DependentUpon>
@@ -318,7 +319,7 @@
     <Content Include="Content\images\wedding_beach.jpg" />
     <Content Include="Content\images\wedding_bw.jpg" />
     <Content Include="Content\Site.css">
-      <DependentUpon>Site.less</DependentUpon>
+      <DependentUpon>site.less</DependentUpon>
     </Content>
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -330,8 +331,14 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <Content Include="Content\images\logo\okboba-logo.pdn" />
-    <Content Include="Content\Admin.less" />
-    <None Include="Content\Site.less" />
+    <Content Include="Content\admin.less" />
+    <Content Include="Content\components.less" />
+    <Content Include="Content\matches.less" />
+    <Content Include="Content\common.less" />
+    <Content Include="Content\profile.less" />
+    <Content Include="Content\messages.less" />
+    <Content Include="Content\question.less" />
+    <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="lib\bootstrap\css\bootstrap.css" />
@@ -404,6 +411,7 @@
     <Content Include="lib\react\react.js" />
     <Content Include="lib\react\react.min.js" />
     <Content Include="Scripts\photoupload.js" />
+    <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

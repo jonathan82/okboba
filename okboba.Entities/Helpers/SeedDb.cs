@@ -292,7 +292,7 @@ namespace okboba.Entities.Helpers
             return (int)(Math.Sqrt(pctMe * pctThem) * 100);
         }
 
-        public List<Match> SimulateMatchSearchCache(int profileId, string gender, int loc1, Dictionary<int, List<CacheAnswer>> cache)
+        public List<Match> SimulateMatchSearchCache(int profileId, byte gender, int loc1, Dictionary<int, List<CacheAnswer>> cache)
         {
             var db = new OkbDbContext();
             var matches = new List<Match>();
@@ -371,7 +371,7 @@ namespace okboba.Entities.Helpers
             return (int)(Math.Sqrt(pctMe * pctThem) * 100);
         }
 
-        public List<Match> SimulateMatchSearchNoJoin(int profileId, string gender, int loc1)
+        public List<Match> SimulateMatchSearchNoJoin(int profileId, byte gender, int loc1)
         {
             var db = new OkbDbContext();
 
@@ -395,7 +395,7 @@ namespace okboba.Entities.Helpers
             return matches;
         }
 
-        public Dictionary<int, Match> SimulateMatchSearch(int profileId, string gender, int loc1)
+        public Dictionary<int, Match> SimulateMatchSearch(int profileId, byte gender, int loc1)
         {
             var db = new OkbDbContext();
             var matches = new Dictionary<int, Match>();
@@ -449,7 +449,7 @@ namespace okboba.Entities.Helpers
             return matches;
         }
 
-        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, string gender, int loc1)
+        public List<Profile> SimulateMatchSearchNoAnswer(int profileId, byte gender, int loc1)
         {
             var db = new OkbDbContext();
             var matches = new List<Profile>();
@@ -467,7 +467,7 @@ namespace okboba.Entities.Helpers
             return matches;
         }
 
-        private Profile CreateUser(string name, string gender, DateTime dob, string location)
+        private Profile CreateUser(string name, byte gender, DateTime dob, string location)
         {
             return new Profile
             {

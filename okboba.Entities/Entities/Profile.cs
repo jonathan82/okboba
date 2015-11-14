@@ -18,10 +18,10 @@ namespace okboba.Entities
         [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
 
-        [StringLength(1)]
-        public string Gender { get; set; }
+        public byte Gender { get; set; }
 
         public Int16 Height { get; set; }
+
         public Int16 LocationId1 { get; set; }
         public Int16 LocationId2 { get; set; }
 
@@ -39,13 +39,13 @@ namespace okboba.Entities
         //Helper methods
         public string[] GetPhotos()
         {
-            if (PhotosInternal == null) return new string[0];
+            if (string.IsNullOrEmpty(PhotosInternal)) return new string[0];
             return PhotosInternal.Split(';');
         }
 
         public string GetFirstPhoto()
         {
-            if (PhotosInternal == null) return "";
+            if (string.IsNullOrEmpty(PhotosInternal)) return "";
             var index = PhotosInternal.IndexOf(';');
             if (index == -1) index = PhotosInternal.Length;
             return PhotosInternal.Substring(0, index);

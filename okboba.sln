@@ -21,6 +21,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Resources", "okboba.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Repository", "okboba.Repository\okboba.Repository.csproj", "{1B313364-E757-4197-9683-7ACB2C4A574B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Chat", "okboba.Chat\okboba.Chat.csproj", "{52303CFF-4E21-45CD-87C9-FB955AA149EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requirements", "Requirements", "{97DDAABB-1039-428A-8505-3B0306502602}"
+	ProjectSection(SolutionItems) = preProject
+		Requirements\Profile Page.txt = Requirements\Profile Page.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +71,10 @@ Global
 		{1B313364-E757-4197-9683-7ACB2C4A574B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B313364-E757-4197-9683-7ACB2C4A574B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B313364-E757-4197-9683-7ACB2C4A574B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52303CFF-4E21-45CD-87C9-FB955AA149EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52303CFF-4E21-45CD-87C9-FB955AA149EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52303CFF-4E21-45CD-87C9-FB955AA149EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52303CFF-4E21-45CD-87C9-FB955AA149EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

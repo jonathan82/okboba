@@ -14,7 +14,7 @@ namespace okboba.Repository.Models
         public int FriendPercent { get; set; }
         public int EnemyPercent { get; set; }
         public string Photo { get; set; }
-        public char Gender { get; set; }
+        public byte Gender { get; set; }
         public int Age { get; set; }
     }
 }

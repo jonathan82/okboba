@@ -42,7 +42,7 @@ namespace okboba.Repository.EntityRepository
             var query = from p in db.Profiles.AsNoTracking()
                         select p;
 
-            if (!string.IsNullOrEmpty(criteria.Gender))
+            if (!(criteria.Gender==OkbConstants.UNKNOWN_GENDER))
             {
                 query = query.Where(p => p.Gender == criteria.Gender);
             }
@@ -83,7 +83,7 @@ namespace okboba.Repository.EntityRepository
                     ProfileId = p.Id,
                     Photo = p.GetFirstPhoto(),
                     Age = DateTime.Today.Year - p.Birthdate.Year,
-                    Gender = p.Gender[0]
+                    Gender = p.Gender
                 });
             }
 
