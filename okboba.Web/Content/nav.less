@@ -10,14 +10,15 @@
 .nav-tabs > li > a {
     border: none;
     font-size: 1.2em;
-    color: #dddddd;
+    color: @gray-light;
     margin: 0;
 }
 
 .nav-tabs > li > a:hover {
     background-color: #FFFFFF;
     border: none;
-    border-bottom: 4px solid pink;
+    //border-bottom: 4px solid pink;
+    color: @gray-dark;
 }
 
 .nav-tabs > li.active > a,
@@ -25,10 +26,12 @@
 .nav-tabs > li.active > a:focus {
     border: none;
     border-bottom: 4px solid pink;
+    color: @gray-dark;
 }
 
 .nav-tabs {
     border-bottom: 1px solid #dddddd;
+    margin-top: 20px;
 }
 
 /******************************************

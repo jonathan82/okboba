@@ -162,8 +162,20 @@
   <data name="Nav_Questions" xml:space="preserve">
     <value>问题</value>
   </data>
+  <data name="Photos_AddPhoto" xml:space="preserve">
+    <value>加照片</value>
+  </data>
+  <data name="ProfileDetail_BodyType" xml:space="preserve">
+    <value>体型</value>
+  </data>
+  <data name="ProfileDetail_CareerAndFamily" xml:space="preserve">
+    <value>事业与家庭</value>
+  </data>
   <data name="ProfileDetail_CarSituation" xml:space="preserve">
     <value>购车情况</value>
+  </data>
+  <data name="ProfileDetail_DressStyle" xml:space="preserve">
+    <value>穿着风格</value>
   </data>
   <data name="ProfileDetail_Drink" xml:space="preserve">
     <value>饮酒</value>
@@ -171,17 +183,50 @@
   <data name="ProfileDetail_Eating" xml:space="preserve">
     <value>饮食习惯</value>
   </data>
+  <data name="ProfileDetail_EconomicConcept" xml:space="preserve">
+    <value>经济观念</value>
+  </data>
   <data name="ProfileDetail_Education" xml:space="preserve">
     <value>学历</value>
   </data>
   <data name="ProfileDetail_Exercise" xml:space="preserve">
     <value>锻炼习惯</value>
   </data>
+  <data name="ProfileDetail_Eye" xml:space="preserve">
+    <value>眼睛</value>
+  </data>
+  <data name="ProfileDetail_FaceType" xml:space="preserve">
+    <value>脸型</value>
+  </data>
+  <data name="ProfileDetail_Feelings" xml:space="preserve">
+    <value>对待感情</value>
+  </data>
+  <data name="ProfileDetail_Hair" xml:space="preserve">
+    <value>头发</value>
+  </data>
   <data name="ProfileDetail_HaveChildren" xml:space="preserve">
     <value>有无子女</value>
   </data>
+  <data name="ProfileDetail_HavePets" xml:space="preserve">
+    <value>关于宠物</value>
+  </data>
+  <data name="ProfileDetail_HealthCondition" xml:space="preserve">
+    <value>健康情况</value>
+  </data>
   <data name="ProfileDetail_Height" xml:space="preserve">
     <value>身高</value>
+  </data>
+  <data name="ProfileDetail_Housework" xml:space="preserve">
+    <value>家务水平等级</value>
+  </data>
+  <data name="ProfileDetail_Humour" xml:space="preserve">
+    <value>幽默感</value>
+  </data>
+  <data name="ProfileDetail_Industry" xml:space="preserve">
+    <value>公司行业</value>
+  </data>
+  <data name="ProfileDetail_Job" xml:space="preserve">
+    <value>职业职位</value>
   </data>
   <data name="ProfileDetail_LivingSituation" xml:space="preserve">
     <value>居住情况</value>
@@ -189,8 +234,17 @@
   <data name="ProfileDetail_LookingFor" xml:space="preserve">
     <value>寻找</value>
   </data>
+  <data name="ProfileDetail_LovePets" xml:space="preserve">
+    <value>宠物喜欢程度</value>
+  </data>
   <data name="ProfileDetail_MonthlyIncome" xml:space="preserve">
     <value>月薪</value>
+  </data>
+  <data name="ProfileDetail_MostMoney" xml:space="preserve">
+    <value>最大消费</value>
+  </data>
+  <data name="ProfileDetail_Muscle" xml:space="preserve">
+    <value>肌肉</value>
   </data>
   <data name="ProfileDetail_Nationality" xml:space="preserve">
     <value>民族</value>
@@ -204,11 +258,29 @@
   <data name="ProfileDetail_Shopping" xml:space="preserve">
     <value>逛街购物</value>
   </data>
+  <data name="ProfileDetail_SkinType" xml:space="preserve">
+    <value>皮肤</value>
+  </data>
+  <data name="ProfileDetail_SleepSchedule" xml:space="preserve">
+    <value>作息时间</value>
+  </data>
   <data name="ProfileDetail_Smoke" xml:space="preserve">
     <value>吸烟</value>
   </data>
+  <data name="ProfileDetail_Sociability" xml:space="preserve">
+    <value>个性特征</value>
+  </data>
+  <data name="ProfileDetail_SocialCircle" xml:space="preserve">
+    <value>交际圈子</value>
+  </data>
+  <data name="ProfileDetail_Temper" xml:space="preserve">
+    <value>脾气</value>
+  </data>
   <data name="ProfileDetail_WantChildren" xml:space="preserve">
     <value>是否要小孩</value>
+  </data>
+  <data name="ProfileDetail_WorkHours" xml:space="preserve">
+    <value>工作状态</value>
   </data>
   <data name="Profile_Question1" xml:space="preserve">
     <value>关于你自己一点点</value>

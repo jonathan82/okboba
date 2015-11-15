@@ -12,13 +12,13 @@ namespace okboba.Web.Models
     {
         [LocalRequired]
         [EmailAddress]
-        [Display(ResourceType = typeof(Localization), Name = "Account_Email")]
+        [Display(ResourceType = typeof(i18n), Name = "Account_Email")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(Localization), Name = "Account_Password")]
+        [Display(ResourceType = typeof(i18n), Name = "Account_Password")]
         public string Password { get; set; }
 
         //[DataType(DataType.Password)]

@@ -11,6 +11,7 @@ namespace okboba.Web.Models
     {
         public Profile Profile { get; set; }
         public MatchModel Match { get; set; }
-        public bool OwnProfile { get; set; }
+        public bool IsMe { get; set; }
+        public string Section { get; set; }
     }
 }

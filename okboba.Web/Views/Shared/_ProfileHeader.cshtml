@@ -1,12 +1,23 @@
 ﻿@model okboba.Web.Models.ProfileHeaderViewModel
 @using okboba.Web.Helpers
+@using okboba.Resources
 
 <!-- Row 1: Match Percent, Name, Message button -->
 <div class="row">
     <!--User Details & Percentages -->
     <div class="col-sm-9 col-md-10">
-        @Model.Match.MatchPercent% Match, @Model.Match.FriendPercent% Friend, @Model.Match.EnemyPercent% Enemy,
-        @Model.Profile.Name,
+        <div class="inline-block">
+            <div class="profile-header-match">@Model.Match.MatchPercent%</div>
+            <div class="profile-header-match-desc">@i18n.Common_Match</div>
+        </div>
+        <div class="inline-block profile-header-friend">
+            <div>@Model.Match.FriendPercent%</div>
+            <div class="profile-header-friend-desc">@i18n.Common_Friend</div>
+        </div>
+        <div class="inline-block">
+            <div>@Model.Match.EnemyPercent%</div>
+            <div>@i18n.Common_Enemy</div>
+        </div>
     </div>
 
     <!-- Buttons -->
@@ -19,22 +30,26 @@
 <hr />
 
 <!-- Row 2: Thumbnails - Show the first 4 -->
+@{ var photos = Model.Profile.GetPhotos(); }
 <div class="profile-header-photo">
-    <a href="~/photo/@Model.Profile.Id">@Html.Avatar(Model.Profile.GetFirstPhoto(), Model.Profile.Gender)</a>
+    <a href="~/photo/@Model.Profile.Id">@Html.Avatar(Model.Profile.GetFirstPhoto(), Model.Profile.Gender, 180, 180)</a>
+    @if (photos.Length==0 && Model.IsMe)
+    {
+        <button class="btn btn-info profile-header-addphoto">@i18n.Photos_AddPhoto</button>
+    }
 </div>
 
-@{ var photos = Model.Profile.GetPhotos(); }
 @for (int i = 1; i < photos.Length && i < 4; i++)
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@Model.Profile.Id">@Html.Avatar(photos[i], Model.Profile.Gender)</a>
+        <a href="~/photo/@Model.Profile.Id">@Html.Avatar(photos[i], Model.Profile.Gender, 180, 180)</a>
     </div>
 }
 
 <!-- Row 3: Navigation tab -->
 <ul class="nav nav-tabs">
-    @Html.NavTab((string)ViewBag.Section, "Profile", "~/profile/" + Model.Profile.Id)
-    @Html.NavTab((string)ViewBag.Section, "Photos", "~/photo/" + Model.Profile.Id)
-    @Html.NavTab((string)ViewBag.Section, "Questions", "~/question/" + Model.Profile.Id)
-    @Html.NavTab((string)ViewBag.Section, "Personality Matrix", "~/matrix/" + Model.Profile.Id)
+    @Html.NavTab(Model.Section, "Profile", "/profile/" + Model.Profile.Id)
+    @Html.NavTab(Model.Section, "Photos", "/photo/" + Model.Profile.Id)
+    @Html.NavTab(Model.Section, "Questions", "/question/" + Model.Profile.Id)
+    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + Model.Profile.Id)
 </ul>

@@ -41,13 +41,23 @@ namespace okboba.Repository.EntityRepository
         public ProfileDetail GetProfileDetail(int profileId)
         {
             var db = new OkbDbContext();
-            return db.ProfileDetails.Find(profileId);
+            var detail = db.ProfileDetails.Find(profileId);
+            if (detail==null)
+            {
+                detail = new ProfileDetail();
+            }
+            return detail;
         }
 
         public ProfileText GetProfileText(int profileId)
         {
             var db = new OkbDbContext();
-            return db.ProfileTexts.Find(profileId);
+            var text = db.ProfileTexts.Find(profileId);
+            if (text == null)
+            {
+                text = new ProfileText();
+            }
+            return text;
         }
 
         public string GetOptionValue(string colName, byte id)

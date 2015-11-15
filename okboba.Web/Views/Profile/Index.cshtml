@@ -5,13 +5,13 @@
     ViewBag.Section = "Profile";
 }
 
-@Html.Action("ProfileHeader", new {profileId = Model.ProfileId, isMe = Model.IsMe })
+@Html.Action("ProfileHeader", new {profileId = Model.ProfileId, isMe = Model.IsMe, section = "Profile" })
 
 @Html.Action("ProfileDetailAndText", new { profileId = Model.ProfileId, isMe = Model.IsMe })
 
 @section Scripts {
-    
+
     <script>
         $().editinplace();
-    </script>    
+    </script>
 }

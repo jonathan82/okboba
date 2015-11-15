@@ -22,14 +22,14 @@ namespace okboba.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Localization {
+    public class i18n {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Localization() {
+        internal i18n() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace okboba.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("okboba.Resources.Localization", typeof(Localization).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("okboba.Resources.i18n", typeof(i18n).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -196,6 +196,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 加照片.
+        /// </summary>
+        public static string Photos_AddPhoto {
+            get {
+                return ResourceManager.GetString("Photos_AddPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 关于你自己一点点.
         /// </summary>
         public static string Profile_Question1 {
@@ -241,11 +250,38 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 体型.
+        /// </summary>
+        public static string ProfileDetail_BodyType {
+            get {
+                return ResourceManager.GetString("ProfileDetail_BodyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 事业与家庭.
+        /// </summary>
+        public static string ProfileDetail_CareerAndFamily {
+            get {
+                return ResourceManager.GetString("ProfileDetail_CareerAndFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 购车情况.
         /// </summary>
         public static string ProfileDetail_CarSituation {
             get {
                 return ResourceManager.GetString("ProfileDetail_CarSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 穿着风格.
+        /// </summary>
+        public static string ProfileDetail_DressStyle {
+            get {
+                return ResourceManager.GetString("ProfileDetail_DressStyle", resourceCulture);
             }
         }
         
@@ -268,6 +304,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 经济观念.
+        /// </summary>
+        public static string ProfileDetail_EconomicConcept {
+            get {
+                return ResourceManager.GetString("ProfileDetail_EconomicConcept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 学历.
         /// </summary>
         public static string ProfileDetail_Education {
@@ -286,6 +331,42 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 眼睛.
+        /// </summary>
+        public static string ProfileDetail_Eye {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Eye", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 脸型.
+        /// </summary>
+        public static string ProfileDetail_FaceType {
+            get {
+                return ResourceManager.GetString("ProfileDetail_FaceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 对待感情.
+        /// </summary>
+        public static string ProfileDetail_Feelings {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Feelings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 头发.
+        /// </summary>
+        public static string ProfileDetail_Hair {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Hair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 有无子女.
         /// </summary>
         public static string ProfileDetail_HaveChildren {
@@ -295,11 +376,65 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 关于宠物.
+        /// </summary>
+        public static string ProfileDetail_HavePets {
+            get {
+                return ResourceManager.GetString("ProfileDetail_HavePets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 健康情况.
+        /// </summary>
+        public static string ProfileDetail_HealthCondition {
+            get {
+                return ResourceManager.GetString("ProfileDetail_HealthCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 身高.
         /// </summary>
         public static string ProfileDetail_Height {
             get {
                 return ResourceManager.GetString("ProfileDetail_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 家务水平等级.
+        /// </summary>
+        public static string ProfileDetail_Housework {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Housework", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 幽默感.
+        /// </summary>
+        public static string ProfileDetail_Humour {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Humour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 公司行业.
+        /// </summary>
+        public static string ProfileDetail_Industry {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Industry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 职业职位.
+        /// </summary>
+        public static string ProfileDetail_Job {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Job", resourceCulture);
             }
         }
         
@@ -322,11 +457,38 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 宠物喜欢程度.
+        /// </summary>
+        public static string ProfileDetail_LovePets {
+            get {
+                return ResourceManager.GetString("ProfileDetail_LovePets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 月薪.
         /// </summary>
         public static string ProfileDetail_MonthlyIncome {
             get {
                 return ResourceManager.GetString("ProfileDetail_MonthlyIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 最大消费.
+        /// </summary>
+        public static string ProfileDetail_MostMoney {
+            get {
+                return ResourceManager.GetString("ProfileDetail_MostMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 肌肉.
+        /// </summary>
+        public static string ProfileDetail_Muscle {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Muscle", resourceCulture);
             }
         }
         
@@ -367,6 +529,24 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 皮肤.
+        /// </summary>
+        public static string ProfileDetail_SkinType {
+            get {
+                return ResourceManager.GetString("ProfileDetail_SkinType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 作息时间.
+        /// </summary>
+        public static string ProfileDetail_SleepSchedule {
+            get {
+                return ResourceManager.GetString("ProfileDetail_SleepSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 吸烟.
         /// </summary>
         public static string ProfileDetail_Smoke {
@@ -376,11 +556,47 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 个性特征.
+        /// </summary>
+        public static string ProfileDetail_Sociability {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Sociability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 交际圈子.
+        /// </summary>
+        public static string ProfileDetail_SocialCircle {
+            get {
+                return ResourceManager.GetString("ProfileDetail_SocialCircle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 脾气.
+        /// </summary>
+        public static string ProfileDetail_Temper {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Temper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 是否要小孩.
         /// </summary>
         public static string ProfileDetail_WantChildren {
             get {
                 return ResourceManager.GetString("ProfileDetail_WantChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工作状态.
+        /// </summary>
+        public static string ProfileDetail_WorkHours {
+            get {
+                return ResourceManager.GetString("ProfileDetail_WorkHours", resourceCulture);
             }
         }
         

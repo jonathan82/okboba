@@ -17,8 +17,8 @@
                         <div class="form-group" style="margin-right: 20px;">
                             <label for="Gender" class="">我是： </label>
                             <select class="form-control input-lg" name="Gender" style="width: 200px;">
-                                <option value="F">女</option>
-                                <option value="M">男</option>
+                                <option value="2">女</option>
+                                <option value="1">男</option>
                             </select>
                         </div>
                         <div class="form-group" style="margin-right: 20px;">
@@ -27,7 +27,7 @@
                                 @*@Html.ValidationMessageFor(m => m.Birthdate, "", new { @class = "text-danger" })*@
                             @*<input name="Birthdate" id="Birthdate" class="form-control input-lg" />*@
                         </div>
-                        <button class="btn btn-lg btn-primary" id="NextButton">@Localization.Common_Submit >></button>
+                        <button class="btn btn-lg btn-primary" id="NextButton">@i18n.Common_Submit >></button>
                     </div>
                 </center>
             </div> <!-- End column -->

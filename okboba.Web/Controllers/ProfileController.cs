@@ -22,10 +22,16 @@ namespace okboba.Controllers
         private IProfileRepository _profileRepo;
         private MatchApiClient _webClient;
 
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            //base.OnActionExecuting(filterContext);
+            _webClient = GetMatchApiClient();
+        }
+
         public ProfileController()
         {
             _profileRepo = EntityProfileRepository.Instance;
-            _webClient = GetMatchApiClient();
+            //_webClient = GetMatchApiClient();
         }
 
         [ChildActionOnly]
@@ -39,7 +45,8 @@ namespace okboba.Controllers
             var detailDict = new Dictionary<string, string>();
             foreach (var prop in profileDetail.GetType().GetProperties())
             {
-                var val = _profileRepo.GetOptionValue(prop.Name, (byte)prop.GetValue(profileDetail));
+                if (prop.PropertyType != typeof(byte)) continue;
+                var val = _profileRepo.GetOptionValue(prop.Name, (byte)(prop.GetValue(profileDetail)));
                 detailDict.Add(prop.Name, val);
             }
 
@@ -48,46 +55,50 @@ namespace okboba.Controllers
             {
                 ProfileText = profileText,
                 ProfileDetail = profileDetail,
+                DetailDict = detailDict,
                 isMe = isMe
             };
 
-            return PartialView(vm);
+            return PartialView("_ProfileDetailAndText",vm);
         }
 
         [ChildActionOnly]
-        public async Task<ActionResult> ProfileHeader(int profileId, bool isMe)
+        public ActionResult ProfileHeader(int profileId, bool isMe, string section)
         {
             // Get profile info
             var profile = _profileRepo.GetProfile(profileId);
 
             // Calculate match between users
-            var match = await _webClient.CalculateMatchAsync(profileId);
+            var match = _webClient.CalculateMatchAsync(profileId).Result;
 
             var vm = new ProfileHeaderViewModel
             {
                 Match = match,
                 Profile = profile,
-                OwnProfile = isMe
+                IsMe = isMe,
+                Section = section
             };
 
-            return PartialView(vm);
+            return PartialView("_ProfileHeader", vm);
         }
 
         public ActionResult Index(int? profileId)
         {
-            var vm = new ProfileViewModel
-            {
-                ProfileId = (int)profileId,
-                IsMe = false
-            };
+            var me = GetProfileId();
+            var vm = new ProfileViewModel();
 
-            if (profileId==null)
+            if (profileId == null || profileId == me)
             {
                 //Viewing own profile
-                vm.ProfileId = GetProfileId();
+                vm.ProfileId = me;
                 vm.IsMe = true;
             }
-
+            else
+            {
+                vm.ProfileId = (int)profileId;
+                vm.IsMe = false;
+            }
+           
             return View(vm);
         }
 

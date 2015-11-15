@@ -29,6 +29,8 @@ namespace okboba.Entities
         [ForeignKey("Profile")]        
         public int ProfileId { get; set; }
 
+        //Basic
+        public byte LookingFor { get; set; }
         public short Height { get; set; }
         public byte Education { get; set; }
         public byte RelationshipStatus { get; set; }
@@ -38,6 +40,8 @@ namespace okboba.Entities
         public byte MonthlyIncome { get; set; }
         public byte LivingSituation { get; set; }
         public byte CarSituation { get; set; }
+        public byte EconomicConcept { get; set; }
+
         // Lifestyle
         public byte Smoke { get; set; }
         public byte Drink { get; set; }
@@ -51,11 +55,13 @@ namespace okboba.Entities
         public byte Housework { get; set; }
         public byte LovePets { get; set; }
         public byte HavePets { get; set; }
+        
         //Job
         public byte Job { get; set; }
         public byte Industry { get; set; }
         public byte WorkHours { get; set; }
         public byte CareerAndFamily { get; set; }
+        
         //Appearance
         public byte BodyType { get; set; }
         public byte FaceType { get; set; }
@@ -68,15 +74,12 @@ namespace okboba.Entities
         public byte Muscle { get; set; }
         public byte HealthCondition { get; set; }
         public byte DressStyle { get; set; }
+        
         //Personality
         public byte Sociability { get; set; }
         public byte Humour { get; set; }
         public byte Temper { get; set; }
-        public byte Feelings { get; set; }
-        public byte LookingFor { get; set; }
-        //Finance
-        public byte EconomicConcept { get; set; }
-        //public byte[] Investments { get; set; }
+        public byte Feelings { get; set; }                       
 
         //Navigation properties
         public Profile Profile { get; set; }

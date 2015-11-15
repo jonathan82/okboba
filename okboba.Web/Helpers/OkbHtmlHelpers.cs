@@ -25,14 +25,14 @@ namespace okboba.Web.Helpers
             }
         }
 
-        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender)
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
         {
             string src;
 
             if (photo == "")
             {
                 //Use one of the default avatars
-                src = "~/Content/images/";
+                src = "/Content/images/";
                 src += gender == OkbConstants.MALE ? "no-avatar-male.png" : "no-avatar-female.png";
             }
             else
@@ -44,8 +44,8 @@ namespace okboba.Web.Helpers
 
             var builder = new TagBuilder("img");
             builder.MergeAttribute("src", src);
-            builder.MergeAttribute("width", OkbConstants.AVATAR_WIDTH.ToString());
-            builder.MergeAttribute("height", OkbConstants.AVATAR_HEIGHT.ToString());
+            builder.MergeAttribute("width", width.ToString());
+            builder.MergeAttribute("height", height.ToString());
 
             return new HtmlString(builder.ToString(TagRenderMode.SelfClosing));
         }

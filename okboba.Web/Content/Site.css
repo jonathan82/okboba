@@ -86,7 +86,7 @@ body {
 }
 .container-auth {
   background-color: #FFF;
-  padding: 40px;
+  padding: 30px 40px;
   min-height: 700px;
 }
 .container-anon {
@@ -121,6 +121,9 @@ body {
 .row-centered {
   text-align: center;
 }
+.inline-block {
+  display: inline-block;
+}
 /********************************************
     Bootstrap override - Navigation tab
 *********************************************/
@@ -130,22 +133,24 @@ body {
 .nav-tabs > li > a {
   border: none;
   font-size: 1.2em;
-  color: #dddddd;
+  color: #777777;
   margin: 0;
 }
 .nav-tabs > li > a:hover {
   background-color: #FFFFFF;
   border: none;
-  border-bottom: 4px solid pink;
+  color: #333333;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   border: none;
   border-bottom: 4px solid pink;
+  color: #333333;
 }
 .nav-tabs {
   border-bottom: 1px solid #dddddd;
+  margin-top: 20px;
 }
 /******************************************
     Bootstrap override - navigation bar
@@ -173,6 +178,13 @@ body {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
   margin-right: 20px;
+  position: relative;
+}
+.profile-header-addphoto {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .profile-details {
   border: 1px solid;
@@ -201,6 +213,37 @@ body {
   padding: 10px;
   opacity: .54;
   color: #000;
+}
+.profile-detail-category {
+  text-align: center;
+}
+.profile-detail-row {
+  color: #777777;
+  font-family: SimSun;
+}
+.profile-header-match {
+  font-size: 4em;
+  color: #FF0066;
+  line-height: 1;
+}
+.profile-header-match-desc {
+  text-align: right;
+  color: #FF0066;
+  font-size: 1.3em;
+  line-height: 1;
+}
+.profile-header-friend {
+  color: #0066FF;
+  font-size: 2em;
+  border-right: 2px solid #eeeeee;
+  padding-left: 20px;
+  padding-right: 20px;
+  line-height: 1;
+  vertical-align: top;
+}
+.profile-header-friend-desc {
+  font-size: 14px;
+  text-align: right;
 }
 .matches-container {
   text-align: center;

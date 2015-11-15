@@ -1,29 +1,31 @@
-﻿@using okboba.Resources
+﻿@model okboba.Web.Models.ProfileDetailViewModel
+@using okboba.Resources
+@using okboba.Repository
 
 <!-- Profile Details -->
 <div class="row top-buffer">
     <div class="col-md-9">
-        <h3>@Localization.Profile_Question1</h3>
+        <h3>@i18n.Profile_Question1</h3>
         <div class="profile-text" data-editinplace="q1">
             @Model.ProfileText.Question1
         </div>
 
-        <h3>@Localization.Profile_Question2</h3>
+        <h3>@i18n.Profile_Question2</h3>
         <div class="profile-text" data-editinplace="q2">
             @Model.ProfileText.Question2
         </div>
 
-        <h3>@Localization.Profile_Question3</h3>
+        <h3>@i18n.Profile_Question3</h3>
         <div class="profile-text" data-editinplace="q3">
             @Model.ProfileText.Question3
         </div>
 
-        <h3>@Localization.Profile_Question4</h3>
+        <h3>@i18n.Profile_Question4</h3>
         <div class="profile-text" data-editinplace="q4">
             @Model.ProfileText.Question4
         </div>
 
-        <h3>@Localization.Profile_Question5</h3>
+        <h3>@i18n.Profile_Question5</h3>
         <div class="profile-text" data-editinplace="q5">
             @Model.ProfileText.Question5
         </div>
@@ -31,17 +33,191 @@
 
     <div class="col-md-3">
         <div class="profile-details">
-            <!--- Dump out all the user info -->
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
-            some details<br />
+            <!-------- Basic ---------->
+            <div class="profile-detail-category">
+                Basic
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_LookingFor:
+                @Model.DetailDict[OkbConstants.DETAIL_LOOKINGFOR]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Height: 
+                
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Education:
+                @Model.DetailDict[OkbConstants.DETAIL_EDUCATION]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_RelationshipStatus:
+                @Model.DetailDict[OkbConstants.DETAIL_RELATIONSHIPSTATUS]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_HaveChildren:
+                @Model.DetailDict[OkbConstants.DETAIL_HAVECHILDREN]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_WantChildren:
+                @Model.DetailDict[OkbConstants.DETAIL_WANTCHILDREN]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Nationality:
+                @Model.DetailDict[OkbConstants.DETAIL_NATIONALITY]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_MonthlyIncome:
+                @Model.DetailDict[OkbConstants.DETAIL_MONTHLYINCOME]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_LivingSituation:
+                @Model.DetailDict[OkbConstants.DETAIL_LIVINGSITUATION]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_CarSituation:
+                @Model.DetailDict[OkbConstants.DETAIL_CARSITUATION]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_EconomicConcept:
+                @Model.DetailDict[OkbConstants.DETAIL_ECONOMICCONCEPT]
+            </div>
+
+            <!-------- Lifestyle ---------->
+            <div class="profile-detail-category">
+                Lifestyle
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Smoke:
+                @Model.DetailDict[OkbConstants.DETAIL_SMOKE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Drink:
+                @Model.DetailDict[OkbConstants.DETAIL_DRINK]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Exercise:
+                @Model.DetailDict[OkbConstants.DETAIL_EXERCISE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Eating:
+                @Model.DetailDict[OkbConstants.DETAIL_EATING]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Shopping:
+                @Model.DetailDict[OkbConstants.DETAIL_SHOPPING]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Religion:
+                @Model.DetailDict[OkbConstants.DETAIL_RELIGION]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_SleepSchedule:
+                @Model.DetailDict[OkbConstants.DETAIL_SLEEPSCHEDULE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_SocialCircle:
+                @Model.DetailDict[OkbConstants.DETAIL_SOCIALCIRCLE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_MostMoney:
+                @Model.DetailDict[OkbConstants.DETAIL_MOSTMONEY]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Housework:
+                @Model.DetailDict[OkbConstants.DETAIL_HOUSEWORK]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_LovePets:
+                @Model.DetailDict[OkbConstants.DETAIL_LOVEPETS]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_HavePets:
+                @Model.DetailDict[OkbConstants.DETAIL_HAVEPETS]
+            </div>
+
+            <!-------- Job ---------->
+            <div class="profile-detail-category">
+                Job
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Job:
+                @Model.DetailDict[OkbConstants.DETAIL_JOB]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Industry:
+                @Model.DetailDict[OkbConstants.DETAIL_INDUSTRY]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_WorkHours:
+                @Model.DetailDict[OkbConstants.DETAIL_WORKHOURS]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_CareerAndFamily:
+                @Model.DetailDict[OkbConstants.DETAIL_CAREERANDFAMILY]
+            </div>
+
+            <!-------- Appearance ---------->
+            <div class="profile-detail-category">
+                Appearance
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_BodyType:
+                @Model.DetailDict[OkbConstants.DETAIL_BODYTYPE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_FaceType:
+                @Model.DetailDict[OkbConstants.DETAIL_FACETYPE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Eye:
+                @Model.DetailDict[OkbConstants.DETAIL_EYECOLOR], 
+                @Model.DetailDict[OkbConstants.DETAIL_EYESHAPE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Hair:
+                @Model.DetailDict[OkbConstants.DETAIL_HAIRCOLOR],
+                @Model.DetailDict[OkbConstants.DETAIL_HAIRTYPE],
+                @Model.DetailDict[OkbConstants.DETAIL_HAIRLENGTH]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_SkinType:
+                @Model.DetailDict[OkbConstants.DETAIL_SKINTYPE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Muscle:
+                @Model.DetailDict[OkbConstants.DETAIL_MUSCLE]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_HealthCondition:
+                @Model.DetailDict[OkbConstants.DETAIL_HEALTHCONDITION]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_DressStyle:
+                @Model.DetailDict[OkbConstants.DETAIL_DRESSSTYLE]
+            </div>
+
+            <!-------- Personality ---------->
+            <div class="profile-detail-category">
+                Personality
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Sociability:
+                @Model.DetailDict[OkbConstants.DETAIL_SOCIABILITY]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Humour:
+                @Model.DetailDict[OkbConstants.DETAIL_HUMOUR]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Temper:
+                @Model.DetailDict[OkbConstants.DETAIL_TEMPER]
+            </div>
+            <div class="profile-detail-row">
+                @i18n.ProfileDetail_Feelings:
+                @Model.DetailDict[OkbConstants.DETAIL_FEELINGS]
+            </div>
+
         </div>
     </div>
 </div>
+

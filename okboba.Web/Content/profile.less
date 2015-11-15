@@ -4,6 +4,13 @@
     .shadow-z-1;
     display: inline-block;    
     margin-right: 20px;
+    position:relative;
+}
+.profile-header-addphoto {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .profile-details {
     border: 1px solid;
@@ -33,4 +40,41 @@
 .profile-thumbnail-blurb {
     padding: 10px;
     .opacity-secondary-text;
+}
+
+.profile-detail-category {
+    text-align: center;
+}
+
+.profile-detail-row {
+    color: @gray-light;
+    font-family: SimSun;
+}
+
+.profile-header-match {
+    font-size: 4em;
+    color: @match-color;
+    line-height: 1;
+}
+
+.profile-header-match-desc {
+    text-align: right;
+    color: @match-color;
+    font-size: 1.3em;
+    line-height: 1;
+}
+
+.profile-header-friend {
+    color: @friend-color;
+    font-size: 2em;
+    border-right: 2px solid @gray-lighter;
+    padding-left: 20px;
+    padding-right: 20px;
+    line-height: 1;
+    vertical-align: top;
+}
+
+.profile-header-friend-desc {
+    font-size: 14px;
+    text-align: right;
 }

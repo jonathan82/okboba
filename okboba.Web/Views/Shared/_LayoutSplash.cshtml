@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    @Styles.Render("~/bundles/css")
+    @Styles.Render("~/bundles/css/all")
 
     <style>
         @@media (max-width: 800px) {
@@ -36,7 +36,7 @@
 
         <!-- Navbar -->
         <div class="splash-navbar">
-            <a href="/account/login" class="btn btn-default">@Localization.Common_Login</a>
+            <a href="/account/login" class="btn btn-default">@i18n.Common_Login</a>
         </div>
 
         <!-- Registration form -->
@@ -49,7 +49,8 @@
     @RenderBody()
 
 
-    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/js/vendeor")
+    @Scripts.Render("~/bundles/js/okboba")
     @RenderSection("scripts", required: false)
 
     <footer style="padding-top: 100px;">

@@ -10,6 +10,7 @@ namespace okboba.Web.Models
     {
         public ProfileText ProfileText { get; set; }
         public ProfileDetail ProfileDetail { get; set; }
+        public Dictionary<string,string> DetailDict { get; set; }
         public bool isMe { get; set; }
     }
 }

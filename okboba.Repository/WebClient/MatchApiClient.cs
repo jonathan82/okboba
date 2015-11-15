@@ -24,7 +24,7 @@ namespace okboba.Repository.WebClient
         
         public async Task<MatchModel> CalculateMatchAsync(int otherProfileId)
         {
-            var result = await CallMatchApiAsync<MatchModel>("/api/matches/calculatematch?otherProfileId=" + otherProfileId, false);
+            var result = await CallMatchApiAsync<MatchModel>("/api/matches/calculatematch?otherProfileId=" + otherProfileId, false).ConfigureAwait(false);
             return result;
         }
 
@@ -56,11 +56,11 @@ namespace okboba.Repository.WebClient
                 HttpResponseMessage response;
                 if(post)
                 {
-                    response = await client.PostAsJsonAsync(query, data);
+                    response = await client.PostAsJsonAsync(query, data).ConfigureAwait(false);
                 }
                 else
                 {
-                    response = await client.GetAsync(query);
+                    response = await client.GetAsync(query).ConfigureAwait(false);
                 }
                 
                 response.EnsureSuccessStatusCode();
