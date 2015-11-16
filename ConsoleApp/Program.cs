@@ -59,27 +59,30 @@ namespace ConsoleApp
 
             //////////////////// Seed the database ///////////////////////
             var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SeedDb db = new SeedDb(connString);
+            SeedDb seeder = new SeedDb(connString);
             Stopwatch timer = new Stopwatch();
 
-            // Questions
-            Console.WriteLine("Seeding Questions...");
-            db.SeedOkcQuestions("../../../data/okc_questions.txt");
+            //Profile Detail Options   
+            seeder.SeedDetailOptions("../../../data/profile_details.txt");         
 
-            // Chinese Cities
-            Console.WriteLine("Seeding Locations...");
-            db.SeedLocations("../../../data/china_cities.txt");
+            //// Questions
+            //Console.WriteLine("Seeding Questions...");
+            //seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
 
-            // Users
-            Console.WriteLine("Seeding Users...");
-            db.SeedUsers(10000, EntityLocationRepository.Instance.GetProvinceList());
+            //// Chinese Cities
+            //Console.WriteLine("Seeding Locations...");
+            //seeder.SeedLocations("../../../data/china_cities.txt");
 
-            // User answers
-            Console.WriteLine("Seeding answers...");
-            timer.Start();
-            db.SeedAnswers(10000, 10);
-            timer.Stop();
-            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            //// Users
+            //Console.WriteLine("Seeding Users...");
+            //seeder.SeedUsers(10000, EntityLocationRepository.Instance.GetProvinceList());
+
+            //// User answers
+            //Console.WriteLine("Seeding answers...");
+            //timer.Start();
+            //seeder.SeedAnswers(10000, 10);
+            //timer.Stop();
+            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //////////////////////// Simulations //////////////////////////
             //var seed = new SeedDb(connString);
