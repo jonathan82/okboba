@@ -20,6 +20,7 @@ namespace okboba.Controllers
     public class ProfileController : OkbBaseController
     {
         private IProfileRepository _profileRepo;
+        private ILocationRepository _locRepo;
         private MatchApiClient _webClient;
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -31,7 +32,7 @@ namespace okboba.Controllers
         public ProfileController()
         {
             _profileRepo = EntityProfileRepository.Instance;
-            //_webClient = GetMatchApiClient();
+            _locRepo = EntityLocationRepository.Instance;
         }
 
         [ChildActionOnly]
@@ -55,7 +56,7 @@ namespace okboba.Controllers
             {
                 ProfileText = profileText,
                 ProfileDetail = profileDetail,
-                DetailDict = detailDict,
+                DetailDict = detailDict,                
                 isMe = isMe
             };
 
@@ -76,6 +77,7 @@ namespace okboba.Controllers
                 Match = match,
                 Profile = profile,
                 IsMe = isMe,
+                Location = _locRepo.GetLocationString(profile.LocationId1, profile.LocationId2),
                 Section = section
             };
 

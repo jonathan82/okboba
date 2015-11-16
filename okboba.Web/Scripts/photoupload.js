@@ -7,8 +7,8 @@
  */
 (function ($) {
 
-    const MAX_FILE_SIZE = 5000000;
-    const MIN_RESOLUTION = 200;
+    const MAX_FILE_SIZE = 5000000; //5 MB
+    const MIN_RESOLUTION = 300;
     const MAX_SCREEN_WIDTH = 800;
 
     var photoArea;
@@ -49,7 +49,7 @@
                     .load(function () {
                         if (this.width < MIN_RESOLUTION || this.height < MIN_RESOLUTION) {
                             //Image too small
-                            alert('Photo must be at leat 200 x 200 pixels!');
+                            alert('Photo must be at least '+MIN_RESOLUTION+' pixels!');
                             return;
                         }
 
@@ -85,7 +85,8 @@
 
         photoArea = this.data('target');
 
-        this.find('input[type="file"]').fileReaderJS(opts);
+        var $fileInput = this.find('input[type="file"]');
+        $fileInput.fileReaderJS(opts);
 
         //Setup the dismiss event handler
         this.on('hidden.bs.modal', function (e) {
@@ -93,6 +94,9 @@
             if ($(photoArea).next().hasClass('photo-upload-container')) {
                 $(photoArea).next().remove();
             }
+
+            //reset form
+            $fileInput.val('');
 
             $(photoArea).show();
         });
@@ -118,11 +122,6 @@
             $('#topThumb').val(intTop);
             $('#leftThumb').val(intLeft);
             $('#widthThumb').val(intThumbWidth);
-
-            alert("submitting form. \
-                   \nleft: " + intTop +
-                   '\ntop: ' + intLeft +
-                   '\nwidth: ' + intThumbWidth);
         });
     }
 

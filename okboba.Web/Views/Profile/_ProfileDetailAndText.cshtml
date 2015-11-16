@@ -1,35 +1,50 @@
 ﻿@model okboba.Web.Models.ProfileDetailViewModel
 @using okboba.Resources
 @using okboba.Repository
+@using okboba.Web.Helpers
 
 <!-- Profile Details -->
 <div class="row top-buffer">
-    <div class="col-md-9">
-        <h3>@i18n.Profile_Question1</h3>
-        <div class="profile-text" data-editinplace="q1">
-            @Model.ProfileText.Question1
+    <div class="col-md-8">
+        <div class="profile-text-question">
+            @i18n.Profile_Question1
+        </div>
+        <div class="profile-text" id="q1">
+            @Html.ProfileText(Model.ProfileText.Question1)
+            @*<div class="js-editinplace-editicon" data-target="#q1"><span class="glyphicon glyphicon-pencil "></span></div>*@
+            @Html.TextEditIcon("#q1", Model.isMe)
         </div>
 
-        <h3>@i18n.Profile_Question2</h3>
-        <div class="profile-text" data-editinplace="q2">
-            @Model.ProfileText.Question2
+        <div class="profile-text-question">@i18n.Profile_Question2</div>
+        <div class="profile-text" id="q2">
+            @Html.ProfileText(Model.ProfileText.Question2)
+            @*<div class="js-editinplace-editicon" data-target="#q2"><span class="glyphicon glyphicon-pencil "></span></div>*@
+            @Html.TextEditIcon("#q2", Model.isMe)
         </div>
 
-        <h3>@i18n.Profile_Question3</h3>
-        <div class="profile-text" data-editinplace="q3">
+        <div class="profile-text-question">@i18n.Profile_Question3</div>
+        <div class="profile-text" id="q3">
             @Model.ProfileText.Question3
+            @*<div class="js-editinplace-editicon" data-target="#q3"><span class="glyphicon glyphicon-pencil "></span></div>*@
+            @Html.TextEditIcon("#q3", Model.isMe)
         </div>
 
-        <h3>@i18n.Profile_Question4</h3>
-        <div class="profile-text" data-editinplace="q4">
+        <div class="profile-text-question">@i18n.Profile_Question4</div>
+        <div class="profile-text" id="q4">
             @Model.ProfileText.Question4
+            @*<div class="js-editinplace-editicon" data-target="#q4"><span class="glyphicon glyphicon-pencil "></span></div>*@
+            @Html.TextEditIcon("#q4", Model.isMe)
         </div>
 
-        <h3>@i18n.Profile_Question5</h3>
-        <div class="profile-text" data-editinplace="q5">
+        <div class="profile-text-question">@i18n.Profile_Question5</div>
+        <div class="profile-text" id="q5">
             @Model.ProfileText.Question5
+            @*<div class="js-editinplace-editicon" data-target="#q5"><span class="glyphicon glyphicon-pencil "></span></div>*@
+            @Html.TextEditIcon("#q5", Model.isMe)
         </div>
     </div>
+
+    <div class="col-md-1"></div>
 
     <div class="col-md-3">
         <div class="profile-details">
@@ -42,8 +57,8 @@
                 @Model.DetailDict[OkbConstants.DETAIL_LOOKINGFOR]
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Height: 
-                
+                @i18n.ProfileDetail_Height:
+
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Education:
@@ -170,7 +185,7 @@
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Eye:
-                @Model.DetailDict[OkbConstants.DETAIL_EYECOLOR], 
+                @Model.DetailDict[OkbConstants.DETAIL_EYECOLOR],
                 @Model.DetailDict[OkbConstants.DETAIL_EYESHAPE]
             </div>
             <div class="profile-detail-row">

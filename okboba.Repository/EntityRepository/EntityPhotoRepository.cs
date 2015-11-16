@@ -72,7 +72,7 @@ namespace okboba.Repository.EntityRepository
                 CloudBlockBlob thumbBlob, origBlob;
 
                 //Setup
-                var cont = GetBlobContainer();
+                var cont = GetBlobContainer(profileId);
                 var filePrefix = GenerateUniqueFilename(cont);
                 imgFactory.Load(upload);
 
@@ -103,11 +103,13 @@ namespace okboba.Repository.EntityRepository
         /// <summary>
         /// Gets the Windows Azure Storage container
         /// </summary>
-        private CloudBlobContainer GetBlobContainer()
+        private CloudBlobContainer GetBlobContainer(int profileId)
         {
             var cont = CloudStorageAccount.Parse(StorageConnectionString)
                 .CreateCloudBlobClient()
-                .GetContainerReference("photos");
+                .GetContainerReference(profileId.ToString());
+
+            cont.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
 
             return cont;
         }

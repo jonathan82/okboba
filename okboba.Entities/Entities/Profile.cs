@@ -50,5 +50,13 @@ namespace okboba.Entities
             if (index == -1) index = PhotosInternal.Length;
             return PhotosInternal.Substring(0, index);
         }
+
+        public int GetAge()
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - Birthdate.Year;
+            if (Birthdate > today.AddYears(-age)) age--;
+            return age;
+        }
     }
 }

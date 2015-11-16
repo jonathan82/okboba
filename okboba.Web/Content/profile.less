@@ -1,5 +1,8 @@
 ﻿@import "common";
 
+@match-percent-size: 72px;
+@match-label-size: 0.5 * @match-percent-size;
+
 .profile-header-photo {
     .shadow-z-1;
     display: inline-block;    
@@ -17,15 +20,24 @@
     background-color: @primary-color-1;
     border-color: @primary-color-2;
     padding: 10px;
+    border-radius: 10px;
 }
-.profile-text {
-    min-height: 150px;
-}
-.profile-text:hover {
-    border: 1px dashed;
-    border-color: @primary-color-2;
+
+.profile-details:hover {
     cursor: pointer;
+    background-color: lighten(@primary-color-1, 3%);
 }
+
+.profile-text {
+    min-height: 100px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-family: @font-simsun;
+    font-size: 1.2em;
+    .opacity-text;
+}
+
 .profile-text-edit {
     width: 100%;
     min-height: 150px;
@@ -51,30 +63,77 @@
     font-family: SimSun;
 }
 
-.profile-header-match {
-    font-size: 4em;
+.profile-header-match {   
     color: @match-color;
+    font-size: @match-percent-size;
     line-height: 1;
+    display: inline-block;
+    position: relative;
+    top: -4px;
 }
 
-.profile-header-match-desc {
-    text-align: right;
+.profile-header-match-label {
     color: @match-color;
-    font-size: 1.3em;
+    font-size: @match-percent-size * 0.5;
+    line-height: 1;
+    vertical-align: top;
+    display:inline-block
+}
+
+.profile-header-friendenemy-container{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 30px;
     line-height: 1;
 }
 
 .profile-header-friend {
     color: @friend-color;
-    font-size: 2em;
-    border-right: 2px solid @gray-lighter;
-    padding-left: 20px;
-    padding-right: 20px;
-    line-height: 1;
-    vertical-align: top;
+    font-size: 0.4 * @match-percent-size;    
+    top: -2px;
+    position: relative;
 }
 
-.profile-header-friend-desc {
-    font-size: 14px;
-    text-align: right;
+.profile-header-friend-label {
+    color: @friend-color;
+    font-size: 0.4 * @match-label-size;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.profile-header-enemy {
+    .profile-header-friend;
+    color: @enemy-color;
+}
+
+.profile-header-enemy-label {
+    .profile-header-friend-label;
+    color: @enemy-color;
+}
+
+.profile-header-friend-container {
+    border-bottom: 1px solid @gray-lighter;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.profile-header-info {
+    display: inline-block;
+    margin-left: 40px;
+    vertical-align: top;
+    color: @gray-light;
+    font-size: 18px;
+    top: -4px;
+    position: relative;
+}
+
+.profile-text-question {
+    font-size: 1.7em;
+    color: @primary-color-3;
+}
+
+.profile-text-placeholder {
+    color: @gray-light;
+    font-size: 1.2em;
+    font-family: SimSun;
 }

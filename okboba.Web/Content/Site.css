@@ -1,8 +1,6 @@
 ﻿/******************
     Less Variables
 *******************/
-/*@light-gray: #F3F3F3;
-@gray: #E8E8E8;*/
 /*****************
     Shadows
 ******************/
@@ -110,7 +108,7 @@ body {
   padding-top: 8%;
 }
 .top-buffer {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .top-buffer-100 {
   margin-top: 100px;
@@ -133,7 +131,7 @@ body {
 .nav-tabs > li > a {
   border: none;
   font-size: 1.2em;
-  color: #777777;
+  color: #9b9b9b;
   margin: 0;
 }
 .nav-tabs > li > a:hover {
@@ -191,14 +189,21 @@ body {
   background-color: #FCE4EC;
   border-color: #F06292;
   padding: 10px;
+  border-radius: 10px;
+}
+.profile-details:hover {
+  cursor: pointer;
+  background-color: #fef2f6;
 }
 .profile-text {
-  min-height: 150px;
-}
-.profile-text:hover {
-  border: 1px dashed;
-  border-color: #F06292;
-  cursor: pointer;
+  min-height: 100px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
+  font-size: 1.2em;
+  opacity: .87;
+  color: #000;
 }
 .profile-text-edit {
   width: 100%;
@@ -218,32 +223,78 @@ body {
   text-align: center;
 }
 .profile-detail-row {
-  color: #777777;
+  color: #9b9b9b;
   font-family: SimSun;
 }
 .profile-header-match {
-  font-size: 4em;
   color: #FF0066;
+  font-size: 72px;
   line-height: 1;
+  display: inline-block;
+  position: relative;
+  top: -4px;
 }
-.profile-header-match-desc {
-  text-align: right;
+.profile-header-match-label {
   color: #FF0066;
-  font-size: 1.3em;
+  font-size: 36px;
+  line-height: 1;
+  vertical-align: top;
+  display: inline-block;
+}
+.profile-header-friendenemy-container {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 30px;
   line-height: 1;
 }
 .profile-header-friend {
   color: #0066FF;
-  font-size: 2em;
-  border-right: 2px solid #eeeeee;
-  padding-left: 20px;
-  padding-right: 20px;
-  line-height: 1;
-  vertical-align: top;
+  font-size: 28.8px;
+  top: -2px;
+  position: relative;
 }
-.profile-header-friend-desc {
-  font-size: 14px;
-  text-align: right;
+.profile-header-friend-label {
+  color: #0066FF;
+  font-size: 14.4px;
+  vertical-align: top;
+  display: inline-block;
+}
+.profile-header-enemy {
+  color: #0066FF;
+  font-size: 28.8px;
+  top: -2px;
+  position: relative;
+  color: green;
+}
+.profile-header-enemy-label {
+  color: #0066FF;
+  font-size: 14.4px;
+  vertical-align: top;
+  display: inline-block;
+  color: green;
+}
+.profile-header-friend-container {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+.profile-header-info {
+  display: inline-block;
+  margin-left: 40px;
+  vertical-align: top;
+  color: #9b9b9b;
+  font-size: 18px;
+  top: -4px;
+  position: relative;
+}
+.profile-text-question {
+  font-size: 1.7em;
+  color: #880E4F;
+}
+.profile-text-placeholder {
+  color: #9b9b9b;
+  font-size: 1.2em;
+  font-family: SimSun;
 }
 .matches-container {
   text-align: center;
@@ -258,7 +309,7 @@ body {
   width: 125px;
   margin: 10px auto;
   padding: 5px;
-  background-color: #777777;
+  background-color: #9b9b9b;
   border: 1px solid #555555;
 }
 .question-form {
@@ -313,7 +364,7 @@ label.photo-upload-label input[type="file"] {
   height: 200px;
   width: 200px;
   opacity: 0.5;
-  background-color: aqua;
+  background-color: #FFEB3B;
 }
 .photo-upload-container {
   display: inline-block;
@@ -331,5 +382,19 @@ label.photo-upload-label input[type="file"] {
   margin: 5px;
 }
 #listThumbnails > div:hover {
+  cursor: pointer;
+}
+/****************************************
+    Edit-in-place Styles
+****************************************/
+.js-editinplace-editicon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: #eeeeee;
+  opacity: 0.7;
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 2px;
   cursor: pointer;
 }

@@ -48,5 +48,16 @@ namespace okboba.Repository.EntityRepository
 
             return result.ToList();
         }
+
+        public string GetLocationString(int locId1, int locId2)
+        {
+            var db = new OkbDbContext();
+            var loc = db.Locations.Find(locId1, locId2);
+            if(loc != null)
+            {
+                return loc.LocationName1 + ", " + loc.LocationName2;
+            }
+            return "";
+        }
     }
 }

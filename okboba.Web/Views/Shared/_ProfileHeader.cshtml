@@ -6,17 +6,21 @@
 <div class="row">
     <!--User Details & Percentages -->
     <div class="col-sm-9 col-md-10">
-        <div class="inline-block">
-            <div class="profile-header-match">@Model.Match.MatchPercent%</div>
-            <div class="profile-header-match-desc">@i18n.Common_Match</div>
+        <div class="profile-header-match">@Model.Match.MatchPercent%</div>
+        <div class="profile-header-match-label">@i18n.Common_Match</div>
+        <div class="profile-header-friendenemy-container">
+            <div class="profile-header-friend-container">
+                <span class="profile-header-friend">@Model.Match.FriendPercent%</span>
+                <div class="profile-header-friend-label">@i18n.Common_Friend</div>
+            </div>
+            <div>
+                <span class="profile-header-enemy">@Model.Match.EnemyPercent%</span>
+                <div class="profile-header-enemy-label">@i18n.Common_Enemy</div>
+            </div>           
         </div>
-        <div class="inline-block profile-header-friend">
-            <div>@Model.Match.FriendPercent%</div>
-            <div class="profile-header-friend-desc">@i18n.Common_Friend</div>
-        </div>
-        <div class="inline-block">
-            <div>@Model.Match.EnemyPercent%</div>
-            <div>@i18n.Common_Enemy</div>
+        <div class="profile-header-info">
+            @Model.Profile.Name, @Model.Profile.GetAge()@Html.Gender(Model.Profile.Gender)<br />
+            @Model.Location
         </div>
     </div>
 
@@ -31,25 +35,34 @@
 
 <!-- Row 2: Thumbnails - Show the first 4 -->
 @{ var photos = Model.Profile.GetPhotos(); }
-<div class="profile-header-photo">
-    <a href="~/photo/@Model.Profile.Id">@Html.Avatar(Model.Profile.GetFirstPhoto(), Model.Profile.Gender, 180, 180)</a>
-    @if (photos.Length==0 && Model.IsMe)
-    {
-        <button class="btn btn-info profile-header-addphoto">@i18n.Photos_AddPhoto</button>
-    }
-</div>
+@{ var profileId = Model.IsMe ? "" : Model.Profile.Id.ToString();}
 
-@for (int i = 1; i < photos.Length && i < 4; i++)
+@for (int i = 0; i < photos.Length && i < 4; i++)
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@Model.Profile.Id">@Html.Avatar(photos[i], Model.Profile.Gender, 180, 180)</a>
+        <a href="~/photo/@profileId">@Html.Avatar(photos[i], Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+    </div>
+}
+@if (photos.Length < 4 && Model.IsMe)
+{
+    //Show Add photo as long as user has less than 4 photos
+    <div class="profile-header-photo">
+        <a href="~/photo/@profileId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>
+    </div>
+}
+else if (photos.Length == 0)
+{
+    //Show no avatar if user has no photos
+    <div class="profile-header-photo">
+        <a href="~/photo/@profileId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
     </div>
 }
 
 <!-- Row 3: Navigation tab -->
 <ul class="nav nav-tabs">
-    @Html.NavTab(Model.Section, "Profile", "/profile/" + Model.Profile.Id)
-    @Html.NavTab(Model.Section, "Photos", "/photo/" + Model.Profile.Id)
-    @Html.NavTab(Model.Section, "Questions", "/question/" + Model.Profile.Id)
-    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + Model.Profile.Id)
+    @Html.NavTab(Model.Section, "Profile", "/profile/" + profileId)
+    @Html.NavTab(Model.Section, "Photos", "/photo/" + profileId)
+    @Html.NavTab(Model.Section, "Questions", "/question/" + profileId)
+    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + profileId)
 </ul>

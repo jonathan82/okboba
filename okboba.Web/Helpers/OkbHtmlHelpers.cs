@@ -1,5 +1,6 @@
 ﻿using okboba.Entities;
 using okboba.Repository;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -25,7 +26,7 @@ namespace okboba.Web.Helpers
             }
         }
 
-        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int profileId, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
         {
             string src;
 
@@ -38,7 +39,7 @@ namespace okboba.Web.Helpers
             else
             {
                 //Use the storage key in web.config to construct URL
-                src = ConfigurationManager.AppSettings["StorageUrl"];
+                src = ConfigurationManager.AppSettings["StorageUrl"] + profileId.ToString() + "/";
                 src += photo + "_t";
             }
 
@@ -68,11 +69,38 @@ namespace okboba.Web.Helpers
             return new HtmlString(liTag.ToString());
         }
 
-        //public static HtmlString Avatar(this HtmlHelper htmlHelper, Profile profile)
-        //{
-        //    string photo = profile.GetFirstPhoto();
+        public static HtmlString ProfileText(this HtmlHelper htmlHelper, string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                //use placeholder text
+                var span = new TagBuilder("span");
+                span.AddCssClass("profile-text-placeholder");
+                span.InnerHtml = i18n.Profile_Text_Prompt;
+                return new HtmlString(span.ToString());
+            }
+            return new HtmlString(text);
+        }
 
-        //    return htmlHelper.Photo(photo, profile.Gender);
-        //}
+        public static HtmlString TextEditIcon(this HtmlHelper htmlHelper, string target, bool me)
+        {
+            //<div class="js-editinplace-editicon" data-target="#q5"><span class="glyphicon glyphicon-pencil "></span></div>
+            if (me)
+            {
+                var div = new TagBuilder("div");
+                div.AddCssClass("js-editinplace-editicon");
+                div.MergeAttribute("data-target", target);
+
+                var span = new TagBuilder("span");
+                span.AddCssClass("glyphicon");
+                span.AddCssClass("glyphicon-pencil");
+
+                div.InnerHtml = span.ToString();
+
+                return new HtmlString(div.ToString());
+            }
+
+            return new HtmlString("");
+        }
     }
 }

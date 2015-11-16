@@ -30,6 +30,7 @@ namespace okboba
                 "~/lib/bootstrap/css/bootstrap.css",
                 "~/lib/bootstrap/css/bootstrap-theme.css",
                 "~/lib/datepicker/css/bootstrap-datepicker3.css",
+                "~/lib/jquery-ui/jquery-ui.css",
                 "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/react").Include(

@@ -250,6 +250,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 请写一些关于自己在这里.
+        /// </summary>
+        public static string Profile_Text_Prompt {
+            get {
+                return ResourceManager.GetString("Profile_Text_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 体型.
         /// </summary>
         public static string ProfileDetail_BodyType {

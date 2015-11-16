@@ -11,5 +11,6 @@ namespace okboba.Repository
     {
         List<Location> GetProvinceList();
         List<Location> GetDistrictList(int id);
+        string GetLocationString(int locId1, int locId2);
     }
 }

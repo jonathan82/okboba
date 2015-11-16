@@ -9,9 +9,12 @@
 
 @Html.Action("ProfileDetailAndText", new { profileId = Model.ProfileId, isMe = Model.IsMe })
 
+@Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
+
 @section Scripts {
 
     <script>
         $().editinplace();
+        $('#photoUploadModal').photoUpload();
     </script>
 }

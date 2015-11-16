@@ -467,6 +467,8 @@
     <Content Include="Views\Playground\Index.cshtml" />
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
+    <Content Include="Views\Photo\_PhotoUpload.cshtml" />
+    <Content Include="Views\Profile\_EditProfileDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
