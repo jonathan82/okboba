@@ -9,14 +9,15 @@
         <div class="profile-text-question">
             @i18n.Profile_Question1
         </div>
-        <div class="profile-text" id="q1">
-            @Html.ProfileText(Model.ProfileText.Question1)
-            @*<div class="js-editinplace-editicon" data-target="#q1"><span class="glyphicon glyphicon-pencil "></span></div>*@
+        <div class="profile-text">
+            <div id="q1">@Html.Raw(Model.ProfileText.Question1)</div>
+            @*@Html.ProfileText(Model.ProfileText.Question1)*@
             @Html.TextEditIcon("#q1", Model.isMe)
         </div>
 
         <div class="profile-text-question">@i18n.Profile_Question2</div>
-        <div class="profile-text" id="q2">
+        <div class="profile-text">
+            <div id="q2"></div>
             @Html.ProfileText(Model.ProfileText.Question2)
             @*<div class="js-editinplace-editicon" data-target="#q2"><span class="glyphicon glyphicon-pencil "></span></div>*@
             @Html.TextEditIcon("#q2", Model.isMe)

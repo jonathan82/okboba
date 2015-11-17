@@ -160,9 +160,10 @@ namespace okboba.Controllers
         public ActionResult EditProfileText(string qText, string whichQuestion)
         {
             //Massage the input
-            qText = HttpContext.Server.HtmlEncode(qText);
             qText = Truncate(qText, 4000);
-
+            qText = HttpContext.Server.HtmlEncode(qText);
+            qText = qText.Replace(Environment.NewLine, "<br>");
+            
             var db = new OkbDbContext();
 
             //Check if we are adding or updating

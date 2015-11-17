@@ -12,19 +12,20 @@ namespace okboba
                 "~/lib/jquery/jquery-{version}.js",
                 "~/lib/jquery-ui/jquery-ui.js",
                 "~/lib/jquery-validate/jquery.validate.js",
+                "~/lib/jquery-validate/localization/messages*",
                 "~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.js",
                 "~/lib/bootstrap/js/bootstrap.js",
                 "~/lib/datepicker/js/bootstrap-datepicker.js",
                 "~/lib/datepicker/locales/bootstrap-datepicker.zh-CN.min.js",
                 "~/lib/filereader/filereader.js",
-                "~/Scripts/okboba.js"));
+                "~/lib/jsviews/jsviews.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",
                 "~/Scripts/editinplace.js",
                 "~/Scripts/locationpicker.js",
                 "~/Scripts/matchscroller.js",
-                "~/Scripts/photoupload.js"));
+                "~/Scripts/photoupload2.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

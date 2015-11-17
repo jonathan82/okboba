@@ -398,12 +398,15 @@
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="lib\jquery\jquery-1.11.3.min.map" />
+    <Content Include="lib\jsviews\jsviews.min.js.map" />
     <None Include="Properties\PublishProfiles\okboba.pubxml" />
     <None Include="lib\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="lib\filereader\filereader.js" />
     <None Include="lib\jquery-validate\jquery.validate-vsdoc.js" />
     <Content Include="lib\jquery-validate-unobtrusive\jquery.validate.unobtrusive.js" />
     <Content Include="lib\jquery-validate-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="lib\jsviews\jsviews.js" />
+    <Content Include="lib\jsviews\jsviews.min.js" />
     <Content Include="Scripts\editinplace.js" />
     <Content Include="Scripts\locationpicker.js" />
     <Content Include="Scripts\matchscroller.js" />
@@ -413,6 +416,7 @@
     <Content Include="lib\react\react.js" />
     <Content Include="lib\react\react.min.js" />
     <Content Include="Scripts\photoupload.js" />
+    <Content Include="Scripts\photoupload2.js" />
     <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

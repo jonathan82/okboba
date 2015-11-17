@@ -207,7 +207,7 @@ body {
 }
 .profile-text-edit {
   width: 100%;
-  min-height: 150px;
+  min-height: 200px;
 }
 .profile-thumbnail {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

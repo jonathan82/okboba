@@ -48,7 +48,8 @@
     //Show Add photo as long as user has less than 4 photos
     <div class="profile-header-photo">
         <a href="~/photo/@profileId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
-        <button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>
+        @*<button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>*@
+        <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Photos_AddPhoto</button>
     </div>
 }
 else if (photos.Length == 0)
