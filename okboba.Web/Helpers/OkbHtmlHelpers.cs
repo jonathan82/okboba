@@ -69,20 +69,34 @@ namespace okboba.Web.Helpers
             return new HtmlString(liTag.ToString());
         }
 
-        public static HtmlString ProfileText(this HtmlHelper htmlHelper, string text)
+        private static string nl2br(string text)
         {
+            return text.Replace(Environment.NewLine, "<br>");
+        }
+
+        public static HtmlString ProfileText(this HtmlHelper htmlHelper, string text, string qid, bool isMe)
+        {
+            var qDiv = new TagBuilder("div");
+            qDiv.MergeAttribute("id", qid);            
+
             if (string.IsNullOrEmpty(text))
             {
                 //use placeholder text
-                var span = new TagBuilder("span");
-                span.AddCssClass("profile-text-placeholder");
-                span.InnerHtml = i18n.Profile_Text_Prompt;
-                return new HtmlString(span.ToString());
+                qDiv.AddCssClass("profile-text-placeholder");
+                qDiv.InnerHtml = isMe ? i18n.Profile_Text_Prompt : i18n.Profile_Text_None;
+                //var span = new TagBuilder("span");
+                //span.AddCssClass("profile-text-placeholder");
+                //span.InnerHtml = isMe ? i18n.Profile_Text_Prompt : i18n.Profile_Text_None;
             }
-            return new HtmlString(text);
+            else
+            {
+                qDiv.InnerHtml = nl2br(text);
+            }
+
+            return new HtmlString(qDiv.ToString());
         }
 
-        public static HtmlString TextEditIcon(this HtmlHelper htmlHelper, string target, bool me)
+        public static HtmlString EditTextIcon(this HtmlHelper htmlHelper, string target, bool me)
         {
             //<div class="js-editinplace-editicon" data-target="#q5"><span class="glyphicon glyphicon-pencil "></span></div>
             if (me)

@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Activity.cs" />
     <Compile Include="Entities\Answer.cs" />
     <Compile Include="Entities\Conversation.cs" />
     <Compile Include="Entities\ConversationMap.cs" />

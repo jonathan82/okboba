@@ -15,9 +15,15 @@ namespace okboba
 
             routes.MapRoute(
                 name: "Index",
-                url: "{controller}/{action}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{id}",
+                defaults: new { action = "Index", id = UrlParameter.Optional  }
             );
+        
+            //routes.MapRoute(
+            //    name: "Index",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { action = "Index", id = UrlParameter.Optional }
+            //);
 
             routes.MapRoute(
                 name: "Default",

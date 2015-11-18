@@ -121,6 +121,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityRepository\EntityActivityRepository.cs" />
+    <Compile Include="IActivityRepository.cs" />
     <Compile Include="OkbConstants.cs" />
     <Compile Include="EntityRepository\EntityLocationRepository.cs" />
     <Compile Include="EntityRepository\EntityMatchRepository.cs" />

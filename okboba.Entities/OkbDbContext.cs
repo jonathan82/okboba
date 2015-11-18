@@ -32,5 +32,6 @@ namespace okboba.Entities
         public DbSet<TranslateQuestion> TranslateQuestions { get; set; }
         public DbSet<ProfileDetail> ProfileDetails { get; set; }
         public DbSet<ProfileDetailOption> ProfileDetailOptions { get; set; }
+        //public DbSet<Activity> ActivityFeed { get; set; }
     }
 }

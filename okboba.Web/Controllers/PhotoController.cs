@@ -23,7 +23,7 @@ namespace okboba.Controllers
         }
 
         // GET: Image
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             //var profileId = GetProfileId();
             //var profile = _profileRepo.GetProfile(profileId);

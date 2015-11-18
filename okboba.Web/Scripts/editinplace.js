@@ -31,9 +31,10 @@
 
                 $.post(url, postData, function (data) {
                     //successfully posted data
-                    //show posted text and edit icon, remove form
+                    //show posted text and edit icon, remove form, remove placeholder class
                     var newTxt = $newForm.children('textarea:first').val();
                     $qDiv.html(encodeHtml(newTxt));
+                    $qDiv.removeClass('profile-text-placeholder');
                     $qDiv.show();
                     $editIcon.show();
                     $newForm.remove();
@@ -54,12 +55,12 @@
             }            
 
             //Grab the html to put in the textarea
-            var html = $qDiv.html();
+            var html = $qDiv.hasClass('profile-text-placeholder') ? '' : $qDiv.html();
 
             $newForm = $('<form><textarea class="profile-text-edit" id=qText-"' + $qDiv.prop('id') + '" name="qText">' + br2nl(html) + '</textarea> \
-                                 <button type="button" class="btn btn-default">Cancel</button> \
-                                 <button type="button" class="btn btn-primary">Save</button> \
-                                 <input type="hidden" name="whichQuestion" value="' + $qDiv.prop('id') + '" /></form>');
+                          <button type="button" class="btn btn-default">Cancel</button> \
+                          <button type="button" class="btn btn-primary">Save</button> \
+                          <input type="hidden" name="whichQuestion" value="' + $qDiv.prop('id') + '" /></form>');
             $qDiv.after($newForm);
 
             //Hide the original text and edit icon

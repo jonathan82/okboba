@@ -1,13 +1,25 @@
 ﻿namespace okboba.Repository
 {
+    //Activities
+    public enum ActivityCategories { Joined, UploadedPhoto, EditedProfileText, AnsweredQuestion }
+
     public static class OkbConstants
     {
+        //Gender
         public const byte UNKNOWN_GENDER = 0;
         public const byte MALE = 1;
         public const byte FEMALE = 2;
+
+        //Avatar
         public const int AVATAR_WIDTH = 200;
         public const int AVATAR_HEIGHT = 200;
+        public const int AVATAR_WIDTH_SMALL = 90;
+        public const int AVATAR_HEIGHT_SMALL = 90;
 
+        //Profile
+        public const int MAX_PROFILE_TEXT_SIZE = 4000;
+
+        //Profile Details
         public const string DETAIL_EDUCATION = "Education";
         public const string DETAIL_RELATIONSHIPSTATUS = "RelationshipStatus";
         public const string DETAIL_HAVECHILDREN = "HaveChildren";

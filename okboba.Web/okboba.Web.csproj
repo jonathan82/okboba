@@ -473,6 +473,7 @@
     <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
     <Content Include="Views\Photo\_PhotoUpload.cshtml" />
     <Content Include="Views\Profile\_EditProfileDetail.cshtml" />
+    <Content Include="Views\Photo\_ListPhotos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

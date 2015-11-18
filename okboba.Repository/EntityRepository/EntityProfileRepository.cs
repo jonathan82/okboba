@@ -124,5 +124,42 @@ namespace okboba.Repository.EntityRepository
                 });
             }
         }
+
+        public void EditProfileText(int profileId, string text, string whichQuestion)
+        {            
+            var db = new OkbDbContext();
+
+            //Check if we are adding or updating
+            var currProfileText = db.ProfileTexts.Find(profileId);
+
+            if (currProfileText == null)
+            {
+                currProfileText = new ProfileText { ProfileId = profileId };
+                db.ProfileTexts.Add(currProfileText);
+            }
+
+            switch (whichQuestion)
+            {
+                case "q1":
+                    currProfileText.Question1 = text;
+                    break;
+                case "q2":
+                    currProfileText.Question2 = text;
+                    break;
+                case "q3":
+                    currProfileText.Question3 = text;
+                    break;
+                case "q4":
+                    currProfileText.Question4 = text;
+                    break;
+                case "q5":
+                    currProfileText.Question5 = text;
+                    break;
+                default:
+                    throw new Exception("Invalid profile text id");
+            }
+
+            db.SaveChanges();
+        }
     }
 }

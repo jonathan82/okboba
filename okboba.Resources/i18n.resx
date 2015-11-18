@@ -315,4 +315,7 @@
   <data name="Profile_Text_Prompt" xml:space="preserve">
     <value>请写一些关于自己在这里</value>
   </data>
+  <data name="Profile_Text_None" xml:space="preserve">
+    <value>没有写</value>
+  </data>
 </root>

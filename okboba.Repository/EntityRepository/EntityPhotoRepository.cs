@@ -77,8 +77,14 @@ namespace okboba.Repository.EntityRepository
                 imgFactory.Load(upload);
 
                 // Create and Upload the thumbnail
-                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb);
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH);
                 thumbBlob = cont.GetBlockBlobReference(filePrefix + "_t");
+                thumbBlob.UploadFromStream(thumbStream);
+
+                //create and upload small thumbnail
+                imgFactory.Reset();
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH_SMALL);
+                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_s");
                 thumbBlob.UploadFromStream(thumbStream);
 
                 // Upload resized image if necessary
@@ -137,13 +143,13 @@ namespace okboba.Repository.EntityRepository
             return 1;
         }
 
-        private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width)
+        private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width, int finalWidth)
         {
             var outStream = new MemoryStream();
 
             imgFactory
                 .Crop(new Rectangle(left, top, width, width))
-                .Resize(new Size(THUMB_WIDTH, THUMB_WIDTH))
+                .Resize(new Size(finalWidth, finalWidth))
                 .Save(outStream);
 
             return outStream;
