@@ -14,16 +14,17 @@ namespace okboba
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Index",
+                name: "IndexWithId",
                 url: "{controller}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional  }
+                defaults: new { action = "Index", id = UrlParameter.Optional  },
+                constraints: new { id = @"\d+" }
             );
-        
-            //routes.MapRoute(
-            //    name: "Index",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { action = "Index", id = UrlParameter.Optional }
-            //);
+
+            routes.MapRoute(
+                name: "Index",
+                url: "{controller}/{action}/{id}",
+                defaults: new { action = "Index", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",

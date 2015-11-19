@@ -198,9 +198,36 @@ namespace okboba.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 加照片.
         /// </summary>
-        public static string Photos_AddPhoto {
+        public static string Photo_AddPhoto {
             get {
-                return ResourceManager.GetString("Photos_AddPhoto", resourceCulture);
+                return ResourceManager.GetString("Photo_AddPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Photo_Delete {
+            get {
+                return ResourceManager.GetString("Photo_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Thumbnail.
+        /// </summary>
+        public static string Photo_EditThumbnail {
+            get {
+                return ResourceManager.GetString("Photo_EditThumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Your Photo.
+        /// </summary>
+        public static string Photo_UploadYourPhoto {
+            get {
+                return ResourceManager.GetString("Photo_UploadYourPhoto", resourceCulture);
             }
         }
         

@@ -26,6 +26,14 @@ namespace okboba.Web.Helpers
             }
         }
 
+        public static HtmlString DisplayPhoto(this HtmlHelper htmlHelper, string photo, int profileId)
+        {
+            var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
+            var img = new TagBuilder("img");
+            img.MergeAttribute("src", storageUrl + profileId.ToString() + "/" + photo + "_u");
+            return new HtmlString(img.ToString(TagRenderMode.SelfClosing));
+        }
+
         public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int profileId, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
         {
             string src;

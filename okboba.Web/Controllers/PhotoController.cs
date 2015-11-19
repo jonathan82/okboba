@@ -22,16 +22,38 @@ namespace okboba.Controllers
             _profileRepo = EntityProfileRepository.Instance;
         }
 
+        [ChildActionOnly]
+        public ActionResult ListPhotos(int id, bool isMe)
+        {
+            var vm = new ListPhotosViewModel();
+
+            var profile = _profileRepo.GetProfile(id);
+
+            vm.ProfileId = id;
+            vm.IsMe = isMe;
+            vm.Photos = profile.GetPhotos();
+
+            return PartialView("_ListPhotos",vm);
+        }
+
         // GET: Image
         public ActionResult Index(int? id)
         {
-            //var profileId = GetProfileId();
-            //var profile = _profileRepo.GetProfile(profileId);
+            var vm = new PhotoIndexViewModel();
+            
+            if (id == null)
+            {
+                //Viewing own profile
+                vm.IsMe = true;
+                vm.ProfileId = GetProfileId();
+            }
+            else
+            {
+                vm.IsMe = false;
+                vm.ProfileId = (int)id;
+            }
 
-            //var vm = new ProfileViewModel(profile);            
-
-            //return View(vm);
-            throw new NotImplementedException();
+            return View(vm);
         }
 
         [HttpPost]

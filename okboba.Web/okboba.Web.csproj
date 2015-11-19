@@ -275,6 +275,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
+    <Compile Include="Models\Photo\ListPhotosViewModel.cs" />
+    <Compile Include="Models\Photo\PhotoIndexViewModel.cs" />
     <Compile Include="Models\Profile\ProfileDetailViewModel.cs" />
     <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModel.cs" />
@@ -340,6 +342,7 @@
     <Content Include="Content\messages.less" />
     <Content Include="Content\question.less" />
     <Content Include="Content\nav.less" />
+    <Content Include="Content\photo.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -407,6 +410,19 @@
     <Content Include="lib\jquery-validate-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <Content Include="lib\jsviews\jsviews.js" />
     <Content Include="lib\jsviews\jsviews.min.js" />
+    <Content Include="lib\masonry\imagesloaded.pkgd.js" />
+    <Content Include="lib\masonry\imagesloaded.pkgd.min.js" />
+    <Content Include="lib\masonry\masonry.pkgd.js" />
+    <Content Include="lib\masonry\masonry.pkgd.min.js" />
+    <Content Include="lib\photoswipe\default-skin\default-skin.css" />
+    <Content Include="lib\photoswipe\default-skin\default-skin.png" />
+    <Content Include="lib\photoswipe\default-skin\default-skin.svg" />
+    <Content Include="lib\photoswipe\default-skin\preloader.gif" />
+    <Content Include="lib\photoswipe\photoswipe-ui-default.js" />
+    <Content Include="lib\photoswipe\photoswipe-ui-default.min.js" />
+    <Content Include="lib\photoswipe\photoswipe.css" />
+    <Content Include="lib\photoswipe\photoswipe.js" />
+    <Content Include="lib\photoswipe\photoswipe.min.js" />
     <Content Include="Scripts\editinplace.js" />
     <Content Include="Scripts\locationpicker.js" />
     <Content Include="Scripts\matchscroller.js" />
@@ -474,6 +490,7 @@
     <Content Include="Views\Photo\_PhotoUpload.cshtml" />
     <Content Include="Views\Profile\_EditProfileDetail.cshtml" />
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
+    <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

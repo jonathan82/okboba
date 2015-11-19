@@ -149,6 +149,7 @@ body {
 .nav-tabs {
   border-bottom: 1px solid #dddddd;
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 /******************************************
     Bootstrap override - navigation bar
@@ -355,6 +356,33 @@ body {
 .conversation-read .circle {
   opacity: 0;
 }
+/****************************************
+    Masonry grid
+****************************************/
+.grid {
+  position: relative;
+  margin-top: 20px;
+}
+.grid-item {
+  display: block;
+  float: left;
+  margin: 0 10px 10px 0;
+  position: relative;
+}
+.photo-edit-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  opacity: 0.9;
+  padding: 10px 5px;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+/****************************************
+    Photo Upload
+****************************************/
 .photo-upload-background {
   background-color: lightgray;
   text-align: center;
@@ -399,7 +427,7 @@ label.photo-upload-label input[type="file"] {
   cursor: pointer;
 }
 /****************************************
-    Edit-in-place Styles
+    Edit-in-place
 ****************************************/
 .js-editinplace-editicon {
   position: absolute;

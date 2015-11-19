@@ -1,94 +1,23 @@
-﻿@model okboba.Web.Models.ProfileHeaderViewModel
+﻿@model okboba.Web.Models.PhotoIndexViewModel
+
 @{
     ViewBag.Title = "Profile Photos";
 }
 
-@Html.Partial("_ProfileHeader")
+@Html.Action("ProfileHeader","Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = "Photos" })
 
-<div class="row top-buffer">
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoUploadModal">Add Photo</button>
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoArrangeModal">Change Order</button>
-</div>
+@Html.Action("ListPhotos", new {id = Model.ProfileId, isMe = Model.IsMe })
 
-@foreach (var p in Model.Photos)
-{
-    <div class="row top-buffer">
-        <p><img src="@(Model.StorageUrl + p)" alt="Alternate Text" /></p>
-        <button class="btn btn-default">Edit Thumbnail</button>
-        <button type="button" class="btn btn-default">Delete Photo</button>
-    </div>
-}
-
-<!-- Photo Upload Modal -->
-<form method="post" action="/photo/upload" enctype="multipart/form-data">
-    <div class="modal fade" id="photoUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-target="#photoUploadArea">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Upload your photo</h4>
-                </div>
-                <div class="modal-body" style="text-align: center;">
-                    <div class="photo-upload-background" id="photoUploadArea">
-                        <label class="photo-upload-label">
-                            <input type="file" name="upload" id="fileInput" value=" " />
-                            <span class="glyphicon glyphicon-upload"></span>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-submit="modal">Save changes</button>
-                    <input type="hidden" id="topThumb" name="topThumb" value=" " />
-                    <input type="hidden" id="leftThumb" name="leftThumb" value=" " />
-                    <input type="hidden" id="widthThumb" name="widthThumb" value=" " />
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<!-- Photo rearrange modal -->
-<div class="modal fade" id="photoArrangeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Re-Arrange your photos</h4>
-            </div>
-            <div class="modal-body" style="text-align: center;">
-                <div id="listThumbnails" class="clearfix">
-                    @foreach (var p in Model.Photos)
-                    {
-                        <div><img src="@(Model.StorageUrl + p + "_t")" alt="" width="100" data-name="@p"/></div>
-                    }                    
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<ul id="testSortable">
-    <li>Item 1</li>
-    <li>Item 2</li>
-    <li>Item 3</li>
-    <li>Item 4</li>
-</ul>
-
+@Html.Partial("_PhotoUpload")
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/filereader")
-    @Scripts.Render("~/bundles/okboba")
 
     <script>
-        $('#photoUploadModal').photoUpload();
-        $('#listThumbnails').sortable();
-        $('#testSortable').sortable();
-
+        //$('#photoUploadModal').photoUpload();
+        //$('#listThumbnails').sortable();
+        //$('#testSortable').sortable();
+        $('.grid-item').hover(function () {
+            $(this).children('.photo-edit-overlay').show();
+        });
     </script>
 }

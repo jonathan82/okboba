@@ -1,1 +1,26 @@
-﻿
+﻿@model okboba.Web.Models.ListPhotosViewModel
+@using okboba.Web.Helpers
+@using okboba.Resources
+
+@if (Model.IsMe)
+{
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoUploadModal">Add Photo</button>
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoArrangeModal">Change Order</button>
+}
+
+<div class="grid clearfix">
+    @foreach (var photo in Model.Photos)
+    {
+        <div class="grid-item">
+            @Html.DisplayPhoto(photo, Model.ProfileId)
+
+            @if (Model.IsMe)
+            {
+                <div class="photo-edit-overlay">
+                    <button class="btn btn-default btn-sm">@i18n.Photo_AddPhoto</button>
+                    <button class="btn btn-default btn-sm">@i18n.Photo_Delete</button>
+                </div>
+            }            
+        </div>
+    }
+</div>

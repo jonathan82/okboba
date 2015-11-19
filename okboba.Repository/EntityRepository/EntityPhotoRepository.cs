@@ -30,10 +30,10 @@ namespace okboba.Repository.EntityRepository
         }
         #endregion
 
-        ////////////////// Member variables ////////////////////////
-        const int THUMB_WIDTH = 200;
+        ////////////////// Member variables ////////////////////////       
         const int MAX_PHOTOS_PER_USER = 10;
-        const int MAX_IMAGE_WIDTH = 900;
+        const int MAX_IMAGE_HEIGHT = 1000;
+        const int FULL_THUMBNAIL_HEIGHT = 250;
         const int MAX_FILENAME_RETRY = 3;
 
         public string StorageConnectionString { get; set; }
@@ -87,11 +87,17 @@ namespace okboba.Repository.EntityRepository
                 thumbBlob = cont.GetBlockBlobReference(filePrefix + "_s");
                 thumbBlob.UploadFromStream(thumbStream);
 
+                //create and upload full thumbnail
+                imgFactory.Reset();
+                thumbStream = ResizeImage(imgFactory, FULL_THUMBNAIL_HEIGHT);
+                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_u");
+                thumbBlob.UploadFromStream(thumbStream);
+
                 // Upload resized image if necessary
-                if (imgFactory.Image.Width > MAX_IMAGE_WIDTH)
+                if (imgFactory.Image.Height > MAX_IMAGE_HEIGHT)
                 {
                     imgFactory.Reset();
-                    origStream = ResizeImage(imgFactory, MAX_IMAGE_WIDTH);
+                    origStream = ResizeImage(imgFactory, MAX_IMAGE_HEIGHT);
                 }
                 else
                 {
@@ -143,6 +149,9 @@ namespace okboba.Repository.EntityRepository
             return 1;
         }
 
+        /// <summary>
+        /// Creates a thumbnail from the given image
+        /// </summary>
         private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width, int finalWidth)
         {
             var outStream = new MemoryStream();
@@ -155,12 +164,18 @@ namespace okboba.Repository.EntityRepository
             return outStream;
         }
 
-        private MemoryStream ResizeImage(ImageFactory imgFactory, int width)
+        /// <summary>
+        /// Resizes image so the longest dimension is longestSide
+        /// </summary>
+        private MemoryStream ResizeImage(ImageFactory imgFactory, int height)
         {
             var outStream = new MemoryStream();
 
             //Maintain aspect ratio
-            int height = (int)(((float)width / imgFactory.Image.Width) * imgFactory.Image.Height);
+            var width = (int)(((float)height / imgFactory.Image.Height) * imgFactory.Image.Width);
+            
+            //Maintain aspect ratio
+            //int height = (int)(((float)width / imgFactory.Image.Width) * imgFactory.Image.Height);
 
             imgFactory
                 .Resize(new Size(width, height))

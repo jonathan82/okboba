@@ -18,7 +18,9 @@ namespace okboba
                 "~/lib/datepicker/js/bootstrap-datepicker.js",
                 "~/lib/datepicker/locales/bootstrap-datepicker.zh-CN.min.js",
                 "~/lib/filereader/filereader.js",
-                "~/lib/jsviews/jsviews.js"));
+                "~/lib/jsviews/jsviews.js",
+                "~/lib/masonry/masonry.pkgd.js",
+                "~/lib/masonry/imagesloaded.pkgd.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",

@@ -162,9 +162,6 @@
   <data name="Nav_Questions" xml:space="preserve">
     <value>问题</value>
   </data>
-  <data name="Photos_AddPhoto" xml:space="preserve">
-    <value>加照片</value>
-  </data>
   <data name="ProfileDetail_BodyType" xml:space="preserve">
     <value>体型</value>
   </data>
@@ -317,5 +314,17 @@
   </data>
   <data name="Profile_Text_None" xml:space="preserve">
     <value>没有写</value>
+  </data>
+  <data name="Photo_AddPhoto" xml:space="preserve">
+    <value>加照片</value>
+  </data>
+  <data name="Photo_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Photo_EditThumbnail" xml:space="preserve">
+    <value>Edit Thumbnail</value>
+  </data>
+  <data name="Photo_UploadYourPhoto" xml:space="preserve">
+    <value>Upload Your Photo</value>
   </data>
 </root>
