@@ -1,0 +1,30 @@
+﻿@using okboba.Resources
+
+<!-- Edit Thumbnail Modal -->
+<script id="editThumbnailTemplate" type="text/x-jsrender">
+
+    <div class="modal fade" id="editThumbnailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-target="#photoUploadArea">
+        <form method="post" action="/photo/editthumbnail" enctype="multipart/form-data">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">@i18n.Photo_EditThumbnail_Caption</h4>
+                    </div>
+                    <div class="modal-body" style="text-align: center;">
+                        <img src="{{:photo}}" alt="Your Photo" class="photo-on-screen"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Cancel</button>
+                        <button type="submit" class="btn btn-primary" data-submit="modal">@i18n.Common_Save</button>
+                        <input type="hidden" id="topThumb" name="topThumb" value=" " />
+                        <input type="hidden" id="leftThumb" name="leftThumb" value=" " />
+                        <input type="hidden" id="widthThumb" name="widthThumb" value=" " />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</script>
+

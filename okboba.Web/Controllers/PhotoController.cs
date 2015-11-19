@@ -59,9 +59,21 @@ namespace okboba.Controllers
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
         {
-            //Check if user has more than max allowed photos
+            var profileId = GetProfileId();
 
-            _photoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, GetProfileId());
+            //Check if file size too big
+            if(upload.ContentLength > OkbConstants.MAX_PHOTO_SIZE)
+            {
+                return new HttpStatusCodeResult(400, "Photo too big");
+            }
+
+            //Check if user has more than max allowed photos
+            if(_photoRepo.GetNumOfPhotos(profileId) > OkbConstants.MAX_NUM_PHOTOS)
+            {
+                return new HttpStatusCodeResult(400, "More than max photos");
+            }
+
+            _photoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, profileId);
 
             return RedirectToAction("Index");
         }

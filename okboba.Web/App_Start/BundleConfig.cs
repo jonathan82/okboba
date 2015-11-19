@@ -20,14 +20,17 @@ namespace okboba
                 "~/lib/filereader/filereader.js",
                 "~/lib/jsviews/jsviews.js",
                 "~/lib/masonry/masonry.pkgd.js",
-                "~/lib/masonry/imagesloaded.pkgd.js"));
+                "~/lib/masonry/imagesloaded.pkgd.js",
+                "~/lib/spinner/spin.js",
+                "~/lib/spinner/jquery.spin.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",
                 "~/Scripts/editinplace.js",
                 "~/Scripts/locationpicker.js",
                 "~/Scripts/matchscroller.js",
-                "~/Scripts/photoupload2.js"));
+                "~/Scripts/photoupload2.js",
+                "~/Scripts/editthumbnail.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

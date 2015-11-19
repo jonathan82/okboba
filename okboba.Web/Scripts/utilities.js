@@ -1,6 +1,5 @@
 ﻿/*
  *  Utitlity Functions
- * 
  */
 function encodeHtml(str) {
     str =  String(str).replace(/&/g, '&amp;')
@@ -15,4 +14,13 @@ function encodeHtml(str) {
 
 function br2nl(str) {
     return str.replace(/<br\s*\/?>/mg, "\n");
+}
+
+/*
+ *  Spinner options
+ */
+var spinOpts = {
+    scale: 2,
+    opacity: 0.3,
+    color: '#FFEB3B'
 }

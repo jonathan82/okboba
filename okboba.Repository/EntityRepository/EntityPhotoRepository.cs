@@ -31,7 +31,6 @@ namespace okboba.Repository.EntityRepository
         #endregion
 
         ////////////////// Member variables ////////////////////////       
-        const int MAX_PHOTOS_PER_USER = 10;
         const int MAX_IMAGE_HEIGHT = 1000;
         const int FULL_THUMBNAIL_HEIGHT = 250;
         const int MAX_FILENAME_RETRY = 3;
@@ -46,18 +45,7 @@ namespace okboba.Repository.EntityRepository
         {
             var db = new OkbDbContext();
             var profile = db.Profiles.Find(profileId);
-            int numOfPhotos = 0;
-
-            if (profile.PhotosInternal == "" || profile.PhotosInternal == null)
-            {
-                numOfPhotos = 0;
-            }
-            else
-            {
-                numOfPhotos = profile.PhotosInternal.Split(';').Count();
-            }
-
-            return numOfPhotos;
+            return profile.GetPhotos().Length;
         }
 
         /// <summary>

@@ -223,6 +223,24 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose your smiling face.
+        /// </summary>
+        public static string Photo_EditThumbnail_Caption {
+            get {
+                return ResourceManager.GetString("Photo_EditThumbnail_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rearrange Photos.
+        /// </summary>
+        public static string Photo_Rearrange {
+            get {
+                return ResourceManager.GetString("Photo_Rearrange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload Your Photo.
         /// </summary>
         public static string Photo_UploadYourPhoto {

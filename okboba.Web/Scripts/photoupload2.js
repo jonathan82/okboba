@@ -89,7 +89,7 @@
             var tmpl = $.templates('#photoUploadTemplate');
             $('body').append(tmpl.render());
             $modal = $('#photoUploadModal');
-            $modal.find('[data-submit="modal"]').click(SaveHandler);
+            $modal.children('form').submit(SaveHandler);
             $modal.on('hidden.bs.modal', DismissHandler);
 
             var $fileInput = $modal.find('input[type="file"]');
@@ -109,8 +109,12 @@
             var $thumb = $('.photo-thumbnail-selector');
             if ($thumb.length == 0) {
                 alert('You must select an image first!');
-                return;
+                return false;
             }
+
+            //Disable buttons and setup spinner
+            $(this).find('button').prop('disabled', true);
+            $('.photo-upload-container').spin(spinOpts);
 
             var pos = $thumb.position();
 

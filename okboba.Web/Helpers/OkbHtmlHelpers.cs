@@ -26,11 +26,18 @@ namespace okboba.Web.Helpers
             }
         }
 
-        public static HtmlString DisplayPhoto(this HtmlHelper htmlHelper, string photo, int profileId)
+        public static string PhotoUrl(this HtmlHelper htmlHelper,string photo, int profileId)
+        {
+            var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
+            return storageUrl + profileId.ToString() + "/" + photo;
+        }
+
+        public static HtmlString ThumbnailFull(this HtmlHelper htmlHelper, string photo, int profileId)
         {
             var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
             var img = new TagBuilder("img");
-            img.MergeAttribute("src", storageUrl + profileId.ToString() + "/" + photo + "_u");
+            img.MergeAttribute("src", PhotoUrl(null, photo,profileId) + "_u");
+            img.AddCssClass("photo-thumbnail-full");
             return new HtmlString(img.ToString(TagRenderMode.SelfClosing));
         }
 

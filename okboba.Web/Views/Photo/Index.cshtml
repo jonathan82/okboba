@@ -10,14 +10,19 @@
 
 @Html.Partial("_PhotoUpload")
 
+@Html.Partial("_EditThumbnail")
+
 @section Scripts {
 
     <script>
-        //$('#photoUploadModal').photoUpload();
-        //$('#listThumbnails').sortable();
-        //$('#testSortable').sortable();
+        //setup button handlers
+        $('[data-toggle="photoupload"]').photoUpload();
+        $('[data-toggle="editthumbnail"]').editthumbnail();
+
+        //setup hover
         $('.grid-item').hover(function () {
-            $(this).children('.photo-edit-overlay').show();
+            $(this).children('.photo-edit-overlay').slideToggle();
         });
+
     </script>
 }

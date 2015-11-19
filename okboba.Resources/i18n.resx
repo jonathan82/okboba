@@ -327,4 +327,10 @@
   <data name="Photo_UploadYourPhoto" xml:space="preserve">
     <value>Upload Your Photo</value>
   </data>
+  <data name="Photo_Rearrange" xml:space="preserve">
+    <value>Rearrange Photos</value>
+  </data>
+  <data name="Photo_EditThumbnail_Caption" xml:space="preserve">
+    <value>Choose your smiling face</value>
+  </data>
 </root>

@@ -423,7 +423,11 @@
     <Content Include="lib\photoswipe\photoswipe.css" />
     <Content Include="lib\photoswipe\photoswipe.js" />
     <Content Include="lib\photoswipe\photoswipe.min.js" />
+    <Content Include="lib\spinner\jquery.spin.js" />
+    <Content Include="lib\spinner\spin.js" />
+    <Content Include="lib\spinner\spin.min.js" />
     <Content Include="Scripts\editinplace.js" />
+    <Content Include="Scripts\editthumbnail.js" />
     <Content Include="Scripts\locationpicker.js" />
     <Content Include="Scripts\matchscroller.js" />
     <Content Include="Scripts\okboba.js" />
@@ -491,6 +495,7 @@
     <Content Include="Views\Profile\_EditProfileDetail.cshtml" />
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
+    <Content Include="Views\Photo\_EditThumbnail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

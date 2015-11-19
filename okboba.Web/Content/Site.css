@@ -369,6 +369,9 @@ body {
   margin: 0 10px 10px 0;
   position: relative;
 }
+.grid-item:hover {
+  cursor: pointer;
+}
 .photo-edit-overlay {
   position: absolute;
   bottom: 0;
@@ -379,6 +382,13 @@ body {
   width: 100%;
   text-align: center;
   display: none;
+}
+.photo-thumbnail-full {
+  border-radius: 6px;
+}
+.photo-on-screen {
+  max-width: 800px;
+  height: auto;
 }
 /****************************************
     Photo Upload

@@ -5,6 +5,10 @@
 
     public static class OkbConstants
     {
+        //Photo
+        public const int MAX_PHOTO_SIZE = 5000000; //MB
+        public const int MAX_NUM_PHOTOS = 10; //max photos per user
+
         //Gender
         public const byte UNKNOWN_GENDER = 0;
         public const byte MALE = 1;
@@ -16,7 +20,7 @@
         public const int AVATAR_WIDTH_SMALL = 90;
         public const int AVATAR_HEIGHT_SMALL = 90;
 
-        //Profile
+        //Profile Text
         public const int MAX_PROFILE_TEXT_SIZE = 4000;
 
         //Profile Details
