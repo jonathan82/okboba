@@ -62,7 +62,7 @@
 
                         //Everythign OK, create thumbnail selector and add to DOM
                         var $thumbDiv = $('<div class="photo-upload-container"> \
-                        <div class="photo-upload-innercontainer"><div class="photo-thumbnail-selector"></div></div> \
+                        <div class="photo-thumbnail-bounds"><div class="photo-thumbnail-selector"></div></div> \
                         </div>');
 
                         $thumbDiv.append($img);

@@ -11,8 +11,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">@i18n.Photo_EditThumbnail_Caption</h4>
                     </div>
-                    <div class="modal-body" style="text-align: center;">
-                        <img src="{{:photo}}" alt="Your Photo" class="photo-on-screen"/>
+                    <div class="modal-body photo-modal-bg">
+                        <div class="photo-upload-container">
+                            <div class="photo-thumbnail-bounds"><div class="photo-thumbnail-selector"></div></div>
+                            <img src="{{:src}}" alt="Your Photo" class="photo-on-screen" />
+                        </div>                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Cancel</button>
@@ -20,6 +23,8 @@
                         <input type="hidden" id="topThumb" name="topThumb" value=" " />
                         <input type="hidden" id="leftThumb" name="leftThumb" value=" " />
                         <input type="hidden" id="widthThumb" name="widthThumb" value=" " />
+                        <input type="hidden" id="photoScreenWidth" name="photoScreenWidth" value=" " />
+                        <input type="hidden" id="photo" name="photo" value=" " />
                     </div>
                 </div>
             </div>

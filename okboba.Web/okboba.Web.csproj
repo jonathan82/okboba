@@ -496,6 +496,7 @@
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
     <Content Include="Views\Photo\_EditThumbnail.cshtml" />
+    <Content Include="Views\Photo\_Photoswipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

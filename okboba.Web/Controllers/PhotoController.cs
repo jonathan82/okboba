@@ -5,6 +5,7 @@ using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -76,6 +77,24 @@ namespace okboba.Controllers
             _photoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, profileId);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditThumbnail(string photo, int topThumb, int leftThumb, int widthThumb, int photoScreenWidth)
+        {
+            var profileId = GetProfileId();
+
+            await _photoRepo.EditThumbnailAsync(photo, topThumb, leftThumb, widthThumb, photoScreenWidth, profileId);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(string photo)
+        {
+            await _photoRepo.DeleteAsync(photo, GetProfileId());
+
+            return Content("");
         }
     }
 }

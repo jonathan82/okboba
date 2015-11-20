@@ -9,12 +9,15 @@
     padding-top: 150px;
     height: 500px;
 }
-/* Hide the file input button */
-label.photo-upload-label input[type="file"] {
+
+//hide the file input button
+label.photo-upload-label input[type="file"] { 
     position: fixed;
     top: -1000px;
 }
-.photo-upload-label {
+
+//the up arrow
+.photo-upload-label { 
     font-size: 500%;
     opacity: 0.8;
 }
@@ -22,27 +25,43 @@ label.photo-upload-label input[type="file"] {
     cursor: pointer;
     color: darkblue;
 }
-.photo-thumbnail-selector { //Used by photo upload plugin
+
+.photo-thumbnail-selector { 
     height: 200px;
     width: 200px;
     opacity: 0.5;
     background-color: @accent-color;
 }
-.photo-upload-container { //Used by photo upload plugin
-    display: inline-block;
-    position:relative;
+
+.photo-thumbnail-selector:hover {
+    cursor: pointer;
 }
-.photo-upload-innercontainer { //Used by photo upload plugin
+
+//used to contain the thumbnail box. need to set some padding to prevent box from going out of bounds
+.photo-thumbnail-bounds { 
     position:absolute;
     width: 100%;   
     height: 100%;
     z-index: 1;
     padding: 10px;
 }
+
+//holds the image to be uploaded/edited
+.photo-upload-container { 
+    display: inline-block;
+    position:relative;
+}
+
+.photo-modal-bg {
+    background-color: @gray-light;
+    text-align: center;
+}
+
 #listThumbnails > div {
     float: left;
     margin: 5px;
 }
+
 #listThumbnails > div:hover {
     cursor: pointer;
 }

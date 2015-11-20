@@ -17,8 +17,8 @@
             @if (Model.IsMe)
             {
                 <div class="photo-edit-overlay">
-                    <button class="btn btn-default btn-sm" data-photo="@Html.PhotoUrl(photo, Model.ProfileId)" data-toggle="editthumbnail">@i18n.Photo_EditThumbnail</button>
-                    <button class="btn btn-default btn-sm" data-photo="">@i18n.Photo_Delete</button>
+                    <button class="btn btn-default btn-sm" data-src="@Html.PhotoUrl(photo, Model.ProfileId)" data-photo="@photo" data-toggle="editthumbnail">@i18n.Photo_EditThumbnail</button>
+                    <button class="btn btn-default btn-sm" data-photo="@photo" data-toggle="deletephoto">@i18n.Photo_Delete</button>
                 </div>
             }            
         </div>

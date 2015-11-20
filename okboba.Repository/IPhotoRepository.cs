@@ -11,5 +11,7 @@ namespace okboba.Repository
     {
         int GetNumOfPhotos(int profileId);
         void UploadPhoto(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId);
+        Task EditThumbnailAsync(string photo, int topThumb, int leftThumb, int widthThumb, int screenWidth, int profileId);
+        Task DeleteAsync(string photo, int profileId);
     }
 }

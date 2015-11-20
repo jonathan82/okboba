@@ -186,5 +186,55 @@ namespace okboba.Repository.EntityRepository
             //Got here, couldn't generate filename
             throw new Exception("Couldn't generate unique filename");
         }
+
+        public async Task EditThumbnailAsync(string photo, int topThumb, int leftThumb, int widthThumb, int screenWidth, int profileId)
+        {
+            var cont = GetBlobContainer(profileId);
+            var blob = cont.GetBlockBlobReference(photo);
+
+            using (var imgFactory = new ImageFactory())
+            {
+                var stream = new MemoryStream();
+                await blob.DownloadToStreamAsync(stream);
+                imgFactory.Load(stream);
+
+                //Calculate the scaled thumbnail dimensions
+                float scale = (float)imgFactory.Image.Width / screenWidth;
+
+                var thumbStream = CreateThumbnail(imgFactory, 
+                    (int)(leftThumb * scale),
+                    (int)(topThumb * scale),
+                    (int)(widthThumb * scale), 
+                    OkbConstants.AVATAR_WIDTH);
+
+                //Upload the new thumbnail
+                blob = cont.GetBlockBlobReference(photo + "_t");
+                await blob.UploadFromStreamAsync(thumbStream);
+            }            
+        }
+
+        public async Task DeleteAsync(string photo, int profileId)
+        {
+            //first delete the photo in the database
+            var db = new OkbDbContext();
+            var profile = db.Profiles.Find(profileId);
+
+            profile.PhotosInternal = profile.PhotosInternal.Replace(photo, "");
+
+            //cleanup
+            profile.PhotosInternal = profile.PhotosInternal.Trim(';');
+            profile.PhotosInternal = profile.PhotosInternal.Replace(";;", ";");
+
+            var t1 = db.SaveChangesAsync();
+
+            //delete from storage
+            var cont = GetBlobContainer(profileId);
+            var t2 = cont.GetBlockBlobReference(photo).DeleteAsync();
+            var t3 = cont.GetBlockBlobReference(photo + "_t").DeleteAsync();
+            var t4 = cont.GetBlockBlobReference(photo + "_s").DeleteAsync();
+            var t5 = cont.GetBlockBlobReference(photo + "_u").DeleteAsync();
+
+            await t1; await t2; await t3; await t4; await t5;
+        }
     }
 }
