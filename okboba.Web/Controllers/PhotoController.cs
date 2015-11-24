@@ -1,6 +1,7 @@
 ﻿using okboba.Entities;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
+using okboba.Resources;
 using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace okboba.Controllers
 
             vm.ProfileId = id;
             vm.IsMe = isMe;
-            vm.Photos = profile.GetPhotos();
+            vm.Thumbnails = profile.GetThumbnails();
 
             return PartialView("_ListPhotos",vm);
         }
@@ -58,7 +59,7 @@ namespace okboba.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
+        public async Task<ActionResult> Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
         {
             var profileId = GetProfileId();
 
@@ -74,7 +75,7 @@ namespace okboba.Controllers
                 return new HttpStatusCodeResult(400, "More than max photos");
             }
 
-            _photoRepo.UploadPhoto(upload.InputStream, leftThumb, topThumb, widthThumb, profileId);
+            await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, profileId);
 
             return RedirectToAction("Index");
         }

@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace okboba.Repository
         Question GetQuestionByRank(int rank);
         bool AnswerQuestion(Answer ans);
         IQueryable<TranslateQuestion> GetTranslateQuestions();
+        IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId);
     }
 }

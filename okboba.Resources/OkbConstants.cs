@@ -1,4 +1,4 @@
-﻿namespace okboba.Repository
+﻿namespace okboba.Resources
 {
     //Activities
     public enum ActivityCategories { Joined, UploadedPhoto, EditedProfileText, AnsweredQuestion }
@@ -8,6 +8,9 @@
         //Photo
         public const int MAX_PHOTO_SIZE = 5000000; //MB
         public const int MAX_NUM_PHOTOS = 10; //max photos per user
+        public const string HEADSHOT_SUFFIX = "t";
+        public const string HEADSHOT_SMALL_SUFFIX = "s";
+        public const string THUMBNAIL_SUFFIX = "u";        
 
         //Gender
         public const byte UNKNOWN_GENDER = 0;

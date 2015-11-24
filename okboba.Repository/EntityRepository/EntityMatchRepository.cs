@@ -7,6 +7,7 @@ using okboba.Repository;
 using okboba.Repository.Models;
 using okboba.Entities;
 using okboba.MatchCalculator;
+using okboba.Resources;
 
 namespace okboba.Repository.EntityRepository
 {
@@ -81,7 +82,7 @@ namespace okboba.Repository.EntityRepository
                     EnemyPercent = matchResult.EnemeyPercent,
                     Name = p.Name,
                     ProfileId = p.Id,
-                    Photo = p.GetFirstPhoto(),
+                    Photo = p.GetFirstHeadshot(),
                     Age = DateTime.Today.Year - p.Birthdate.Year,
                     Gender = p.Gender
                 });

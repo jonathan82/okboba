@@ -1,5 +1,5 @@
 ﻿/*
- *  Plugin : Edit Thumbnail
+ *  Plugin : Edit Thumbnail, Delete Photo
  *  Author : Jonathan Lin
  *  Date   : 11/19/2015
  *  Notes  : 

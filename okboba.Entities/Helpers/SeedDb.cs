@@ -41,26 +41,26 @@ namespace okboba.Entities.Helpers
         /// Seed the questions
         /// </summary>
         /// <param name="numOfQues"></param>
-        public void SeedQuestions(int numOfQues)
-        {
-            using (OkbDbContext context = new OkbDbContext())
-            { 
-                if (context.Questions.Count() > 0)
-                {
-                    //Skip if questions exist
-                    return;
-                }
+        //public void SeedQuestions(int numOfQues)
+        //{
+        //    using (OkbDbContext context = new OkbDbContext())
+        //    { 
+        //        if (context.Questions.Count() > 0)
+        //        {
+        //            //Skip if questions exist
+        //            return;
+        //        }
 
-                var choices = "This is Choice A;This is Choice B;This is Choice C;This is Choice D;This is Choice E";
+        //        var choices = "This is Choice A;This is Choice B;This is Choice C;This is Choice D;This is Choice E";
 
-                for (int i = 1; i <= numOfQues; i++)
-                {
-                    Question q = CreateQuestion("What's your favorite color?", choices, i);
-                    context.Questions.Add(q);
-                }
-                context.SaveChanges();
-            }
-        }
+        //        for (int i = 1; i <= numOfQues; i++)
+        //        {
+        //            Question q = CreateQuestion("What's your favorite color?", choices, i);
+        //            context.Questions.Add(q);
+        //        }
+        //        context.SaveChanges();
+        //    }
+        //}
 
         /// <summary>
         /// Seed the Number of users
@@ -171,37 +171,46 @@ namespace okboba.Entities.Helpers
         public void SeedOkcQuestions(string filename)
         {
             var db = new OkbDbContext();
-            if(db.Questions.Count() > 0)
-            {
-                return;
-            }            
+            if(db.Questions.Count() > 0) return;
 
             //////////////// Insert Okcupid questions ////////////////////
-            var sr = new StreamReader(filename);
-            int count = 0;            
+            var stream = new StreamReader(filename);
+            int count = 1;            
 
-            while (!sr.EndOfStream)
+            while (!stream.EndOfStream)
             {
-                var ques = sr.ReadLine();
-                string ans, ansInternal = "";
-                while ((ans = sr.ReadLine()) != "" && !sr.EndOfStream)
+                var line = stream.ReadLine();
+                
+                int index = 1;
+                string answerLine;
+
+                //Loop thru answers
+                while ((answerLine = stream.ReadLine()) != "" && !stream.EndOfStream)
                 {
-                    ansInternal += ans + ";";
+                    db.QuestionChoices.Add(new QuestionChoice
+                    {
+                        QuestionId = (short)count,
+                        Index = (byte)index,
+                        Score = 0,
+                        Text = answerLine
+                    });
+
+                    index++;
                 }
-                //remove trailing semicolon
-                ansInternal = ansInternal.TrimEnd(';');
 
-                var addQues = new Question
+                //Add Question
+                db.Questions.Add(new Question
                 {
-                    Text = ques,
-                    ChoicesInternal = ansInternal,
-                    Rank = ++count                    
-                };
+                    Id = (short)count,
+                    Rank = count,
+                    Text = line,
+                    TraitId = null
+                });
 
-                db.Questions.Add(addQues);
+                count++;
+
+                db.SaveChanges();
             }
-
-            db.SaveChanges();
         }
         
 
@@ -281,14 +290,14 @@ namespace okboba.Entities.Helpers
             };
         }
 
-        private Question CreateQuestion(string text, string choices, int rank)
-        {
-            return new Question
-            {
-                Text = text,
-                Rank = rank,
-                ChoicesInternal = choices
-            };
-        }
+        //private Question CreateQuestion(string text, string choices, int rank)
+        //{
+        //    return new Question
+        //    {
+        //        Text = text,
+        //        Rank = rank,
+        //        ChoicesInternal = choices
+        //    };
+        //}
     }
 }

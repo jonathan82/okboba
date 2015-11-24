@@ -32,20 +32,23 @@ namespace okboba.Web.Helpers
             return storageUrl + profileId.ToString() + "/" + photo;
         }
 
-        public static HtmlString ThumbnailFull(this HtmlHelper htmlHelper, string photo, int profileId)
+        public static HtmlString Thumbnail(this HtmlHelper htmlHelper, Photo photo, int profileId)
         {
             var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
             var img = new TagBuilder("img");
-            img.MergeAttribute("src", PhotoUrl(null, photo,profileId) + "_u");
+            img.MergeAttribute("src", PhotoUrl(null, photo.Thumb,profileId));
+            img.MergeAttribute("data-original", PhotoUrl(null, photo.Original, profileId));
+            img.MergeAttribute("data-w", photo.Width.ToString());
+            img.MergeAttribute("data-h", photo.Height.ToString());
             img.AddCssClass("photo-thumbnail-full");
             return new HtmlString(img.ToString(TagRenderMode.SelfClosing));
         }
 
-        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int profileId, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, Photo photo, byte gender, int profileId, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT)
         {
             string src;
 
-            if (photo == "")
+            if (photo == null || string.IsNullOrEmpty(photo.Thumb))
             {
                 //Use one of the default avatars
                 src = "/Content/images/";
@@ -55,7 +58,7 @@ namespace okboba.Web.Helpers
             {
                 //Use the storage key in web.config to construct URL
                 src = ConfigurationManager.AppSettings["StorageUrl"] + profileId.ToString() + "/";
-                src += photo + "_t";
+                src += photo.Thumb;
             }
 
             var builder = new TagBuilder("img");

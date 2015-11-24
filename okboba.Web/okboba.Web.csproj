@@ -280,6 +280,7 @@
     <Compile Include="Models\Profile\ProfileDetailViewModel.cs" />
     <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModel.cs" />
+    <Compile Include="Models\Question\QuestionIndexViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -435,6 +436,7 @@
     <Content Include="lib\react\react-dom.min.js" />
     <Content Include="lib\react\react.js" />
     <Content Include="lib\react\react.min.js" />
+    <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
     <Content Include="Scripts\photoupload2.js" />
     <Content Include="Scripts\utilities.js" />

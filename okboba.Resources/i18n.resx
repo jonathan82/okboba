@@ -333,4 +333,10 @@
   <data name="Photo_EditThumbnail_Caption" xml:space="preserve">
     <value>Choose your smiling face</value>
   </data>
+  <data name="Question_Prompt_Acceptable" xml:space="preserve">
+    <value>How would you like your match to answer?</value>
+  </data>
+  <data name="Question_Prompt_Importance" xml:space="preserve">
+    <value>How important are your matches answers?</value>
+  </data>
 </root>

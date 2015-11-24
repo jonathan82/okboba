@@ -691,6 +691,24 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How would you like your match to answer?.
+        /// </summary>
+        public static string Question_Prompt_Acceptable {
+            get {
+                return ResourceManager.GetString("Question_Prompt_Acceptable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How important are your matches answers?.
+        /// </summary>
+        public static string Question_Prompt_Importance {
+            get {
+                return ResourceManager.GetString("Question_Prompt_Importance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 重要.
         /// </summary>
         public static string Question_SomewhatImportant {

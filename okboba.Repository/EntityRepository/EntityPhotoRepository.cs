@@ -2,6 +2,7 @@
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using okboba.Entities;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -45,14 +46,14 @@ namespace okboba.Repository.EntityRepository
         {
             var db = new OkbDbContext();
             var profile = db.Profiles.Find(profileId);
-            return profile.GetPhotos().Length;
+            return profile.GetThumbnails().Count();
         }
 
         /// <summary>
         /// Uploads a photo to the database as well as Azure cloud.  Creates a thumbnail and r
         /// resizes image before doing so.  Also generates a random filename.
         /// </summary>
-        public void UploadPhoto(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId)
+        public async Task UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId)
         {
             using (var imgFactory = new ImageFactory())
             {
@@ -61,41 +62,45 @@ namespace okboba.Repository.EntityRepository
 
                 //Setup
                 var cont = GetBlobContainer(profileId);
-                var filePrefix = GenerateUniqueFilename(cont);
+                var unique = GenerateUniqueFilename(cont);
                 imgFactory.Load(upload);
-
-                // Create and Upload the thumbnail
-                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH);
-                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_t");
-                thumbBlob.UploadFromStream(thumbStream);
-
-                //create and upload small thumbnail
-                imgFactory.Reset();
-                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH_SMALL);
-                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_s");
-                thumbBlob.UploadFromStream(thumbStream);
-
-                //create and upload full thumbnail
-                imgFactory.Reset();
-                thumbStream = ResizeImage(imgFactory, FULL_THUMBNAIL_HEIGHT);
-                thumbBlob = cont.GetBlockBlobReference(filePrefix + "_u");
-                thumbBlob.UploadFromStream(thumbStream);
 
                 // Upload resized image if necessary
                 if (imgFactory.Image.Height > MAX_IMAGE_HEIGHT)
                 {
-                    imgFactory.Reset();
                     origStream = ResizeImage(imgFactory, MAX_IMAGE_HEIGHT);
                 }
                 else
                 {
                     origStream = upload;
                 }
-                origBlob = cont.GetBlockBlobReference(filePrefix);
-                origBlob.UploadFromStream(origStream);
+                var code = Profile.EncodeDimensions(imgFactory.Image.Width, imgFactory.Image.Height);
+                var filename = unique + '_' + code;
+                origBlob = cont.GetBlockBlobReference(filename);
+                var t4 = origBlob.UploadFromStreamAsync(origStream);
+
+                // Create and Upload the thumbnail
+                imgFactory.Reset();
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH);
+                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.HEADSHOT_SUFFIX);
+                var t1 = thumbBlob.UploadFromStreamAsync(thumbStream);
+
+                //create and upload small thumbnail
+                imgFactory.Reset();
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH_SMALL);
+                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.HEADSHOT_SMALL_SUFFIX);
+                var t2 = thumbBlob.UploadFromStreamAsync(thumbStream);
+
+                //create and upload full thumbnail
+                imgFactory.Reset();
+                thumbStream = ResizeImage(imgFactory, FULL_THUMBNAIL_HEIGHT);
+                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.THUMBNAIL_SUFFIX);
+                var t3 = thumbBlob.UploadFromStreamAsync(thumbStream);                
+
+                await t1; await t2; await t3; await t4;
 
                 //Finally Save filename to DB
-                AddPhotoToDb(filePrefix, profileId);
+                await AddPhotoToDbAsync(filename, profileId);
             }
         }
 
@@ -118,7 +123,7 @@ namespace okboba.Repository.EntityRepository
         /// Adds a Photo to the database for the given user.  uses a semicolon delimited string to store
         /// photo names.  
         /// </summary>
-        private int AddPhotoToDb(string filename, int profileId)
+        private async Task AddPhotoToDbAsync(string filename, int profileId)
         {
             var db = new OkbDbContext();
             var p = db.Profiles.Find(profileId);
@@ -132,9 +137,7 @@ namespace okboba.Repository.EntityRepository
                 p.PhotosInternal += ';' + filename;
             }
 
-            db.SaveChanges();
-
-            return 1;
+            await db.SaveChangesAsync();
         }
 
         /// <summary>

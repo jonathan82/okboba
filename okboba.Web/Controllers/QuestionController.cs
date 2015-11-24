@@ -22,25 +22,24 @@ namespace okboba.Controllers
         }
 
         // GET: Question
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            //var profileId = GetProfileId();
-            //var profile = _profileRepo.GetProfile(profileId);
-            //var vm = new ProfileViewModel(profile);
+            var vm = new QuestionIndexViewModel();
 
-            //if(profile.CurrentQuestionId == null)
-            //{
-            //    // We finished answering all the questions.  
-            //    // See if there are any unanswered questions left.
-            //}
-            //else
-            //{
-            //    //Get the current question and return it in the view model
-            //    vm.CurrentQuestion = _quesRepo.GetQuestion(profile.CurrentQuestionId);
-            //}
+            if (id == null)
+            {
+                vm.ProfileId = GetProfileId();
+                vm.IsMe = true;
+            }
+            else
+            {
+                vm.ProfileId = (int)id;
+                vm.IsMe = false;
+            }
 
-            //return View(vm);
-            throw new NotImplementedException();
+            vm.MyQuestions = _quesRepo.GetAnsweredQuestions(vm.ProfileId);
+
+            return View(vm);
         }
 
         /// <summary>

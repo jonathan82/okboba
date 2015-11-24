@@ -42,6 +42,8 @@ namespace okboba.Entities.Helpers
 
         public override object GetValue(int i)
         {
+            byte[] choices = { 0x1, 0x2, 0x4, 0x8 };
+
             switch (i)
             {
                 case 0:
@@ -52,7 +54,7 @@ namespace okboba.Entities.Helpers
                     return (rowCount % numOfQuesPerUser) + 1;
                 case 2:
                     //Choice Index
-                    return random.Next(0,4); // 0,1,2,3
+                    return choices[random.Next(0,4)]; // 0,1,2,3
                 case 3:
                     //Choice Weight
                     return random.Next(1,4); //1 - a little important, 2 - somewhat important, 3 - very important
@@ -78,7 +80,7 @@ namespace okboba.Entities.Helpers
         {
             AddSchemaTableRow("ProfileId", null, null, null, false, true, false, System.Data.SqlDbType.Int, null, null, null, null, null);
             AddSchemaTableRow("QuestionId", null, null, null, false, true, false, System.Data.SqlDbType.SmallInt, null, null, null, null, null);
-            AddSchemaTableRow("ChoiceIndex", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
+            AddSchemaTableRow("ChoiceBit", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
             AddSchemaTableRow("ChoiceWeight", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
             AddSchemaTableRow("ChoiceAcceptable", null, null, null, false, false, false, System.Data.SqlDbType.TinyInt, null, null, null, null, null);
             AddSchemaTableRow("LastAnswered", null, null, null, false, false, false, System.Data.SqlDbType.SmallDateTime, null, null, null, null, null);

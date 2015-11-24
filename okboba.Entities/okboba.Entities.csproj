@@ -79,6 +79,7 @@
     <Compile Include="Entities\ProfileDetail.cs" />
     <Compile Include="Entities\ProfileText.cs" />
     <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\QuestionChoice.cs" />
     <Compile Include="Entities\Trait.cs" />
     <Compile Include="Entities\TranslateQuestion.cs" />
     <Compile Include="Migrations\201511050517002_Initial.cs" />
@@ -92,6 +93,18 @@
     <Compile Include="Migrations\201511140700254_Gender.cs" />
     <Compile Include="Migrations\201511140700254_Gender.Designer.cs">
       <DependentUpon>201511140700254_Gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511230245414_PhotosInternal.cs" />
+    <Compile Include="Migrations\201511230245414_PhotosInternal.Designer.cs">
+      <DependentUpon>201511230245414_PhotosInternal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511240126204_Questions.cs" />
+    <Compile Include="Migrations\201511240126204_Questions.Designer.cs">
+      <DependentUpon>201511240126204_Questions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511240203261_Questions2.cs" />
+    <Compile Include="Migrations\201511240203261_Questions2.Designer.cs">
+      <DependentUpon>201511240203261_Questions2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -117,6 +130,21 @@
     <EmbeddedResource Include="Migrations\201511140700254_Gender.resx">
       <DependentUpon>201511140700254_Gender.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511230245414_PhotosInternal.resx">
+      <DependentUpon>201511230245414_PhotosInternal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511240126204_Questions.resx">
+      <DependentUpon>201511240126204_Questions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511240203261_Questions2.resx">
+      <DependentUpon>201511240203261_Questions2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\okboba.Resources\okboba.Resources.csproj">
+      <Project>{7fb93755-0b4c-46e7-974c-ba68a4ec949f}</Project>
+      <Name>okboba.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

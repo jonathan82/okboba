@@ -32,7 +32,8 @@ namespace okboba
                 "~/Scripts/locationpicker.js",
                 "~/Scripts/matchscroller.js",
                 "~/Scripts/photoupload2.js",
-                "~/Scripts/editthumbnail.js"));
+                "~/Scripts/editthumbnail.js",
+                "~/Scripts/photoswipe.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

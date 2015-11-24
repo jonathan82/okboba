@@ -85,7 +85,7 @@ body {
 .container-auth {
   background-color: #FFF;
   padding: 30px 40px;
-  min-height: 700px;
+  min-height: 1200px;
 }
 .container-anon {
   background-color: #fff;
@@ -107,14 +107,20 @@ body {
 .splash-container .container {
   padding-top: 8%;
 }
-.top-buffer {
-  margin-top: 30px;
+.top-buffer-10 {
+  margin-top: 10px;
 }
-.top-buffer-100 {
-  margin-top: 100px;
+.top-buffer-20 {
+  margin-top: 20px;
+}
+.top-buffer-30 {
+  margin-top: 30px;
 }
 .top-buffer-50 {
   margin-top: 50px;
+}
+.top-buffer-100 {
+  margin-top: 100px;
 }
 .row-centered {
   text-align: center;
@@ -176,7 +182,7 @@ body {
 .profile-header-photo {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 15px;
   position: relative;
 }
 .profile-header-addphoto {
@@ -329,8 +335,64 @@ body {
 }
 .question-form {
   background-color: #F5F5F0;
-  padding: 10px;
-  border: 1px solid lightgray;
+  padding: 15px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  font-size: 18px;
+  color: #555555;
+}
+/*
+    Custom input styles
+    Reference: http://blog.karenmenezes.com/2014/nov/1/another-pure-css-checkbox-article/
+*/
+.checkbox-custom > input,
+.radio-custom > input {
+  display: none;
+}
+.checkbox-custom > label,
+.radio-custom > label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: normal;
+}
+.checkbox-custom > label:before,
+.radio-custom > label:before {
+  content: '';
+  background: #fff;
+  border: 2px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  margin-right: 8px;
+  text-align: center;
+  margin-top: -3px;
+}
+.checkbox-custom > input:checked + label:before {
+  background: #f072b5;
+  box-shadow: inset 0px 0px 0px 4px #fff;
+}
+.radio-custom > label:before {
+  border-radius: 50%;
+}
+.radio-custom > input:checked + label:before {
+  background: #f072b5;
+  box-shadow: inset 0px 0px 0px 4px #fff;
+}
+.question-importance-box {
+  margin-right: 4px;
+  display: inline-block;
+  text-align: center;
+}
+.question-importance-bar {
+  width: 130px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: #c1c1c1;
+  cursor: pointer;
+  margin-top: 5px;
 }
 .conversation-row {
   padding: 10px;

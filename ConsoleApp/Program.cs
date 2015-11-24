@@ -63,11 +63,11 @@ namespace ConsoleApp
             Stopwatch timer = new Stopwatch();
 
             //Profile Detail Options   
-            seeder.SeedDetailOptions("../../../data/profile_details.txt");         
+            //seeder.SeedDetailOptions("../../../data/profile_details.txt");         
 
-            //// Questions
-            //Console.WriteLine("Seeding Questions...");
-            //seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
+            // Questions
+            Console.WriteLine("Seeding Questions...");
+            seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
 
             //// Chinese Cities
             //Console.WriteLine("Seeding Locations...");
@@ -77,10 +77,10 @@ namespace ConsoleApp
             //Console.WriteLine("Seeding Users...");
             //seeder.SeedUsers(10000, EntityLocationRepository.Instance.GetProvinceList());
 
-            //// User answers
+            // User answers
             //Console.WriteLine("Seeding answers...");
             //timer.Start();
-            //seeder.SeedAnswers(10000, 10);
+            //seeder.SeedAnswers(10000, 100);
             //timer.Stop();
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using okboba.Repository.Models;
 
 namespace okboba.Repository.EntityRepository
 {
@@ -34,17 +35,6 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var ques = db.Questions.Find(id);
 
-            ques.Choices = new List<string>();
-
-            //Get the internal representation of choices in the database
-            if (ques.ChoicesInternal != null)
-            {
-                var choices = ques.ChoicesInternal.Split(';');
-                foreach (var c in choices)
-                {
-                    ques.Choices.Add(c);
-                }
-            }
             return ques;
         }
 
@@ -131,19 +121,59 @@ namespace okboba.Repository.EntityRepository
             return result;
         }
 
-        /// <summary>
-        /// Converts an array of booleans representing acceptable choices
-        /// to a byte representation.
-        /// </summary>
-        public byte convertBoolToAccept(bool[] bAccept)
+        public IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId)
         {
-            byte encAccept = 0;
+            //select* from answers a join questions q
+            //on a.QuestionId = q.Id
+            //join QuestionChoices qc
+            //on qc.QuestionId = q.id
+            //where a.ProfileId = 1000
+            //order by q.id asc, qc.[index] asc            
 
-            for (int i = 0; i < bAccept.Length; i++)
+            var db = new OkbDbContext();
+
+            var result = from answer in db.Answers.AsNoTracking()
+                         join ques in db.Questions.AsNoTracking()
+                         on answer.QuestionId equals ques.Id
+                         join qc in db.QuestionChoices.AsNoTracking()
+                         on answer.QuestionId equals qc.QuestionId
+                         where answer.ProfileId == profileId
+                         orderby answer.LastAnswered descending, ques.Id ascending, qc.Index ascending
+                         select new 
+                         {
+                             Question = ques,
+                             Choice = qc,
+                             Answer = answer
+                         };
+
+            var list = new List<QuestionWithAnswerModel>();
+
+            int currQuesId = 0;
+
+            foreach (var item in result)
             {
-                encAccept |= (byte)((bAccept[i] ? 1 : 0) << i);
+                if (item.Question.Id != currQuesId)
+                {
+                    //add new question
+                    list.Add(new QuestionWithAnswerModel
+                    {
+                        Question = item.Question,
+                        Answer = item.Answer,
+                        Choices = new List<QuestionChoice>()
+                    });
+                }
+
+                //add the choices
+                list[list.Count - 1].Choices.Add(new QuestionChoice
+                {
+                    Index = item.Choice.Index,
+                    Text = item.Choice.Text,
+                });
+
+                currQuesId = item.Question.Id;
             }
-            return encAccept;
+
+            return list;
         }
     }
 }

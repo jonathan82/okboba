@@ -37,29 +37,29 @@
 <hr />
 
 <!-- Row 2: Thumbnails - Show the first 4 -->
-@{ var photos = Model.Profile.GetPhotos(); }
+@{ var photos = Model.Profile.GetHeadshots(); }
 @{ var profileId = Model.IsMe ? "" : Model.Profile.Id.ToString();}
 
-@for (int i = 0; i < photos.Length && i < 4; i++)
+@foreach (var photo in photos.Take(4))
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar(photos[i], Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@profileId">@Html.Avatar(photo, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
     </div>
 }
-@if (photos.Length < 4 && Model.IsMe)
+@if (photos.Count() < 4 && Model.IsMe)
 {
     //Show Add photo as long as user has less than 4 photos
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@profileId">@Html.Avatar(null, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
         @*<button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>*@
         <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Photo_AddPhoto</button>
     </div>
 }
-else if (photos.Length == 0)
+else if (photos.Count() == 0)
 {
     //Show no avatar if user has no photos
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@profileId">@Html.Avatar(null, Model.Profile.Gender, Model.Profile.Id, 170, 170)</a>
     </div>
 }
 

@@ -12,6 +12,8 @@
 
 @Html.Partial("_EditThumbnail")
 
+@Html.Partial("_Photoswipe")
+
 @section Scripts {
 
     <script>
@@ -24,6 +26,9 @@
         $('.grid-item').hover(function () {
             $(this).children('.photo-edit-overlay').slideToggle();
         });
+
+        //setup photo gallery
+        $('.photo-thumbnail-full').photoswipe();
 
     </script>
 }

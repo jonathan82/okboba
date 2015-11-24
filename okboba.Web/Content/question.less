@@ -1,5 +1,72 @@
-﻿.question-form {
+﻿@import "common";
+
+.question-form {
     background-color: #F5F5F0;
-    padding: 10px;
-    border: 1px solid lightgray;
+    padding: 15px;
+    //border: 1px solid lightgray;
+    .shadow-z-1;
+    font-size: 18px;
+    color: @gray;
+}
+
+/*
+    Custom input styles
+    Reference: http://blog.karenmenezes.com/2014/nov/1/another-pure-css-checkbox-article/
+*/
+.checkbox-custom > input, 
+.radio-custom > input {
+    display: none;
+}
+
+.checkbox-custom > label,
+.radio-custom > label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.checkbox-custom > label:before, 
+.radio-custom > label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    margin-right: 8px;
+    text-align: center;
+    margin-top: -3px;
+}
+
+.checkbox-custom > input:checked + label:before {
+    background: lighten(@primary-color-3, 40%);
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+
+.radio-custom > label:before {
+    border-radius: 50%;
+}
+
+.radio-custom > input:checked + label:before {
+    background: lighten(@primary-color-3, 40%);
+    box-shadow: inset 0px 0px 0px 4px #fff;
+}
+
+.question-importance-box {
+    margin-right: 4px;
+    display: inline-block;
+    text-align: center;
+}
+
+.question-importance-bar {
+    width: 130px;
+    height: 16px;
+    border-radius: 4px;
+    background-color: lighten(@gray-light, 15%);
+    cursor: pointer;
+    margin-top: 5px;
 }

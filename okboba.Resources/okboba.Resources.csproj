@@ -46,6 +46,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>i18n.resx</DependentUpon>
     </Compile>
+    <Compile Include="OkbConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
