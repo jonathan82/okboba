@@ -75,6 +75,9 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Pinyin4net">
+      <HintPath>..\lib\Pinyin4net.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Common, Version=4.0.46.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.Common.4.0.46\lib\net40\ServiceStack.Common.dll</HintPath>
       <Private>True</Private>
@@ -133,6 +136,7 @@
     <Compile Include="IPhotoRepository.cs" />
     <Compile Include="IProfileRepository.cs" />
     <Compile Include="IQuestionRepository.cs" />
+    <Compile Include="Models\LocationPinyinModel.cs" />
     <Compile Include="Models\MatchCriteriaModel.cs" />
     <Compile Include="Models\MatchModel.cs" />
     <Compile Include="Models\QuestionViewModels.cs" />

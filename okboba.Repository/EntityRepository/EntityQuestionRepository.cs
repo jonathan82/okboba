@@ -121,15 +121,74 @@ namespace okboba.Repository.EntityRepository
             return result;
         }
 
-        public IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId)
+        /// <summary>
+        /// Gets a list of all the answer choices for a given question
+        /// </summary>
+        private IEnumerable<QuestionChoice> GetChoices(int id)
         {
-            //select* from answers a join questions q
-            //on a.QuestionId = q.Id
-            //join QuestionChoices qc
-            //on qc.QuestionId = q.id
-            //where a.ProfileId = 1000
-            //order by q.id asc, qc.[index] asc            
+            var db = new OkbDbContext();
+            var list = new List<QuestionChoice>();
+            var result = from choice in db.QuestionChoices.AsNoTracking()
+                         where choice.QuestionId == id
+                         orderby choice.Index ascending
+                         select choice;
 
+            foreach (var choice in result)
+            {
+                list.Add(choice);
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Gets the next 2 un-answered questions for the user sorting by rank. Builds 
+        /// a dcitionary of answers for the user to speed up lookup. 
+        /// </summary>
+        public IEnumerable<QuestionWithAnswerModel> GetNext2Questions(int profileId)
+        {
+            var db = new OkbDbContext();
+
+            //Build answer dictionary
+            var result = from answer in db.Answers.AsNoTracking()
+                         where answer.ProfileId == profileId
+                         select answer;
+
+            var set = new HashSet<Int16>();
+
+            foreach (var answer in result)
+            {
+                set.Add(answer.QuestionId);
+            }
+
+            var list = new List<QuestionWithAnswerModel>();
+
+            int count = 0;
+
+            //Loop thru all the questions
+            foreach (var question in db.Questions.AsNoTracking())
+            {
+                if (set.Contains(question.Id)) continue;
+                list.Add(new QuestionWithAnswerModel
+                {
+                    Question = question,
+                    Choices = GetChoices(question.Id)
+                });
+
+                count++;
+
+                if (count >= 2) break; //just get the next 2 questions
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Get a list of all the answered questions for the given profile ID sorted by
+        /// the date last answered from the database.
+        /// </summary>
+        public IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId)
+        {       
             var db = new OkbDbContext();
 
             var result = from answer in db.Answers.AsNoTracking()
@@ -164,7 +223,7 @@ namespace okboba.Repository.EntityRepository
                 }
 
                 //add the choices
-                list[list.Count - 1].Choices.Add(new QuestionChoice
+                ((List<QuestionChoice>)list[list.Count - 1].Choices).Add(new QuestionChoice
                 {
                     Index = item.Choice.Index,
                     Text = item.Choice.Text,

@@ -115,6 +115,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 女.
+        /// </summary>
+        public static string Common_Female {
+            get {
+                return ResourceManager.GetString("Common_Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 朋友.
         /// </summary>
         public static string Common_Friend {
@@ -129,6 +138,15 @@ namespace okboba.Resources {
         public static string Common_Login {
             get {
                 return ResourceManager.GetString("Common_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 男.
+        /// </summary>
+        public static string Common_Male {
+            get {
+                return ResourceManager.GetString("Common_Male", resourceCulture);
             }
         }
         
@@ -723,6 +741,51 @@ namespace okboba.Resources {
         public static string Question_VeryImportant {
             get {
                 return ResourceManager.GetString("Question_VeryImportant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 生日.
+        /// </summary>
+        public static string Register_Birthdate {
+            get {
+                return ResourceManager.GetString("Register_Birthdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我是.
+        /// </summary>
+        public static string Register_IAm {
+            get {
+                return ResourceManager.GetString("Register_IAm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 城市.
+        /// </summary>
+        public static string Register_Location {
+            get {
+                return ResourceManager.GetString("Register_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我找.
+        /// </summary>
+        public static string Register_LookingFor {
+            get {
+                return ResourceManager.GetString("Register_LookingFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 名字.
+        /// </summary>
+        public static string Register_Nickname {
+            get {
+                return ResourceManager.GetString("Register_Nickname", resourceCulture);
             }
         }
     }

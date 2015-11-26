@@ -60,6 +60,10 @@
 .popover {
   max-width: 100%;
 }
+.control-label {
+  font-weight: normal;
+  font-size: 1.3em;
+}
 /***************************
     Okboba Specific Sytles
 ****************************/
@@ -382,9 +386,7 @@ body {
   box-shadow: inset 0px 0px 0px 4px #fff;
 }
 .question-importance-box {
-  margin-right: 4px;
-  display: inline-block;
-  text-align: center;
+  margin-top: 5px;
 }
 .question-importance-bar {
   width: 130px;
@@ -392,7 +394,11 @@ body {
   border-radius: 4px;
   background-color: #c1c1c1;
   cursor: pointer;
+  margin-right: 4px;
   margin-top: 5px;
+}
+.question-importance-bar.active {
+  background-color: #F06292;
 }
 .conversation-row {
   padding: 10px;
@@ -418,9 +424,6 @@ body {
 .conversation-read .circle {
   opacity: 0;
 }
-/****************************************
-    Masonry grid
-****************************************/
 .grid {
   position: relative;
   margin-top: 20px;
@@ -451,6 +454,17 @@ body {
 .photo-on-screen {
   max-width: 800px;
   height: auto;
+}
+.photo-sadface {
+  width: 400px;
+  margin: 30px auto;
+  font-size: 1.5em;
+  opacity: 0.5;
+  text-align: center;
+}
+.register-form {
+  font-size: 1.4em;
+  color: white;
 }
 /****************************************
     Photo Upload
@@ -517,4 +531,17 @@ label.photo-upload-label input[type="file"] {
   padding: 4px 6px;
   border-radius: 2px;
   cursor: pointer;
+}
+/****************************************
+    Location box
+****************************************/
+.location-box {
+  position: absolute;
+  z-index: 100;
+  display: inline-block;
+  background-color: #FFF;
+  padding: 5px;
+  width: 370px;
+  border-radius: 3px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }

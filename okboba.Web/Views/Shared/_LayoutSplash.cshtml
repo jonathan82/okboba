@@ -29,27 +29,27 @@
 
 <body class="body-splash">
 
-    <div class="splash-buffer">
-    </div>
+    <!-- Matches the size of the background image -->
+    <div class="splash-buffer"></div>
 
     <div class="splash-container">
 
         <!-- Navbar -->
         <div class="splash-navbar">
-            <a href="/account/login" class="btn btn-default">@i18n.Common_Login</a>
+            <a href="/account/login" class="btn btn-info">@i18n.Common_Login</a>
         </div>
 
         <!-- Registration form -->
         <div class="container">
-            @RenderSection("registrationform", required: true);
+            @RenderBody()
         </div>
 
-    </div>
+    </div>    
 
-    @RenderBody()
+    @Html.Partial("_Marketing");
 
 
-    @Scripts.Render("~/bundles/js/vendeor")
+    @Scripts.Render("~/bundles/js/vendor")
     @Scripts.Render("~/bundles/js/okboba")
     @RenderSection("scripts", required: false)
 

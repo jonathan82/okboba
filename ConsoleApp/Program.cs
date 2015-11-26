@@ -65,13 +65,13 @@ namespace ConsoleApp
             //Profile Detail Options   
             //seeder.SeedDetailOptions("../../../data/profile_details.txt");         
 
-            // Questions
-            Console.WriteLine("Seeding Questions...");
-            seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
+            //// Questions
+            //Console.WriteLine("Seeding Questions...");
+            //seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
 
-            //// Chinese Cities
-            //Console.WriteLine("Seeding Locations...");
-            //seeder.SeedLocations("../../../data/china_cities.txt");
+            // Chinese Cities
+            Console.WriteLine("Seeding Locations...");
+            seeder.SeedLocations("../../../data/china_cities.txt");
 
             //// Users
             //Console.WriteLine("Seeding Users...");

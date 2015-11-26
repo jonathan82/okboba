@@ -21,13 +21,11 @@ namespace okboba.Web.Models
         [Display(ResourceType = typeof(i18n), Name = "Account_Password")]
         public string Password { get; set; }
 
-        //[DataType(DataType.Password)]
-        //[Display(Name = "Confirm password")]
-        //[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        //public string ConfirmPassword { get; set; }
-
         [Required]
         public byte Gender { get; set; }
+
+        [Required]
+        public byte LookingForGender { get; set; }
 
         [Required]
         public DateTime Birthdate { get; set; }

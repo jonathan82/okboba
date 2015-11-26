@@ -10,7 +10,7 @@ namespace okboba.Repository.Models
     public class QuestionWithAnswerModel
     {
         public Question Question { get; set; }
-        public List<QuestionChoice> Choices { get; set; }
+        public IEnumerable<QuestionChoice> Choices { get; set; }
         public Answer Answer { get; set; }
     }
 }

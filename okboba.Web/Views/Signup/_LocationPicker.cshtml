@@ -1,0 +1,32 @@
+﻿<script id="locationPickerTemplate" type="text/x-jsrender">
+
+    <div class="location-box">
+        <div>Choose your location:</div>
+        <div>
+            <span>A-G</span>
+            {{for first}}
+            <a href="#">{{:name}}</a>
+            {{/for}}
+        </div>
+        <div>
+            <span>H-L</span>
+            {{for second}}
+            <a href="#">{{:name}}</a>
+            {{/for}}
+        </div>
+        <div>
+            <span>M-S</span>
+            {{for third}}
+            <a href="#">{{:name}}</a>
+            {{/for}}
+        </div>
+        <div>
+            <span>T-Z</span>
+            {{for fourth}}
+            <a href="#">{{:name}}</a>
+            {{/for}}
+        </div>
+        
+    </div>
+
+</script>

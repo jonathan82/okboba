@@ -23,17 +23,17 @@ namespace okboba.Controllers
 
         public ActionResult Index()
         {
-            var locationList = locationRepo.GetProvinceList();
-            var provinceList = new List<object>();                       
+            //var locationList = locationRepo.GetProvinceList();
+            //var provinceList = new List<object>();                       
 
-            foreach (var loc in locationList)
-            {
-                provinceList.Add(new { id = loc.LocationId1, name = loc.LocationName1 });
-            }
+            //foreach (var loc in locationList)
+            //{
+            //    provinceList.Add(new { id = loc.LocationId1, name = loc.LocationName1 });
+            //}
 
-            var json = JsonConvert.SerializeObject(provinceList);
+            //var json = JsonConvert.SerializeObject(provinceList);
 
-            ViewBag.JsonProvinces = json;
+            //ViewBag.JsonProvinces = json;
 
             return View();
         }

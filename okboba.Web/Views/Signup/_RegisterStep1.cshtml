@@ -1,0 +1,23 @@
+﻿@using okboba.Resources
+
+<!-- Regisration Form: Step 1 -->
+<div id="register-step-1" class="register-form text-center">
+    <img src="~/Content/images/Logo/okboba-logo-lg-2.png" style="opacity:0.8;" />
+    <div class="form-inline" style="margin-top: 30px;">
+        <div class="form-group form-group-lg" style="margin-right: 20px;">
+            <label for="Gender" class="control-label">@i18n.Register_IAm： </label>
+            <select class="form-control" name="Gender" style="width: 200px;">
+                <option value="@OkbConstants.FEMALE">@i18n.Common_Female</option>
+                <option value="@OkbConstants.MALE">@i18n.Common_Male</option>
+            </select>
+        </div>
+        <div class="form-group form-group-lg" style="margin-right: 20px;">
+            <label for="LookingForGender" class="control-label">@i18n.Register_LookingFor： </label>
+            <select class="form-control" name="LookingForGender" style="width: 200px;">
+                <option value="@OkbConstants.FEMALE">@i18n.Common_Female</option>
+                <option value="@OkbConstants.MALE">@i18n.Common_Male</option>
+            </select>
+        </div>
+        <button class="btn btn-lg btn-primary" id="NextButton">@i18n.Common_Submit >></button>
+    </div>
+</div>

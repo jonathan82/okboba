@@ -15,5 +15,6 @@ namespace okboba.Repository
         bool AnswerQuestion(Answer ans);
         IQueryable<TranslateQuestion> GetTranslateQuestions();
         IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId);
+        IEnumerable<QuestionWithAnswerModel> GetNext2Questions(int profileId);
     }
 }

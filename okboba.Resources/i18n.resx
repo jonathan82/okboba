@@ -339,4 +339,25 @@
   <data name="Question_Prompt_Importance" xml:space="preserve">
     <value>How important are your matches answers?</value>
   </data>
+  <data name="Common_Female" xml:space="preserve">
+    <value>女</value>
+  </data>
+  <data name="Common_Male" xml:space="preserve">
+    <value>男</value>
+  </data>
+  <data name="Register_Birthdate" xml:space="preserve">
+    <value>生日</value>
+  </data>
+  <data name="Register_IAm" xml:space="preserve">
+    <value>我是</value>
+  </data>
+  <data name="Register_Location" xml:space="preserve">
+    <value>城市</value>
+  </data>
+  <data name="Register_LookingFor" xml:space="preserve">
+    <value>我找</value>
+  </data>
+  <data name="Register_Nickname" xml:space="preserve">
+    <value>名字</value>
+  </data>
 </root>

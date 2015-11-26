@@ -1,0 +1,70 @@
+﻿@model okboba.Web.Models.RegisterViewModel
+@using okboba.Resources
+
+<!-- Regisration Form: Step 2 -->
+<div class="row" id="register-step-2" style="display: none;">
+    <div class="col-md-4 col-md-offset-1">
+        <p>只需填写几个字段上手。或者用你最喜欢的社交网络。</p>
+    </div>
+    <div class="col-md-5">
+        <span class="h3">登记.</span>
+        <hr />
+        <div class="form-horizontal">
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="Email" class="col-sm-3 control-label">@i18n.Account_Email:</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    @*<input type="text" name="Email" value=" " class="form-control" />*@
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="Password" class="col-sm-3 control-label">@i18n.Account_Password:</label>
+                <div class="col-sm-9">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    @*<input type="text" name="Password" value=" " class="form-control" />*@
+                </div>
+            </div>
+
+            <!-- Nickname -->
+            <div class="form-group">
+                <label for="Name" class="col-sm-3 control-label">@i18n.Register_Nickname:</label>
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    @*<input type="text" name="Name" value=" " class="form-control" />*@
+                </div>
+            </div>
+
+            <!-- Birthdate -->
+            <div class="form-group">
+                <label for="Birthdate" class="col-sm-3 control-label">@i18n.Register_Birthdate:</label>
+                <div class="col-sm-9">
+                    <input type="text" name="Birthdate" value=" " class="form-control" id="Birthdate"/>
+                </div>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+                <label for="Location" class="col-sm-3 control-label">@i18n.Register_Location:</label>
+                <div class="col-sm-9">
+                    <input id="locationinput" type="text" name="name" value=" " class="form-control" />
+                    <input type="hidden" name="locationId1" value="" id="locationId1" />
+                    <input type="hidden" name="locationId2" value="" id="locationId2" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">加入!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

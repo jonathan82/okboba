@@ -3,6 +3,10 @@
  *  Author : Jonathan Lin
  *  Date   : 10/20/2015
  *  Notes  : Uses popover to present a 2-level province/district chooser
+ *           ABCDEFG
+ *           HIJKLMN
+ *           OPQRSTU
+ *           VWXYZ
  */
 (function ($) {
 

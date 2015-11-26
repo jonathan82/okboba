@@ -1,0 +1,54 @@
+﻿@model okboba.Web.Models.QuestionIndexViewModel
+@using okboba.Resources
+
+<!-- Question box -->
+<div class="question-form">
+
+    <p>@Model.NextQuestions.First().Question.Text</p>
+
+    @foreach (var choice in Model.NextQuestions.First().Choices)
+    {
+        <div class="radio-custom">
+            <input type="radio" name="ChoiceIndex" value="@choice.Index" id="r@(choice.Index)_@(choice.QuestionId)" />
+            <label for="r@(choice.Index)_@(choice.QuestionId)">@choice.Text</label>
+        </div>
+    }
+
+    <p class="top-buffer-10">@i18n.Question_Prompt_Acceptable</p>
+
+    @foreach (var choice in Model.NextQuestions.First().Choices)
+    {
+        <div class="checkbox-custom">
+            <input type="checkbox" name="ChoiceAccept" value="@choice.Index" id="c@(choice.Index)_@(choice.QuestionId)" />
+            <label for="c@(choice.Index)_@(choice.QuestionId)">@choice.Text</label>
+        </div>
+    }
+
+    <div class="checkbox-custom">
+        <input type="checkbox" name="ChoiceIrrelevant" value="true" id="irrelevant" />
+        <label for="irrelevant">@i18n.Question_Irrelevant</label>
+    </div>
+
+    <p class="top-buffer-10">@i18n.Question_Prompt_Importance</p>
+
+    <div class="question-importance-box">
+        <div class="inline-block">
+            <div class="text-center">@i18n.Question_ALittleImportant</div>
+            <div class="question-importance-bar" data-importance="1"></div>
+        </div>
+        <div class="inline-block">
+            <div class="text-center">@i18n.Question_SomewhatImportant</div>
+            <div class="question-importance-bar" data-importance="2"></div>
+        </div>
+        <div class="inline-block">
+            <div class="text-center">@i18n.Question_VeryImportant</div>
+            <div class="question-importance-bar" data-importance="3"></div>
+        </div>
+    </div>
+    <input type="hidden" name="importance" value="" />
+
+    <div class="text-right top-buffer-20">
+        <button class="btn btn-default">Skip Question</button>
+        <button class="btn btn-primary">Answer</button>
+    </div>
+</div>

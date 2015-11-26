@@ -38,6 +38,7 @@ namespace okboba.Controllers
             }
 
             vm.MyQuestions = _quesRepo.GetAnsweredQuestions(vm.ProfileId);
+            vm.NextQuestions = _quesRepo.GetNext2Questions(vm.ProfileId);
 
             return View(vm);
         }

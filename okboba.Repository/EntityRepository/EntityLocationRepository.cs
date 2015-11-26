@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using okboba.Entities;
+using okboba.Repository.Models;
+using Pinyin4net;
 
 namespace okboba.Repository.EntityRepository
 {
@@ -26,15 +28,40 @@ namespace okboba.Repository.EntityRepository
         }
         #endregion
 
-        public List<Location> GetProvinceList()
+        public List<LocationPinyinModel> GetProvinceList()
         {
             var db = new OkbDbContext();
 
-            return db.Locations
-                .AsEnumerable()
-                .Distinct()
-                .OrderBy(loc => loc.LocationId1)
-                .ToList();
+            var result = from loc in db.Locations.AsNoTracking()
+                         group loc by loc.LocationId1 into loc1Group
+                         select loc1Group.FirstOrDefault();
+
+            var list = new List<LocationPinyinModel>();
+
+            foreach (var loc in result)
+            {
+                var pinyinArray = PinyinHelper.ToHanyuPinyinStringArray(loc.LocationName1[0]);
+
+                list.Add(new LocationPinyinModel
+                {
+                    LocationId = loc.LocationId1,
+                    LocationName = loc.LocationName1,
+                    Pinyin = pinyinArray != null ? pinyinArray[0] : ""
+                });
+
+                //Fix up zhong => chongqing
+                if (list[list.Count - 1].LocationName == "重庆") list[list.Count - 1].Pinyin = "chong";
+            }
+
+            list.Sort((loc1, loc2) => loc1.Pinyin.CompareTo(loc2.Pinyin));
+
+            return list;
+
+            //return db.Locations
+            //    .AsEnumerable()
+            //    .Distinct()
+            //    .OrderBy(loc => loc.LocationId1)
+            //    .ToList();
         }
 
         public List<Location> GetDistrictList(int id)

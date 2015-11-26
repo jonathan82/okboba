@@ -268,6 +268,7 @@
     <Compile Include="Controllers\PlaygroundController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,7 +282,7 @@
     <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModel.cs" />
     <Compile Include="Models\Question\QuestionIndexViewModel.cs" />
-    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\Signup\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Content\images\none.gif" />
     <Content Include="Content\images\none.jpg" />
     <Content Include="Content\images\Penguins.jpg" />
+    <Content Include="Content\images\sadface.png" />
     <Content Include="Content\images\Shanghai-Skyline.jpg" />
     <Content Include="Content\images\wedding_beach.jpg" />
     <Content Include="Content\images\wedding_bw.jpg" />
@@ -344,6 +346,7 @@
     <Content Include="Content\question.less" />
     <Content Include="Content\nav.less" />
     <Content Include="Content\photo.less" />
+    <Content Include="Content\register.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -430,6 +433,7 @@
     <Content Include="Scripts\editinplace.js" />
     <Content Include="Scripts\editthumbnail.js" />
     <Content Include="Scripts\locationpicker.js" />
+    <Content Include="Scripts\locationpicker2.js" />
     <Content Include="Scripts\matchscroller.js" />
     <Content Include="Scripts\okboba.js" />
     <Content Include="lib\react\react-dom.js" />
@@ -439,6 +443,7 @@
     <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
     <Content Include="Scripts\photoupload2.js" />
+    <Content Include="Scripts\question.js" />
     <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -462,17 +467,11 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Signup\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Matches\matches.cshtml" />
@@ -490,7 +489,6 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Playground\Index.cshtml" />
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
     <Content Include="Views\Photo\_PhotoUpload.cshtml" />
@@ -499,6 +497,13 @@
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
     <Content Include="Views\Photo\_EditThumbnail.cshtml" />
     <Content Include="Views\Photo\_Photoswipe.cshtml" />
+    <Content Include="Views\Question\_QuestionBox.cshtml" />
+    <Content Include="Views\Question\_QuestionBoxTemplate.cshtml" />
+    <Content Include="Views\Signup\_RegisterStep2.cshtml" />
+    <Content Include="Views\Signup\_Marketing.cshtml" />
+    <Content Include="Views\Signup\_ViewStart.cshtml" />
+    <Content Include="Views\Signup\_RegisterStep1.cshtml" />
+    <Content Include="Views\Signup\_LocationPicker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

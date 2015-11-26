@@ -1,0 +1,59 @@
+﻿@model okboba.Web.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "OkBoba - The Premier Dating Site for Smart Singles";
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
+{
+    @Html.Partial("_RegisterStep1")
+    
+    @Html.Partial("_RegisterStep2")
+}
+
+@Html.Partial("_LocationPicker")
+
+@section Scripts {
+
+    <script>
+        window.history.pushState({step: 'step1'},"step1",null);
+
+        $('#NextButton').click(function (e) {
+            e.preventDefault();
+
+            $('#register-step-1').fadeOut('fast', function (e) {
+                $('#register-step-2').fadeIn('fast');
+            });            
+
+            window.history.pushState({step: 'step2'},null,null);
+        });
+
+        $(window).on('popstate', function (e) {
+            //alert('popstate ' + e.originalEvent.state.step);
+            if (e.originalEvent.state.step == 'step1') {
+                $('#register-step-2').fadeOut('fast', function (e) {
+                    $('#register-step-1').fadeIn('fast');
+                });
+            } else if(e.originalEvent.state.step == 'step2') {
+                $('#register-step-1').fadeOut('fast', function (e) {
+                    $('#register-step-2').fadeIn('fast');
+                });
+            }
+        });
+
+        $('#Birthdate').datepicker({
+            //endDate: "2000/01/01",
+            startView: 2,
+            language: "zh-CN",
+            orientation: "bottom auto",
+            autoclose: true
+        });
+
+        //Setup the location picker
+        var provinces = @Html.Raw(ViewBag.JsonProvinces);
+
+        //$('#locationinput').locationpicker(provinces, "#locationId1", "#locationId2");
+
+        $('#locationinput').locationpicker(provinces);
+    </script>
+}
