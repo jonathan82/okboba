@@ -119,7 +119,7 @@ namespace okboba.Controllers
             qText = HttpContext.Server.HtmlEncode(qText);
 
             _profileRepo.EditProfileText(GetProfileId(), qText, whichQuestion);
-            _activityRepo.EditProfileTextActivity(GetProfileId(), Truncate(qText, 100));
+            //_activityRepo.EditProfileTextActivity(GetProfileId(), Truncate(qText, 100));
 
             return Content("{}");
         }

@@ -1,32 +1,56 @@
-﻿<script id="locationPickerTemplate" type="text/x-jsrender">
+﻿@using okboba.Resources
+@*
+    data = {
+        current: {currently selected location}
+        top: [array of locations]
+        first: [array of locations]
+        second: [array of locations]
+        third: [array of locations]
+        fourth: [array of locations]
+    }
+*@
+<script id="locationPickerTemplate" type="text/x-jsrender">
 
-    <div class="location-box">
-        <div>Choose your location:</div>
-        <div>
-            <span>A-G</span>
+    <div>你在哪？</div>
+
+    {{if hot}}
+    <div>
+        热门城市:
+        {{for hot}}
+        <a href="#" data-id="{{:LocationId}}">{{:LocationName}}</a>
+        {{/for}}
+    </div>
+    {{/if}}
+
+    {{if current}}
+    <div><b>你选择:</b> <a href="#" data-step="1">{{:current.LocationName}}</a></div>
+    {{/if}}
+
+    <div>
+        <span>A-G:</span>
+        <span>
             {{for first}}
-            <a href="#">{{:name}}</a>
+            <a href="#" data-id="{{:LocationId}}">{{:LocationName}}</a>
             {{/for}}
-        </div>
-        <div>
-            <span>H-L</span>
-            {{for second}}
-            <a href="#">{{:name}}</a>
-            {{/for}}
-        </div>
-        <div>
-            <span>M-S</span>
-            {{for third}}
-            <a href="#">{{:name}}</a>
-            {{/for}}
-        </div>
-        <div>
-            <span>T-Z</span>
-            {{for fourth}}
-            <a href="#">{{:name}}</a>
-            {{/for}}
-        </div>
-        
+        </span>
+    </div>
+    <div>
+        <span>H-L:</span>
+        {{for second}}
+        <a href="#" data-id="{{:LocationId}}">{{:LocationName}}</a>
+        {{/for}}
+    </div>
+    <div>
+        <span>M-S:</span>
+        {{for third}}
+        <a href="#" data-id="{{:LocationId}}">{{:LocationName}}</a>
+        {{/for}}
+    </div>
+    <div>
+        <span>T-Z:</span>
+        {{for fourth}}
+        <a href="#" data-id="{{:LocationId}}">{{:LocationName}}</a>
+        {{/for}}
     </div>
 
 </script>

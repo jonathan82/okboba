@@ -54,6 +54,9 @@
 /**********************
     Bootstrap Overrides
 ***********************/
+.modal-open {
+  overflow: scroll;
+}
 .container {
   border-radius: 6px;
 }
@@ -466,6 +469,9 @@ body {
   font-size: 1.4em;
   color: white;
 }
+#loginModal {
+  top: 15%;
+}
 /****************************************
     Photo Upload
 ****************************************/
@@ -535,13 +541,13 @@ label.photo-upload-label input[type="file"] {
 /****************************************
     Location box
 ****************************************/
-.location-box {
+.location-picker-container {
   position: absolute;
   z-index: 100;
   display: inline-block;
   background-color: #FFF;
   padding: 5px;
-  width: 370px;
+  width: 380px;
   border-radius: 3px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }

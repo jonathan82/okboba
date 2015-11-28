@@ -347,6 +347,7 @@
     <Content Include="Content\nav.less" />
     <Content Include="Content\photo.less" />
     <Content Include="Content\register.less" />
+    <Content Include="Content\chat.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -504,6 +505,7 @@
     <Content Include="Views\Signup\_ViewStart.cshtml" />
     <Content Include="Views\Signup\_RegisterStep1.cshtml" />
     <Content Include="Views\Signup\_LocationPicker.cshtml" />
+    <Content Include="Views\Signup\_Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

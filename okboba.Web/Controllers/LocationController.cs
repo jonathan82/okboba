@@ -18,17 +18,11 @@ namespace okboba.Controllers
         }
 
         // GET: Location
-        public JsonResult GetDistrictJson(int provinceId)
+        public JsonResult GetDistricts(int provinceId)
         {
-            var locations = locationRepo.GetDistrictList(provinceId);
-            var districtList = new List<object>();
+            var districts = locationRepo.GetDistricts(provinceId);
 
-            foreach (var loc in locations)
-            {
-                districtList.Add(new { id = loc.LocationId2, name = loc.LocationName2 });
-            }
-
-            return Json(districtList, JsonRequestBehavior.AllowGet);
+            return Json(districts, JsonRequestBehavior.AllowGet);
         }
     }
 }

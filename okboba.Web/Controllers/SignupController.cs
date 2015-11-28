@@ -45,7 +45,7 @@ namespace okboba.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            var provList = _locationRepo.GetProvinceList();
+            var provList = _locationRepo.GetProvinces();
             //var provinceList = new List<object>();
 
             //foreach (var loc in locationList)

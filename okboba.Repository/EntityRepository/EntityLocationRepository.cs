@@ -28,7 +28,7 @@ namespace okboba.Repository.EntityRepository
         }
         #endregion
 
-        public List<LocationPinyinModel> GetProvinceList()
+        public List<LocationPinyinModel> GetProvinces()
         {
             var db = new OkbDbContext();
 
@@ -64,16 +64,31 @@ namespace okboba.Repository.EntityRepository
             //    .ToList();
         }
 
-        public List<Location> GetDistrictList(int id)
+        public List<LocationPinyinModel> GetDistricts(int id)
         {
             var db = new OkbDbContext();
 
-            var result = from loc in db.Locations
+            var result = from loc in db.Locations.AsNoTracking()
                          where loc.LocationId1 == id
-                         orderby loc.LocationId2
                          select loc;
 
-            return result.ToList();
+            var list = new List<LocationPinyinModel>();
+
+            foreach (var loc in result)
+            {
+                var pinyinArr = PinyinHelper.ToHanyuPinyinStringArray(loc.LocationName2[0]);
+
+                list.Add(new LocationPinyinModel
+                {
+                    LocationId = loc.LocationId2,
+                    LocationName = loc.LocationName2,
+                    Pinyin = pinyinArr != null ? pinyinArr[0] : ""
+                });
+            }
+
+            list.Sort((loc1, loc2) => loc1.Pinyin.CompareTo(loc2.Pinyin));
+
+            return list;
         }
 
         public string GetLocationString(int locId1, int locId2)
@@ -82,7 +97,7 @@ namespace okboba.Repository.EntityRepository
             var loc = db.Locations.Find(locId1, locId2);
             if(loc != null)
             {
-                return loc.LocationName1 + ", " + loc.LocationName2;
+                return loc.LocationName2 + ", " + loc.LocationName1;
             }
             return "";
         }

@@ -36,7 +36,7 @@
 
         <!-- Navbar -->
         <div class="splash-navbar">
-            <a href="/account/login" class="btn btn-info">@i18n.Common_Login</a>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">@i18n.Common_Login</button>
         </div>
 
         <!-- Registration form -->
@@ -44,9 +44,11 @@
             @RenderBody()
         </div>
 
-    </div>    
+    </div>
 
-    @Html.Partial("_Marketing");
+    @Html.Partial("_Login")
+
+    @Html.Partial("_Marketing")
 
 
     @Scripts.Render("~/bundles/js/vendor")

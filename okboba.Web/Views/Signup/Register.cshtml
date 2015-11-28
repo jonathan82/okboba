@@ -4,7 +4,7 @@
     ViewBag.Title = "OkBoba - The Premier Dating Site for Smart Singles";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
 {
     @Html.Partial("_RegisterStep1")
     
@@ -18,6 +18,7 @@
     <script>
         window.history.pushState({step: 'step1'},"step1",null);
 
+        //Next button
         $('#NextButton').click(function (e) {
             e.preventDefault();
 
@@ -28,6 +29,7 @@
             window.history.pushState({step: 'step2'},null,null);
         });
 
+        //Back button
         $(window).on('popstate', function (e) {
             //alert('popstate ' + e.originalEvent.state.step);
             if (e.originalEvent.state.step == 'step1') {
@@ -41,19 +43,28 @@
             }
         });
 
-        $('#Birthdate').datepicker({
-            //endDate: "2000/01/01",
-            startView: 2,
+        //Setup the birthdate picker
+        $("#Birthdate").datepicker( {
+            format: "yyyy年mm月",
+            startView: 2, 
+            minViewMode: "months",
             language: "zh-CN",
             orientation: "bottom auto",
+            defaultViewDate: {year: 1980},
             autoclose: true
         });
 
         //Setup the location picker
         var provinces = @Html.Raw(ViewBag.JsonProvinces);
-
-        //$('#locationinput').locationpicker(provinces, "#locationId1", "#locationId2");
-
         $('#locationinput').locationpicker(provinces);
+
+        //Validation
+        $('#registerForm').validate();
+
+        //Submit button
+        $('form').submit(function (e) {
+            e.preventDefault();
+            //set the date
+        });
     </script>
 }

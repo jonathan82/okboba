@@ -10,8 +10,8 @@ namespace okboba.Repository
 {
     public interface ILocationRepository
     {
-        List<LocationPinyinModel> GetProvinceList();
-        List<Location> GetDistrictList(int id);
+        List<LocationPinyinModel> GetProvinces();
+        List<LocationPinyinModel> GetDistricts(int id);
         string GetLocationString(int locId1, int locId2);
     }
 }
