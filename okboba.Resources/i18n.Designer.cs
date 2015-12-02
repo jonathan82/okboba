@@ -178,6 +178,42 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to answered a question..
+        /// </summary>
+        public static string Feed_AnsweredQuestion {
+            get {
+                return ResourceManager.GetString("Feed_AnsweredQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to edited their profile text..
+        /// </summary>
+        public static string Feed_EditedProfileText {
+            get {
+                return ResourceManager.GetString("Feed_EditedProfileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to joined! Send them a message!.
+        /// </summary>
+        public static string Feed_Joined {
+            get {
+                return ResourceManager.GetString("Feed_Joined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to uploaded a photo..
+        /// </summary>
+        public static string Feed_UploadedPhoto {
+            get {
+                return ResourceManager.GetString("Feed_UploadedPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 性格.
         /// </summary>
         public static string Nav_Personality {

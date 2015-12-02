@@ -1,0 +1,20 @@
+﻿@model IEnumerable<okboba.Repository.Models.ActivityModel>
+@using okboba.Web.Helpers
+@using okboba.Resources
+
+<h3>What's going on</h3>
+<hr />
+
+@foreach (var activity in Model)
+{
+    <a href="#" class="shadow-z-1 activity-feed-row">
+        @{var photo = activity.Profile.GetFirstHeadshot(true);}
+        @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.Id, 40, 40, true, true)
+        <div class="activity-feed-blurb">
+            @Html.FeedBlurb(activity)
+        </div>
+        <div class="pull-right">
+            just now
+        </div>
+    </a>
+}

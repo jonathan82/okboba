@@ -14,27 +14,28 @@ namespace okboba.Controllers
     [Authorize]
     public class HomeController : OkbBaseController
     {
-        private ILocationRepository locationRepo;
+        private IActivityRepository _activityRepo;
+        private IProfileRepository _profileRepo;
 
         public HomeController()
         {
-            this.locationRepo = EntityLocationRepository.Instance;
+            _activityRepo = EntityActivityRepository.Instance;
+            _profileRepo = EntityProfileRepository.Instance;
+        }
+
+        [ChildActionOnly]
+        public ActionResult ActivityFeed()
+        {
+            //retrieve the preferences for the user and show 'em what they want
+            var profile = _profileRepo.GetProfile(GetProfileId());
+
+            var vm = _activityRepo.GetActivities(profile.LookingForGender, 50);
+
+            return PartialView("_ActivityFeed",vm);
         }
 
         public ActionResult Index()
         {
-            //var locationList = locationRepo.GetProvinceList();
-            //var provinceList = new List<object>();                       
-
-            //foreach (var loc in locationList)
-            //{
-            //    provinceList.Add(new { id = loc.LocationId1, name = loc.LocationName1 });
-            //}
-
-            //var json = JsonConvert.SerializeObject(provinceList);
-
-            //ViewBag.JsonProvinces = json;
-
             return View();
         }
 

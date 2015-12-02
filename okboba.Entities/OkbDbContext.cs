@@ -33,6 +33,6 @@ namespace okboba.Entities
         public DbSet<ProfileDetail> ProfileDetails { get; set; }
         public DbSet<ProfileDetailOption> ProfileDetailOptions { get; set; }
         public DbSet<QuestionChoice> QuestionChoices { get; set; }
-        //public DbSet<Activity> ActivityFeed { get; set; }
+        public DbSet<Activity> ActivityFeed { get; set; }
     }
 }

@@ -57,7 +57,7 @@
             //Grab the html to put in the textarea
             var html = $qDiv.hasClass('profile-text-placeholder') ? '' : $qDiv.html();
 
-            $newForm = $('<form><textarea class="profile-text-edit" id=qText-"' + $qDiv.prop('id') + '" name="qText">' + br2nl(html) + '</textarea> \
+            $newForm = $('<form><textarea class="profile-text-edit" id=qText-"' + $qDiv.prop('id') + '" name="text">' + br2nl(html) + '</textarea> \
                           <button type="button" class="btn btn-default">Cancel</button> \
                           <button type="button" class="btn btn-primary">Save</button> \
                           <input type="hidden" name="whichQuestion" value="' + $qDiv.prop('id') + '" /></form>');

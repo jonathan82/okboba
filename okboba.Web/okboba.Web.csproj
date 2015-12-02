@@ -348,6 +348,7 @@
     <Content Include="Content\photo.less" />
     <Content Include="Content\register.less" />
     <Content Include="Content\chat.less" />
+    <Content Include="Content\home.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -434,7 +435,6 @@
     <Content Include="Scripts\editinplace.js" />
     <Content Include="Scripts\editthumbnail.js" />
     <Content Include="Scripts\locationpicker.js" />
-    <Content Include="Scripts\locationpicker2.js" />
     <Content Include="Scripts\matchscroller.js" />
     <Content Include="Scripts\okboba.js" />
     <Content Include="lib\react\react-dom.js" />
@@ -443,7 +443,6 @@
     <Content Include="lib\react\react.min.js" />
     <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
-    <Content Include="Scripts\photoupload2.js" />
     <Content Include="Scripts\question.js" />
     <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\_references.js" />
@@ -506,6 +505,7 @@
     <Content Include="Views\Signup\_RegisterStep1.cshtml" />
     <Content Include="Views\Signup\_LocationPicker.cshtml" />
     <Content Include="Views\Signup\_Login.cshtml" />
+    <Content Include="Views\Home\_ActivityFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

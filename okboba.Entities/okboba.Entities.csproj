@@ -106,6 +106,14 @@
     <Compile Include="Migrations\201511240203261_Questions2.Designer.cs">
       <DependentUpon>201511240203261_Questions2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512011623567_Activity.cs" />
+    <Compile Include="Migrations\201512011623567_Activity.Designer.cs">
+      <DependentUpon>201512011623567_Activity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512012342085_ActivityRename.cs" />
+    <Compile Include="Migrations\201512012342085_ActivityRename.Designer.cs">
+      <DependentUpon>201512012342085_ActivityRename.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -138,6 +146,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511240203261_Questions2.resx">
       <DependentUpon>201511240203261_Questions2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512011623567_Activity.resx">
+      <DependentUpon>201512011623567_Activity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512012342085_ActivityRename.resx">
+      <DependentUpon>201512012342085_ActivityRename.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

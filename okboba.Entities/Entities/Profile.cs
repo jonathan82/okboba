@@ -22,14 +22,15 @@ namespace okboba.Entities
         public int Id { get; set; }
 
         [StringLength(20)]
-        public string Name { get; set; }
+        public string Nickname { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Birthdate { get; set; }
 
         public byte Gender { get; set; }
+        public byte LookingForGender { get; set; }
 
-        public Int16 Height { get; set; }
+        //public Int16 Height { get; set; }
 
         public Int16 LocationId1 { get; set; }
         public Int16 LocationId2 { get; set; }
@@ -81,18 +82,18 @@ namespace okboba.Entities
             return Photos(OkbConstants.THUMBNAIL_SUFFIX);
         }
 
-        public string GetFirstHeadshot()
+        public string GetFirstHeadshot(bool small = false)
         {
             if (string.IsNullOrEmpty(PhotosInternal)) return "";
             var index = PhotosInternal.IndexOf(';');
             if (index < 0)
             {
-                return PhotosInternal + '_' + OkbConstants.HEADSHOT_SUFFIX;
+                return PhotosInternal + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
             }
 
-            return PhotosInternal.Substring(0, index) + '_' + OkbConstants.HEADSHOT_SUFFIX;
+            return PhotosInternal.Substring(0, index) + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
         }
-
+        
 
         ////////////////////////////// Base62 Functions ////////////////////////////////
         private const string Base62Codes = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

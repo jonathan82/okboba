@@ -19,7 +19,7 @@
             </div>           
         </div>
         <div class="profile-header-info">
-            @Model.Profile.Name, @Model.Profile.GetAge()@Html.Gender(Model.Profile.Gender)<br />
+            @Model.Profile.Nickname, @Model.Profile.GetAge()@Html.Gender(Model.Profile.Gender)<br />
             @Model.Location
         </div>
     </div>
@@ -43,7 +43,7 @@
 @foreach (var photo in photos.Take(4))
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar(photo, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@profileId">@Html.Avatar(photo.Thumb, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
     </div>
 }
 @if (photos.Count() < 4 && Model.IsMe)

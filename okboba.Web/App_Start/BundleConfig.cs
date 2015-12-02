@@ -29,9 +29,9 @@ namespace okboba
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",
                 "~/Scripts/editinplace.js",
-                "~/Scripts/locationpicker2.js",
+                "~/Scripts/locationpicker.js",
                 "~/Scripts/matchscroller.js",
-                "~/Scripts/photoupload2.js",
+                "~/Scripts/photoupload.js",
                 "~/Scripts/editthumbnail.js",
                 "~/Scripts/photoswipe.js",
                 "~/Scripts/question.js"));

@@ -22,7 +22,7 @@ namespace okboba.Controllers
     {
         private IProfileRepository _profileRepo;
         private ILocationRepository _locationRepo;
-        private IActivityRepository _activityRepo;
+        private IActivityRepository _feedRepo;
         private MatchApiClient _webClient;
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -35,6 +35,7 @@ namespace okboba.Controllers
         {
             _profileRepo = EntityProfileRepository.Instance;
             _locationRepo = EntityLocationRepository.Instance;
+            _feedRepo = EntityActivityRepository.Instance;
         }
 
         [ChildActionOnly]
@@ -112,14 +113,14 @@ namespace okboba.Controllers
         /// </summary>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditProfileText(string qText, string whichQuestion)
+        public ActionResult EditProfileText(string text, string whichQuestion)
         {
             //Massage the input
-            qText = Truncate(qText, OkbConstants.MAX_PROFILE_TEXT_SIZE);
-            qText = HttpContext.Server.HtmlEncode(qText);
+            text = Truncate(text, OkbConstants.MAX_PROFILE_TEXT_SIZE);
+            text = HttpContext.Server.HtmlEncode(text);
 
-            _profileRepo.EditProfileText(GetProfileId(), qText, whichQuestion);
-            //_activityRepo.EditProfileTextActivity(GetProfileId(), Truncate(qText, 100));
+            _profileRepo.EditProfileText(GetProfileId(), text, whichQuestion);
+            _feedRepo.EditProfileTextActivity(GetProfileId(), text);
 
             return Content("{}");
         }

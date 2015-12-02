@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -278,26 +279,43 @@ namespace okboba.Entities.Helpers
             
         }
         
-
-
         private Profile CreateUser(string name, byte gender, DateTime dob, string location)
         {
             return new Profile
             {
-                Name = name,
+                Nickname = name,
                 Gender = gender,
                 Birthdate = dob
             };
         }
 
-        //private Question CreateQuestion(string text, string choices, int rank)
-        //{
-        //    return new Question
-        //    {
-        //        Text = text,
-        //        Rank = rank,
-        //        ChoicesInternal = choices
-        //    };
-        //}
+        /// <summary>
+        /// Returns a random time accurate to minutes from 10 days ago to now
+        /// </summary>
+        private DateTime RandomTime(Random rand)
+        {
+            DateTime start = DateTime.Now.AddDays(-10);
+            var range = (DateTime.Now - start).TotalMinutes;
+            return start.AddMinutes(rand.Next((int)range));
+        }
+
+        public void SeedActivities(int n)
+        {
+            var db = new OkbDbContext();
+            var rand = new Random();
+
+            for (int i = 0; i < n; i++)
+            {
+                db.ActivityFeed.Add(new Activity
+                {
+                    Who = (rand.Next() % 1000) + 1,
+                    CategoryId = (rand.Next() % 4) + 1,
+                    When = RandomTime(rand),
+                    What = "this is some test text for metadata field. lorum ipsum dolor blah blah blah"
+                });
+            }
+
+            db.SaveChanges();
+        }
     }
 }

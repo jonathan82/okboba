@@ -1,10 +1,13 @@
 ﻿namespace okboba.Resources
 {
     //Activities
-    public enum ActivityCategories { Joined, UploadedPhoto, EditedProfileText, AnsweredQuestion }
+    public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }
 
     public static class OkbConstants
     {
+        //Activity Feed
+        public const int FEED_BLURB_SIZE = 100;
+
         //Photo
         public const int MAX_PHOTO_SIZE = 5000000; //MB
         public const int MAX_NUM_PHOTOS = 10; //max photos per user

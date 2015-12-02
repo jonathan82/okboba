@@ -70,8 +70,8 @@ namespace ConsoleApp
             //seeder.SeedOkcQuestions("../../../data/okc_questions.txt");
 
             // Chinese Cities
-            Console.WriteLine("Seeding Locations...");
-            seeder.SeedLocations("../../../data/china_cities.txt");
+            //Console.WriteLine("Seeding Locations...");
+            //seeder.SeedLocations("../../../data/china_cities.txt");
 
             //// Users
             //Console.WriteLine("Seeding Users...");
@@ -83,6 +83,9 @@ namespace ConsoleApp
             //seeder.SeedAnswers(10000, 100);
             //timer.Stop();
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+
+            //Activity feed
+            seeder.SeedActivities(1000);
 
             //////////////////////// Simulations //////////////////////////
             //var seed = new SeedDb(connString);

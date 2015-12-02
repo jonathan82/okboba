@@ -360,4 +360,16 @@
   <data name="Register_Nickname" xml:space="preserve">
     <value>名字</value>
   </data>
+  <data name="Feed_AnsweredQuestion" xml:space="preserve">
+    <value>answered a question.</value>
+  </data>
+  <data name="Feed_EditedProfileText" xml:space="preserve">
+    <value>edited their profile text.</value>
+  </data>
+  <data name="Feed_Joined" xml:space="preserve">
+    <value>joined! Send them a message!</value>
+  </data>
+  <data name="Feed_UploadedPhoto" xml:space="preserve">
+    <value>uploaded a photo.</value>
+  </data>
 </root>

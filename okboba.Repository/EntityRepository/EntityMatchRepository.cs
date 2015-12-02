@@ -80,7 +80,7 @@ namespace okboba.Repository.EntityRepository
                     MatchPercent = matchResult.MatchPercent,
                     FriendPercent = matchResult.FriendPercent,
                     EnemyPercent = matchResult.EnemeyPercent,
-                    Name = p.Name,
+                    Name = p.Nickname,
                     ProfileId = p.Id,
                     Photo = p.GetFirstHeadshot(),
                     Age = DateTime.Today.Year - p.Birthdate.Year,

@@ -135,6 +135,9 @@ body {
 .inline-block {
   display: inline-block;
 }
+.img-circle {
+  border-radius: 50%;
+}
 /********************************************
     Bootstrap override - Navigation tab
 *********************************************/
@@ -471,6 +474,21 @@ body {
 }
 #loginModal {
   top: 15%;
+}
+.activity-feed-row,
+.activity-feed-row:hover,
+.activity-feed-row:active,
+.activity-feed-row:focus {
+  padding: 8px 15px;
+  margin-bottom: 12px;
+  color: #555555;
+  font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
+  display: block;
+}
+.activity-feed-blurb {
+  vertical-align: top;
+  margin-left: 15px;
+  display: inline-block;
 }
 /****************************************
     Photo Upload

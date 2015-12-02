@@ -1,5 +1,7 @@
-﻿using System;
+﻿using okboba.Resources;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +24,9 @@ namespace okboba.Entities
     {
         public int Id { get; set; }        
         public int CategoryId { get; set; }
-        public int ProfileId { get; set; }
-        public string Metadata { get; set; }
+        public int Who { get; set; }
+        [StringLength(OkbConstants.FEED_BLURB_SIZE)]
+        public string What { get; set; }
         public DateTime When { get; set; }
     }
 }

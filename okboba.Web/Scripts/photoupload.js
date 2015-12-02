@@ -11,7 +11,6 @@
     const MIN_RESOLUTION = 300;
     const MAX_SCREEN_WIDTH = 800;
 
-    var photoArea;
     var origImageWidth;
     var scaledImageWidth;
 
@@ -49,7 +48,7 @@
                     .load(function () {
                         if (this.width < MIN_RESOLUTION || this.height < MIN_RESOLUTION) {
                             //Image too small
-                            alert('Photo must be at least '+MIN_RESOLUTION+' pixels!');
+                            alert('Photo must be at least ' + MIN_RESOLUTION + ' pixels!');
                             return;
                         }
 
@@ -63,12 +62,12 @@
 
                         //Everythign OK, create thumbnail selector and add to DOM
                         var $thumbDiv = $('<div class="photo-upload-container"> \
-                        <div class="photo-upload-innercontainer"><div class="photo-thumbnail-selector"></div></div> \
+                        <div class="photo-thumbnail-bounds"><div class="photo-thumbnail-selector"></div></div> \
                         </div>');
 
                         $thumbDiv.append($img);
-                        $(photoArea).after($thumbDiv);
-                        $(photoArea).hide();
+                        $('#photoUploadArea').after($thumbDiv);
+                        $('#photoUploadArea').hide(); //hide so we don't get rid of file input
 
                         //Setup the thumbail selector to be resizeable and draggeable
                         $('.photo-thumbnail-selector').draggable(dragOpts).resizable(resizeOpts);
@@ -80,36 +79,42 @@
         }
     }
 
-    // Initialize the plugin for a modal
+    // Initialize the plugin for a modal. Assume being called on a button
     $.fn.photoUpload = function () {
 
-        photoArea = this.data('target');
+        var $modal;
 
-        var $fileInput = this.find('input[type="file"]');
-        $fileInput.fileReaderJS(opts);
+        //Setup the click handler to create modal
+        this.click(function (e) {
+            var tmpl = $.templates('#photoUploadTemplate');
+            $('body').append(tmpl.render());
+            $modal = $('#photoUploadModal');
+            $modal.children('form').submit(SaveHandler);
+            $modal.on('hidden.bs.modal', DismissHandler);
 
-        //Setup the dismiss event handler
-        this.on('hidden.bs.modal', function (e) {
+            var $fileInput = $modal.find('input[type="file"]');
+            $fileInput.fileReaderJS(opts);
 
-            if ($(photoArea).next().hasClass('photo-upload-container')) {
-                $(photoArea).next().remove();
-            }
-
-            //reset form
-            $fileInput.val('');
-
-            $(photoArea).show();
+            $modal.modal();
         });
 
-        //Setup the Save handler -- do the real work
-        $('[data-submit="modal"]').click(function (e) {
+        function DismissHandler(e) {
+            //remove modal from the page
+            $modal.remove();
+        }
+
+        function SaveHandler (e) {
 
             // Make sure an image is selected first
             var $thumb = $('.photo-thumbnail-selector');
             if ($thumb.length == 0) {
                 alert('You must select an image first!');
-                return;
+                return false;
             }
+
+            //Disable buttons and setup spinner
+            $(this).find('button').prop('disabled', true);
+            $('.photo-upload-container').spin(spinOpts);
 
             var pos = $thumb.position();
 
@@ -122,7 +127,7 @@
             $('#topThumb').val(intTop);
             $('#leftThumb').val(intLeft);
             $('#widthThumb').val(intThumbWidth);
-        });
+        }
     }
 
 })(jQuery);

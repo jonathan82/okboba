@@ -67,16 +67,14 @@ namespace okboba.Entities.Helpers
             switch (i)
             {
                 case 0:
-                    return randomProfile.Name;
+                    return randomProfile.Nickname;
                 case 1:
                     return randomProfile.Birthdate;
                 case 2:
                     return randomProfile.Gender;
                 case 3:
-                    return randomProfile.Height;
-                case 4:
                     return randomProfile.LocationId1;
-                case 5:
+                case 4:
                     return randomProfile.LocationId2;
                 default:
                     break;
@@ -91,17 +89,16 @@ namespace okboba.Entities.Helpers
             {
                 //Male
                 randomProfile.Gender = 1;
-                randomProfile.Name = maleNames[random.Next() % maleNames.Length];                
+                randomProfile.Nickname = maleNames[random.Next() % maleNames.Length];                
             }
             else
             {
                 //Female
                 randomProfile.Gender = 2;
-                randomProfile.Name = femaleNames[random.Next() % maleNames.Length];
+                randomProfile.Nickname = femaleNames[random.Next() % maleNames.Length];
             }
 
             randomProfile.Birthdate = DateTime.Now.AddYears(-random.Next(16, 99));
-            randomProfile.Height = (short)random.Next(120, 215);
 
             //20% chance in beijing
             if(random.Next() % 5 == 0)
@@ -119,10 +116,9 @@ namespace okboba.Entities.Helpers
 
         protected override void AddSchemaTableRows()
         {
-            AddSchemaTableRow("Name", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
+            AddSchemaTableRow("Nickname", 20, null, null, false, false, false, SqlDbType.NVarChar, null, null, null, null, null);
             AddSchemaTableRow("Birthdate", null, null, null, false, false, false, SqlDbType.Date, null, null, null, null, null);
             AddSchemaTableRow("Gender", 1, null, null, false, false, false, SqlDbType.NChar, null, null, null, null, null);
-            AddSchemaTableRow("Height", null, null, null, false, false, true, SqlDbType.SmallInt, null, null, null, null, null);
             AddSchemaTableRow("LocationId1", null, null, null, false, false, false, SqlDbType.SmallInt, null, null, null, null, null);
             AddSchemaTableRow("LocationId2", null, null, null, false, false, false, SqlDbType.SmallInt, null, null, null, null, null);
         }

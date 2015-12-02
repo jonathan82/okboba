@@ -85,7 +85,7 @@ namespace okboba.Web.Controllers
                 {
                     Gender = model.Gender,
                     Birthdate = model.Birthdate,
-                    Name = model.Name,
+                    Nickname = model.Name,
                     LocationId1 = model.LocationId1,
                     LocationId2 = model.LocationId2
                 };
