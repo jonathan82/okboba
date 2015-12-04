@@ -214,6 +214,33 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 忘记你的密码？.
+        /// </summary>
+        public static string Login_ForgotPassword {
+            get {
+                return ResourceManager.GetString("Login_ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你的电子邮件.
+        /// </summary>
+        public static string Login_YourEmail {
+            get {
+                return ResourceManager.GetString("Login_YourEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你的密码.
+        /// </summary>
+        public static string Login_YourPasswod {
+            get {
+                return ResourceManager.GetString("Login_YourPasswod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 性格.
         /// </summary>
         public static string Nav_Personality {

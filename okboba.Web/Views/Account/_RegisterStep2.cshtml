@@ -2,9 +2,11 @@
 @using okboba.Resources
 
 <!-- Regisration Form: Step 2 -->
-<div class="row" id="register-step-2" style="display: none;">
-    <div class="col-md-4 col-md-offset-1">
-        <p>只需填写几个字段上手。或者用你最喜欢的社交网络。</p>
+<div class="row register-form" id="register-step-2" style="display: none;">
+    <div class="col-md-4 col-md-offset-1 text-right">
+        <img src="~/Content/images/dialog_box.png" alt="Alternate Text" />
+        <img src="~/Content/images/cartoon_lady.png" class="register-lady" alt="Cartoon Lady" />
+        @Html.ValidationSummary()
     </div>
     <div class="col-md-5">
         <span class="h3">登记.</span>
@@ -33,7 +35,7 @@
 
             <!-- Nickname -->
             <div class="form-group">
-                <label for="Name" class="col-sm-3 control-label">@i18n.Register_Nickname:</label>
+                <label for="Nickname" class="col-sm-3 control-label">@i18n.Register_Nickname:</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
@@ -43,18 +45,18 @@
 
             <!-- Birthdate -->
             <div class="form-group">
-                <label for="Birthdate" class="col-sm-3 control-label">@i18n.Register_Birthdate:</label>
+                <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Register_Birthdate:</label>
                 <div class="col-sm-9">
-                    <input type="text" name="BirthdateText" value="" class="form-control" id="Birthdate" required/>
+                    <input type="text" name="BirthdateText" value="" class="form-control" id="BirthdateText" required readonly/>
                     <input type="hidden" name="Birthdate" value="" id="Birthdate" />
                 </div>
             </div>
 
             <!-- City -->
             <div class="form-group">
-                <label for="Location" class="col-sm-3 control-label">@i18n.Register_Location:</label>
+                <label for="locationText" class="col-sm-3 control-label">@i18n.Register_Location:</label>
                 <div class="col-sm-9">
-                    <input id="locationinput" type="text" name="name" value="" class="form-control" required />
+                    <input id="locationText" type="text" name="locationText" value="" class="form-control" required readonly/>
                     <input type="hidden" name="locationId1" value="" id="locationId1" />
                     <input type="hidden" name="locationId2" value="" id="locationId2" />
                 </div>

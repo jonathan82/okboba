@@ -57,10 +57,10 @@
     }
 
     function Finish(loc1, loc2) {
-        var $tb = $('#locationinput');
+        var $tb = $('#locationText');
         $tb.val(loc2.LocationName + ', ' + loc1.LocationName);
-        $('locationId1').val(loc1.LocationId);
-        $('locationId2').val(loc2.LocationId);
+        $('#locationId1').val(loc1.LocationId);
+        $('#locationId2').val(loc2.LocationId);
         $tb.trigger('locationpicker:close');
     }
 
@@ -115,7 +115,7 @@
     $.fn.locationpicker = function (prov) {
 
         var $picker;
-        var $textbox = $(this);
+        var $textbox = this;
         var open = false;
 
         //Open the location picker
@@ -167,6 +167,8 @@
                 $textbox.trigger('locationpicker:close');
             }
         });
+
+        return this;
     }
 
 })(jQuery);

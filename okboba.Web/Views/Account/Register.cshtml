@@ -13,9 +13,12 @@
 
 @Html.Partial("_LocationPicker")
 
+
 @section Scripts {
 
     <script>
+        var positiveMessages = ["You're beautiful.","You're worth it.","Don't worry, be happy.", "You only live once."];
+       
         window.history.pushState({step: 'step1'},"step1",null);
 
         //Next button
@@ -44,29 +47,59 @@
         });
 
         //Setup the birthdate picker
-        $("#Birthdate").datepicker( {
+        $("#BirthdateText").datepicker( {
             format: "yyyy年mm月",
             startView: 2, 
             minViewMode: "months",
             language: "zh-CN",
             orientation: "bottom auto",
             defaultViewDate: {year: 1980},
+            startDate: '-100y',
+            endDate: '-15y',
             autoclose: true
+        }).on('hide', function (e) {
+            //validate field
+            $('#BirthdateText').valid();
+        }).on('changeDate', function (e) {
+            //convert chinese date to standard date - mm/dd/yyyy
+            var re = /(\d\d\d\d)年(\d\d)月/;
+            var match = re.exec($('#BirthdateText').val());
+            if (match != null) {
+                var birthdate = match[2] + '/01/' + match[1];
+                $('#Birthdate').val(birthdate);
+            }
         });
 
         //Setup the location picker
         var provinces = @Html.Raw(ViewBag.JsonProvinces);
-        $('#locationinput').locationpicker(provinces);
+        $('#locationText').locationpicker(provinces)
+            .on('locationpicker:close', function () {
+                $('#locationText').valid();
+            });
 
         //Validation
-        $('#registerForm').validate();
+        var validationOpts = {
+            rules: {
+                Gender: "required",
+                LookingForGender: "required",
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Password: {
+                    required: true,
+                    minlength: 6
+                },
+                Nickname: {
+                    required: true,
+                    minlength: 2
+                },
+                BirthdateText: "required",
+                locationText: "required"
+            }
+        }
 
-        //Submit button
-        $('form').submit(function (e) {
-            e.preventDefault();
-            //set the date
-            var re = /(\d\d\d\d)年(\d\d)月/;
+        $('#registerForm').validate(validationOpts);
 
-        });
     </script>
 }

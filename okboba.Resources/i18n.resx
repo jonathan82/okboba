@@ -372,4 +372,13 @@
   <data name="Feed_UploadedPhoto" xml:space="preserve">
     <value>uploaded a photo.</value>
   </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>忘记你的密码？</value>
+  </data>
+  <data name="Login_YourEmail" xml:space="preserve">
+    <value>你的电子邮件</value>
+  </data>
+  <data name="Login_YourPasswod" xml:space="preserve">
+    <value>你的密码</value>
+  </data>
 </root>

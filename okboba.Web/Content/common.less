@@ -82,21 +82,34 @@
 /**********************
     Bootstrap Overrides
 ***********************/
+
 .modal-open {
-    overflow: scroll;
+    //prevent scrollbar from disappearing when modal is open
+    overflow: scroll; 
 }
 
 .container {
     border-radius: 6px;
 }
 
-.popover {
-    max-width: 100%;
-}
-
 .control-label {
+    //increase font size on registration controls
     font-weight: normal;
     font-size: 1.3em;
+}
+
+.form-group-lg > .control-label {
+    font-size: 1.5em;
+}
+
+.help-block {
+    // adjust spacing between error message and form control
+    margin-bottom: -5px;
+}
+
+.form-control[readonly] {
+    //get rid of default gray background
+    background-color: #FFF;
 }
 
 /***************************
@@ -119,7 +132,7 @@ body {
     background-size: 100%;
 }
 .body-anon {
-    background-color: @primary-color-2;
+
 }
 .container-auth {
     background-color: #FFF;

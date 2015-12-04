@@ -60,12 +60,18 @@
 .container {
   border-radius: 6px;
 }
-.popover {
-  max-width: 100%;
-}
 .control-label {
   font-weight: normal;
   font-size: 1.3em;
+}
+.form-group-lg > .control-label {
+  font-size: 1.5em;
+}
+.help-block {
+  margin-bottom: -5px;
+}
+.form-control[readonly] {
+  background-color: #FFF;
 }
 /***************************
     Okboba Specific Sytles
@@ -85,9 +91,6 @@ body {
   background-image: url('Images/Shanghai-Skyline.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
-}
-.body-anon {
-  background-color: #F06292;
 }
 .container-auth {
   background-color: #FFF;
@@ -469,11 +472,19 @@ body {
   text-align: center;
 }
 .register-form {
-  font-size: 1.4em;
   color: white;
 }
 #loginModal {
   top: 15%;
+}
+.login-button {
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.register-lady {
+  opacity: 0.8;
+  margin-top: -20px;
+  margin-right: 10px;
 }
 .activity-feed-row,
 .activity-feed-row:hover,
@@ -567,5 +578,6 @@ label.photo-upload-label input[type="file"] {
   padding: 5px;
   width: 380px;
   border-radius: 3px;
+  color: #000;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }
