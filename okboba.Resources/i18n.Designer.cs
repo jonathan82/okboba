@@ -214,6 +214,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 无效的电子邮件或密码.
+        /// </summary>
+        public static string Login_BadPassword {
+            get {
+                return ResourceManager.GetString("Login_BadPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 忘记你的密码？.
         /// </summary>
         public static string Login_ForgotPassword {

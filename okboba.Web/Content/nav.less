@@ -39,7 +39,8 @@
     Bootstrap override - navigation bar
 *******************************************/
 .navbar-brand {
-    padding: 8px 30px;
+    //top right bottom left
+    padding: 6px 50px 6px 30px;
 }
 
 .navbar-default {
@@ -50,13 +51,16 @@
     .shadow-z-3;
 }
 
-.navbar-nav:first-child {
-    padding-left: 25%;
-}
-
 .navbar-nav > li > a {
+    //60 px height
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 1.5em;
     color: @primary-color-3 !important;
+    line-height: 30px;
+}
+
+.navbar-right {
+    //so right nav links won't be so close to the edge
+    margin-right: 0;
 }

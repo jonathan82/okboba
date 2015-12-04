@@ -372,6 +372,9 @@
   <data name="Feed_UploadedPhoto" xml:space="preserve">
     <value>uploaded a photo.</value>
   </data>
+  <data name="Login_BadPassword" xml:space="preserve">
+    <value>无效的电子邮件或密码</value>
+  </data>
   <data name="Login_ForgotPassword" xml:space="preserve">
     <value>忘记你的密码？</value>
   </data>

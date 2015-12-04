@@ -73,7 +73,8 @@ namespace okboba.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                Response.StatusCode = 400;
+                return Content("fail");
             }
 
             // This doesn't count login failures towards account lockout
@@ -83,11 +84,12 @@ namespace okboba.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                    return Content("success");
 
                 case SignInStatus.Failure:
                 default:
-                    return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                    Response.StatusCode = 400;
+                    return Content("fail");
             }
         }
                                         

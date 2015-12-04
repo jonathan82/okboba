@@ -6,11 +6,13 @@
 
 @Html.Action("ProfileHeader", "Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = "Questions" })
 
+<a name="questionBox"></a>
+
 @Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
 
 <div class="row">
     <div class="col-md-6">
-
+        
         <!-- Question Box -->
         @if (Model.IsMe)
         {
