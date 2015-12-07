@@ -1,1 +1,40 @@
-﻿
+﻿@import "common";
+
+.chat-slider {
+    .shadow-z-2;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 270px;
+    height: 200px;
+    background: #808080;
+    border-radius: 5px 5px 0 0;
+}
+
+.chat-head {
+    background: @primary-color-2;
+    height: 2em;    
+    border-radius: 5px 5px 0 0;
+    .shadow-z-2;
+}
+
+.chat-messages {
+    background: @gray-lighter;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    right: 0;
+    bottom: 2em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.chat-input {
+    background: #FFF;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2em;
+    border: 1px solid @gray-light;
+}

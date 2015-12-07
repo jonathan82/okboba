@@ -24,7 +24,9 @@ namespace okboba
                 "~/lib/spinner/spin.js",
                 "~/lib/spinner/jquery.spin.js",
                 "~/lib/photoswipe/photoswipe.js",
-                "~/lib/photoswipe/photoswipe-ui-default.js"));
+                "~/lib/photoswipe/photoswipe-ui-default.js",
+                "~/lib/nicescroll/jquery.nicescroll.js",
+                "~/lib/throttle/jquery.ba-throttle-debounce.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",
@@ -35,7 +37,8 @@ namespace okboba
                 "~/Scripts/editthumbnail.js",
                 "~/Scripts/photoswipe.js",
                 "~/Scripts/question.js",
-                "~/Scripts/validation.js"));
+                "~/Scripts/validation.js",
+                "~/Scripts/chat.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

@@ -415,6 +415,9 @@
     <Content Include="lib\masonry\imagesloaded.pkgd.min.js" />
     <Content Include="lib\masonry\masonry.pkgd.js" />
     <Content Include="lib\masonry\masonry.pkgd.min.js" />
+    <Content Include="lib\nicescroll\jquery.nicescroll.js" />
+    <Content Include="lib\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="lib\nicescroll\zoomico.png" />
     <Content Include="lib\photoswipe\default-skin\default-skin.css" />
     <Content Include="lib\photoswipe\default-skin\default-skin.png" />
     <Content Include="lib\photoswipe\default-skin\default-skin.svg" />
@@ -427,6 +430,9 @@
     <Content Include="lib\spinner\jquery.spin.js" />
     <Content Include="lib\spinner\spin.js" />
     <Content Include="lib\spinner\spin.min.js" />
+    <Content Include="lib\throttle\jquery.ba-throttle-debounce.js" />
+    <Content Include="lib\throttle\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\editinplace.js" />
     <Content Include="Scripts\editthumbnail.js" />
     <Content Include="Scripts\locationpicker.js" />
@@ -490,6 +496,7 @@
     <Content Include="Views\Account\_Login.cshtml" />
     <Content Include="Views\Home\_ActivityFeed.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Shared\_ChatSlider.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

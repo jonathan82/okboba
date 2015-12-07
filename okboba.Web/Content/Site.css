@@ -487,6 +487,41 @@ body {
   margin-top: -20px;
   margin-right: 10px;
 }
+.chat-slider {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 270px;
+  height: 200px;
+  background: #808080;
+  border-radius: 5px 5px 0 0;
+}
+.chat-head {
+  background: #F06292;
+  height: 2em;
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.chat-messages {
+  background: #eeeeee;
+  position: absolute;
+  top: 2em;
+  left: 0;
+  right: 0;
+  bottom: 2em;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.chat-input {
+  background: #FFF;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2em;
+  border: 1px solid #9b9b9b;
+}
 .activity-feed-row,
 .activity-feed-row:hover,
 .activity-feed-row:active,
