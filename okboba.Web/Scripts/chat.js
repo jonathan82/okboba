@@ -11,15 +11,18 @@
 //  for a single chat window. Assumes jQuery and jsrender is available.
 ////////////////////////////////////////////////////////////////////
 function ChatSlider($container, options) {
-    // Private vars
+    //// Private vars
     var configMap = {
         templateId: '#chatSliderTemplate',
         minHeight: 200,
-        minWidth: 250
+        minWidth: 250,
+        sliderClosedHeight: 31
     }
-    var tmpl, $chat;
+    var tmpl, $chat, that, savedHeight;
 
-    // Public functions
+    that = this;
+
+    //// Public functions
     this.setPosition = function (right) {
         $chat.css('right', right);
     }
@@ -28,17 +31,39 @@ function ChatSlider($container, options) {
         return $chat.width();
     }
 
-    // Constructor logic
+    this.remove = function () {
+        $chat.remove();
+    }
+
+    //// Private Functions
+    function togglePosition() {
+        var $icon;
+        if ($chat.height() == configMap.sliderClosedHeight) {
+            //open
+            $chat.height(savedHeight);
+            $icon = $chat.find('.glyphicon-chevron-up');
+            $icon.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        } else {
+            //close
+            savedHeight = $chat.height(); //save the current height
+            $chat.height(configMap.sliderClosedHeight);
+            $icon = $chat.find('.glyphicon-chevron-down');
+            $icon.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        }
+    }
+
+    //// Constructor logic
     //  create chat window from template and add to DOM container
     tmpl = $.templates(configMap.templateId);
     $chat = $(tmpl.render());
     $container.append($chat);
+    savedHeight = $chat.height();
 
-    //Set resize options
+    //Enable resizable 
     $chat.resizable({
         minWidth: configMap.minWidth,
         minHeight: configMap.minHeight,
-        handles: 'nw, n',
+        handles: 'nw, n, w',
         resize: function (event, ui) { //fix for jquery resizeable not working for fixed position divs
             $chat.css('position', 'fixed');
             $chat.css('bottom', '0');
@@ -48,7 +73,24 @@ function ChatSlider($container, options) {
     });
 
     //Custom scrollbar
-    $chat.find('.chat-messages').niceScroll();
+    //$chat.find('.chat-messages').niceScroll();
+
+    //Close handler
+    $chat.find('.chat-remove').click(function () {
+        $(that).trigger('chat:close');
+    });
+
+    //Minimize handler
+    $chat.find('.chat-minimize').click(function () {
+        togglePosition();
+    });
+
+    //Capture Enter key
+    $chat.find('.chat-input').keypress(function (e) {
+        if (e.which == 13) {
+            alert('enter pressed');
+        }
+    })
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -111,8 +153,18 @@ var chatManager = (function ($) {
 
     createChat = function () {
         //create a new chat window and position it in browser window
-        sliders.push(new ChatSlider($('body'), null));
+        var slider = new ChatSlider($('body'), null);
+        sliders.push(slider);
         repositionSliders();
+
+        //close handler
+        $(slider).on('chat:close', function () {
+            var i = sliders.indexOf(this);
+            sliders[i].remove();
+            delete sliders[i];
+            sliders.splice(i, 1);
+            repositionSliders();
+        });
     }
 
     initModule = function () {

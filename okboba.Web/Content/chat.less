@@ -1,40 +1,98 @@
 ﻿@import "common";
 
+.chat-shadow-top,
+.chat-shadow-bottom {
+    width: 100%;
+    height: 5px;
+    background-color: #000;
+    position:absolute;
+    opacity: 0.2;
+}
+
+.chat-shadow-top {
+    top: 0;
+}
+
+.chat-shadow-bottom {
+    bottom: 0;
+}
+
 .chat-slider {
-    .shadow-z-2;
     position: fixed;
     bottom: 0;
     right: 20px;
     width: 270px;
-    height: 200px;
-    background: #808080;
-    border-radius: 5px 5px 0 0;
-}
-
-.chat-head {
-    background: @primary-color-2;
-    height: 2em;    
+    height: 300px;
     border-radius: 5px 5px 0 0;
     .shadow-z-2;
 }
 
+.chat-sizer {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.chat-header-row {
+    display: table-row;
+    height: 1px;
+}
+
+.chat-msg-row {
+    display: table-row;
+    height: auto;
+    position:relative;
+}
+
+.chat-input-row {
+    display: table-row;
+    height: 1px;
+}
+
+.chat-header {
+    background: @primary-color-2;
+    height: 31px;
+    border-radius: 5px 5px 0 0;
+    padding: 3px 6px;
+}
+
 .chat-messages {
     background: @gray-lighter;
-    position: absolute;
-    top: 2em;
-    left: 0;
-    right: 0;
-    bottom: 2em;
-    overflow-x: hidden;
+    height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    padding: 0 8px;
 }
 
 .chat-input {
+    padding: 8px;
     background: #FFF;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 2em;
-    border: 1px solid @gray-light;
+}
+
+.chat-remove,
+.chat-minimize {
+    cursor: pointer;
+    float: right;
+    opacity: 0.7;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: #FFF;
+}
+
+.chat-remove > .glyphicon,
+.chat-minimize > .glyphicon {
+    vertical-align: middle;
+}
+
+.chat-remove:hover,
+.chat-minimize:hover {
+    background-color: lighten(@primary-color-2, 20%);
+}
+
+.chat-header-title {
+    vertical-align: middle;
+    color: #FFF;
+    .opacity-inverse-text;
 }
