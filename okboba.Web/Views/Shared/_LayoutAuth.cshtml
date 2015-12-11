@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using okboba.Web.Helpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,8 +25,19 @@
         <span class="text-info">&copy; @DateTime.Now.Year - Okboba.com</span>
     </footer>
 
-    @Scripts.Render("~/bundles/js/vendor")
+    @Scripts.Render("~/bundles/js/vendor")    
+    <script src="@Html.ChatUrl()/hubs"></script>
     @Scripts.Render("~/bundles/js/okboba")
     @RenderSection("scripts", required: false)
+
+    <script>
+        //Initialize chat on every page
+        $(function () {
+            chatManager.initModule({ hubUrl: '@Html.ChatUrl()' });
+            for (var i = 0; i < 3; i++) {
+                chatManager.createChat(3);
+            }
+        });
+    </script>
 </body>
 </html>

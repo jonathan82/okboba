@@ -26,7 +26,8 @@ namespace okboba
                 "~/lib/photoswipe/photoswipe.js",
                 "~/lib/photoswipe/photoswipe-ui-default.js",
                 "~/lib/nicescroll/jquery.nicescroll.js",
-                "~/lib/throttle/jquery.ba-throttle-debounce.js"));
+                "~/lib/throttle/jquery.ba-throttle-debounce.js",
+                "~/lib/signalr/jquery.signalR-2.2.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",

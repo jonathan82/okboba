@@ -10,7 +10,7 @@
 //  Represents the chat window on screen and contains all the functions
 //  for a single chat window. Assumes jQuery and jsrender is available.
 ////////////////////////////////////////////////////////////////////
-function ChatSlider($container, options) {
+function ChatSlider($container, options, who) {
     //// Private vars
     var configMap = {
         templateId: '#chatSliderTemplate',
@@ -18,11 +18,13 @@ function ChatSlider($container, options) {
         minWidth: 250,
         sliderClosedHeight: 31
     }
-    var tmpl, $chat, that, savedHeight;
+    var tmpl, $chat, that, savedHeight, avatarUrl;
 
     that = this;
 
     //// Public functions
+    this.who = who;
+
     this.setPosition = function (right) {
         $chat.css('right', right);
     }
@@ -33,6 +35,13 @@ function ChatSlider($container, options) {
 
     this.remove = function () {
         $chat.remove();
+    }
+
+    this.addMessage = function () {
+        if (avatarUrl = null) {
+            //Get the avatar URL from the web service and save it
+
+        }
     }
 
     //// Private Functions
@@ -101,14 +110,47 @@ function ChatSlider($container, options) {
 ////////////////////////////////////////////////////////////////////
 var chatManager = (function ($) {
 
-    // Private vars
+    //// Private vars
     var configMap = {
         sliderGutterWidth: 15, //spacing between chat sliders
-        minOverlap: 20 //minimum overlap spacing between sliders
+        minOverlap: 20, //minimum overlap spacing between sliders
+        hubUrl: null
     }
-    var createChat, repositionSliders, initModule;
+    var createChat, repositionSliders, initModule, chatHubProxy;
     var sliders = [];
 
+    //// Private functions
+    function receiveMessage(from, msg) {
+        var i;
+
+        //check if chat window is already open
+        for (i = 0; i < sliders.length; i++) {
+            if (sliders[i].who == from) {
+                //add message to window
+                return;
+            }
+        }
+
+        //create new chat window
+        createChat(from);
+    }
+
+    function setupSignalR() {
+        $.connection.hub.url = configMap.hubUrl;
+
+        chatHubProxy = $.connection.chatHub;
+        chatHubProxy.client.receiveMessage = receiveMessage;
+
+        $.connection.hub.start().done(function () {
+            //connection established
+            alert('connection established');
+        }).fail(function () {
+            //connection failed
+            alert('signalr connection failed');
+        });
+    }
+
+    //// Public functions
     repositionSliders = function () {
         var bw, i, sum, n, overlap, lw, right, gw;
 
@@ -151,9 +193,9 @@ var chatManager = (function ($) {
 
     }
 
-    createChat = function () {
+    createChat = function (who) {
         //create a new chat window and position it in browser window
-        var slider = new ChatSlider($('body'), null);
+        var slider = new ChatSlider($('body'), null, who);
         sliders.push(slider);
         repositionSliders();
 
@@ -167,12 +209,18 @@ var chatManager = (function ($) {
         });
     }
 
-    initModule = function () {
+    initModule = function (options) {
+
+        configMap = $.extend(configMap, options);
+
         //listen for resize event
         $(window).resize($.throttle(250, function () {
             console.log('resize');
             repositionSliders();
         }));
+
+        //setup signalr
+        setupSignalR();
     }
 
     return {

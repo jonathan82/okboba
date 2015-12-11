@@ -219,7 +219,6 @@ namespace okboba.MatchApi.Controllers
 
             profileId = user.Profile.Id;
 
-
             return profileId;
         }
     }

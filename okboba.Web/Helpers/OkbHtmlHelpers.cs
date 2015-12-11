@@ -27,6 +27,11 @@ namespace okboba.Web.Helpers
             }
         }
 
+        public static string ChatUrl(this HtmlHelper htmlHelper)
+        {
+            return ConfigurationManager.AppSettings["ChatUrl"];
+        }
+
         public static string PhotoUrl(this HtmlHelper htmlHelper,string photo, int profileId)
         {
             var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];

@@ -427,6 +427,8 @@
     <Content Include="lib\photoswipe\photoswipe.css" />
     <Content Include="lib\photoswipe\photoswipe.js" />
     <Content Include="lib\photoswipe\photoswipe.min.js" />
+    <Content Include="lib\signalr\jquery.signalR-2.2.0.js" />
+    <Content Include="lib\signalr\jquery.signalR-2.2.0.min.js" />
     <Content Include="lib\spinner\jquery.spin.js" />
     <Content Include="lib\spinner\spin.js" />
     <Content Include="lib\spinner\spin.min.js" />

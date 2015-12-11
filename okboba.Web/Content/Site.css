@@ -540,7 +540,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
-  padding: 0 8px;
+  padding: 6px 6px;
 }
 .chat-input {
   padding: 8px;
@@ -569,6 +569,41 @@ body {
   color: #FFF;
   opacity: 1.0;
 }
+/*.chat-dialog-them,
+.chat-dialog-me {
+    background-color: #FFF;
+    padding: 5px;
+}
+
+.chat-dialog-them {
+    display: table-cell;    
+}
+
+.chat-dialog-me {
+    display: inline-block;
+}
+
+.chat-avatar {
+    display: table-cell;
+}
+
+.chat-me,
+.chat-them {
+    margin-bottom: 10px;
+}
+
+.chat-me {
+    text-align: right;
+}
+
+.chat-them {
+    text-align: left;
+}
+
+.chat-avatar-img {
+    margin-right: 5px;
+    .img-circle;
+}*/
 .activity-feed-row,
 .activity-feed-row:hover,
 .activity-feed-row:active,
