@@ -20,21 +20,13 @@ namespace okboba.Entities
         [ForeignKey("Conversation")]
         public int ConversationId { get; set; }
 
-        [ForeignKey("ToProfile")]
-        public int? ToProfileId { get; set; }
-
-        [StringLength(10)]
-        public string ToPhoto { get; set; }
-
-        [StringLength(10)]
-        public string ToName { get; set; }
-
-        public bool HasBeenRead { get; set; }
-        public bool HasReplies { get; set; }
+        [ForeignKey("OtherProfile")]
+        public int Other { get; set; }
 
         //Navigation properties
-        public Conversation Conversation { get; set; }
-        public Profile Profile { get; set; }
-        public Profile ToProfile { get; set; }
+        public virtual Conversation Conversation { get; set; }
+        public virtual Profile Profile { get; set; }
+        public virtual Profile OtherProfile { get; set; }
+        public virtual Message LastMessage { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using okboba.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,16 +12,20 @@ namespace okboba.Entities
     public class Message
     {
         public int Id { get; set; }
-        [ForeignKey("Conversation")]
-        public int ConversationId { get; set; }
-        [ForeignKey("FromProfile")]
-        public int FromProfileId { get; set; }
-        [StringLength(1000)]
+
+        [StringLength(OkbConstants.MAX_MESSAGE_LENGTH)]
         public string MessageText { get; set; }
+
         public DateTime Timestamp { get; set; }
 
+        [ForeignKey("Conversation")]
+        public int ConversationId { get; set; }
+
+        [ForeignKey("FromProfile")]
+        public int From { get; set; }
+
         // Navigation properties
-        public Conversation Conversation { get; set; }
-        public Profile FromProfile { get; set; }
+        public virtual Conversation Conversation { get; set; }
+        public virtual Profile FromProfile { get; set; }
     }
 }

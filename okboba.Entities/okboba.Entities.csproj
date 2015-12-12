@@ -114,6 +114,10 @@
     <Compile Include="Migrations\201512012342085_ActivityRename.Designer.cs">
       <DependentUpon>201512012342085_ActivityRename.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512110907260_Messages.cs" />
+    <Compile Include="Migrations\201512110907260_Messages.Designer.cs">
+      <DependentUpon>201512110907260_Messages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -152,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512012342085_ActivityRename.resx">
       <DependentUpon>201512012342085_ActivityRename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512110907260_Messages.resx">
+      <DependentUpon>201512110907260_Messages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

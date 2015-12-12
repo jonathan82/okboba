@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityRepository\EntityActivityRepository.cs" />
+    <Compile Include="EntityRepository\EntityMessageRepository.cs" />
     <Compile Include="IActivityRepository.cs" />
     <Compile Include="EntityRepository\EntityLocationRepository.cs" />
     <Compile Include="EntityRepository\EntityMatchRepository.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="EntityRepository\EntityQuestionRepository.cs" />
     <Compile Include="ILocationRepository.cs" />
     <Compile Include="IMatchRepository.cs" />
+    <Compile Include="IMessageRepository.cs" />
     <Compile Include="IPhotoRepository.cs" />
     <Compile Include="IProfileRepository.cs" />
     <Compile Include="IQuestionRepository.cs" />

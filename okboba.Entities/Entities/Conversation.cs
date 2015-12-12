@@ -11,14 +11,8 @@ namespace okboba.Entities
     public class Conversation
     {
         public int Id { get; set; }
-        public string Subject { get; set; }
-        public DateTime? LastMessageDate { get; set; }
-        [StringLength(255)]
-        public string LastMessageBlurb { get; set; }
-        [ForeignKey("Profile")]
-        public int? LastMessageFrom { get; set; }
 
-        //Navigation properties
-        public virtual Profile Profile { get; set; }
+        [StringLength(100)]
+        public string Subject { get; set; }
     }
 }

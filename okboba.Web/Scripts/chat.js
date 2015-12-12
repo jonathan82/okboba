@@ -45,6 +45,12 @@ function ChatSlider($container, options, who) {
     }
 
     //// Private Functions
+    function forceHeight () {
+        //force the browser to respect messsage box height
+        var remain = $chat.height() - $chat.find('.chat-header-row').height() - $chat.find('.chat-input-row').height();
+        $chat.find('.chat-messages').height(remain);
+    }
+
     function togglePosition() {
         var $icon;
         if ($chat.height() == configMap.sliderClosedHeight) {
@@ -67,6 +73,7 @@ function ChatSlider($container, options, who) {
     $chat = $(tmpl.render());
     $container.append($chat);
     savedHeight = $chat.height();
+    forceHeight();
 
     //Enable resizable 
     $chat.resizable({
@@ -78,6 +85,7 @@ function ChatSlider($container, options, who) {
             $chat.css('bottom', '0');
             $chat.css('top', '');
             $chat.css('left', '');
+            forceHeight();
         }
     });
 
@@ -143,7 +151,7 @@ var chatManager = (function ($) {
 
         $.connection.hub.start().done(function () {
             //connection established
-            alert('connection established');
+            //alert('connection established');
         }).fail(function () {
             //connection failed
             alert('signalr connection failed');

@@ -5,6 +5,9 @@
 
     public static class OkbConstants
     {
+        //Messages
+        public const int MAX_MESSAGE_LENGTH = 1000;
+
         //Activity Feed
         public const int FEED_BLURB_SIZE = 100;
 
