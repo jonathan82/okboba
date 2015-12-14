@@ -23,6 +23,10 @@ namespace okboba.Entities
         [ForeignKey("OtherProfile")]
         public int Other { get; set; }
 
+        public bool HasBeenRead { get; set; }
+
+        public bool HasReplies { get; set; }
+
         //Navigation properties
         public virtual Conversation Conversation { get; set; }
         public virtual Profile Profile { get; set; }

@@ -11,7 +11,7 @@
 
 <body class="body-auth">
 
-    @Html.Partial("_ChatSlider")
+    @Html.Partial("~/Views/Messages/_ChatSlider.cshtml")
 
     @Html.Partial("_Navbar")
 
@@ -34,7 +34,7 @@
         //Initialize chat on every page
         $(function () {
             chatManager.initModule({ hubUrl: '@Html.ChatUrl()' });
-            for (var i = 0; i < 3; i++) {
+            for (var i = 0; i < 10; i++) {
                 chatManager.createChat(3);
             }
         });

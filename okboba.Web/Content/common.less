@@ -6,10 +6,10 @@
 @primary-color-2: #D81B60;
 @primary-color-3: #880E4F;
 @accent-color: #FFEB3B;
-@gray-darker:  lighten(#000, 13.5%); // #222
-@gray-dark:    lighten(#000, 20%);   // #333
-@gray:         lighten(#000, 33.5%); // #555
-@gray-light:   lighten(#000, 60.7%); // #777 46.7
+@gray-darker: lighten(#000, 13.5%); // #222
+@gray-dark: lighten(#000, 20%); // #333
+@gray: lighten(#000, 33.5%); // #555
+@gray-light: lighten(#000, 60.7%); // #777 46.7
 @gray-lighter: lighten(#000, 93.5%); // #eee
 @match-color: #FF0066;
 @friend-color: #0066FF;
@@ -20,34 +20,27 @@
     Shadows
 ******************/
 .shadow-z-1 {
-  box-shadow:
-    0 1px 6px 0 rgba(0, 0, 0, 0.12),
-    0 1px  6px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }
+
 .shadow-z-1-hover {
-  box-shadow:
-    0 5px 11px 0 rgba(0, 0, 0, 0.18),
-    0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 }
+
 .shadow-z-2 {
-  box-shadow:
-    0 8px 17px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .shadow-z-3 {
-  box-shadow:
-    0 12px 15px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
 .shadow-z-4 {
-  box-shadow:
-    0 16px 28px 0 rgba(0, 0, 0, 0.22),
-    0 25px 55px 0 rgba(0, 0, 0, 0.21);
+    box-shadow: 0 16px 28px 0 rgba(0, 0, 0, 0.22), 0 25px 55px 0 rgba(0, 0, 0, 0.21);
 }
+
 .shadow-z-5 {
-  box-shadow:
-    0 27px 24px 0 rgba(0, 0, 0, 0.2),
-    0 40px 77px 0 rgba(0, 0, 0, 0.22);
+    box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
 }
 
 /******************************
@@ -57,25 +50,32 @@
     opacity: .87;
     color: #000;
 }
+
 .opacity-secondary-text {
     opacity: .54;
     color: #000;
 }
+
 .opacity-disabled {
     opacity: .38;
 }
+
 .opacity-divider {
     opacity: .12;
 }
+
 .opacity-inverse-text {
     opacity: 1.0;
 }
+
 .opacity-inverse-secondary-text {
     opacity: .7;
 }
+
 .opacity-inverse-disabled {
     opacity: .3;
 }
+
 .opacity-inverse-divider {
     opacity: .12;
 }
@@ -86,7 +86,7 @@
 
 .modal-open {
     //prevent scrollbar from disappearing when modal is open
-    overflow: scroll; 
+    overflow: scroll;
 }
 
 .container {
@@ -120,43 +120,52 @@ footer {
     margin-top: 20px;
     text-align: center;
 }
+
 body {
     padding-bottom: 25px;
 }
+
 .body-auth {
     padding-top: 90px;
     background-color: @primary-color-3;
 }
+
 .body-splash {
     background-image: url('Images/Shanghai-Skyline.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
 }
-.body-anon {
 
+.body-anon {
 }
+
 .container-auth {
     background-color: #FFF;
     padding: 30px 40px;
     min-height: 1200px;
 }
+
 .container-anon {
     background-color: #fff;
 }
+
 .splash-buffer {
-  	position: relative;
-  	padding-top: 48%;
+    position: relative;
+    padding-top: 48%;
 }
+
 .splash-container {
-  	position: absolute;
-  	top: 0;
-  	left: 0;
-  	width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
+
 .splash-navbar {
     padding: 10px;
     text-align: right;
 }
+
 .splash-container .container {
     padding-top: 8%;
 }
@@ -164,15 +173,19 @@ body {
 .top-buffer-10 {
     margin-top: 10px;
 }
+
 .top-buffer-20 {
     margin-top: 20px;
 }
+
 .top-buffer-30 {
     margin-top: 30px;
 }
+
 .top-buffer-50 {
     margin-top: 50px;
 }
+
 .top-buffer-100 {
     margin-top: 100px;
 }
@@ -187,4 +200,21 @@ body {
 
 .img-circle {
     border-radius: 50%;
+}
+
+.dont-break-out {
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
 }

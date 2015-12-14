@@ -143,6 +143,7 @@
     <Compile Include="IProfileRepository.cs" />
     <Compile Include="IQuestionRepository.cs" />
     <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\ConversationModel.cs" />
     <Compile Include="Models\LocationPinyinModel.cs" />
     <Compile Include="Models\MatchCriteriaModel.cs" />
     <Compile Include="Models\MatchModel.cs" />

@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,16 +25,25 @@ namespace okboba.Repository.EntityRepository
                 return instance;
             }
         }
+        #endregion
 
-        public async Task AddMessageAsync(int from, int to, string text, int? convId)
+        /// <summary>
+        /// 
+        /// Adds a new message to the Messages table.  Creates a new converation if necessary.
+        /// Updates the LastMessage to point to new message in the ConversationMap table. 
+        /// Sets the HasBeenRead and HasReply flags
+        /// 
+        /// </summary>
+        public async Task AddMessageAsync(int from, int to, string text, int? convId = null)
         {
             var db = new OkbDbContext();
             Message msg;
+            ConversationMap mapMe, mapOther;
 
             if (convId==null)
             {
                 //// New conversation
-                var conv = new Conversation { Subject = "" };
+                var conv = new Conversation { Subject = "Hi" };
                 db.Conversations.Add(conv);
 
                 msg = new Message
@@ -46,22 +56,26 @@ namespace okboba.Repository.EntityRepository
                 db.Messages.Add(msg);
 
                 //My copy of the conversation
-                var mapMe = new ConversationMap
+                mapMe = new ConversationMap
                 {
                     Conversation = conv,
                     LastMessage = msg,
                     Other = to,
-                    ProfileId = from
+                    ProfileId = from,
+                    HasBeenRead = true,
+                    HasReplies = false
                 };
                 db.ConversationMap.Add(mapMe);
 
                 //Other's copy of the conversation
-                var mapOther = new ConversationMap
+                mapOther = new ConversationMap
                 {
                     Conversation = conv,
                     LastMessage = msg,
                     Other = from,
-                    ProfileId = to
+                    ProfileId = to,
+                    HasBeenRead = false,
+                    HasReplies = true
                 };
                 db.ConversationMap.Add(mapOther);
 
@@ -81,74 +95,157 @@ namespace okboba.Repository.EntityRepository
             db.Messages.Add(msg);
 
             //Update last message in conversation
-            
+            mapMe = db.ConversationMap.Find(from, convId);
+            mapMe.HasBeenRead = true;
+
+            mapOther = db.ConversationMap.Find(to, convId);
+            mapOther.HasBeenRead = false;
+
+            if (!mapMe.HasReplies || !mapOther.HasReplies)
+            {
+                //Conversation doesn't have replies.  Check if this message is a reply 
+                //and set flag accordingly.
+                if(mapMe.LastMessage.From != from)
+                {
+                    //the last message isn't from me
+                    mapMe.HasReplies = true;
+                    mapOther.HasReplies = true;
+                }
+            }
+
+            mapMe.LastMessage = msg;
+            mapOther.LastMessage = msg;
+
+            await db.SaveChangesAsync();            
         }
 
-        public IEnumerable<Conversation> GetConversations(int id)
+
+        /// <summary>
+        /// 
+        /// Gets a paged list of conversations belonging to the given user, 
+        /// ordered by the last message sent. Shows only conversations that have at least
+        /// one reply (not ones where only one user has sent a message).
+        /// 
+        /// </summary>
+        public IEnumerable<ConversationModel> GetConversations(int id, int page = 1, int numPerPage = 20)
         {
-            throw new NotImplementedException();
+            var db = new OkbDbContext();
+
+            var query = from map in db.ConversationMap.AsNoTracking()
+                        where map.ProfileId == id && map.HasReplies == true
+                        orderby map.LastMessage.Timestamp descending
+                        select new ConversationModel
+                        {
+                            OtherProfile = map.OtherProfile,
+                            LastMessage = map.LastMessage,
+                            HasBeenRead = map.HasBeenRead
+                        };
+
+            var skip = (page - 1) * numPerPage;
+
+            return query.Skip(skip).Take(numPerPage);
         }
 
+
+        /// <summary>
+        /// 
+        /// Gets the last conversation given user has had with other user.
+        /// 
+        /// </summary>
         public Conversation GetLastConversation(int id, int other)
         {
-            throw new NotImplementedException();
+            var db = new OkbDbContext();
+
+            var query = from map in db.ConversationMap.AsNoTracking()
+                        where map.ProfileId == id && map.Other == other
+                        orderby map.LastMessage.Timestamp descending
+                        select map.Conversation;
+
+            return query.First();
         }
 
-        public IEnumerable<Message> GetMessages(int convId)
+
+        /// <summary>
+        /// 
+        /// Gets a paged list of messages for a given conversation, ordered by their timestamps.
+        /// 
+        /// </summary>
+        public IEnumerable<Message> GetMessages(int convId, int page = 1, int numPerPage = 20)
+        {
+            var db = new OkbDbContext();
+
+            var query = from msg in db.Messages.AsNoTracking()
+                        where msg.ConversationId == convId
+                        orderby msg.Timestamp descending
+                        select msg;
+
+            var skip = (page - 1) * numPerPage;
+
+            return query.Skip(skip).Take(numPerPage);
+        }
+
+
+        /// <summary>
+        /// 
+        /// Gets a paged list of Sent conversations for the given user.  A Sent conversation
+        /// is one where the user sent the last message. Ordered by timestamp.
+        /// 
+        /// </summary>
+        public IEnumerable<ConversationModel> GetSent(int id, int page = 1, int numPerPage = 20)
+        {
+            var db = new OkbDbContext();
+
+            var query = from map in db.ConversationMap.AsNoTracking()
+                        where map.ProfileId == id && map.LastMessage.From == id
+                        orderby map.LastMessage.Timestamp descending
+                        select new ConversationModel
+                        {
+                            OtherProfile = map.OtherProfile,
+                            LastMessage = map.LastMessage
+                        };
+
+            var skip = (page - 1) * numPerPage;
+
+            return query.Skip(skip).Take(numPerPage);                        
+        }
+
+
+        /// <summary>
+        /// 
+        /// Get the total number of messages (sent + received) for a user
+        /// 
+        /// </summary>
+        public int GetMessageCount(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Conversation> GetSent(int id)
+
+        /// <summary>
+        /// 
+        /// Deletes the conversation for a user from ConversationMap.  Decrements the 
+        /// message count for the user by the number of messages in conversation.
+        /// 
+        /// </summary>
+        public async Task DeleteConversationAsync(int id, int convId)
         {
-            throw new NotImplementedException();
+            var db = new OkbDbContext();
+
+            //Get number of messages in conversation
+            var query = from msg in db.Messages.AsNoTracking()
+                        where msg.ConversationId == convId
+                        select msg;
+
+            var count = query.Count();
+
+            //Delete conversation
+            var toDelete = new ConversationMap { ConversationId = convId, ProfileId = id };
+            db.ConversationMap.Attach(toDelete);
+            db.ConversationMap.Remove(toDelete);
+
+            //Decrement message count for user
+
+            await db.SaveChangesAsync();
         }
-        #endregion
-
-        //public IEnumerable<Message> GetMessages(int convId, int page = 1, int numPerPage = 20)
-        //{
-        //    var db = new OkbDbContext();
-
-        //    var result = from msg in db.Messages.AsNoTracking()
-        //                 where msg.ConversationId == convId
-        //                 orderby msg.Timestamp descending
-        //                 select msg;
-
-        //    var skip = (page - 1) * numPerPage;
-
-        //    return result.Skip(skip).Take(numPerPage);
-        //}
-
-        //public Conversation GetLastConversation(int me, int them)
-        //{
-        //    var db = new OkbDbContext();
-
-        //    var query = from cm in db.ConversationMap.AsNoTracking()
-        //                where cm.ProfileId == me && 
-        //                (cm.Conversation.PersonA == them || cm.Conversation.PersonB == them)
-        //                orderby cm.Conversation.LastMessage.Timestamp descending
-        //                select cm.Conversation;
-
-        //    return query.First();
-        //}
-
-        //public void AddMessage(int from, int to, string text, int convId)
-        //{
-        //    var db = new OkbDbContext();
-
-        //    //add the message
-        //    var msg = new Message
-        //    {
-        //        From = from,
-        //        MessageText = text,
-        //        Timestamp = DateTime.Now,
-        //        ConversationId = convId
-        //    };
-
-        //    //update the conversation with the latest message
-        //    var conv = db.Conversations.Find(convId);
-        //    conv.LastMessage = msg;
-        //    db.SaveChanges();
-        //}
     }
 }

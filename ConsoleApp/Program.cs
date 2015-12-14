@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Mail;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
@@ -28,6 +30,23 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+            //////////////////// Mail ///////////////////////////
+            var msg = new MailMessage("jonlin82@gmail.com", "jonlin82@gmail.com", "hello boba","hello boba");
+            var smtp = new SmtpClient();
+            smtp.Host = "smtp.1and1.com";
+            smtp.EnableSsl = true;
+            var cred = new NetworkCredential("jonlin82@gmail.com", "8da3m0nw1");
+            smtp.UseDefaultCredentials = true;
+            smtp.Credentials = cred;
+            smtp.Port = 587;
+            smtp.Send(msg);
+
+            //////////////////// Test Messages /////////////////////////
+            //var repo = EntityMessageRepository.Instance;
+
+            //// Add a bunch of messages between me and multiple users
+            //repo.AddMessageAsync(100, 1000, "hello world").Wait();
+
 
             //var client = new RedisManagerPool("localhost").GetClient().As<Person>();
             //var key = "mykey";
@@ -58,9 +77,9 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SeedDb seeder = new SeedDb(connString);
-            Stopwatch timer = new Stopwatch();
+            //var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            //SeedDb seeder = new SeedDb(connString);
+            //Stopwatch timer = new Stopwatch();
 
             //Profile Detail Options   
             //seeder.SeedDetailOptions("../../../data/profile_details.txt");         
@@ -85,7 +104,7 @@ namespace ConsoleApp
             //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Activity feed
-            seeder.SeedActivities(1000);
+            //seeder.SeedActivities(1000);
 
             //////////////////////// Simulations //////////////////////////
             //var seed = new SeedDb(connString);

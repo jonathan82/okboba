@@ -6,14 +6,21 @@
  */
 
 ////////////////////////////////////////////////////////////////////
+//
 // ChatSlider: 
 //  Represents the chat window on screen and contains all the functions
 //  for a single chat window. Assumes jQuery and jsrender is available.
+//
+// Events:
+//  chat:close      - fired when "close" button is clicked
+//  chat:foreground - fired when anywhere on chat slider is clicked on
+//
 ////////////////////////////////////////////////////////////////////
-function ChatSlider($container, options, who) {
+function ChatSlider($container, options, who, zIndex) {
     //// Private vars
     var configMap = {
         templateId: '#chatSliderTemplate',
+        emoticonTemplateId: '#chatEmoticonsTemplate',
         minHeight: 200,
         minWidth: 250,
         sliderClosedHeight: 31
@@ -44,6 +51,14 @@ function ChatSlider($container, options, who) {
         }
     }
 
+    this.getZIndex = function () {
+        return parseInt($chat.css('z-index'));
+    }
+
+    this.setZIndex = function (z) {
+        $chat.css('z-index', z);
+    }
+
     //// Private Functions
     function forceHeight () {
         //force the browser to respect messsage box height
@@ -68,12 +83,12 @@ function ChatSlider($container, options, who) {
     }
 
     //// Constructor logic
-    //  create chat window from template and add to DOM container
+    //create chat window from template and add to DOM container
     tmpl = $.templates(configMap.templateId);
     $chat = $(tmpl.render());
     $container.append($chat);
     savedHeight = $chat.height();
-    forceHeight();
+    this.setZIndex(zIndex);
 
     //Enable resizable 
     $chat.resizable({
@@ -85,7 +100,6 @@ function ChatSlider($container, options, who) {
             $chat.css('bottom', '0');
             $chat.css('top', '');
             $chat.css('left', '');
-            forceHeight();
         }
     });
 
@@ -104,17 +118,31 @@ function ChatSlider($container, options, who) {
 
     //Capture Enter key
     $chat.find('.chat-input').keypress(function (e) {
-        if (e.which == 13) {
-            alert('enter pressed');
+        if (e.which == 13) {            
+            e.preventDefault();
+            alert($(this).text());
         }
-    })
+    });
+
+    //Smiley button 
+    $chat.find('.chat-input-emo-button').click(function () {
+        //$chat.find('.chat-emoticon-row').toggle()
+    });
+
+    //Bring chat to foreground
+    $chat.click(function () {
+        $(that).trigger('chat:foreground');
+    });
 }
 
+
 ////////////////////////////////////////////////////////////////////
+//
 // chatManager: 
 //  Manages multiple chat windows on screen. Constructs chat windows as needed
 //  and positions them so they fit in the browser window.  Calls the
 //  Chat constructor to create a new chat window. 
+//
 ////////////////////////////////////////////////////////////////////
 var chatManager = (function ($) {
 
@@ -122,6 +150,7 @@ var chatManager = (function ($) {
     var configMap = {
         sliderGutterWidth: 15, //spacing between chat sliders
         minOverlap: 20, //minimum overlap spacing between sliders
+        startZIndex: 100, //starting z-index for chat sliders
         hubUrl: null
     }
     var createChat, repositionSliders, initModule, chatHubProxy;
@@ -158,6 +187,34 @@ var chatManager = (function ($) {
         });
     }
 
+    function lastZIndex() {
+        var i, max = -1, z;
+        for (i = 0; i < sliders.length; i++) {
+            z = sliders[i].getZIndex();
+            max = z > max ? z : max;
+        }
+        return max;
+    }
+
+    function pushDown(zIndex) {
+        var i, z;
+        //Push all the sliders above the given z-index down by one
+        for (i = 0; i < sliders.length; i++) {
+            z = sliders[i].getZIndex();
+            if (z > zIndex) {
+                sliders[i].setZIndex(z - 1);
+            }
+        }
+    }
+
+    function debugZIndex() {
+        var i, str = '';
+        for (i = 0; i < sliders.length; i++) {
+            str += sliders[i].getZIndex() + ' ';
+        }
+        console.log('z-index: ' + str);
+    }
+
     //// Public functions
     repositionSliders = function () {
         var bw, i, sum, n, overlap, lw, right, gw;
@@ -167,11 +224,8 @@ var chatManager = (function ($) {
 
         if (n == 0) return; //no sliders to position
 
-        console.log('reposition');
-
         //get browser width minus the left and right gutters
         bw = $(window).width() - (2 * gw);
-        //alert('bw: ' + bw);
 
         //get sum of all the slider widths
         sum = 0;
@@ -202,18 +256,34 @@ var chatManager = (function ($) {
     }
 
     createChat = function (who) {
+        var slider, zIndex;
+
         //create a new chat window and position it in browser window
-        var slider = new ChatSlider($('body'), null, who);
+        zIndex = sliders.length == 0 ? configMap.startZIndex : lastZIndex() + 1;
+        slider = new ChatSlider($('body'), null, who, zIndex);
         sliders.push(slider);
         repositionSliders();
 
         //close handler
         $(slider).on('chat:close', function () {
             var i = sliders.indexOf(this);
+            pushDown(this.getZIndex());
             sliders[i].remove();
             delete sliders[i];
             sliders.splice(i, 1);
             repositionSliders();
+            debugZIndex();
+            console.log('chat:close');
+        });
+
+        //bring to foreground handler
+        $(slider).on('chat:foreground', function () {
+            var i, maxZ;
+            maxZ = lastZIndex();
+            pushDown(this.getZIndex());
+            this.setZIndex(maxZ);
+            debugZIndex();
+            console.log('chat:foreground');
         });
     }
 

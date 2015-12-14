@@ -141,6 +141,22 @@ body {
 .img-circle {
   border-radius: 50%;
 }
+.dont-break-out {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
 /********************************************
     Bootstrap override - Navigation tab
 *********************************************/
@@ -487,26 +503,12 @@ body {
   margin-top: -20px;
   margin-right: 10px;
 }
-.chat-shadow-top,
-.chat-shadow-bottom {
-  width: 100%;
-  height: 5px;
-  background-color: #000;
-  position: absolute;
-  opacity: 0.2;
-}
-.chat-shadow-top {
-  top: 0;
-}
-.chat-shadow-bottom {
-  bottom: 0;
-}
 .chat-slider {
   position: fixed;
   bottom: 0;
   right: 20px;
   width: 270px;
-  height: 300px;
+  height: 350px;
   border-radius: 5px 5px 0 0;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -522,7 +524,6 @@ body {
 .chat-msg-row {
   display: table-row;
   height: auto;
-  position: relative;
 }
 .chat-input-row {
   display: table-row;
@@ -533,20 +534,7 @@ body {
   height: 31px;
   border-radius: 5px 5px 0 0;
   padding: 3px 6px;
-}
-.chat-messages {
-  background: #eeeeee;
-  height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  position: relative;
-}
-.chat-messages-inner {
-  padding: 6px 6px;
-}
-.chat-input {
-  padding: 8px;
-  background: #FFF;
+  cursor: pointer;
 }
 .chat-remove,
 .chat-minimize {
@@ -570,6 +558,21 @@ body {
   vertical-align: middle;
   color: #FFF;
   opacity: 1.0;
+}
+.chat-messages {
+  background: #eeeeee;
+  height: 100%;
+  position: relative;
+}
+.chat-messages-inner {
+  padding: 6px 6px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 .chat-dialog-them,
 .chat-dialog-me {
@@ -598,6 +601,37 @@ body {
 .chat-avatar-img {
   margin-right: 5px;
   border-radius: 50%;
+}
+.chat-input-wrapper {
+  position: relative;
+}
+.chat-input {
+  padding: 8px 8px 8px 33px;
+  max-height: 7em;
+  overflow-y: auto;
+  position: relative;
+  background-color: #FFF;
+}
+.chat-input-emo-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 33px;
+  text-align: center;
+  vertical-align: middle;
+}
+.chat-input-emo-button {
+  cursor: pointer;
+  display: inline-block;
+}
+.chat-emoticon-row {
+  display: table-row;
+  height: 1px;
+}
+.chat-emoticon-chooser {
+  height: 100px;
+  background-color: #9b9b9b;
 }
 .activity-feed-row,
 .activity-feed-row:hover,

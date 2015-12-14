@@ -472,7 +472,7 @@
     <Content Include="Views\Shared\_LayoutAnon.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
-    <Content Include="Views\Shared\_ProfileHeader.cshtml" />
+    <Content Include="Views\Profile\_ProfileHeader.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\Compose.cshtml" />
@@ -498,7 +498,8 @@
     <Content Include="Views\Account\_Login.cshtml" />
     <Content Include="Views\Home\_ActivityFeed.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
-    <Content Include="Views\Shared\_ChatSlider.cshtml" />
+    <Content Include="Views\Messages\_ChatSlider.cshtml" />
+    <Content Include="Views\Messages\_ChatEmoticons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,16 @@ using System.Threading.Tasks;
 ///     - Add message to Messages table
 ///     - Update the ConversationMap with the last message sent
 ///     - Update HasReply flag
+///     - Set HasBeenRead = false
 ///     - Add new Conversation/ConversationMap if needed (convId == null)
+///     - Increment the message count for both users (from/to)
+/// 
+/// 6. Keep track of the total message count for the user (sent + received)
+///     - Get message count 
+/// 
+/// 7. Delete a Conversation
+///     - Decrement the message count by # of messages in conversation
+///     - Remove from ConversationMap.  Doesn't affect other's users copy of the conversation.
 /// 
 /// Notes: All the lists returned should be paged.
 /// 
@@ -41,10 +51,12 @@ namespace okboba.Repository
 {
     interface IMessageRepository
     {
-        IEnumerable<Message> GetMessages(int convId);
-        IEnumerable<Conversation> GetConversations(int id);
-        IEnumerable<Conversation> GetSent(int id);
+        IEnumerable<Message> GetMessages(int convId, int page, int numPerPage);
+        IEnumerable<ConversationModel> GetConversations(int id, int page, int numPerPage);
+        IEnumerable<ConversationModel> GetSent(int id, int page, int numPerPage);
         Conversation GetLastConversation(int id, int other);
         Task AddMessageAsync(int from, int to, string text, int? convId);
+        int GetMessageCount(int id);
+        Task DeleteConversationAsync(int id, int convId);
     }
 }
