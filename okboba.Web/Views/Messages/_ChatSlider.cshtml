@@ -1,4 +1,10 @@
-﻿<script id="chatSliderTemplate" type="text/x-jsrender">
+﻿<!--
+    The passed in data context:
+        emoticonUrl      - url of emoticons 
+        emoticonUrlSmall - url of small emoticons
+        emoticons        - array of first page of emoticons 
+-->
+<script id="chatSliderTemplate" type="text/x-jsrender">
     <div class="chat-slider">
         <div class="chat-sizer">
             <div class="chat-header-row">
@@ -11,67 +17,50 @@
             <div class="chat-msg-row">
                 <div class="chat-messages">
                     <div class="chat-messages-inner">
-                        <div class="chat-me">
-                            <div class="chat-dialog-me">short msg</div>
-                        </div>
-                        <div class="chat-them">
-                            <div class="chat-avatar">
-                                <img src="/Content/images/no-avatar-female-chat.png" class="chat-avatar-img" width="35" height="35" alt="Avatar" />
-                            </div>
-                            <div class="chat-dialog-them">this is a message this is a message this is a message</div>
-                        </div>
-                        <div class="chat-me">
-                            <div class="chat-dialog-me">short msg</div>
-                        </div>
-                        <div class="chat-them">
-                            <div class="chat-avatar">
-                                <img src="/Content/images/no-avatar-female-chat.png" class="chat-avatar-img" width="35" height="35" alt="Avatar" />
-                            </div>
-                            <div class="chat-dialog-them">this is a message this is a message this is a message</div>
-                        </div>
-                        <div class="chat-me">
-                            <div class="chat-dialog-me">short msg</div>
-                        </div>
-                        <div class="chat-them">
-                            <div class="chat-avatar">
-                                <img src="/Content/images/no-avatar-female-chat.png" class="chat-avatar-img" width="35" height="35" alt="Avatar" />
-                            </div>
-                            <div class="chat-dialog-them">this is a message this is a message this is a message</div>
-                        </div>
-                        <div class="chat-me">
-                            <div class="chat-dialog-me">short msg</div>
-                        </div>
-                        <div class="chat-them">
-                            <div class="chat-avatar">
-                                <img src="/Content/images/no-avatar-female-chat.png" class="chat-avatar-img" width="35" height="35" alt="Avatar" />
-                            </div>
-                            <div class="chat-dialog-them">this is a message this is a message this is a message</div>
-                        </div>
-                        <div class="chat-me">
-                            <div class="chat-dialog-me">short msg</div>
-                        </div>
-                        <div class="chat-them">
-                            <div class="chat-avatar">
-                                <img src="/Content/images/no-avatar-female-chat.png" class="chat-avatar-img" width="35" height="35" alt="Avatar" />
-                            </div>
-                            <div class="chat-dialog-them">this is a message this is a message this is a message</div>
-                        </div>
+                        <!-- Chat messages go here -->
                     </div>
                 </div>
             </div>
             <div class="chat-emoticon-row">
-                <div class="chat-emoticon-chooser">
-                    this is where the emoticons go
-                </div>                
+                <div class="chat-emoticon-slider">
+                    <ul class="chat-emoticon-nav">
+                        <li class="active" data-page="1"><img src="{{:emoticonUrlSmall}}1f600.png" alt="1f600" width="16" height="16" />
+                        </li><li data-page="2"><img src="{{:emoticonUrlSmall}}1f349.png" alt="1f349" width="16" height="16" />
+                        </li><li data-page="3"><img src="{{:emoticonUrlSmall}}1f495.png" alt="1f495" width="16" height="16" />
+                        </li><li class="chat-emoticon-close"><span class="glyphicon glyphicon-remove"></span></li></ul>
+
+                    <!-- Emoticons go here: Load the first page of emoticons -->
+                    <ul class="chat-emoticon-chooser">
+                        {{for emoticons ~url=emoticonUrl}}
+                        <li data-id="{{:#data}}"><img src="{{:~url}}{{:#data}}.png" alt="{{:#data}}" width="25" height="25" /></li>
+                        {{/for}}
+                    </ul>
+                </div>
             </div>
             <div class="chat-input-row">
                 <div class="chat-input-wrapper">
-                    <div class="chat-input dont-break-out" contenteditable="true">input</div>
+                    <div class="chat-input dont-break-out" contenteditable="true" placeholder="Your messsage text"></div>
                     <div class="chat-input-emo-wrapper">
-                        <div class="chat-input-emo-button"><img src="/Content/images/chat-smiley.png" width="21" height="21" alt="Smiley" /></div>
+                        <div class="chat-input-emo-button"><img src="/Content/images/chat-smiley.png" width="22" height="22" alt="Smiley" /></div>
                     </div>
-                </div>                
+                    @*<div class="chat-input-placeholder">Your message text</div>*@
+                </div>
             </div>
         </div>
+    </div>
+</script>
+
+<script id="chatDialogThemTemplate" type="text/x-jsrender">
+    <div class="chat-dialog-them-wrapper">
+        <div class="chat-dialog-them">{{:message}}</div>
+        <img src="/Content/images/no-avatar-female-chat.png" alt="Avatar" class="chat-dialog-avatar" width="35" height="35" />
+        <img src="/Content/images/chat-curve-them.png" class="chat-dialog-curve-them" />
+    </div>
+</script>
+
+<script id="chatDialogMeTemplate" type="text/x-jsrender">
+    <div class="chat-dialog-me-wrapper">
+        <div class="chat-dialog-me">{{:message}}</div>
+        <img src="/Content/images/chat-curve-me.png" class="chat-dialog-curve-me" alt="Alternate Text" />
     </div>
 </script>

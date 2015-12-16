@@ -277,17 +277,7 @@ namespace okboba.Entities.Helpers
                 throw;
             }
             
-        }
-        
-        private Profile CreateUser(string name, byte gender, DateTime dob, string location)
-        {
-            return new Profile
-            {
-                Nickname = name,
-                Gender = gender,
-                Birthdate = dob
-            };
-        }
+        }       
 
         /// <summary>
         /// Returns a random time accurate to minutes from 10 days ago to now

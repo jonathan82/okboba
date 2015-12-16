@@ -34,8 +34,8 @@
         //Initialize chat on every page
         $(function () {
             chatManager.initModule({ hubUrl: '@Html.ChatUrl()' });
-            for (var i = 0; i < 10; i++) {
-                chatManager.createChat(3);
+            for (var i = 0; i < 3; i++) {
+                chatManager.createChat();
             }
         });
     </script>

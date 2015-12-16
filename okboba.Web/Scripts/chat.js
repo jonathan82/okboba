@@ -16,22 +16,31 @@
 //  chat:foreground - fired when anywhere on chat slider is clicked on
 //
 ////////////////////////////////////////////////////////////////////
-function ChatSlider($container, options, who, zIndex) {
+function ChatSlider($container, config) {
+
     //// Private vars
     var configMap = {
-        templateId: '#chatSliderTemplate',
-        emoticonTemplateId: '#chatEmoticonsTemplate',
+        chatSliderTemplate: null,
+        chatDialogThemTemplate: null,
+        chatDialogMeTemplate: null,
+        initialZIndex: 100,
         minHeight: 200,
         minWidth: 250,
-        sliderClosedHeight: 31
+        sliderClosedHeight: 31,
+        emoticonUrl: 'http://twemoji.maxcdn.com/36x36/',
+        emoticonUrlSmall: 'http://twemoji.maxcdn.com/16x16/',
+        emoticonPages: null //an array of objects (emoticon pages) with an array of emoticons and their nav icon
     }
-    var tmpl, $chat, that, savedHeight, avatarUrl;
+    var $chat,
+        that,
+        savedHeight;
 
     that = this;
 
-    //// Public functions
-    this.who = who;
+    //// Merge the config options
+    configMap = $.extend(configMap, config);
 
+    //// Public functions
     this.setPosition = function (right) {
         $chat.css('right', right);
     }
@@ -44,11 +53,14 @@ function ChatSlider($container, options, who, zIndex) {
         $chat.remove();
     }
 
-    this.addMessage = function () {
-        if (avatarUrl = null) {
-            //Get the avatar URL from the web service and save it
-
+    this.addMessage = function (msg, isMe) {
+        var dialogHtml;
+        if (isMe) {
+            dialogHtml = configMap.chatDialogMeTemplate.render({ message: msg });            
+        } else {
+            dialogHtml = configMap.chatDialogThemTemplate.render({ message: msg });
         }
+        $chat.find('.chat-messages-inner').append(dialogHtml);
     }
 
     this.getZIndex = function () {
@@ -60,10 +72,8 @@ function ChatSlider($container, options, who, zIndex) {
     }
 
     //// Private Functions
-    function forceHeight () {
-        //force the browser to respect messsage box height
-        var remain = $chat.height() - $chat.find('.chat-header-row').height() - $chat.find('.chat-input-row').height();
-        $chat.find('.chat-messages').height(remain);
+    function isMinimized() {
+        return $chat.height() == configMap.sliderClosedHeight;
     }
 
     function togglePosition() {
@@ -82,13 +92,46 @@ function ChatSlider($container, options, who, zIndex) {
         }
     }
 
+    function emoticonChooserHtml(emoticons, url) {
+        var i,
+            html = '<ul class="chat-emoticon-chooser">';
+        for (i = 0; i < emoticons.length; i++) {
+            html += '<li data-id="'+emoticons[i]+'"><img src="' + url + emoticons[i] + '.png" alt="Emoticon" width="25" height="25" /></li>';
+        }
+        html += '</ul>';
+        return html;
+    }
+
+    function insertEmoticon() {
+        var id;
+        id = $(this).data('id');
+        $chat.find('.chat-input').focus();
+        //$chat.find('.chat-input-placeholder').hide();
+        html = '<img src="'+configMap.emoticonUrl+id+'.png" class="emoji" alt="'+id+'" />';
+        pasteHtmlAtCaret(html);
+    }
+
+    function sanitizeHtml(html) {
+        var re;
+
+        //convert emoji to unicode
+        re = /<img.*?data-id="(.*?)".*?>/mg;
+        
+
+        //trim whitespace
+    }
+
     //// Constructor logic
     //create chat window from template and add to DOM container
-    tmpl = $.templates(configMap.templateId);
-    $chat = $(tmpl.render());
+    $chat = $(configMap.chatSliderTemplate.render({
+        emoticonUrl: configMap.emoticonUrl,
+        emoticonUrlSmall: configMap.emoticonUrlSmall,
+        emoticons: configMap.emoticonPages[0].emoticons
+    }));
     $container.append($chat);
     savedHeight = $chat.height();
-    this.setZIndex(zIndex);
+    this.setZIndex(configMap.initialZIndex);
+    $chat.find('.chat-emoticon-chooser').children('li').click(insertEmoticon);
 
     //Enable resizable 
     $chat.resizable({
@@ -103,9 +146,6 @@ function ChatSlider($container, options, who, zIndex) {
         }
     });
 
-    //Custom scrollbar
-    //$chat.find('.chat-messages').niceScroll();
-
     //Close handler
     $chat.find('.chat-remove').click(function () {
         $(that).trigger('chat:close');
@@ -118,20 +158,74 @@ function ChatSlider($container, options, who, zIndex) {
 
     //Capture Enter key
     $chat.find('.chat-input').keypress(function (e) {
+        var html;
+
+        //get the input text
+        html = trimBr($(this).html());
+
+        //handle 'enter'
         if (e.which == 13) {            
             e.preventDefault();
-            alert($(this).text());
+            console.log(html);
+        } else {
+            //otherwise hide the placeholder
+            $chat.find('.chat-input-placeholder').hide();
         }
     });
 
-    //Smiley button 
+    ////Focus on input when placeholder text is clicked
+    //$chat.find('.chat-input-placeholder').click(function () {
+    //    $chat.find('.chat-input').focus();
+    //});
+
+    ////Handle delete key: re-Show placeholder text if input is empty 
+    //$chat.find('.chat-input').keydown(function (e) {
+    //    var html;
+    //    if (e.keyCode == 46 || e.keyCode == 8) {
+    //        html = trimBr($(this).html());
+    //        if (html == '') {
+    //            //show placeholder
+    //            $('.chat-input-placeholder').show();
+    //        }
+    //    }
+    //});
+
+    //Open emoticon slider
     $chat.find('.chat-input-emo-button').click(function () {
-        //$chat.find('.chat-emoticon-row').toggle()
+        $chat.find('.chat-emoticon-slider').slideToggle('fast');
     });
 
     //Bring chat to foreground
     $chat.click(function () {
         $(that).trigger('chat:foreground');
+    });
+
+    //Maximize slider if header is clicked and slider is minimized
+    $chat.find('.chat-header').click(function (e) {        
+        if (isMinimized()) {
+            if (!$(e.target).hasClass('glyphicon-chevron-up')) {
+                //make sure we didn't click on the minimize button
+                togglePosition();
+            }
+        }
+    });
+
+    //Emoticon nav tab click handler
+    $chat.find('.chat-emoticon-nav').children('li').not('.chat-emoticon-close').click(function () {
+        var page, html;
+        page = $(this).data('page');
+        html = emoticonChooserHtml(configMap.emoticonPages[page - 1].emoticons, configMap.emoticonUrl);
+        $(this).parent().children('li.active').removeClass('active');
+        $(this).addClass('active');        
+        $chat.find('.chat-emoticon-chooser').replaceWith(html);
+
+        //Insert emoticon at caret
+        $chat.find('.chat-emoticon-chooser').children('li').click(insertEmoticon);
+    });
+
+    //Close emoticon slider
+    $chat.find('.chat-emoticon-close').click(function () {
+        $chat.find('.chat-emoticon-slider').hide();
     });
 }
 
@@ -151,25 +245,31 @@ var chatManager = (function ($) {
         sliderGutterWidth: 15, //spacing between chat sliders
         minOverlap: 20, //minimum overlap spacing between sliders
         startZIndex: 100, //starting z-index for chat sliders
+        chatSliderTemplateId: '#chatSliderTemplate',
+        chatDialogThemTemplateId: '#chatDialogThemTemplate',
+        chatDialogMeTemplateId: '#chatDialogMeTemplate',
         hubUrl: null
     }
-    var createChat, repositionSliders, initModule, chatHubProxy;
-    var sliders = [];
+    var createChat, repositionSliders, initModule;
+    var sliders = [],
+        chatHubProxy,
+        chatSliderTemplate,
+        chatDialogThemTemplate,
+        chatDialogMeTemplate;
+
+    var emoticonSmilies = ['1f600', '1f601', '1f602', '1f603', '1f604', '1f605', '1f606', '1f607', '1f608', '1f609', '1f60a', '1f60b', '1f60c', '1f60d', '1f60e', '1f60f', '1f610', '1f611', '1f612', '1f613', '1f614', '1f615', '1f616', '1f617', '1f618', '1f619', '1f61a', '1f61b', '1f61c', '1f61d', '1f61e', '1f61f', '1f620', '1f621', '1f622', '1f623', '1f624', '1f625', '1f626', '1f627', '1f628', '1f629', '1f62a', '1f62b', '1f62c', '1f62d', '1f62e', '1f62f', '1f630', '1f631', '1f632', '1f633', '1f634', '1f635', '1f636', '1f637', '1f638', '1f639', '1f63a', '1f63b', '1f63c', '1f63d', '1f63e', '1f63f', '1f640'],
+        emoticonFood = ['1f354', '1f355', '1f356', '1f357', '1f358', '1f359', '1f35a', '1f35b', '1f35c', '1f35d', '1f35e', '1f35f', '1f360', '1f361', '1f362', '1f363', '1f364', '1f365', '1f366', '1f367', '1f368', '1f369', '1f36a', '1f36b', '1f36c', '1f36d', '1f36e', '1f36f', '1f370', '1f371', '1f372', '1f373', '1f374', '1f375', '1f376', '1f377', '1f378', '1f379', '1f37a', '1f37b'],
+        emoticonLove = ['1f46a', '1f46b', '1f46c', '1f46d', '1f46e', '1f46f', '1f470', '1f471', '1f472', '1f473', '1f474', '1f475', '1f476', '1f477', '1f478', '1f479', '1f47a', '1f47b', '1f47c', '1f47d', '1f47e', '1f47f', '1f480', '1f481', '1f482', '1f483', '1f484', '1f485', '1f486', '1f487', '1f488', '1f489', '1f48a', '1f48b', '1f48c', '1f48d', '1f48e', '1f48f', '1f490', '1f491', '1f492', '1f493', '1f494', '1f495', '1f496', '1f497', '1f498', '1f499', '1f49a', '1f49b', '1f49c', '1f49d', '1f49e', '1f49f'];
 
     //// Private functions
     function receiveMessage(from, msg) {
-        var i;
+        //TODO
+        alert('TODO');
+    }
 
-        //check if chat window is already open
-        for (i = 0; i < sliders.length; i++) {
-            if (sliders[i].who == from) {
-                //add message to window
-                return;
-            }
-        }
+    function sendMessage(msg, to) {
+        //send already sanitized text
 
-        //create new chat window
-        createChat(from);
     }
 
     function setupSignalR() {
@@ -255,12 +355,22 @@ var chatManager = (function ($) {
 
     }
 
-    createChat = function (who) {
+    createChat = function () {
         var slider, zIndex;
 
         //create a new chat window and position it in browser window
         zIndex = sliders.length == 0 ? configMap.startZIndex : lastZIndex() + 1;
-        slider = new ChatSlider($('body'), null, who, zIndex);
+        slider = new ChatSlider($('body'), {
+            chatSliderTemplate: chatSliderTemplate,
+            chatDialogThemTemplate: chatDialogThemTemplate,
+            chatDialogMeTemplate: chatDialogMeTemplate,
+            initialZIndex: zIndex,
+            emoticonPages: [
+                { emoticons: emoticonSmilies, navIcon: ''  },
+                { emoticons: emoticonFood, navIcon: '' },
+                { emoticons: emoticonLove, navIcon: '' }
+            ]
+        });
         sliders.push(slider);
         repositionSliders();
 
@@ -272,8 +382,6 @@ var chatManager = (function ($) {
             delete sliders[i];
             sliders.splice(i, 1);
             repositionSliders();
-            debugZIndex();
-            console.log('chat:close');
         });
 
         //bring to foreground handler
@@ -282,9 +390,13 @@ var chatManager = (function ($) {
             maxZ = lastZIndex();
             pushDown(this.getZIndex());
             this.setZIndex(maxZ);
-            debugZIndex();
-            console.log('chat:foreground');
         });
+
+        //Add some dummy messages
+        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
+        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
+        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
+        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
     }
 
     initModule = function (options) {
@@ -299,6 +411,11 @@ var chatManager = (function ($) {
 
         //setup signalr
         setupSignalR();
+
+        //load the templates (so we can reuse them when creating new sliders)
+        chatSliderTemplate = $.templates(configMap.chatSliderTemplateId);
+        chatDialogThemTemplate = $.templates(configMap.chatDialogThemTemplateId);
+        chatDialogMeTemplate = $.templates(configMap.chatDialogMeTemplateId);
     }
 
     return {
