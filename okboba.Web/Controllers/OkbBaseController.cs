@@ -18,6 +18,13 @@ namespace okboba.Controllers
             return value.Length <= maxChars ? value : value.Substring(0, maxChars);
         }
 
+        /// <summary>
+        /// 
+        /// Gets the profile Id of the logged in user. First looks in the Session and if not
+        /// there looks up in DB and caches in the session to speed up lookups next time.
+        /// The User Id is stored in the Identity object of the current thread.
+        /// 
+        /// </summary>
         protected int GetProfileId()
         {            
             int profileId;

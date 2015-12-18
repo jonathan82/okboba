@@ -87,12 +87,19 @@ namespace okboba.Controllers
             return PartialView("_ProfileHeader", vm);
         }
 
-        public ActionResult Index(int? id)
+        /// <summary>
+        /// 
+        /// Action for the default Profile view.  Takes a string of the user's Base 62 ID and gets the Profile Id
+        /// to pass to the child views. Should eventually support anonymous viewing of profiles based on a privacy
+        /// flag.
+        /// 
+        /// </summary>
+        public ActionResult Index(string userId)
         {
             var me = GetProfileId();
-            var vm = new ProfileViewModel();
+            var vm = new ProfileViewModel();            
 
-            if (id == null || id == me)
+            if (string.IsNullOrEmpty(userId) || userId == User.Identity.GetUserId())
             {
                 //Viewing own profile
                 vm.ProfileId = me;
@@ -100,7 +107,17 @@ namespace okboba.Controllers
             }
             else
             {
-                vm.ProfileId = (int)id;
+                //get the profile id associated with the passed in userId
+                var id = _profileRepo.GetProfileId(userId);
+
+                if (id < 0 )
+                {
+                    // Bad userId passed in - no profile found!
+                    // throw exception or return no profile found view??
+                    throw new Exception("No Profile Found for given user Id!");
+                }
+
+                vm.ProfileId = id;
                 vm.IsMe = false;
             }
            

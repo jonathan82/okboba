@@ -1,5 +1,7 @@
-﻿using okboba.Entities;
-using okboba.Resources;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -8,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace okboba.Entities.Helpers
+namespace okboba.Seeder
 {
     public class SeedDb
     {
@@ -24,7 +26,7 @@ namespace okboba.Entities.Helpers
 
             foreach (var q in quesList)
             {
-                db.TranslateQuestions.Add(q);                
+                db.TranslateQuestions.Add(q);
             }
             var ret = db.SaveChanges();
         }
@@ -43,10 +45,11 @@ namespace okboba.Entities.Helpers
         /// and randomizes the location of each user.  Uses the UserProfileBulkReader to generate random
         /// profiles.
         /// </summary>
-        public void SeedUsers(int numOfUsers, List<Location> provinces, int commitCount = 1000)
+        public void SeedUsers(int numOfUsers, IList<LocationPinyinModel> provinces, int commitCount = 100)
         {
-            var db = new OkbDbContext();            
+            var db = new OkbDbContext();
             var profileGen = new ProfileGenerator(provinces);
+            var userManager = new UserManager<OkbUser, string>(new UserStore<OkbUser>(db));
 
             db.Configuration.AutoDetectChangesEnabled = false;
 
@@ -57,6 +60,7 @@ namespace okboba.Entities.Helpers
                 {
                     UserName = email,
                     Email = email,
+                    PasswordHash = userManager.PasswordHasher.HashPassword("password"),
                     JoinDate = DateTime.Now
                 };
 
@@ -79,37 +83,6 @@ namespace okboba.Entities.Helpers
             db.SaveChanges();
         }
 
-        /// <summary>
-        /// Seed the users by using bulk copy.  Only seeds the profiles but doesn't create a User.
-        /// Takes a list of provinces used to generate random locations for each profile. 
-        /// </summary>
-        public void SeedUsersBulkCopy(int numOfUsers, List<Location> provinces)
-        {
-            //Skip if users exist
-            OkbDbContext db = new OkbDbContext();
-            if(db.Profiles.Count() > 0)
-            {
-                db.Dispose();
-                return;
-            }
-
-            UserProfileBulkDataReader profileReader = new UserProfileBulkDataReader(numOfUsers, "", "Profiles", provinces);
-
-            using (SqlBulkCopy sbc = new SqlBulkCopy(connString,
-                SqlBulkCopyOptions.TableLock |
-                SqlBulkCopyOptions.UseInternalTransaction))
-            {
-                sbc.BatchSize = 1000;
-                sbc.DestinationTableName = "Profiles";
-
-                foreach (var col in profileReader.ColumnMappings)
-                {
-                    sbc.ColumnMappings.Add(col);
-                }
-
-                sbc.WriteToServer(profileReader);
-            }
-        }
 
         /// <summary>
         /// Seed the Answers using SqlBulkCopy for performance.  
@@ -141,7 +114,7 @@ namespace okboba.Entities.Helpers
 
                 sbc.WriteToServer(bulkReader);
             }
-        }        
+        }
 
         /// <summary>
         /// Seed the Locations from the given file
@@ -149,7 +122,7 @@ namespace okboba.Entities.Helpers
         public void SeedLocations(string filename)
         {
             OkbDbContext db = new OkbDbContext();
-            if(db.Locations.Count() > 0)
+            if (db.Locations.Count() > 0)
             {
                 db.Dispose();
                 return;
@@ -168,21 +141,24 @@ namespace okboba.Entities.Helpers
                     //First entry is the province
                     string province = cities[0];
 
-                    for(Int16 districtCount = 1; districtCount < cities.Length; districtCount++)
+                    for (Int16 districtCount = 1; districtCount < cities.Length; districtCount++)
                     {
                         string district = cities[districtCount];
 
-                        var loc = new Location { LocationId1 = provinceCount,
-                                                 LocationId2 = districtCount,
-                                                 LocationName1 = province,
-                                                 LocationName2 = district };
+                        var loc = new Location
+                        {
+                            LocationId1 = provinceCount,
+                            LocationId2 = districtCount,
+                            LocationName1 = province,
+                            LocationName2 = district
+                        };
                         //Update the database
                         db.Locations.Add(loc);
                         db.SaveChanges();
                     }
                     provinceCount++;
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -191,16 +167,16 @@ namespace okboba.Entities.Helpers
         public void SeedOkcQuestions(string filename)
         {
             var db = new OkbDbContext();
-            if(db.Questions.Count() > 0) return;
+            if (db.Questions.Count() > 0) return;
 
             //////////////// Insert Okcupid questions ////////////////////
             var stream = new StreamReader(filename);
-            int count = 1;            
+            int count = 1;
 
             while (!stream.EndOfStream)
             {
                 var line = stream.ReadLine();
-                
+
                 int index = 1;
                 string answerLine;
 
@@ -232,7 +208,7 @@ namespace okboba.Entities.Helpers
                 db.SaveChanges();
             }
         }
-        
+
         /// <summary>
         /// Seed the detail options from the given file
         /// </summary>
@@ -269,7 +245,7 @@ namespace okboba.Entities.Helpers
             //Dump it out
             foreach (var option in details)
             {
-                Console.WriteLine("{0}, {1}, {2}", option.Id, option.ColName, option.Value );
+                Console.WriteLine("{0}, {1}, {2}", option.Id, option.ColName, option.Value);
             }
         }
 
@@ -289,7 +265,7 @@ namespace okboba.Entities.Helpers
                 ChoiceAcceptable = 1,
                 LastAnswered = DateTime.Now
             };
-            
+
             try
             {
                 db.Answers.Add(ans);
@@ -300,8 +276,8 @@ namespace okboba.Entities.Helpers
 
                 throw;
             }
-            
-        }       
+
+        }
 
         /// <summary>
         /// Returns a random time accurate to minutes from 10 days ago to now. Used to seed

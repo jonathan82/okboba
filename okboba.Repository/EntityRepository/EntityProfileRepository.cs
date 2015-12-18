@@ -161,5 +161,12 @@ namespace okboba.Repository.EntityRepository
 
             db.SaveChanges();
         }
+
+        public int GetProfileId(string userId)
+        {
+            var db = new OkbDbContext();
+            var user = db.Users.Find(userId);
+            return user == null ? -1 : user.Profile.Id;
+        }
     }
 }

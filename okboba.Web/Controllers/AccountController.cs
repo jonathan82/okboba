@@ -133,7 +133,8 @@ namespace okboba.Controllers
                 var user = new OkbUser
                 {
                     UserName = model.Email,
-                    Email = model.Email
+                    Email = model.Email,
+                    JoinDate = DateTime.Now
                 };
 
                 var profile = new Profile

@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="EntityRepository\EntityActivityRepository.cs" />
     <Compile Include="EntityRepository\EntityMessageRepository.cs" />
+    <Compile Include="Helpers\GuidEncoder.cs" />
     <Compile Include="IActivityRepository.cs" />
     <Compile Include="EntityRepository\EntityLocationRepository.cs" />
     <Compile Include="EntityRepository\EntityMatchRepository.cs" />

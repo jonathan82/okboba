@@ -30,21 +30,20 @@ namespace okboba.Entities
         public byte Gender { get; set; }
         public byte LookingForGender { get; set; }
 
-        //public Int16 Height { get; set; }
-
         public Int16 LocationId1 { get; set; }
         public Int16 LocationId2 { get; set; }
 
         [StringLength(140)]
         public string PhotosInternal { get; set; } //list of semicolon separated filenames
 
-        [ForeignKey("CurrentQuestion")]
-        public Int16? CurrentQuestionId { get; set; }
+        //Foreign key to users table.  we have to manually set this because EF doesn't alow
+        //one to one foreign key relationshps. So there's no navigation property to User table.
+        [StringLength(128)]
+        public string UserId { get; set; }
 
         //Navigation properties
         public virtual Location Location { get; set; }
         public virtual ProfileText ProfileText { get; set; }
-        public Question CurrentQuestion { get; set; }
 
         //Photo Helper methods        
         private IEnumerable<Photo> Photos(string suffix)

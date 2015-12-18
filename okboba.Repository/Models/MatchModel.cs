@@ -9,6 +9,7 @@ namespace okboba.Repository.Models
     public class MatchModel
     {
         public int ProfileId { get; set; }
+        public string UserId { get; set; }
         public string Name { get; set; }
         public int MatchPercent { get; set; }
         public int FriendPercent { get; set; }

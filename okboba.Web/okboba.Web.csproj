@@ -466,7 +466,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Matches\matches.cshtml" />
     <Content Include="Views\Account\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutSplash.cshtml" />
     <Content Include="Views\Shared\_LayoutAnon.cshtml" />

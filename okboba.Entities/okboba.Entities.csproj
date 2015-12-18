@@ -82,6 +82,8 @@
     <Compile Include="Entities\QuestionChoice.cs" />
     <Compile Include="Entities\Trait.cs" />
     <Compile Include="Entities\TranslateQuestion.cs" />
+    <Compile Include="Helpers\OkbUuid.cs" />
+    <Compile Include="Helpers\ProfileGenerator.cs" />
     <Compile Include="Migrations\201511050517002_Initial.cs" />
     <Compile Include="Migrations\201511050517002_Initial.Designer.cs">
       <DependentUpon>201511050517002_Initial.cs</DependentUpon>
@@ -121,6 +123,10 @@
     <Compile Include="Migrations\201512121113230_Messages2.cs" />
     <Compile Include="Migrations\201512121113230_Messages2.Designer.cs">
       <DependentUpon>201512121113230_Messages2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512171823569_UserId.cs" />
+    <Compile Include="Migrations\201512171823569_UserId.Designer.cs">
+      <DependentUpon>201512171823569_UserId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512121113230_Messages2.resx">
       <DependentUpon>201512121113230_Messages2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512171823569_UserId.resx">
+      <DependentUpon>201512171823569_UserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
