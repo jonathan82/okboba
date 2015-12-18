@@ -76,14 +76,24 @@
 /***************************
     Okboba Specific Sytles
 ****************************/
+html {
+  position: relative;
+  min-height: 100%;
+}
 footer {
-  margin-top: 20px;
-  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 120px;
+  width: 100%;
+  background-color: #880E4F;
+  padding-top: 25px;
 }
 body {
-  padding-bottom: 25px;
+  margin: 0 0 120px;
 }
-.body-auth {
+.body-auth,
+.body-anon {
   padding-top: 90px;
   background-color: #880E4F;
 }
@@ -92,13 +102,10 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
 }
-.container-auth {
+.container-auth,
+.container-anon {
   background-color: #FFF;
   padding: 30px 40px;
-  min-height: 1200px;
-}
-.container-anon {
-  background-color: #fff;
 }
 .splash-buffer {
   position: relative;
@@ -811,3 +818,24 @@ label.photo-upload-label input[type="file"] {
   color: #000;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
 }
+/****************
+  Footer Styles
+*****************/
+footer {
+  line-height: 1.8em;
+  font-size: 1.2em;
+}
+footer a,
+footer a:visited,
+footer a:active,
+footer a:hover {
+  color: #cd1577;
+}
+footer a:hover {
+  color: #b6136a;
+  text-decoration: none;
+}
+/*
+footer a:active {
+    color: #FFF;
+}*/

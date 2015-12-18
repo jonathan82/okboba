@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>OkBoba.com - @ViewBag.Title</title>
     @Styles.Render("~/bundles/css/all")
 </head>
 <body class="body-anon">
@@ -13,6 +13,8 @@
     <div class="container container-anon">
         @RenderBody()
     </div>
+
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundles/js/vendor")
     @Scripts.Render("~/bundles/js/okboba")

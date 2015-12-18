@@ -61,6 +61,7 @@ namespace okboba.Seeder
                     UserName = email,
                     Email = email,
                     PasswordHash = userManager.PasswordHasher.HashPassword("password"),
+                    SecurityStamp = Guid.NewGuid().ToString(),
                     JoinDate = DateTime.Now
                 };
 

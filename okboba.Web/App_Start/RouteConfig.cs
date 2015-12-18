@@ -14,6 +14,12 @@ namespace okboba
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "StaticPage",
+                url: "static/{page}",
+                defaults: new { controller = "Static", action = "Page" }
+            );
+
+            routes.MapRoute(
                 name: "IndexWithId",
                 url: "{controller}/{id}",
                 defaults: new { action = "Index", id = UrlParameter.Optional  },

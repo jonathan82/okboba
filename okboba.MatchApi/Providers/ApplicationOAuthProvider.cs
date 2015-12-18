@@ -9,7 +9,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using okboba.MatchApi.Models;
 using okboba.Entities;
 
 namespace okboba.MatchApi.Providers

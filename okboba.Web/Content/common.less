@@ -116,16 +116,27 @@
 /***************************
     Okboba Specific Sytles
 ****************************/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 footer {
-    margin-top: 20px;
-    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 120px;
+    width: 100%;
+    background-color: @primary-color-3;
+    padding-top: 25px;
 }
 
 body {
-    padding-bottom: 25px;
+    margin: 0 0 120px;
 }
 
-.body-auth {
+.body-auth,
+.body-anon {
     padding-top: 90px;
     background-color: @primary-color-3;
 }
@@ -136,17 +147,11 @@ body {
     background-size: 100%;
 }
 
-.body-anon {
-}
-
-.container-auth {
+.container-auth,
+.container-anon {
     background-color: #FFF;
     padding: 30px 40px;
-    min-height: 1200px;
-}
-
-.container-anon {
-    background-color: #fff;
+    //min-height: 1200px;
 }
 
 .splash-buffer {

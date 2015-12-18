@@ -21,9 +21,7 @@
         
     </div>
 
-    <footer>
-        <span class="text-info">&copy; @DateTime.Now.Year - Okboba.com</span>
-    </footer>
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundles/js/vendor")    
     <script src="@Html.ChatUrl()/hubs"></script>
