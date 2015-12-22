@@ -763,6 +763,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 回答问题.
+        /// </summary>
+        public static string Question_Answer {
+            get {
+                return ResourceManager.GetString("Question_Answer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 上述任何.
         /// </summary>
         public static string Question_Any {
@@ -795,6 +804,15 @@ namespace okboba.Resources {
         public static string Question_Prompt_Importance {
             get {
                 return ResourceManager.GetString("Question_Prompt_Importance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 跳过问题.
+        /// </summary>
+        public static string Question_Skip {
+            get {
+                return ResourceManager.GetString("Question_Skip", resourceCulture);
             }
         }
         

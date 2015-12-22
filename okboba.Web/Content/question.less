@@ -1,4 +1,4 @@
-﻿@import "common";
+﻿@import (reference) "common.less";
 
 .question-form {
     background-color: #F5F5F0;
@@ -56,7 +56,7 @@
     box-shadow: inset 0px 0px 0px 4px #fff;
 }
 
-.question-importance-box {
+.question-importance-bars {
     margin-top: 5px;
 }
 
@@ -72,4 +72,28 @@
 
 .question-importance-bar.active {
     background-color: @primary-color-2;
+}
+
+.question-choice-fade {
+    opacity: 0.5;
+}
+
+.question-choice-unacceptable {
+    text-decoration: line-through;
+}
+
+.question-choice-match {
+    color: green;
+}
+
+.question-choice-nomatch {
+    color: darkred;
+}
+
+.question-answered {
+    .shadow-z-1;
+    background-color: lighten(#F5F5F0, 2%);
+    padding: 15px;
+    color: @gray;
+    margin-bottom: 15px;
 }

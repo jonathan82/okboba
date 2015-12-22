@@ -261,9 +261,9 @@ namespace okboba.Seeder
             {
                 ProfileId = rand.Next(2, 200000),
                 QuestionId = (short)rand.Next(201, 1243),
-                ChoiceBit = 1,
+                ChoiceIndex = 1,
                 ChoiceWeight = 1,
-                ChoiceAcceptable = 1,
+                ChoiceAccept = 1,
                 LastAnswered = DateTime.Now
             };
 

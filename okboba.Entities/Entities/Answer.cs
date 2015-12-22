@@ -23,6 +23,9 @@ namespace okboba.Entities
     ///         ChoiceIndex = null to indicate skipped question.
     /// 
     /// Case 4: The user hasn't answered the question. In this case no answer will appear in the Answers table.
+    /// 
+    /// Note: we have a composite primary key consisting of ProfileId and QuestionId.  For performance this may
+    ///       need to be removed and we just treat the table as a "heap".
     /// </summary>
     public class Answer
     {
@@ -34,9 +37,9 @@ namespace okboba.Entities
         [Column(Order = 2)]
         public Int16 QuestionId { get; set; }
 
-        public byte? ChoiceBit { get; set; }
+        public byte? ChoiceIndex { get; set; }
         public byte ChoiceWeight { get; set; }
-        public byte ChoiceAcceptable { get; set; }
+        public byte ChoiceAccept { get; set; }
 
         [Column(TypeName = "smalldatetime")] //SQL Server
         //[Column(TypeName = "timestamp")] //MySQL 
@@ -44,6 +47,12 @@ namespace okboba.Entities
 
         //References
         public virtual Profile Profile { get; set; }
-        public virtual Question Question { get; set; }        
+        public virtual Question Question { get; set; }   
+        
+        //Helper functions
+        public byte ChoiceBit()
+        {
+            return ChoiceIndex != null ? (byte)(1 << (ChoiceIndex - 1)) : (byte)0;
+        }
     }
 }

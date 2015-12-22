@@ -13,6 +13,7 @@ namespace okboba.MatchCalculator
         public byte ChoiceAccept;
         public byte ChoiceWeight;
         public short QuestionId;
+        public DateTime LastAnswered;
     }
 
     public struct MatchResult
@@ -45,7 +46,9 @@ namespace okboba.MatchCalculator
         public const int LITTLE_IMPORTANT = 1;
         public const int SOMEWHAT_IMPORTANT = 5;
         public const int VERY_IMPORTANT = 25;
+
         private Dictionary<int, List<CacheAnswer>> _answerCache;
+
         private int[] _weights = { 0, LITTLE_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT };
 
 
@@ -83,9 +86,10 @@ namespace okboba.MatchCalculator
 
                 if(a.QuestionId==updateAnswer.QuestionId)
                 {
-                    a.ChoiceBit = (byte)updateAnswer.ChoiceBit;
-                    a.ChoiceAccept = updateAnswer.ChoiceAcceptable;
+                    a.ChoiceBit = (byte)updateAnswer.ChoiceIndex;
+                    a.ChoiceAccept = updateAnswer.ChoiceAccept;
                     a.ChoiceWeight = updateAnswer.ChoiceWeight;
+                    a.LastAnswered = DateTime.Now;
 
                     //found and updated answer, done
                     return;
@@ -96,9 +100,10 @@ namespace okboba.MatchCalculator
             listAnswers.Add(new CacheAnswer
             {
                 QuestionId = updateAnswer.QuestionId,
-                ChoiceBit = (byte)updateAnswer.ChoiceBit,
-                ChoiceAccept = updateAnswer.ChoiceAcceptable,
-                ChoiceWeight = updateAnswer.ChoiceWeight
+                ChoiceBit = (byte)updateAnswer.ChoiceIndex,
+                ChoiceAccept = updateAnswer.ChoiceAccept,
+                ChoiceWeight = updateAnswer.ChoiceWeight,
+                LastAnswered = DateTime.Now
             });
         }
 
@@ -118,7 +123,7 @@ namespace okboba.MatchCalculator
         ///     case 2 - they answered same AND importance differs greatly: increase enemyScore
         ///     case 3 - all others don't affect enemyScore
         /// </summary>
-        public MatchResult CalculateMatchPercent(int profileId, Dictionary<int, Answer> myAnswers)
+        public MatchResult CalculateMatchPercent(int profileId, Dictionary<int, CacheAnswer> myAnswers)
         {
             int scoreMe = 0,
                 scoreThem = 0,
@@ -141,7 +146,7 @@ namespace okboba.MatchCalculator
                 if (!myAnswers.ContainsKey(them.QuestionId)) continue; //I haven't answered this question
                 var me = myAnswers[them.QuestionId];
                 //if (me.ChoiceBit == null || them.ChoiceBit == null) continue; // either of us skipped this question
-                bool meAccept = (me.ChoiceAcceptable & them.ChoiceBit) != 0 ? true : false;
+                bool meAccept = (me.ChoiceAccept & them.ChoiceBit) != 0 ? true : false;
                 bool themAccept = (me.ChoiceBit & them.ChoiceAccept) != 0 ? true : false;
                 scoreMe += meAccept ? _weights[me.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
                 scoreThem += themAccept ? _weights[them.ChoiceWeight % _weights.Length] : 0; // modulo to prevent out of bounds
@@ -151,7 +156,7 @@ namespace okboba.MatchCalculator
 
                 //enemy score: more complex
                 if( (me.ChoiceBit != them.ChoiceBit && (!meAccept || !themAccept)) || //case 1
-                    (me.ChoiceBit==them.ChoiceBit && Math.Abs((sbyte)me.ChoiceWeight-(sbyte)them.ChoiceWeight) > 1) ) //case 2
+                    (me.ChoiceBit==them.ChoiceBit && Math.Abs(me.ChoiceWeight - them.ChoiceWeight) > 1) ) //case 2
                 {
                     enemyScore++;
                 }
@@ -182,8 +187,10 @@ namespace okboba.MatchCalculator
         }
 
         /// <summary>
+        /// 
         /// Loads the inital answer cache from the database. Returns the number of answers
-        /// loaded.
+        /// loaded. Should be called when the app first starts.  Could take up a lot of memory.
+        /// 
         /// </summary>
         public int LoadAnswerCache()
         {
@@ -191,24 +198,42 @@ namespace okboba.MatchCalculator
             _answerCache = new Dictionary<int, List<CacheAnswer>>();
 
             var db = new OkbDbContext();
+            List<CacheAnswer> list;
 
             foreach (var ans in db.Answers.AsNoTracking())
             {
                 //Don't load questions the user skipped (ChoiceBit==null)
-                if (ans.ChoiceBit == null) continue;
+                if (ans.ChoiceIndex == null) continue;
 
-                if (!_answerCache.ContainsKey(ans.ProfileId))
+                if (_answerCache.TryGetValue(ans.ProfileId, out list))
+                {
+                    list.Add(new CacheAnswer
+                    {
+                        QuestionId = ans.QuestionId,
+                        ChoiceBit = ans.ChoiceBit(),
+                        ChoiceAccept = ans.ChoiceAccept,
+                        ChoiceWeight = ans.ChoiceWeight,
+                        LastAnswered = ans.LastAnswered
+                    });
+                }
+                else
                 {
                     _answerCache.Add(ans.ProfileId, new List<CacheAnswer>());
                 }
 
-                _answerCache[ans.ProfileId].Add(new CacheAnswer
-                {
-                    QuestionId = ans.QuestionId,
-                    ChoiceBit = (byte)ans.ChoiceBit,
-                    ChoiceAccept = ans.ChoiceAcceptable,
-                    ChoiceWeight = ans.ChoiceWeight
-                });
+                //if (!_answerCache.ContainsKey(ans.ProfileId))
+                //{
+                //    _answerCache.Add(ans.ProfileId, new List<CacheAnswer>());
+                //}
+
+                //_answerCache[ans.ProfileId].Add(new CacheAnswer
+                //{
+                //    QuestionId = ans.QuestionId,
+                //    ChoiceBit = ans.ChoiceBit(),
+                //    ChoiceAccept = ans.ChoiceAccept,
+                //    ChoiceWeight = ans.ChoiceWeight,
+                //    LastAnswered = ans.LastAnswered
+                //});
 
                 count++;
             }
@@ -217,24 +242,49 @@ namespace okboba.MatchCalculator
         }
 
         /// <summary>
-        /// Gets a user's answer in a dictionary
+        /// 
+        /// Gets a user's answer in a dictionary. If it doesn't exist returns an empty 
+        /// Dictionary.
+        /// 
         /// </summary>
-        public Dictionary<int, Answer> GetUserAnswers(int profileId)
+        public Dictionary<int, CacheAnswer> GetAnswerDict(int profileId)
         {
-            var db = new OkbDbContext();
+            List<CacheAnswer> list;
+            var dict = new Dictionary<int, CacheAnswer>();
 
-            var result = from ans in db.Answers.AsNoTracking()
-                         where ans.ProfileId == profileId
-                         select ans;
-
-            var answers = new Dictionary<int, Answer>();
-
-            foreach (var ans in result)
+            if (_answerCache.TryGetValue(profileId, out list))
             {
-                answers.Add(ans.QuestionId, ans);
+                //answer in cache
+                foreach (var ans in list)
+                {
+                    dict.Add(ans.QuestionId, ans);
+                }
             }
 
-            return answers;
+            return dict;
+
+            //var db = new OkbDbContext();
+
+            //var result = from ans in db.Answers.AsNoTracking()
+            //             where ans.ProfileId == profileId
+            //             select ans;
+
+            //var answers = new Dictionary<int, Answer>();
+
+            //foreach (var ans in result)
+            //{
+            //    answers.Add(ans.QuestionId, ans);
+            //}
+
+            //return answers;
+        }
+
+        /// <summary>
+        /// Gets a list of the users answers from the answer cache.
+        /// </summary>
+        public IEnumerable<CacheAnswer> GetAnswers(int profileId)
+        {
+            return _answerCache[profileId];
         }
     }
 }

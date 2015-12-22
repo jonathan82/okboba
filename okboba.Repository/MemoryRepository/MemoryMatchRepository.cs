@@ -9,25 +9,25 @@ using okboba.Entities;
 using okboba.MatchCalculator;
 using okboba.Resources;
 
-namespace okboba.Repository.EntityRepository
+namespace okboba.Repository.MemoryRepository
 {
 
-    public class EntityMatchRepository : IMatchRepository
+    public class MemoryMatchRepository : IMatchRepository
     {
         #region Singelton
-        private static EntityMatchRepository instance;
-        private EntityMatchRepository()
+        private static MemoryMatchRepository instance;
+        private MemoryMatchRepository()
         {
             _matchCalc = MatchCalc.Instance;
         }
 
-        public static EntityMatchRepository Instance
+        public static MemoryMatchRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new EntityMatchRepository();
+                    instance = new MemoryMatchRepository();
                 }
                 return instance;
             }
@@ -43,11 +43,11 @@ namespace okboba.Repository.EntityRepository
             var query = from p in db.Profiles.AsNoTracking()
                         select p;
 
-            if (!(criteria.Gender==OkbConstants.UNKNOWN_GENDER))
+            if (!(criteria.Gender == OkbConstants.UNKNOWN_GENDER))
             {
                 query = query.Where(p => p.Gender == criteria.Gender);
             }
-            if(criteria.LocationId1 != 0)
+            if (criteria.LocationId1 != 0)
             {
                 query = query.Where(p => p.LocationId1 == criteria.LocationId1);
             }
@@ -69,7 +69,7 @@ namespace okboba.Repository.EntityRepository
 
             var query = BuildSearchQuery(db, criteria);
 
-            var myAnswers = _matchCalc.GetUserAnswers(profileId);
+            var myAnswers = _matchCalc.GetAnswerDict(profileId);
 
             foreach (var p in query)
             {
@@ -89,7 +89,7 @@ namespace okboba.Repository.EntityRepository
             }
 
             //For now just sort the list by match %
-            matches.Sort(delegate(MatchModel m1, MatchModel m2)
+            matches.Sort(delegate (MatchModel m1, MatchModel m2)
             {
                 return m2.MatchPercent.CompareTo(m1.MatchPercent);
             });
@@ -102,7 +102,7 @@ namespace okboba.Repository.EntityRepository
         /// </summary>
         public MatchModel CalculateMatch(int profileId1, int profileId2)
         {
-            var ans1 = _matchCalc.GetUserAnswers(profileId1);
+            var ans1 = _matchCalc.GetAnswerDict(profileId1);
             var result = _matchCalc.CalculateMatchPercent(profileId2, ans1);
             return new MatchModel
             {

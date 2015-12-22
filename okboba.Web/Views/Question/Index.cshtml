@@ -1,14 +1,20 @@
 ﻿@model okboba.Web.Models.QuestionIndexViewModel
 @using okboba.Resources
+@using okboba.Web.Helpers
+@using Newtonsoft.Json
 @{
     ViewBag.Title = "Questions";
 }
 
 @Html.Action("ProfileHeader", "Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = "Questions" })
 
+<!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
 
 @Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
+
+@Html.Partial("_QuestionTemplate")
+@Html.Partial("_AnswerTemplate")
 
 <div class="row">
     <div class="col-md-6">
@@ -26,24 +32,19 @@
             }
         }
 
+        <hr id="question-separator" />
+
         <!-- Question list -->
-        @foreach (var ques in Model.MyQuestions)
+        @foreach (var ques in Model.Questions)
         {
-            <hr />
             <div class="question-answered">
                 <p>@ques.Question.Text</p>
                 <ul>
-                    @foreach (var choice in ques.Choices)
-                    {
-                        <li>@choice.Text</li>
-                    }
+                    @Html.Choice(ques, Model.CompareQuestions)
                 </ul>
                 <p>@i18n.Question_Prompt_Acceptable</p>
                 <ul>
-                    @foreach (var choice in ques.Choices)
-                    {
-                        <li>@choice.Text</li>
-                    }
+                    @Html.ChoiceAcceptable(ques, Model.CompareQuestions)
                 </ul>
             </div>
         }
@@ -63,6 +64,10 @@
 @section Scripts {
 
     <script>
-        $('.question-importance-bar').questionimportance();
+        var NextQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.NextQuestions));
+        var AnsweredQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.Questions));
+
+        $('.question-form').questionValidation();
+        $('.question-form').questionSubmit();
     </script>
 }

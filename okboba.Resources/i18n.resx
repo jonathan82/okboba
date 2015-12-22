@@ -384,4 +384,10 @@
   <data name="Login_YourPasswod" xml:space="preserve">
     <value>你的密码</value>
   </data>
+  <data name="Question_Answer" xml:space="preserve">
+    <value>回答问题</value>
+  </data>
+  <data name="Question_Skip" xml:space="preserve">
+    <value>跳过问题</value>
+  </data>
 </root>

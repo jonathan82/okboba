@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace okboba.Repository.Models
 {
-    public class QuestionWithAnswerModel
+    public class QuestionAnswerModel
     {
-        public Question Question { get; set; }
-        public IEnumerable<QuestionChoice> Choices { get; set; }
+        public QuestionModel Question { get; set; }
         public Answer Answer { get; set; }
     }
 }

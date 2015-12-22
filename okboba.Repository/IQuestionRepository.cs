@@ -1,5 +1,6 @@
 ﻿using okboba.Entities;
 using okboba.Repository.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,8 @@ namespace okboba.Repository
 {
     public interface IQuestionRepository
     {
-        Question GetQuestion(int? id);
-        Question GetQuestionByRank(int rank);
-        bool AnswerQuestion(Answer ans);
-        IQueryable<TranslateQuestion> GetTranslateQuestions();
-        IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId);
-        IEnumerable<QuestionWithAnswerModel> GetNext2Questions(int profileId);
+        void Answer(Answer ans);
+        IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page = 1, int perPage = 20);
+        IList<QuestionModel> Next2Questions(int profileId);
     }
 }

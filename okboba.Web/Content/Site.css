@@ -418,7 +418,7 @@ body {
   background: #f072b5;
   box-shadow: inset 0px 0px 0px 4px #fff;
 }
-.question-importance-box {
+.question-importance-bars {
   margin-top: 5px;
 }
 .question-importance-bar {
@@ -432,6 +432,25 @@ body {
 }
 .question-importance-bar.active {
   background-color: #D81B60;
+}
+.question-choice-fade {
+  opacity: 0.5;
+}
+.question-choice-unacceptable {
+  text-decoration: line-through;
+}
+.question-choice-match {
+  color: green;
+}
+.question-choice-nomatch {
+  color: darkred;
+}
+.question-answered {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #f9f9f6;
+  padding: 15px;
+  color: #555555;
+  margin-bottom: 15px;
 }
 .conversation-row {
   padding: 10px;

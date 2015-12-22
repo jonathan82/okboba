@@ -37,7 +37,8 @@ namespace okboba
                 "~/Scripts/photoupload.js",
                 "~/Scripts/editthumbnail.js",
                 "~/Scripts/photoswipe.js",
-                "~/Scripts/question.js",
+                "~/Scripts/questionvalidation.js",
+                "~/Scripts/questionsubmit.js",
                 "~/Scripts/validation.js",
                 "~/Scripts/chat.js"));
 

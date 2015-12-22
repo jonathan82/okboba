@@ -1,0 +1,65 @@
+﻿@using okboba.Resources
+@*
+    Format for the data model is as follows:
+    {
+        Id: question Id
+        Text: question Text
+        Choices: [Array of strings]            
+    }
+*@
+<script id="questionTemplate" type="text/x-jsrender">
+
+    <form class="question-form">
+
+        <p>{{:Text}}</p>
+
+        {{for Choices}}
+            <div class="radio-custom">
+                <input type="radio" name="ChoiceIndex" id="r{{:#index + 1 + '_' + ~root.Id}}" value="{{:#index + 1}}" />
+                <label for="r{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
+            </div>
+        {{/for}}
+
+        <p class="top-buffer-10">@i18n.Question_Prompt_Acceptable</p>
+
+        {{for Choices}}
+            <div class="checkbox-custom">
+                <input type="checkbox" name="ChoiceAccept" value="{{:#index + 1}}" id="c{{:#index + 1 + '_' + ~root.Id}}" />
+                <label for="c{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
+            </div>
+        {{/for}}
+
+        <div class="checkbox-custom">
+            <input type="checkbox" name="ChoiceIrrelevant" value="true" id="ChoiceIrrelevant{{:Id}}" />
+            <label for="ChoiceIrrelevant{{:Id}}">@i18n.Question_Irrelevant</label>
+        </div>
+
+        <div class="question-importance-box">
+            <p class="top-buffer-10">@i18n.Question_Prompt_Importance</p>
+
+            <div class="question-importance-bars">
+                <div class="inline-block">
+                    <div class="text-center">@i18n.Question_ALittleImportant</div>
+                    <div class="question-importance-bar" data-importance="1"></div>
+                </div>
+                <div class="inline-block">
+                    <div class="text-center">@i18n.Question_SomewhatImportant</div>
+                    <div class="question-importance-bar" data-importance="2"></div>
+                </div>
+                <div class="inline-block">
+                    <div class="text-center">@i18n.Question_VeryImportant</div>
+                    <div class="question-importance-bar" data-importance="3"></div>
+                </div>
+            </div>
+        </div>
+        
+        <input type="hidden" name="ChoiceImportance" value="0" />
+        <input type="hidden" name="QuestionId" value="{{:Id}}" />
+
+        <div class="text-right top-buffer-20">
+            <button class="btn btn-default">@i18n.Question_Skip</button>
+            <button class="btn btn-primary" disabled>@i18n.Question_Answer</button>
+        </div>
+    </form>
+
+</script>

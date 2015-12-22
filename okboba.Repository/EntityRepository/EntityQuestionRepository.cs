@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using okboba.Repository.Models;
+using okboba.Repository.MemoryRepository;
+using PagedList;
 
 namespace okboba.Repository.EntityRepository
 {
-    public class EntityQuestionRepository : IQuestionRepository
+    public class EntityQuestionRepository : QuestionRepositoryBase, IQuestionRepository
     {
         #region Singelton
         private static EntityQuestionRepository instance;
@@ -26,108 +28,15 @@ namespace okboba.Repository.EntityRepository
             }
         }
         #endregion
-
-        /// <summary>
-        /// Get the question given its ID
-        /// </summary>
-        public Question GetQuestion(int? id)
-        {
-            var db = new OkbDbContext();
-            var ques = db.Questions.Find(id);
-
-            return ques;
-        }
-
-        /// <summary>
-        /// Get the question given its rank.
-        /// </summary>
-        public Question GetQuestionByRank(int rank)
-        {
-            var db = new OkbDbContext();
-
-            var result = from q in db.Questions.AsQueryable()
-                         where q.Rank == rank
-                         select q;
-
-            return result.ToList().First();
-        }
-
-        private Answer ValidateAnswer(Answer ans)
-        {
-            if (ans.ChoiceBit == null || ans.ChoiceBit == 0)
-            {
-                //skipping question
-                ans.ChoiceBit = null;
-                ans.ChoiceWeight = 0;
-                ans.ChoiceAcceptable = 0;
-            }
-            else
-            {
-                //validate answer
-                if (ans.ChoiceWeight == 0)
-                {
-                    // user chose irrelevant, mark all answers as acceptable
-                    ans.ChoiceAcceptable = 0xFF;
-                }
-            }
-
-            ans.LastAnswered = DateTime.Now;
-
-            return ans;
-        }
-
-        /// <summary>
-        /// Answer a question by adding it to the Answers table and updates the user's
-        /// current question.
-        /// </summary>
-        public bool AnswerQuestion(Answer ans)
-        {           
-            //Are updating a question or adding a new one?
-            var db = new OkbDbContext();
-            var dbAns = db.Answers.Find(ans.ProfileId, ans.QuestionId);
-
-            if (dbAns==null)
-            {
-                //new answer
-                ans = ValidateAnswer(ans);
-                db.Answers.Add(ans);
-            }
-            else
-            {
-                //update answer
-                //make sure user not updating answer they answered in last 24 hrs
-                var diff = DateTime.Now - dbAns.LastAnswered;
-                if (diff.Hours < 24) return false;
-                ans = ValidateAnswer(ans);
-                dbAns.ChoiceBit = ans.ChoiceBit;
-                dbAns.ChoiceWeight = ans.ChoiceWeight;
-                dbAns.ChoiceAcceptable = ans.ChoiceAcceptable;
-                dbAns.LastAnswered = ans.LastAnswered;
-            }
-
-            db.SaveChanges();
-
-            return true;
-        }
-
-        public IQueryable<TranslateQuestion> GetTranslateQuestions()
-        {
-            var db = new OkbDbContext();
-
-            var result = from q in db.TranslateQuestions
-                         orderby q.Rank ascending
-                         select q;
-
-            return result;
-        }
+       
 
         /// <summary>
         /// Gets a list of all the answer choices for a given question
         /// </summary>
-        private IEnumerable<QuestionChoice> GetChoices(int id)
+        private IList<string> GetChoices(int id)
         {
             var db = new OkbDbContext();
-            var list = new List<QuestionChoice>();
+            var list = new List<string>();
             var result = from choice in db.QuestionChoices.AsNoTracking()
                          where choice.QuestionId == id
                          orderby choice.Index ascending
@@ -135,17 +44,18 @@ namespace okboba.Repository.EntityRepository
 
             foreach (var choice in result)
             {
-                list.Add(choice);
+                list.Add(choice.Text);
             }
 
             return list;
         }
 
         /// <summary>
-        /// Gets the next 2 un-answered questions for the user sorting by rank. Builds 
-        /// a dcitionary of answers for the user to speed up lookup. 
+        /// 
+        /// Gets the next 2 un-answered questions for the user.
+        /// 
         /// </summary>
-        public IEnumerable<QuestionWithAnswerModel> GetNext2Questions(int profileId)
+        public IList<QuestionModel> Next2Questions(int profileId)
         {
             var db = new OkbDbContext();
 
@@ -161,7 +71,7 @@ namespace okboba.Repository.EntityRepository
                 set.Add(answer.QuestionId);
             }
 
-            var list = new List<QuestionWithAnswerModel>();
+            var list = new List<QuestionModel>();
 
             int count = 0;
 
@@ -169,9 +79,10 @@ namespace okboba.Repository.EntityRepository
             foreach (var question in db.Questions.AsNoTracking())
             {
                 if (set.Contains(question.Id)) continue;
-                list.Add(new QuestionWithAnswerModel
+                list.Add(new QuestionModel
                 {
-                    Question = question,
+                    Id = question.Id,
+                    Text = question.Text,
                     Choices = GetChoices(question.Id)
                 });
 
@@ -187,7 +98,7 @@ namespace okboba.Repository.EntityRepository
         /// Get a list of all the answered questions for the given profile ID sorted by
         /// the date last answered from the database.
         /// </summary>
-        public IEnumerable<QuestionWithAnswerModel> GetAnsweredQuestions(int profileId)
+        public IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page, int perPage)
         {       
             var db = new OkbDbContext();
 
@@ -205,34 +116,43 @@ namespace okboba.Repository.EntityRepository
                              Answer = answer
                          };
 
-            var list = new List<QuestionWithAnswerModel>();
+            var list = new List<QuestionAnswerModel>();
 
-            int currQuesId = 0;
+            int currQuesId = -1;
 
-            foreach (var item in result)
+            foreach (var row in result)
             {
-                if (item.Question.Id != currQuesId)
+                if (row.Question.Id != currQuesId)
                 {
                     //add new question
-                    list.Add(new QuestionWithAnswerModel
+                    list.Add(new QuestionAnswerModel
                     {
-                        Question = item.Question,
-                        Answer = item.Answer,
-                        Choices = new List<QuestionChoice>()
+                        Question = new QuestionModel
+                        {
+                            Id = row.Question.Id,
+                            Text = row.Question.Text,
+                            Choices = new List<string>()
+                        },
+                        Answer = row.Answer
                     });
                 }
 
                 //add the choices
-                ((List<QuestionChoice>)list[list.Count - 1].Choices).Add(new QuestionChoice
-                {
-                    Index = item.Choice.Index,
-                    Text = item.Choice.Text,
-                });
+                list[list.Count - 1].Question.Choices.Add(row.Choice.Text);
 
-                currQuesId = item.Question.Id;
+                currQuesId = row.Question.Id;
             }
 
-            return list;
+            return list.ToPagedList(page, perPage);
+        }
+
+        public void Answer(Answer ans)
+        {
+            ans = ValidateAnswer(ans);
+            AnswerQuestionDb(ans);
+            
+            //call match api to update answer cache
+
         }
     }
 }

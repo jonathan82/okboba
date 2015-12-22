@@ -24,6 +24,18 @@ namespace okboba.Repository.WebClient
         
         public async Task<MatchModel> CalculateMatchAsync(int otherProfileId)
         {
+            //we call ConfigureAwait(false) because caller requires context, and to prevent deadlock
+            //
+            //From: https://msdn.microsoft.com/en-us/magazine/jj991977.aspx
+            //"The root cause of this deadlock is due to the way await handles contexts. By default, 
+            // when an incomplete Task is awaited, the current “context” is captured and used to resume the 
+            // method when the Task completes. This “context” is the current SynchronizationContext unless 
+            // it’s null, in which case it’s the current TaskScheduler. GUI and ASP.NET applications have a 
+            // SynchronizationContext that permits only one chunk of code to run at a time. When the await 
+            // completes, it attempts to execute the remainder of the async method within the captured context. 
+            // But that context already has a thread in it, which is (synchronously) waiting for the async 
+            // method to complete. They’re each waiting for the other, causing a deadlock."
+
             var result = await CallMatchApiAsync<MatchModel>("/api/matches/calculatematch?otherProfileId=" + otherProfileId, false).ConfigureAwait(false);
             return result;
         }

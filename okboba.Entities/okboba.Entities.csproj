@@ -128,6 +128,10 @@
     <Compile Include="Migrations\201512171823569_UserId.Designer.cs">
       <DependentUpon>201512171823569_UserId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512210708244_question.cs" />
+    <Compile Include="Migrations\201512210708244_question.Designer.cs">
+      <DependentUpon>201512210708244_question.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -175,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512171823569_UserId.resx">
       <DependentUpon>201512171823569_UserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512210708244_question.resx">
+      <DependentUpon>201512210708244_question.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

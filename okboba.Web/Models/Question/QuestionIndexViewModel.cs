@@ -1,4 +1,6 @@
-﻿using okboba.Repository.Models;
+﻿using okboba.Entities;
+using okboba.Repository.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,8 @@ namespace okboba.Web.Models
     {
         public int ProfileId { get; set; }
         public bool IsMe { get; set; }
-        public IEnumerable<QuestionWithAnswerModel> MyQuestions { get; set; }
-        public IEnumerable<QuestionWithAnswerModel> NextQuestions { get; set; }
+        public IPagedList<QuestionAnswerModel> Questions { get; set; }
+        public Dictionary<short, Answer> CompareQuestions { get; set; }
+        public IEnumerable<QuestionModel> NextQuestions { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using okboba.Repository;
+﻿using Microsoft.AspNet.Identity;
+using okboba.Entities;
+using okboba.Repository;
 using okboba.Repository.EntityRepository;
 using okboba.Web.Models;
 using System;
@@ -22,40 +24,83 @@ namespace okboba.Controllers
         }
 
         // GET: Question
-        public ActionResult Index(int? id)
+        public ActionResult Index(string userId)
         {
             var vm = new QuestionIndexViewModel();
 
-            if (id == null)
+            var me = GetProfileId();
+
+            if (string.IsNullOrEmpty(userId) || userId == User.Identity.GetUserId())
             {
-                vm.ProfileId = GetProfileId();
+                //Viewing own questions
+                vm.ProfileId = me;
                 vm.IsMe = true;
+                vm.Questions = _quesRepo.GetQuestions(me);
+                vm.NextQuestions = _quesRepo.Next2Questions(me);
             }
             else
             {
-                vm.ProfileId = (int)id;
-                vm.IsMe = false;
-            }
+                //Viewing other person's questions
+                var id = _profileRepo.GetProfileId(userId);
 
-            vm.MyQuestions = _quesRepo.GetAnsweredQuestions(vm.ProfileId);
-            vm.NextQuestions = _quesRepo.GetNext2Questions(vm.ProfileId);
+                vm.ProfileId = id;
+                vm.IsMe = false;
+                vm.Questions = _quesRepo.GetQuestions(id);
+
+                //Get my own questions for comparison
+                //Convert to dictionary for easier comparison
+                var compareQuestions = _quesRepo.GetQuestions(id);
+                vm.CompareQuestions = new Dictionary<short, Answer>();
+                foreach (var q in compareQuestions)
+                {
+                    vm.CompareQuestions.Add(q.Question.Id, q.Answer);
+                }
+            }
 
             return View(vm);
         }
 
         /// <summary>
-        /// Add an answer to a question for a user and then returns a JSON object for the 
-        /// next question.
+        /// Answers or updates their answer then returns a JSON object for the 
+        /// next 2 questions. If updateFlag is true then no need to get the next
+        /// 2 questions.
         /// </summary>
-        public JsonResult AnswerQuestion(int questionId, int answerIndex, bool[] answerAccept, int weight,int rank)
+        public JsonResult Answer(AnswerViewModel input, bool updateFlag = false, bool skipFlag = false)
         {
             var profileId = GetProfileId();
-            
-            var nextQues = _quesRepo.GetQuestionByRank(rank + 1);
 
-            //quesRepo.AnswerQuestion(profileId, questionId, answerIndex, answerAccept, weight, nextQues.Id);
+            var answer = new Answer
+            {
+                ProfileId = profileId,
+                QuestionId = (short)input.QuestionId
+            };
 
-            return Json(nextQues);
+            if (skipFlag)
+            {
+                //skipping question               
+                answer.ChoiceIndex = 0;
+                answer.ChoiceAccept = 0;
+                answer.ChoiceWeight = 0;
+            }
+            else
+            {
+                //Convert user input to Answer object for repository
+                byte acceptBits = 0;
+                foreach (var index in input.ChoiceAccept)
+                {
+                    acceptBits |= (byte)(1 << (index - 1));
+                }
+
+                answer.ChoiceIndex = (byte)input.ChoiceIndex;
+                answer.ChoiceAccept = acceptBits;
+                answer.ChoiceWeight = (byte)input.ChoiceImportance;                
+            }
+
+            _quesRepo.Answer(answer);
+
+            var nextQuestions = _quesRepo.Next2Questions(profileId);
+
+            return Json(nextQuestions);
         }
     }
 }

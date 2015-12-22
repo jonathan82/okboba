@@ -2,53 +2,70 @@
 @using okboba.Resources
 
 <!-- Question box -->
-<div class="question-form">
+<form class="question-form">
 
-    <p>@Model.NextQuestions.First().Question.Text</p>
+    <p>@Model.NextQuestions.First().Text</p>
 
-    @foreach (var choice in Model.NextQuestions.First().Choices)
-    {
-        <div class="radio-custom">
-            <input type="radio" name="ChoiceIndex" value="@choice.Index" id="r@(choice.Index)_@(choice.QuestionId)" />
-            <label for="r@(choice.Index)_@(choice.QuestionId)">@choice.Text</label>
-        </div>
+    @{
+        int index = 1;
+        var question = Model.NextQuestions.First();
+
+        foreach (var choiceText in question.Choices)
+        {
+            <div class="radio-custom">
+                <input type="radio" name="ChoiceIndex" value="@index" id="r@(index)_@question.Id" />
+                <label for="r@(index)_@question.Id">@choiceText</label>
+            </div>
+
+            index++;
+        }
     }
 
     <p class="top-buffer-10">@i18n.Question_Prompt_Acceptable</p>
 
-    @foreach (var choice in Model.NextQuestions.First().Choices)
-    {
-        <div class="checkbox-custom">
-            <input type="checkbox" name="ChoiceAccept" value="@choice.Index" id="c@(choice.Index)_@(choice.QuestionId)" />
-            <label for="c@(choice.Index)_@(choice.QuestionId)">@choice.Text</label>
-        </div>
+    @{
+        index = 1;
+
+        foreach (var choiceText in question.Choices)
+        {
+            <div class="checkbox-custom">
+                <input type="checkbox" name="ChoiceAccept" value="@index" id="c@(index)_@question.Id" />
+                <label for="c@(index)_@question.Id">@choiceText</label>
+            </div>
+
+            index++;
+        }
     }
 
     <div class="checkbox-custom">
-        <input type="checkbox" name="ChoiceIrrelevant" value="true" id="irrelevant" />
-        <label for="irrelevant">@i18n.Question_Irrelevant</label>
+        <input type="checkbox" name="ChoiceIrrelevant" value="true" id="ChoiceIrrelevant@(question.Id)" />
+        <label for="ChoiceIrrelevant@(question.Id)">@i18n.Question_Irrelevant</label>
     </div>
-
-    <p class="top-buffer-10">@i18n.Question_Prompt_Importance</p>
 
     <div class="question-importance-box">
-        <div class="inline-block">
-            <div class="text-center">@i18n.Question_ALittleImportant</div>
-            <div class="question-importance-bar" data-importance="1"></div>
-        </div>
-        <div class="inline-block">
-            <div class="text-center">@i18n.Question_SomewhatImportant</div>
-            <div class="question-importance-bar" data-importance="2"></div>
-        </div>
-        <div class="inline-block">
-            <div class="text-center">@i18n.Question_VeryImportant</div>
-            <div class="question-importance-bar" data-importance="3"></div>
+        <p class="top-buffer-10">@i18n.Question_Prompt_Importance</p>
+
+        <div class="question-importance-bars">
+            <div class="inline-block">
+                <div class="text-center">@i18n.Question_ALittleImportant</div>
+                <div class="question-importance-bar" data-importance="1"></div>
+            </div>
+            <div class="inline-block">
+                <div class="text-center">@i18n.Question_SomewhatImportant</div>
+                <div class="question-importance-bar" data-importance="2"></div>
+            </div>
+            <div class="inline-block">
+                <div class="text-center">@i18n.Question_VeryImportant</div>
+                <div class="question-importance-bar" data-importance="3"></div>
+            </div>
         </div>
     </div>
-    <input type="hidden" name="importance" value="" />
+   
+    <input type="hidden" name="ChoiceImportance" id="ChoiceImportance@(question.Id)" value="0" />
+    <input type="hidden" name="QuestionId" value="@question.Id" />
 
     <div class="text-right top-buffer-20">
-        <button class="btn btn-default">Skip Question</button>
-        <button class="btn btn-primary">Answer</button>
+        <button class="btn btn-default">@i18n.Question_Skip</button>
+        <button class="btn btn-primary" disabled>@i18n.Question_Answer</button>
     </div>
-</div>
+</form>

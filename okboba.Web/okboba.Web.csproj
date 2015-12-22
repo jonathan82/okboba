@@ -273,6 +273,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OkbHtmlHelpers.cs" />
+    <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
     <Compile Include="Models\Photo\ListPhotosViewModel.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="Models\Profile\ProfileDetailViewModel.cs" />
     <Compile Include="Models\Profile\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\Profile\ProfileViewModel.cs" />
+    <Compile Include="Models\Question\AnswerViewModel.cs" />
     <Compile Include="Models\Question\QuestionIndexViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
@@ -448,7 +450,8 @@
     <Content Include="lib\react\react.min.js" />
     <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
-    <Content Include="Scripts\question.js" />
+    <Content Include="Scripts\questionsubmit.js" />
+    <Content Include="Scripts\questionvalidation.js" />
     <Content Include="Scripts\utilities.js" />
     <Content Include="Scripts\validation.js" />
     <Content Include="Scripts\_references.js" />
@@ -491,7 +494,7 @@
     <Content Include="Views\Photo\_EditThumbnail.cshtml" />
     <Content Include="Views\Photo\_Photoswipe.cshtml" />
     <Content Include="Views\Question\_QuestionBox.cshtml" />
-    <Content Include="Views\Question\_QuestionBoxTemplate.cshtml" />
+    <Content Include="Views\Question\_QuestionTemplate.cshtml" />
     <Content Include="Views\Account\_RegisterStep2.cshtml" />
     <Content Include="Views\Account\_Marketing.cshtml" />
     <Content Include="Views\Account\_RegisterStep1.cshtml" />
@@ -504,6 +507,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Static\HowWorks.cshtml" />
     <Content Include="Views\Static\_ViewStart.cshtml" />
+    <Content Include="Views\Question\_AnswerTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

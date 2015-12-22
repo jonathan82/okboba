@@ -4,6 +4,7 @@ using okboba.Entities;
 using okboba.MatchCalculator;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
+using okboba.Repository.MemoryRepository;
 using okboba.Repository.Models;
 using okboba.Repository.RedisRepository;
 using System;
@@ -40,7 +41,7 @@ namespace okboba.MatchApi.Controllers
 
         public MatchesController()
         {
-            _matchRepo = EntityMatchRepository.Instance;
+            _matchRepo = MemoryMatchRepository.Instance;
             _redisRepo = RedisMatchRepository.Instance;
             _matchCalc = MatchCalc.Instance;
         }
