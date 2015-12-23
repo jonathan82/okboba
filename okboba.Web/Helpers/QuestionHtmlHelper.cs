@@ -34,6 +34,10 @@ namespace okboba.Web.Helpers
             {
                 tag.AddCssClass("question-choice-fade");
             }
+            else
+            {
+                tag.AddCssClass("question-choice-bold");
+            }
         }
 
         private static void MatchChoice(TagBuilder tag, int index, byte choiceAccept)

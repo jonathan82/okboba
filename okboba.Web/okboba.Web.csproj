@@ -124,6 +124,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -508,6 +509,7 @@
     <Content Include="Views\Static\HowWorks.cshtml" />
     <Content Include="Views\Static\_ViewStart.cshtml" />
     <Content Include="Views\Question\_AnswerTemplate.cshtml" />
+    <Content Include="Views\Question\_Pagination.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

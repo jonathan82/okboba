@@ -31,8 +31,7 @@ using System.Web.Mvc;
 namespace okboba.MatchApi.Controllers
 {
     [System.Web.Mvc.Authorize]
-    [EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
-    public class MatchesController : ApiController
+    public class MatchesController : OkbBaseController
     {
         private IMatchRepository _matchRepo;
         private RedisMatchRepository _redisRepo;
@@ -44,22 +43,6 @@ namespace okboba.MatchApi.Controllers
             _matchRepo = MemoryMatchRepository.Instance;
             _redisRepo = RedisMatchRepository.Instance;
             _matchCalc = MatchCalc.Instance;
-        }
-
-        /// <summary>
-        /// Updates the users cached answer used for matching.  Only allow users to update their own answers.
-        /// </summary>
-        public void UpdateCacheAnswer(Answer answer)
-        {
-            //We should be authenticated at this point.  Only allow users to update their own answers
-            var profileId = GetProfileId();
-
-            answer.ProfileId = profileId;
-
-            _matchCalc.AddOrUpdate(answer);
-
-            //return Json(new { result = "success" });
-            //return Ok();
         }
 
         /// <summary>
@@ -131,33 +114,7 @@ namespace okboba.MatchApi.Controllers
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             return response;
-        }
-
-        //private string CalculateMatchesAndSave()
-        //{
-        //    var json = "";
-        //    //calculate matches and save in cache
-        //    var matches = _matchRepo.MatchSearch(profileId, criteria);
-        //    var range = PageRange(page, matches.Count);
-
-        //    _redisRepo.SaveMatchResults(key, matches);
-
-        //    if (range == null)
-        //    {
-        //        json = "[]";
-        //    }
-        //    else
-        //    {
-        //        json = "[";
-        //        for (int i = range.Item1; i < range.Item2; i++)
-        //        {
-        //            //serialize matches[i] to return to caller                    
-        //            json += JsonConvert.SerializeObject(matches[i]) + ",";
-        //        }
-        //        json = json.TrimEnd(',');
-        //        json += "]";
-        //    }
-        //}
+        }  
 
         private string GetCachedResults(int page, string key)
         {
@@ -203,24 +160,6 @@ namespace okboba.MatchApi.Controllers
 
             return new Tuple<int, int>(start, end);
         }
-
-        protected int GetProfileId()
-        {
-            int profileId;
-
-            var db = new OkbDbContext();
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Find(userId);
-
-            if (user == null)
-            {
-                // No profile exists for user!??!?
-                throw new Exception("No profile exists for user");
-            }
-
-            profileId = user.Profile.Id;
-
-            return profileId;
-        }
+        
     }
 }

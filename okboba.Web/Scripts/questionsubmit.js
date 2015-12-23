@@ -9,56 +9,120 @@
 (function ($) {
 
     //// Private vars
-    var url = "/question/answer",
+    var answerUrl = "/question/answer",
+        skipUrl = "/question/skip",
         $questionForm,
         questionTemplate,
-        answerTemplate;
+        answerTemplate,
+        currentQuestion,
+        nextQuestion;
 
     //// Private functions
+    function showQuestion(ques) {
+        var html;
+
+        html = questionTemplate.render(ques);
+
+        //Fade out the old question and fade in the new one. We use fadeTo to fade to 0
+        //without removing it from the DOM to prevent "screen jumping".  Likewise we fade
+        //in the new div by inserting it as completetly transparent first.
+        $questionForm.fadeTo('slow', 0, function () {
+            var newDiv = $(html).css('opacity', 0);
+            $(this).replaceWith(newDiv);
+            newDiv.fadeTo('slow', 1);
+
+            $questionForm = newDiv;
+
+            //Setup the validation and submit handlers
+            //pass false to questionSubmit since we don't want a full initialization
+            $questionForm.questionValidation();
+            $questionForm.questionSubmit(false);
+        });
+    }
+
+    function skip (e) {
+        var data,
+            html;
+
+        e.preventDefault();
+
+        data = $questionForm.serialize();
+
+        $.post(skipUrl, data, function success(nextQuestions) {
+
+            //update pointers
+            currentQuestion = nextQuestion;
+            nextQuestion = nextQuestions[1];
+
+            //show the next question
+            showQuestion(currentQuestion);
+
+        }).fail(function (xhr, textStatus, errorThrown) {
+
+            //log error on console
+            console.log('answer question failed: ' + textStatus);
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    }
+
     function submit(e) {
         var data,
             html;
 
         e.preventDefault();
 
-        data = $(this).serialize();
+        data = $questionForm.serialize();
 
         //Submit question
-        $.post(url, data, function (nextQuestions) {
-            //success
-            console.log(nextQuestions);
-        }).fail(function () {
-            //failure
-            alert('failed');
+        $.post(answerUrl, data, function (nextQuestions) {
+
+            //success - update next and current questions
+            currentQuestion = nextQuestion;
+            nextQuestion = nextQuestions[1];
+
+        }).fail(function (xhr, textStatus, errorThrown) {
+
+            //failure - show the previous question (in this case currentQuestion since it hasn't been updated)
+            showQuestion(currentQuestion);
+
+            //log error on console
+            console.log('answer question failed: ' + textStatus);
+            console.log(xhr);
+            console.log(textStatus);
+            console.log(errorThrown);
         });
 
-        //Optimistically show next question - fade in
-        html = questionTemplate.render(NextQuestions[1]);
-
-        $questionForm.fadeTo('slow', 0, function () {
-            var div = $(html).css('opacity', 0);
-            $(this).replaceWith(div);
-            div.fadeTo('slow',1);
-            $(this).replaceWith(html);
-            $questionForm = div;
-            $questionForm.questionValidation();
-        });
-
-        //Optimistically add question to list of answered questions
-        var html2 = answerTemplate.render();
-        $('#question-separator').after(html2);
-
-        console.log('form: ' + data);
+        //Optimistically show next question
+        showQuestion(nextQuestion);
     }
 
     //// Public functions (exposed thru jQuery)
-    $.fn.questionSubmit = function () {
 
-        $questionForm = this;
-        questionTemplate = $.templates('#questionTemplate');
-        answerTemplate = $.templates('#answerTemplate');
+    /*
+     * Initializes the plugin for the form by setting up the event handlers. If initFlag
+     * is true we do some addtional initialization like loading the templates and setting the initial
+     * values for current and next questions. Subsequent requests to update the current/next question
+     * pointers will be handled by the submit/skip functions. initFlag should be set to true the first
+     * time page is loaded, false other times.
+     */
+    $.fn.questionSubmit = function (initFlag) {
 
-        $questionForm.submit(submit);
+        $questionForm = this;        
+        
+        //setup the submit and skip event handlers
+        $questionForm.find('button.btn-primary').click(submit);
+        $questionForm.find('button.btn-default').click(skip);
+
+        if (initFlag) {
+            questionTemplate = $.templates('#questionTemplate');
+            answerTemplate = $.templates('#answerTemplate');
+
+            //NextQuestions is a global variable returned by the first load of the Question page.
+            currentQuestion = NextQuestions[0];
+            nextQuestion = NextQuestions[1];
+        }
     }
 
 })(jQuery);

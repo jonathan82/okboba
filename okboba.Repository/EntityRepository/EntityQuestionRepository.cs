@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using okboba.Repository.Models;
 using okboba.Repository.MemoryRepository;
 using PagedList;
+using System.Data.Entity;
+using System.Transactions;
 
 namespace okboba.Repository.EntityRepository
 {
@@ -51,9 +53,12 @@ namespace okboba.Repository.EntityRepository
         }
 
         /// <summary>
-        /// 
-        /// Gets the next 2 un-answered questions for the user.
-        /// 
+        /// Gets the next 2 un-answered questions for the user. 
+        ///  - Will return a list with either 0, 1 or 2 elements. 
+        ///  - The questions are ordered by Rank so questions returned will be the next "best" questions. 
+        ///  - Skipped questions are stored in the DB (but not the cache) so they won't be included in the returned questions. 
+        ///  - Performance-wise loops thru the answers and questions in the DB and builds a HashSet and list respectively,
+        ///    so a fairly expensive operation. Have room for optimization.
         /// </summary>
         public IList<QuestionModel> Next2Questions(int profileId)
         {
@@ -75,8 +80,12 @@ namespace okboba.Repository.EntityRepository
 
             int count = 0;
 
-            //Loop thru all the questions
-            foreach (var question in db.Questions.AsNoTracking())
+            //Loop thru all the questions ordered by rank
+            var questions = from q in db.Questions.AsNoTracking()
+                            orderby q.Rank ascending
+                            select q;
+
+            foreach (var question in questions)
             {
                 if (set.Contains(question.Id)) continue;
                 list.Add(new QuestionModel
@@ -96,7 +105,7 @@ namespace okboba.Repository.EntityRepository
 
         /// <summary>
         /// Get a list of all the answered questions for the given profile ID sorted by
-        /// the date last answered from the database.
+        /// the date last answered from the database. Doesn't return skipped questions
         /// </summary>
         public IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page, int perPage)
         {       
@@ -107,7 +116,7 @@ namespace okboba.Repository.EntityRepository
                          on answer.QuestionId equals ques.Id
                          join qc in db.QuestionChoices.AsNoTracking()
                          on answer.QuestionId equals qc.QuestionId
-                         where answer.ProfileId == profileId
+                         where answer.ProfileId == profileId && answer.ChoiceIndex != null
                          orderby answer.LastAnswered descending, ques.Id ascending, qc.Index ascending
                          select new 
                          {
@@ -146,13 +155,13 @@ namespace okboba.Repository.EntityRepository
             return list.ToPagedList(page, perPage);
         }
 
-        public void Answer(Answer ans)
+        /// <summary>
+        /// Answers a question by adding it to the db. Will update if answer exists, otherwise adds a new
+        /// answer. The controller will take care of updating answer in cache. Validation peformed by the caller.
+        /// </summary>
+        public async Task AnswerAsync(Answer ans)
         {
-            ans = ValidateAnswer(ans);
-            AnswerQuestionDb(ans);
-            
-            //call match api to update answer cache
-
+            await AnswerDbAsync(ans);
         }
     }
 }

@@ -21,9 +21,9 @@ namespace okboba
 
             routes.MapRoute(
                 name: "IndexWithId",
-                url: "{controller}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional  },
-                constraints: new { id = @"\d+" }
+                url: "{controller}/{userId}",
+                defaults: new { action = "Index", userId = UrlParameter.Optional  },
+                constraints: new { userId = @"[a-zA-Z0-9]+" }
             );
 
             routes.MapRoute(

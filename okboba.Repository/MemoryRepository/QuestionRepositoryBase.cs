@@ -7,35 +7,40 @@ using System.Threading.Tasks;
 
 namespace okboba.Repository.MemoryRepository
 {
-    public class QuestionRepositoryBase
+    public abstract class QuestionRepositoryBase
     {
         /// <summary>
-        /// Validates an answer by making sure it follows the following conventions:
+        /// Makes sure an answer is valid by meeting the following requirements.  Returns true 
+        /// if answer is valid, false if not. Has side effect of modifiying passed in Answer.
         /// 
-        ///     - Skipped: ChoiceBit = null and the rest 0
-        ///     - Irrelevant: ChoiceWeight = 0 and all bits set to 1 on ChoiceAcceptable
+        ///     - Answer isn't skipped (ChoiceIndex is not 0 or null)
+        ///     - Set Irrelevant values: If ChoiceWeight = 0 then all bits set to 1 on ChoiceAccept
+        ///     - ChoiceWeight must be 0, 1, 2, or 3
+        ///     - ChoiceAccept can't be 0
         /// 
         /// </summary>
-        protected Answer ValidateAnswer(Answer ans)
+        public bool ValidateAnswer(Answer ans)
         {
-            if (ans.ChoiceIndex == null || ans.ChoiceIndex == 0)
+            if (ans.ChoiceIndex == null || ans.ChoiceIndex == 0) return false;
+
+            //Irrelevant
+            if (ans.ChoiceWeight == 0)
             {
-                //skipping question
-                ans.ChoiceIndex = null;
-                ans.ChoiceWeight = 0;
-                ans.ChoiceAccept = 0;
-            }
-            else
-            {
-                //validate answer
-                if (ans.ChoiceWeight == 0)
-                {
-                    // user chose irrelevant, mark all answers as acceptable
-                    ans.ChoiceAccept = 0xFF;
-                }
+                // user chose irrelevant, mark all answers as acceptable
+                ans.ChoiceAccept = 0xFF;
             }
 
-            return ans;
+            if (ans.ChoiceWeight != 0 &&
+                ans.ChoiceWeight != 1 &&
+                ans.ChoiceWeight != 2 &&
+                ans.ChoiceWeight != 3)
+            {
+                return false;
+            }
+
+            if (ans.ChoiceAccept == 0) return false;
+
+            return true;
         }
 
         /// <summary>
@@ -44,11 +49,11 @@ namespace okboba.Repository.MemoryRepository
         /// validated the answer so we don't have to here.
         /// 
         /// </summary>
-        protected void AnswerQuestionDb(Answer ans)
+        protected async Task AnswerDbAsync(Answer ans)
         {
             var db = new OkbDbContext();
 
-            var dbAns = db.Answers.Find(ans.ProfileId, ans.QuestionId);
+            var dbAns = await db.Answers.FindAsync(ans.ProfileId, ans.QuestionId);
 
             //Are we updating a question or adding a new one?
             if (dbAns == null)
@@ -66,7 +71,7 @@ namespace okboba.Repository.MemoryRepository
                 dbAns.LastAnswered = DateTime.Now;
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
     }
 }

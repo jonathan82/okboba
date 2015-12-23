@@ -10,6 +10,7 @@ namespace okboba.Web.Models
 {
     public class QuestionIndexViewModel
     {
+        public string UserId { get; set; }
         public int ProfileId { get; set; }
         public bool IsMe { get; set; }
         public IPagedList<QuestionAnswerModel> Questions { get; set; }

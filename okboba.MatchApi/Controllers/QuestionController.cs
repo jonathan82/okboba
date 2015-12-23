@@ -1,16 +1,17 @@
-﻿using System;
+﻿using okboba.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace okboba.MatchApi.Controllers
 {
-    [Authorize]
-    [EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
-    public class QuestionController : ApiController
+    [Authorize]    
+    public class QuestionController : OkbBaseController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()

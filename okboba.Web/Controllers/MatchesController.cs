@@ -26,24 +26,25 @@ namespace okboba.Controllers
             _profileRepo = EntityProfileRepository.Instance;
         }
 
-        private void InitClient()
-        {
-            //get the cookie and base
-            var cookie = new Cookie();
+        //private void InitClient()
+        //{
+        //    //get the cookie and base
+        //    var cookie = new Cookie();
 
-            cookie.Name = Startup.IDENTITY_COOKIE_NAME;
-            //cookie.Domain = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Domain;
-            cookie.Value = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Value;
+        //    cookie.Name = Startup.IDENTITY_COOKIE_NAME;
+        //    //cookie.Domain = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Domain;
+        //    cookie.Value = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Value;
 
-            var url = ConfigurationManager.AppSettings["MatchApiUrl"];
-            _webClient = new MatchApiClient(url, cookie);
-        }
+        //    var url = ConfigurationManager.AppSettings["MatchApiUrl"];
+        //    _webClient = new MatchApiClient(url, cookie);
+        //}
 
 
         // GET: Matches
         public async Task<ActionResult> Index(MatchCriteriaModel criteria)
         {
-            InitClient();
+            //InitClient();
+            _webClient = GetMatchApiClient();
 
             var profileId = GetProfileId();
             var profile = _profileRepo.GetProfile(profileId);

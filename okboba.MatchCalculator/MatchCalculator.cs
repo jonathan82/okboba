@@ -71,13 +71,14 @@ namespace okboba.MatchCalculator
         /// </summary>        
         public void AddOrUpdate(Answer updateAnswer)
         {
-            // Check for new user
-            if(!_answerCache.ContainsKey(updateAnswer.ProfileId))
-            {
-                _answerCache.Add(updateAnswer.ProfileId, new List<CacheAnswer>());
-            }
+            List<CacheAnswer> listAnswers;
 
-            var listAnswers = _answerCache[updateAnswer.ProfileId];
+            // Check for new user
+            if(!_answerCache.TryGetValue(updateAnswer.ProfileId, out listAnswers))
+            {
+                listAnswers = new List<CacheAnswer>();
+                _answerCache.Add(updateAnswer.ProfileId, listAnswers);
+            }
 
             //Check if updating or adding new answer
             for(int i=0; i < listAnswers.Count; i++)
@@ -86,7 +87,7 @@ namespace okboba.MatchCalculator
 
                 if(a.QuestionId==updateAnswer.QuestionId)
                 {
-                    a.ChoiceBit = (byte)updateAnswer.ChoiceIndex;
+                    a.ChoiceBit = updateAnswer.ChoiceBit();
                     a.ChoiceAccept = updateAnswer.ChoiceAccept;
                     a.ChoiceWeight = updateAnswer.ChoiceWeight;
                     a.LastAnswered = DateTime.Now;
@@ -100,7 +101,7 @@ namespace okboba.MatchCalculator
             listAnswers.Add(new CacheAnswer
             {
                 QuestionId = updateAnswer.QuestionId,
-                ChoiceBit = (byte)updateAnswer.ChoiceIndex,
+                ChoiceBit = updateAnswer.ChoiceBit(),
                 ChoiceAccept = updateAnswer.ChoiceAccept,
                 ChoiceWeight = updateAnswer.ChoiceWeight,
                 LastAnswered = DateTime.Now

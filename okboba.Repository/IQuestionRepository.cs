@@ -11,8 +11,9 @@ namespace okboba.Repository
 {
     public interface IQuestionRepository
     {
-        void Answer(Answer ans);
-        IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page = 1, int perPage = 20);
+        Task AnswerAsync(Answer ans);
+        IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page = 1, int perPage = 10);
         IList<QuestionModel> Next2Questions(int profileId);
+        bool ValidateAnswer(Answer ans);
     }
 }

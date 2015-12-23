@@ -374,8 +374,13 @@ body {
   background-color: #F5F5F0;
   padding: 15px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  font-size: 18px;
+  font-size: 16px;
   color: #555555;
+}
+.question-stats {
+  background-color: #F5F5F0;
+  text-align: center;
+  padding: 20px 10px;
 }
 /*
     Custom input styles
@@ -418,6 +423,9 @@ body {
   background: #f072b5;
   box-shadow: inset 0px 0px 0px 4px #fff;
 }
+/*******************************
+    Styles for the Question importance bars
+*********************************/
 .question-importance-bars {
   margin-top: 5px;
 }
@@ -433,8 +441,14 @@ body {
 .question-importance-bar.active {
   background-color: #D81B60;
 }
+/*******************************
+    Styles for the comparing Answers
+*********************************/
 .question-choice-fade {
   opacity: 0.5;
+}
+.question-choice-bold {
+  font-weight: bold;
 }
 .question-choice-unacceptable {
   text-decoration: line-through;
@@ -448,7 +462,7 @@ body {
 .question-answered {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   background-color: #f9f9f6;
-  padding: 15px;
+  padding: 10px 15px;
   color: #555555;
   margin-bottom: 15px;
 }

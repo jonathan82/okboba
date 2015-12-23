@@ -19,11 +19,9 @@ namespace okboba.Controllers
         }
 
         /// <summary>
-        /// 
         /// Gets the profile Id of the logged in user. First looks in the Session and if not
         /// there looks up in DB and caches in the session to speed up lookups next time.
         /// The User Id is stored in the Identity object of the current thread.
-        /// 
         /// </summary>
         protected int GetProfileId()
         {            
@@ -53,6 +51,11 @@ namespace okboba.Controllers
             return profileId;
         }
 
+        /// <summary>
+        /// Gets an instance of the MatchApiClient by creating it with an authentication cookie.
+        /// This is created per request and should be called once the controller is constructed
+        /// since we need the HttpContext object to ge the cookie info.
+        /// </summary>
         protected MatchApiClient GetMatchApiClient()
         {
             //get the cookie and base
