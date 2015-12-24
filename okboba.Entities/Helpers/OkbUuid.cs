@@ -29,6 +29,12 @@ namespace okboba.Entities.Helpers
 
             } while (longId != 0);
 
+            //pad to 11 characters
+            while (str.Length < 11)
+            {
+                str = "0" + str;
+            }
+
             return str;
         }
     }

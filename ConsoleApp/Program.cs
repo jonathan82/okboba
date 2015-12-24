@@ -30,16 +30,35 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
-            //////////////////// Mail ///////////////////////////
-            //var msg = new MailMessage("jonlin82@gmail.com", "jonlin82@gmail.com", "hello boba","hello boba");
-            //var smtp = new SmtpClient();
-            //smtp.Host = "smtp.1and1.com";
-            //smtp.EnableSsl = true;
-            //var cred = new NetworkCredential("jonlin82@gmail.com", "8da3m0nw1");
-            //smtp.UseDefaultCredentials = true;
-            //smtp.Credentials = cred;
-            //smtp.Port = 587;
-            //smtp.Send(msg);
+            ////////////////// Split Okcupid questions /////////////////
+            //var file = new StreamReader("../../../Data/okc_questions_curated.txt");
+            //int count = 1;
+            //string buffer = "";
+            //int page = 1;
+            //while (!file.EndOfStream)
+            //{
+            //    var line = file.ReadLine();
+
+            //    buffer += line + Environment.NewLine;
+            //    if (line == "")
+            //    {
+            //        count++;
+
+            //        if ((count % 100) == 0)
+            //        {
+            //            //write to file
+            //            var writer = new StreamWriter("../../../Data/okc_" + page + ".txt");
+            //            writer.Write(buffer);
+            //            writer.Flush();
+            //            writer.Close();
+            //            Console.WriteLine(count);
+            //            buffer = "";
+            //            page++;
+            //        }
+            //    }                
+
+            //}
+            //Console.WriteLine("count: " + count);
 
             //////////////////// Test Messages /////////////////////////
             //var repo = EntityMessageRepository.Instance;
@@ -77,9 +96,9 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SeedDb seeder = new SeedDb(connString);
-            Stopwatch timer = new Stopwatch();
+            //var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            //SeedDb seeder = new SeedDb(connString);
+            //Stopwatch timer = new Stopwatch();
 
             //Profile Detail Options   
             //seeder.SeedDetailOptions("../../../data/profile_details.txt");         
@@ -93,12 +112,12 @@ namespace ConsoleApp
             //seeder.SeedLocations("../../../data/china_cities.txt");
 
             // Users
-            const int numOfUsers = 1000;
-            Console.WriteLine("Seeding {0} users...", numOfUsers);
-            timer.Start();
-            seeder.SeedUsers(numOfUsers, EntityLocationRepository.Instance.GetProvinces());
-            timer.Stop();
-            Console.WriteLine("{0} s",timer.ElapsedMilliseconds / 1000);
+            //const int numOfUsers = 1000;
+            //Console.WriteLine("Seeding {0} users...", numOfUsers);
+            //timer.Start();
+            //seeder.SeedUsers(numOfUsers, EntityLocationRepository.Instance.GetProvinces());
+            //timer.Stop();
+            //Console.WriteLine("{0} s",timer.ElapsedMilliseconds / 1000);
 
             // User answers
             //Console.WriteLine("Seeding answers...");

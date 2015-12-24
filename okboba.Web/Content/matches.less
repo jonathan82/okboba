@@ -8,7 +8,30 @@
     display: inline-block; 
     margin: 10px 10px;
     text-align: left;
+    position: relative;
 }
+
+.match-avatar {
+    position: absolute;
+    margin-top: -20px;
+    clip: rect(20px, 200px, 200px, 0);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.match-avatar:hover {
+    margin-top: 0;
+    clip: rect(0, 200px, 180px, 0);
+}
+
+.match-info-wrapper {
+    padding-top: 180px;
+    width: 200px;
+    text-align: center;
+}
+
 .matches-loading {   
     width: 125px;
     margin: 10px auto;

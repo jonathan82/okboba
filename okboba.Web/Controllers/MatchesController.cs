@@ -26,24 +26,9 @@ namespace okboba.Controllers
             _profileRepo = EntityProfileRepository.Instance;
         }
 
-        //private void InitClient()
-        //{
-        //    //get the cookie and base
-        //    var cookie = new Cookie();
-
-        //    cookie.Name = Startup.IDENTITY_COOKIE_NAME;
-        //    //cookie.Domain = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Domain;
-        //    cookie.Value = HttpContext.Request.Cookies[Startup.IDENTITY_COOKIE_NAME].Value;
-
-        //    var url = ConfigurationManager.AppSettings["MatchApiUrl"];
-        //    _webClient = new MatchApiClient(url, cookie);
-        //}
-
-
         // GET: Matches
         public async Task<ActionResult> Index(MatchCriteriaModel criteria)
         {
-            //InitClient();
             _webClient = GetMatchApiClient();
 
             var profileId = GetProfileId();
@@ -52,7 +37,6 @@ namespace okboba.Controllers
             //For now, if criteria isn't specified lets choose sensible defaults based on user                        
             if(criteria.Gender==OkbConstants.UNKNOWN_GENDER)
             {
-                //criteria.Gender = profile.Gender == "女" ? "男" : "女";
                 criteria.Gender = profile.Gender == OkbConstants.FEMALE ? OkbConstants.MALE : OkbConstants.FEMALE;
             }
 
@@ -62,8 +46,8 @@ namespace okboba.Controllers
             var vm = new MatchesViewModel
             {
                 Matches = matches,
-                StorageUrl = ConfigurationManager.AppSettings["StorageUrl"],
                 MatchApiUrl = ConfigurationManager.AppSettings["MatchApiUrl"],
+                StorageUrl = ConfigurationManager.AppSettings["StorageUrl"],
                 MatchCriteria = criteria
             };
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,7 +47,9 @@ namespace okboba.Entities
         public DateTime LastAnswered { get; set; }
 
         //References
+        [JsonIgnore]
         public virtual Profile Profile { get; set; }
+        [JsonIgnore]
         public virtual Question Question { get; set; }   
         
         //Helper functions

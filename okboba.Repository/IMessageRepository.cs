@@ -49,7 +49,7 @@ using System.Threading.Tasks;
 
 namespace okboba.Repository
 {
-    interface IMessageRepository
+    public interface IMessageRepository
     {
         IEnumerable<Message> GetMessages(int convId, int page, int numPerPage);
         IEnumerable<ConversationModel> GetConversations(int id, int page, int numPerPage);

@@ -59,6 +59,8 @@
 
         }).fail(function (xhr, textStatus, errorThrown) {
 
+            alert('error submitting question');
+
             //log error on console
             console.log('answer question failed: ' + textStatus);
             console.log(xhr);
@@ -69,7 +71,8 @@
 
     function submit(e) {
         var data,
-            html;
+            html,
+            failed = false;
 
         e.preventDefault();
 
@@ -84,6 +87,9 @@
 
         }).fail(function (xhr, textStatus, errorThrown) {
 
+            //we set the failed flag in case we reach here before optimisticlly showing the next question
+            failed = true;
+
             //failure - show the previous question (in this case currentQuestion since it hasn't been updated)
             showQuestion(currentQuestion);
 
@@ -95,7 +101,9 @@
         });
 
         //Optimistically show next question
-        showQuestion(nextQuestion);
+        if (!failed) {
+            showQuestion(nextQuestion);
+        }        
     }
 
     //// Public functions (exposed thru jQuery)

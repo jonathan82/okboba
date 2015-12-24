@@ -1,23 +1,20 @@
 ﻿@model okboba.Web.Models.MatchesViewModel
+@using okboba.Web.Helpers
+@using Newtonsoft.Json
+@using okboba.Resources
 
 <div id="matches-container" class="matches-container">
     <div id="p1">
         @{int count = 0; }
         @foreach (var m in Model.Matches)
         {
-            var thumbUrl = "";
             <div class="match-result">
-                <!-- thumbnail and profile summary and match %-->
-                @if (m.Photo == "")
-                {
-                    thumbUrl = m.Gender == 'M' ? "/content/images/no-avatar-male.png" : "/content/images/no-avatar-female.png";
-                }
-                else
-                {
-                    thumbUrl = Model.StorageUrl + "/" + m.Photo + "_t";
-                }
-                <img src="@thumbUrl" alt="Profile Photo" width="200" height="200" />
-                <p>@m.MatchPercent% Match - @m.Age@m.Gender - @m.Name</p>
+                <a href="~/profile/@m.UserId">@Html.Avatar(m.Photo, m.Gender, m.UserId, "match-avatar")</a>
+                <div class="match-info-wrapper">
+                    <p>@m.Nickname</p>
+                    <p>@m.Age &middot; @m.Location</p>
+                    <p>@m.MatchPercent% @i18n.Common_Match | @m.EnemyPercent% @i18n.Common_Enemy</p>
+                </div>
             </div>
             count++;
         }
@@ -25,13 +22,13 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/okboba")
     
     <script>
-        $('#matches-container').matchscroller(
-            [1], 
-            '@Model.MatchApiUrl', 
-            @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.MatchCriteria)),
-            '@Model.StorageUrl');
+        $('#matches-container').matchscroller( {
+            storageUrl: '@Model.StorageUrl',
+            matchUrl: '@Model.MatchApiUrl',
+            searchCriteria: @Html.Raw(JsonConvert.SerializeObject(Model.MatchCriteria))
+        });
+            
     </script>
 }

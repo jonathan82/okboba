@@ -6,6 +6,14 @@ using System.Web;
 
 namespace okboba.Web.Models
 {
+    /// <summary>
+    /// Information that we want to show on a match "card".
+    ///  - Avatar photo (crop photo, on hover we shift photo down to show more)
+    ///  - Match %, Enemy %
+    ///  - Age
+    ///  - Location
+    ///  - Nickname
+    /// </summary>
     public class MatchesViewModel
     {
         public List<MatchModel> Matches { get; set; }

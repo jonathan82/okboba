@@ -105,8 +105,8 @@
       <HintPath>..\packages\MsieJavaScriptEngine.1.5.1\lib\net40\MsieJavaScriptEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="React.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
@@ -444,7 +444,6 @@
     <Content Include="Scripts\editthumbnail.js" />
     <Content Include="Scripts\locationpicker.js" />
     <Content Include="Scripts\matchscroller.js" />
-    <Content Include="Scripts\okboba.js" />
     <Content Include="lib\react\react-dom.js" />
     <Content Include="lib\react\react-dom.min.js" />
     <Content Include="lib\react\react.js" />
@@ -480,7 +479,7 @@
     <Content Include="Views\Profile\_ProfileHeader.cshtml" />
     <Content Include="Views\Question\Index.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
-    <Content Include="Views\Messages\Compose.cshtml" />
+    <Content Include="Views\Messages\Conversation.cshtml" />
     <Content Include="Views\Admin\Questions.cshtml" />
     <Content Include="Scripts\jsx\questions.jsx" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
@@ -510,6 +509,9 @@
     <Content Include="Views\Static\_ViewStart.cshtml" />
     <Content Include="Views\Question\_AnswerTemplate.cshtml" />
     <Content Include="Views\Question\_Pagination.cshtml" />
+    <Content Include="Views\Messages\Sent.cshtml" />
+    <Content Include="Views\Messages\_Navtab.cshtml" />
+    <Content Include="Views\Matches\_MatchesTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

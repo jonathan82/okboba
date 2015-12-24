@@ -77,7 +77,16 @@ namespace okboba.Web.Helpers
             return new HtmlString(str);
         }
 
-        public static HtmlString Avatar(this HtmlHelper htmlHelper, string photo, byte gender, int profileId, int width = OkbConstants.AVATAR_WIDTH, int height = OkbConstants.AVATAR_HEIGHT, bool small = false, bool circle = false)
+        /// <summary>
+        /// Generates an Avatar by buidling an img tag with the given parameters. If no photo is 
+        /// specified it will use the "no avatar" default photo. The image is styled with the given className.
+        /// The photo passed in is retrieved from one of the helper functions in the Profile entity class.
+        /// </summary>        
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, 
+            string photo, 
+            byte gender, 
+            string userId, 
+            string className)
         {
             string src;
 
@@ -90,16 +99,13 @@ namespace okboba.Web.Helpers
             else
             {
                 //Use the storage key in web.config to construct URL
-                src = ConfigurationManager.AppSettings["StorageUrl"] + profileId.ToString() + "/";
+                src = ConfigurationManager.AppSettings["StorageUrl"] + userId + "/";
                 src += photo;
             }
 
             var builder = new TagBuilder("img");
             builder.MergeAttribute("src", src);
-            builder.MergeAttribute("width", width.ToString());
-            builder.MergeAttribute("height", height.ToString());
-
-            if (circle) builder.AddCssClass("img-circle");
+            builder.AddCssClass(className);
 
             return new HtmlString(builder.ToString(TagRenderMode.SelfClosing));
         }

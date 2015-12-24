@@ -1,0 +1,459 @@
+Do you enjoy gardening?
+Yes.
+No.
+I'm not sure.
+
+Can you name five current world leaders?
+Yes
+No
+
+Which of the following types of toys did you generally like best when you were about eight years old?
+Creative / building toys.
+Action figures, dolls, or model vehicles.
+Stuffed animals.
+Balls, frisbees, or other sporting goods.
+
+Do you store any of your physical possessions alphabetically?
+Yes.
+No.
+
+Which is your preferred method of learning?
+Traditional classroom
+Computer-based instruction
+Self study / reading
+Other
+
+Do you think most people your age would guess what kinds of music you listen to or don't listen to just by looking at you?
+Yes.
+No.
+
+When taking a cab, do you like talking to the driver?
+Yes.
+No.
+I'm not sure.
+
+Do you like word games like Scrabble or Boggle?
+Yes
+No
+
+Would you say you have...
+A green thumb
+A black thumb
+A modicum of success with vegetation
+Absolutely no interest in plants
+
+Lolita?
+Brilliant
+Overrated
+Don't know
+
+Are you comfortable eating with chopsticks?
+Yes.
+No.
+
+Do you know what a 'safeword' is, in a sexual context?
+Yes
+No
+
+If while visiting a friend's house, you notice a painting hanging slightly off kilter.  Do you adjust it?
+Yes.
+No.
+
+What's the gender distribution of the vocalists in your music collection?
+Mostly female singers.
+Nearly the same male and female.
+Mostly male singers.
+I have little or no music collection with vocals.
+
+How often were you picked on by other kids your age when you were growing up?
+Very often.
+Sometimes.
+Rarely.
+Never.
+
+Have you ever read Shakespeare, other than for a class?
+Yes
+No
+
+Do you read the news most days?
+Yes
+No
+
+On average, how do your friends compare to you, age-wise?
+They're mostly older than I
+They're mostly younger than I
+They're about the same age
+I don't have that many friends
+
+Have you ever had a precognitive dream?
+Yes.
+No.
+
+Have you typically researched the policies of companies before you bought products from them?
+Yes.
+No.
+
+Do you have a survival kit prepared just in case a disaster occurs and normal services are disrupted for an extended period of time?
+Yes.
+No.
+
+If you saw a really fantastic magic trick performed, would you want to know the secret behind how it was done?
+Yes.
+No.
+
+What is your favorite transportation medium?
+Land (trains, buses, cars, bikes, feet, etc.)
+Sea (ships, boats, submarines, etc.)
+Air (airplanes, rockets, dirigibles, etc.)
+Other.
+
+Do you see a pattern in the type of people you usually end up in relationships with? 
+Yes.
+No.
+
+You wake up 20 minutes before your alarm is scheduled to go off. What do you do?
+Get up
+Go back to sleep till the alarm goes off
+
+Have you ever donated blood?
+Yes, and I still do
+Yes, but I don't want to again/didn't like it
+No, I'm ineligible
+No
+
+Have you ever failed a charisma check?
+Yes
+No
+Yes, with a natural 20.
+
+Do you wear expensive designer clothes?
+Yes
+No
+
+Do you find people from different countries more interesting, on average?
+Yes
+No
+
+Would you consider dating a psychiatrist?
+Yes.
+No.
+
+Do you read fan fiction?
+Yes.
+No.
+I don't know.
+
+When you hear the name Dylan what is the first to come to mind?
+Bob Dylan
+Dylan Thomas
+90210
+Something or someone else / Nothing
+
+Do you, or have you ever, read a text book or technical manual for fun/pleasure?
+Yes
+No
+
+Have you ever used a fake ID to do or acquire something you were legally barred from as a result of your age?
+Yes
+No
+
+Are we ever going to have those flying cars they've been promising us?
+Yes
+No
+
+How often do you send greeting cards for holidays and birthdays?
+Always
+Sometimes
+Never
+
+Would speaking in front of a large group make you nervous?
+Yes.
+No.
+
+When you draw a picture, write a poem, or otherwise do something creative, are you shy about letting other people see it?
+Sometimes
+Rarely
+Often
+If I'm still learning the required skills
+
+Do you enjoy improvisational comedy?
+Yes.
+No.
+
+Do you get along well with shy and socially awkward people?
+Yes
+No
+
+Do you currently subscribe to any pay-for-play online games?
+Yes.
+No.
+
+Do you enjoy creating mathematical problems to solve by yourself?
+Yes.
+No.
+
+Can you identify a French Manicure?
+Yes
+No
+I'm Not Sure
+What is a manicure?
+
+Other things being equal, would you prefer a job that requires you to be mostly on your feet or mostly sitting down?
+Mostly on my feet.
+Mostly sitting down.
+
+Do you lift weights?
+Yes
+No
+
+How well do you sleep when you're in unfamiliar surroundings?
+Better than usual.
+The same as usual.
+Worse than usual.
+
+Do you read in the bathroom?
+Yes, usually.
+No, never.
+Sometimes.
+
+Have you made special efforts to keep any favorite toys from your childhood?
+Yes.
+No.
+
+Who would you lie to first..
+A Friend
+A Parent
+A Sibling
+
+Do you enjoy being photographed?
+Yes
+No
+
+Do you have a vanity license plate?
+Yes
+No, absolutely not
+No, but I want one
+
+How many live plants do you have in your home?
+None.
+One or two.
+Three to nine.
+Ten or more.
+
+How much time do you spend doing volunteer work each week?
+None
+Less than 5 hours
+5 to 10 hours
+More than 10 hours
+
+Do you enjoy flowers?
+Yes
+No
+Flowers are a waste of time
+
+For you, would getting amnesia be a good thing?
+Yes.
+No.
+
+Are your decisions generally more pro-active or reactive?
+Pro-active
+Reactive
+
+Do you have a thing for foreign accents?
+Yes
+No
+
+Were you born in the United States?
+Yes
+No
+
+Have you ever tracked someone down just to apologize for something that you did years before?
+Yes.
+No.
+
+Have ever performed CPR on a real person?
+Yes.
+No, but I've been trained to.
+No, and I don't know how to.
+
+Have you ever been described as \"fidgety\"?
+Yes
+No
+Once or twice
+
+Do you have a car?
+Yes
+No
+
+Before people find out your real age, what do they usually assume?  \r\n
+That I'm younger than I really am.
+That I'm older than I really am.
+They are usually very close.
+I haven't noticed a pattern.
+
+Can you change a tire on your own?
+Yes
+No
+
+Have you created a 'Things To Do Before I Die' list?
+Yes.
+No.
+
+When it comes to music, do you have a strong preference for male or female vocals?
+Yes - male vocals.
+Yes - female vocals.
+No, not really.
+I prefer instrumental or non-vocal-driven music.
+
+Which most closely describes how you organize your sock drawer?
+I pair them before I put them away.
+I pair them when I get dressed.
+I have them paired and organized by color.
+I take them out of the laundry when I dress.
+
+Parlez-vous francais?
+Yes
+No
+What?
+Oui, je fais
+
+Do you have a living will?
+Yes.
+No.
+
+Do you have a distinctive laugh?
+Yes.
+No.
+
+Do you hang out with the same group of friends almost every time you go out?
+Yes.
+No.
+
+When using a computer, at a desk, do you:
+Sit painfully erect
+Have good posture
+Slouch a bit
+Slump on the desk
+
+Should children be taught self defense?\r\n
+Yes.
+No.
+
+In high school, were you one of the \"cool\" kids?
+Yes
+No
+
+Those ___ want ___ go, ___.
+two, to, too
+to, to, to
+too, two, to
+two, too, too
+
+Do you like to listen to audiobooks?
+Yes.
+No.
+I've never tried them.
+
+Would dealing face to face with someone with an impediment (nervous facial tic, bad stutter) make you uncomfortable or frustrated?
+Yes
+No
+
+When cooking food in the microwave, do you often impatiently hit the cancel button within the last few seconds rather than waiting?
+Yes
+No
+I don't have/use a microwave
+
+Do you write poetry?
+Yes
+No
+
+To your knowledge, do people have an unusual or humorous nickname for you?
+Yes, and I like it.
+Yes, but I don't like it.
+No.
+
+Have you ever created a piece of art for a friend, just because you were thinking of them?
+Yes.
+No.
+
+Do you crack your knuckles?
+Yes.
+No.
+
+Do you iron your own clothes?
+Yes
+No
+
+Do you have a good imagination?
+Yes.
+No.
+
+How good is your singing voice?
+Really awesome, actually
+Very good
+Okay
+Crappy
+
+Do you like logic puzzles?
+Yes
+No
+
+Can you name 5 directors and a film that each made, from before 1980?
+Yes
+No
+
+If possible, would you prefer to date someone a lot more attractive than you, or about the same?
+A lot more attractive
+About the same
+
+Break-ups. Which has happened more?
+Usually I break up with them
+Usually they break up with me
+It's been equal on both sides.
+
+Can you tell the difference between very good wine and pretty good wine, just from the taste?
+Yes
+No
+
+Do you enjoy keeping up to date with the latest technology news?
+Yes.
+No.
+
+Do you consider yourself to be photogenic?
+Yes.
+No.
+
+Do you know and enjoy chess?
+Yes
+No
+
+Can you name 5 operas, and their composers?
+Yes
+No
+
+Do you understand quantum physics?
+Yes / Some
+No
+
+What portion of your friends are citizens of a country other than your own?
+All or most.
+Many.
+One, two or a few.
+None.
+
+Do you enjoy learning about other cultures?
+Yes
+No
+
+Do you currently own or have you ever owned a suit/dress that cost $1000 or more?
+Yes
+No
+
+Do you talk about your sex life with either of your parents?
+Yes
+No
+
+Do you know who wrote: \"Was this the face that launched a thousand ships/And burnt the topless towers of Ilium?\"
+Yes
+No
+

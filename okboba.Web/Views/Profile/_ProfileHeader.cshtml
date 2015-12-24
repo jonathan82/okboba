@@ -38,19 +38,19 @@
 
 <!-- Row 2: Thumbnails - Show the first 4 -->
 @{ var photos = Model.Profile.GetHeadshots(); }
-@{ var profileId = Model.IsMe ? "" : Model.Profile.Id.ToString();}
+@{ var userId = Model.IsMe ? "" : Model.Profile.UserId;}
 
 @foreach (var photo in photos.Take(4))
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar(photo.Thumb, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@userId">@Html.Avatar(photo.Thumb, Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>        
     </div>
 }
 @if (photos.Count() < 4 && Model.IsMe)
 {
     //Show Add photo as long as user has less than 4 photos
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar(null, Model.Profile.Gender, Model.Profile.Id, 180, 180)</a>
+        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>
         @*<button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>*@
         <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Photo_AddPhoto</button>
     </div>
@@ -59,14 +59,14 @@ else if (photos.Count() == 0)
 {
     //Show no avatar if user has no photos
     <div class="profile-header-photo">
-        <a href="~/photo/@profileId">@Html.Avatar(null, Model.Profile.Gender, Model.Profile.Id, 170, 170)</a>
+        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>
     </div>
 }
 
 <!-- Row 3: Navigation tab -->
 <ul class="nav nav-tabs">
-    @Html.NavTab(Model.Section, "Profile", "/profile/" + profileId)
-    @Html.NavTab(Model.Section, "Photos", "/photo/" + profileId)
-    @Html.NavTab(Model.Section, "Questions", "/question/" + profileId)
-    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + profileId)
+    @Html.NavTab(Model.Section, "Profile", "/profile/" + userId)
+    @Html.NavTab(Model.Section, "Photos", "/photo/" + userId)
+    @Html.NavTab(Model.Section, "Questions", "/question/" + userId)
+    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + userId)
 </ul>

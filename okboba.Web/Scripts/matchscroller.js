@@ -2,100 +2,111 @@
  *  Plugin : Match scroller
  *  Author : Jonathan Lin
  *  Date   : 11/8/2015
- *  Notes  : 
+ *  Notes  : The match scroller plugin will load the next page of matches when the user
+ *           scrolls to the bottom of the screen. It will call the Match API endpoint using
+ *           CORS. 
  */
 (function ($) {
 
-    var currPages = [];
-    var $container;
-    var loading = false;
-    var matchApiUrl = '';
+    //// Private variables
+    const MAX_PAGES = 10;
+    var configMap = {
+        storageUrl: '', //used to generate Avatar photo
+        matchUrl: '', //the endpoint where to retrieve matches from
+        searchCriteria: '', //the match criteria passed to the api
+        templateId: 'matchesTemplate', //the jsrender template used to render a page of matches
+        matchTemplate: null
+    }
+    var $container,
+        lastPage = 1,
+        loading = false;
 
-    function getThumbnailUrl(photo, storageUrl, gender) {
+    //// Private functions
+    function avatarUrl(match, storageUrl) {
         var url = "";
-        if (photo == "") {
+        if (match.Photo == "") {
             url = '/content/images/no-avatar-';
-            url += gender == 'M' ? 'male.png' : 'female.png';
+            url += match.Gender == 'M' ? 'male.png' : 'female.png';
             return url;
         }
-        url = storageUrl + photo + '_t';
+        url = storageUrl + match.UserId + '/' + match.Photo;
         return url;
     }
 
-    function loadPreviousMatches() {
-        alert('not implemented yet');
+    function removeFirstMatches() {
+
+        if (lastPage > MAX_PAGES) {
+            //remove first page
+            $container.children().remove('#p' + (lastPage - MAX_PAGES));
+        }
     }
 
-    $.fn.matchscroller = function (pagesLoaded, matchHost, criteria, storageUrl) {
-        currPages = pagesLoaded;
-        $container = this;
-        matchApiUrl = matchHost;
-        var MAX_PAGES = 10;
+    function showMatches(matches, page) {
+        var html, i;
 
+        //generate and add the avatar url's to the data
+        for (i = 0; i < matches.length; i++) {
+            matches[i].AvatarUrl = avatarUrl(matches[i], configMap.storageUrl);
+        }
+
+        //load the next page of matches using the template
+        html = configMap.matchTemplate.render({
+            Page: page,
+            Matches: matches
+        });
+
+        //empty page - maybe last page of matches
+        if (matches.length == 0) return;
+
+        //append
+        $container.append(html);
+    }
+
+    //// Public functions (exposed thru jQuery)
+    $.fn.matchscroller = function (config) {
+                
+        configMap = $.extend(configMap, config);
+
+        $container = this;
+
+        configMap.matchTemplate = $.templates(configMap.templateId);
+       
         //setup scroll event handler
         $(window).scroll(function () {
             if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
 
+                //prevent loading while already loading
                 if (loading) return;
 
                 //append the loading text
                 $container.append('<div class="matches-loading"><span class="opacity-secondary-text">倒入中...</span></div>');
 
-                //get the page to load
-                var pageToLoad = currPages[currPages.length - 1] + 1;
-                criteria.page = pageToLoad;
+                configMap.searchCriteria.page = lastPage + 1;
 
                 //make ajax call to get next page
-                $.ajax(matchApiUrl + '/api/matches', {
-                    data: criteria,
+                $.ajax(configMap.matchUrl, {
+                    data: configMap.searchCriteria,
                     dataType: "json",
                     traditional: true,
                     xhrFields: {
                         withCredentials: true
                     }
                 }).done(function (data) {
-                    loading = false;
-                    var html = '<div id="p' + pageToLoad + '">';
 
-                    //append next page of matches
-                    for (var i = 0; i < data.length; i++) {
-                        var thumbUrl = getThumbnailUrl(data[i].Photo, storageUrl, data[i].Gender);
-                        html += '<div class="match-result">';
-                        html += '<a href="/profile/' + data[i].ProfileId + '"><img src="' + thumbUrl + '" alt="Profile Photo" width="200" height="200" /></a>';
-                        html += '<p>' + data[i].MatchPercent + '% Match - ' + data[i].Age + data[i].Gender + ' - ' + data[i].Name + '</p>';
-                        html += '</div>';
-                    }
-                    html += '</div>';
-
-                    //remove loading text
-                    $container.children().remove(':last');
-
-                    //empty page
-                    if (data.length == 0) return;
-
-                    //append
-                    $container.append(html);
-                    currPages.push(pageToLoad);
-
-                    if (currPages.length > MAX_PAGES) {
-                        //remove first page
-                        $container.children().remove('#p' + currPages[0]);
-                        currPages.shift();
-
-                        if (!$container.children(':first').is('button')) {
-                            //add new previous button
-                            var $prevButton = $('<button type="button" class="btn btn-default">回到之前页面...</button>');
-                            $prevButton.click(loadPreviousMatches);
-                            $container.prepend($prevButton);
-                        }
-                    }
+                    lastPage++;
+                    showMatches(data, lastPage);
+                    removeFirstMatches();                    
 
                 }).fail(function () {
-                    loading = false;
+
                     alert('failed loading matches');
+                    
+                }).always(function () {
+
+                    loading = false;
 
                     //remove loading text
-                    $container.children().remove(':last');
+                    $container.children().remove('.matches-loading');
                 });
 
                 loading = true;

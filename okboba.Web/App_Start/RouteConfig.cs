@@ -9,6 +9,15 @@ namespace okboba
 {
     public class RouteConfig
     {
+        /// <summary>
+        /// Example routes:
+        ///     /question
+        ///     /question/[userId]?page=3
+        ///     /account/login
+        ///     /photo/[userId]
+        /// 
+        /// userId is a Base62 string 
+        /// </summary>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -23,7 +32,7 @@ namespace okboba
                 name: "IndexWithId",
                 url: "{controller}/{userId}",
                 defaults: new { action = "Index", userId = UrlParameter.Optional  },
-                constraints: new { userId = @"[a-zA-Z0-9]+" }
+                constraints: new { userId = @"[a-zA-Z0-9]{11}" }
             );
 
             routes.MapRoute(

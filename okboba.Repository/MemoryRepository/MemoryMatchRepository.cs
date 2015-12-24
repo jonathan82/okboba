@@ -8,6 +8,7 @@ using okboba.Repository.Models;
 using okboba.Entities;
 using okboba.MatchCalculator;
 using okboba.Resources;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Repository.MemoryRepository
 {
@@ -19,6 +20,7 @@ namespace okboba.Repository.MemoryRepository
         private MemoryMatchRepository()
         {
             _matchCalc = MatchCalc.Instance;
+            _locRepo = EntityLocationRepository.Instance;
         }
 
         public static MemoryMatchRepository Instance
@@ -36,7 +38,8 @@ namespace okboba.Repository.MemoryRepository
 
         //////////////////// Member variables /////////////////
         private MatchCalc _matchCalc;
-        const int MAX_MATCH_RESULTS = 3000;
+        private ILocationRepository _locRepo;
+        
 
         private IQueryable<Profile> BuildSearchQuery(OkbDbContext db, MatchCriteriaModel criteria)
         {
@@ -52,8 +55,8 @@ namespace okboba.Repository.MemoryRepository
                 query = query.Where(p => p.LocationId1 == criteria.LocationId1);
             }
 
-            //Limit to 4000 matches
-            query = query.Take(MAX_MATCH_RESULTS);
+            //Limit maximum match results returned
+            query = query.Take(OkbConstants.MAX_MATCH_RESULTS);
 
             return query;
         }
@@ -80,11 +83,13 @@ namespace okboba.Repository.MemoryRepository
                     MatchPercent = matchResult.MatchPercent,
                     FriendPercent = matchResult.FriendPercent,
                     EnemyPercent = matchResult.EnemeyPercent,
-                    Name = p.Nickname,
+                    UserId = p.UserId,
+                    Nickname = p.Nickname,
                     ProfileId = p.Id,
                     Photo = p.GetFirstHeadshot(),
-                    Age = DateTime.Today.Year - p.Birthdate.Year,
-                    Gender = p.Gender
+                    Age = p.GetAge(),
+                    Gender = p.Gender,
+                    Location = _locRepo.GetLocationString(p.LocationId1, p.LocationId2)
                 });
             }
 

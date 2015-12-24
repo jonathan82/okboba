@@ -1,0 +1,40 @@
+﻿@using okboba.Resources
+@*
+    Template for a page of matches. Data context is an object with an array of MatchModel's.
+    An AvatarUrl property is added to each MatchModel by the match scroller plugin.
+
+    Data context:
+    {
+        Page: 3        //page number
+        Matches: []    //array of MatchModels
+    }
+
+        public class MatchModel
+        {
+            public int ProfileId { get; set; }
+            public string UserId { get; set; }
+            public string Nickname { get; set; }
+            public int MatchPercent { get; set; }
+            public int FriendPercent { get; set; }
+            public int EnemyPercent { get; set; }
+            public string Photo { get; set; }
+            public byte Gender { get; set; }
+            public int Age { get; set; }
+            public string Location { get; set; }
+        }
+*@
+<script id="matchesTemplate" type="text/x-jsrender">
+    <div id="p{{:Page}}">
+        {{for Matches}}
+        <div class="match-result">
+            <a href="/profile/{{:UserId}}"><img src="{{AvatarUrl}}" alt="Photo" class="match-avatar" /></a>
+            <div class="match-info-wrapper">
+                <p>{{:Nickname}}</p>
+                <p>{{:Age}} &middot; {{:Location}}</p>
+                <p>{{:MatchPercent}}% @i18n.Common_Match | {{:EnemyPercent}}% @i18n.Common_Enemy</p>
+            </div>
+        </div>
+        {{/for}}
+    </div>
+    
+</script>

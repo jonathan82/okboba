@@ -45,7 +45,7 @@ namespace okboba.Entities
         public virtual Location Location { get; set; }
         public virtual ProfileText ProfileText { get; set; }
 
-        //Photo Helper methods        
+        //Photo Helper methods
         private IEnumerable<Photo> Photos(string suffix)
         {
             var photoList = new List<Photo>();
@@ -87,7 +87,8 @@ namespace okboba.Entities
             var index = PhotosInternal.IndexOf(';');
             if (index < 0)
             {
-                return PhotosInternal + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
+                //return PhotosInternal + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
+                index = PhotosInternal.Length;
             }
 
             return PhotosInternal.Substring(0, index) + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);

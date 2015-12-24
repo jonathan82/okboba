@@ -5,6 +5,9 @@
 
     public static class OkbConstants
     {
+        //Matches
+        public const int MAX_MATCH_RESULTS = 4000;
+
         //Messages
         public const int MAX_MESSAGE_LENGTH = 1000;
 
