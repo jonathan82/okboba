@@ -155,6 +155,10 @@
       <Project>{44883c0b-23dd-4ad4-9654-8c13631ba7d9}</Project>
       <Name>okboba.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\okboba.Repository\okboba.Repository.csproj">
+      <Project>{1b313364-e757-4197-9683-7acb2c4a574b}</Project>
+      <Name>okboba.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

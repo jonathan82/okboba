@@ -13,6 +13,7 @@ namespace okboba.Repository
     {
         Task AnswerAsync(Answer ans);
         IPagedList<QuestionAnswerModel> GetQuestions(int profileId, int page = 1, int perPage = 10);
+        Dictionary<short, Answer> GetAnswers(int profileId);
         IList<QuestionModel> Next2Questions(int profileId);
         bool ValidateAnswer(Answer ans);
     }

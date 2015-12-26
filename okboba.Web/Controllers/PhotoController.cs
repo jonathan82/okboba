@@ -1,4 +1,5 @@
-﻿using okboba.Entities;
+﻿using Microsoft.AspNet.Identity;
+using okboba.Entities;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
 using okboba.Resources;
@@ -39,11 +40,11 @@ namespace okboba.Controllers
         }
 
         // GET: Image
-        public ActionResult Index(int? id)
+        public ActionResult Index(string userId)
         {
             var vm = new PhotoIndexViewModel();
             
-            if (id == null)
+            if (string.IsNullOrEmpty(userId) || User.Identity.GetUserId()==userId)
             {
                 //Viewing own profile
                 vm.IsMe = true;
@@ -52,7 +53,7 @@ namespace okboba.Controllers
             else
             {
                 vm.IsMe = false;
-                vm.ProfileId = (int)id;
+                vm.ProfileId = _profileRepo.GetProfileId(userId);
             }
 
             return View(vm);

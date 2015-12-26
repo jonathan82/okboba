@@ -1,437 +1,437 @@
-Do you have any credit cards?
+1100. Do you have any credit cards?
 Yes
 No
 
-Do you like stand-up comedy?
+1101. Do you like stand-up comedy?
 Yes
 No
 
-Do you generally finish all of the food on your plate?
+1102. Do you generally finish all of the food on your plate?
 Yes.
 No.
 
-Do you have a nervous habit, like biting your nails?
+1103. Do you have a nervous habit, like biting your nails?
 Yes
 No
 
-Do you know the square root of 256 off the top of your head?
+1104. Do you know the square root of 256 off the top of your head?
 Yes
 No
 
-Which is the smallest amount of money you would stop to pick up if you saw it laying in the street?
+1105. Which is the smallest amount of money you would stop to pick up if you saw it laying in the street?
 Penny
 Nickel
 Dime
 A quarter or more.
 
-Do you have dessert after dinner?
+1106. Do you have dessert after dinner?
 Yes, often
 No
 Sometimes
 
-What kind of education did you have growing up?
+1107. What kind of education did you have growing up?
 Private school.
 Public school.
 Home school.
 Some combination of the above.
 
-Can you name your two closest neighbours?
+1108. Can you name your two closest neighbours?
 Yes.
 No.
 
-Have you ever done something reckless that resulted in a major injury? (broken bones, etc.)
+1109. Have you ever done something reckless that resulted in a major injury? (broken bones, etc.)
 Yes
 No
 
-Do you snort when you laugh?
+1110. Do you snort when you laugh?
 Yes / sometimes
 No / never
 
-Do you have a current passport?
+1111. Do you have a current passport?
 Yes
 No
 
-Are you a highly skilled writer?
+1112. Are you a highly skilled writer?
 Yes
 No
 
-What is the first definition for the word \"composition\" that comes to mind?
+1113. What is the first definition for the word \"composition\" that comes to mind?
 The makeup of a mixture of ingredients
 A piece of music
 A piece of writing
 An arrangement of visual elements
 
-Do people tend to turn to you for answers pertaining to subjects you know little about?
+1114. Do people tend to turn to you for answers pertaining to subjects you know little about?
 Yes.
 No.
 
-Would you, or did you, go to your 10-year high school reunion?
+1115. Would you, or did you, go to your 10-year high school reunion?
 Yes
 No, but I wanted to
 No
 
-Have you ever been arrested, even if just for a small crime or misdemeanor?
+1116. Have you ever been arrested, even if just for a small crime or misdemeanor?
 Yes
 No
 
-Have you ever written a song?
+1117. Have you ever written a song?
 Yes.
 No.
 
-Do you take pills when you have a headache?
+1118. Do you take pills when you have a headache?
 Yes
 No
 
-Do you have a really good relationship with both your parents?
+1119. Do you have a really good relationship with both your parents?
 Yes
 No
 
-Have you ever seen your bestfriend naked?
+1120. Have you ever seen your bestfriend naked?
 Yes
 No
 
-Do you think you have what it takes to be a successful actor or actress?
+1121. Do you think you have what it takes to be a successful actor or actress?
 Yes.
 No.
 
-Have you ever raised an animal for food?
+1122. Have you ever raised an animal for food?
 Yes.
 No.
 
-If you discovered upon death that you must reincarnate into an animal, but are only allowed a broad choice as follows, which would you select?
+1123. If you discovered upon death that you must reincarnate into an animal, but are only allowed a broad choice as follows, which would you select?
 An animal that lives on land.
 An animal that lives in the water.
 An animal that can fly.
 
-Do you have (or are you getting) a degree from one of the 8 ivy league universities, MIT, Stanford, Duke, U Chicago, or Caltech?
+1124. Do you have (or are you getting) a degree from one of the 8 ivy league universities, MIT, Stanford, Duke, U Chicago, or Caltech?
 Yes
 No
 My degree is not from the U.S.
 
-Have you ever intentionally left a book in a public place, hoping someone else would pick it up and read it?
+1125. Have you ever intentionally left a book in a public place, hoping someone else would pick it up and read it?
 Yes.
 No.
 
-Do you typically send thank you cards to people, when they do you favors?
+1126. Do you typically send thank you cards to people, when they do you favors?
 Yes
 No
 
-Did you ever take a class in school just because you heard the person you liked was taking it?
+1127. Did you ever take a class in school just because you heard the person you liked was taking it?
 Yes
 No
 
-Have you ever quit a job without giving at least a week notice?
+1128. Have you ever quit a job without giving at least a week notice?
 Yes
 No
 
-Do you feel nauseated at the sight of blood?
+1129. Do you feel nauseated at the sight of blood?
 Yes, if it's someone else's.
 Yes, if it's mine.
 Yes to both above.
 No
 
-Can you recite any written literary work from memory, including a favourite poem?
+1130. Can you recite any written literary work from memory, including a favourite poem?
 No
 Yes
 
-Have you performed any charity work in the last year? (We mean labor, not donating money)
+1131. Have you performed any charity work in the last year? (We mean labor, not donating money)
 Yes
 No
 
-Have you performed in a theater setting as an adult?
+1132. Have you performed in a theater setting as an adult?
 Yes, as a professional.
 Yes, as a student.
 Yes, as a hobby.
 No.
 
-Have you ever seen a therapist?
+1133. Have you ever seen a therapist?
 Yes
 No
 
-Do you know CPR?
+1134. Do you know CPR?
 Yes
 No
 Only the basics/never finished the course.
 
-When was your favorite book written? If you have more than one favorite, pick your favorite period of literature.
+1135. When was your favorite book written? If you have more than one favorite, pick your favorite period of literature.
 Pre-1700 (Renaissance/medieval/classical/ancient)
 1700-1900 (Elizabethan, Romantic, Victorian, etc.)
 1900-1945ish (Modern)
 1950s or later (Contemporary)
 
-Have you ever lived outside the country of your citizenship for a single period that exceeds three months?
+1136. Have you ever lived outside the country of your citizenship for a single period that exceeds three months?
 Yes.
 No.
 
-Do you talk in your sleep?
+1137. Do you talk in your sleep?
 Yes / Sometimes
 No / Very Rarely
 I'm Not Sure / Maybe
 
-Do you keep a blog (online journal)?
+1138. Do you keep a blog (online journal)?
 Yes.
 No.
 
-Do you own shares in companies traded on a stock exchange?
+1139. Do you own shares in companies traded on a stock exchange?
 Yes.
 No.
 
-Do you have rhythm (at least enough to find the beat of a song)?
+1140. Do you have rhythm (at least enough to find the beat of a song)?
 Yes
 No
 I think so, but people tell me otherwise
 
-Could you do 25 pushups without stopping?
+1141. Could you do 25 pushups without stopping?
 Yes
 No
 
-Can you name any ballet other than the Nutcracker?
+1142. Can you name any ballet other than the Nutcracker?
 Yes
 No
 
-Is taking care of your body important to you?
+1143. Is taking care of your body important to you?
 Yes
 No
 
-Do you currently grow any of your own food?
+1144. Do you currently grow any of your own food?
 Yes.
 No.
 
-Have you ever traveled around another country alone?
+1145. Have you ever traveled around another country alone?
 Yes
 No
 
-Do you listen to podcasts?
+1146. Do you listen to podcasts?
 Yes, frequently.
 Yes, once in a while.
 No.
 
-Homemade/handmade gifts are more...
+1147. Homemade/handmade gifts are more...
 Thoughtful in a good way
 Cheap in a bad way
 
-Have you ever been fired from a job?
+1148. Have you ever been fired from a job?
 Yes
 No
 
-Are you naturally a lot better at games than most people?
+1149. Are you naturally a lot better at games than most people?
 Yes
 No
 
-Have you ever started your own business?
+1150. Have you ever started your own business?
 Yes.
 No.
 
-Does the fact that you have never done something before, USUALLY increase or decrease its appeal?
+1151. Does the fact that you have never done something before, USUALLY increase or decrease its appeal?
 Increase
 Decrease
 
-Have you ever worked in a customer service job?
+1152. Have you ever worked in a customer service job?
 Yes.
 No.
 
-Do you know any programming languages?
+1153. Do you know any programming languages?
 Yes
 No
 
-Which are you better at remembering, names or faces?
+1154. Which are you better at remembering, names or faces?
 Names.
 Faces.
 
-Could you name 5 impressionists, and a painting by each?
+1155. Could you name 5 impressionists, and a painting by each?
 Yes
 No
 
-Do you play any musical instruments?
+1156. Do you play any musical instruments?
 Yes
 No
 
-Do you know how to drive a stick shift (manual transmission)?
+1157. Do you know how to drive a stick shift (manual transmission)?
 Yes
 No
 
-Did you ever receive any sort of non-athletic award during your years in school?
+1158. Did you ever receive any sort of non-athletic award during your years in school?
 Yes.
 No.
 
-Do you know what the golden spiral is?
+1159. Do you know what the golden spiral is?
 Yes
 No
 
-Have you ever written a screenplay or stage play?
+1160. Have you ever written a screenplay or stage play?
 Yes, both.
 No, neither.
 Screenplay only.
 Stage play only.
 
-Do you own any cookbooks?
+1161. Do you own any cookbooks?
 Yes.
 No.
 
-Have you ever studied math BEYOND calculus?
+1162. Have you ever studied math BEYOND calculus?
 Yes
 No
 
-Have you ever skied, snowboarded, surfed, or wind-surfed?
+1163. Have you ever skied, snowboarded, surfed, or wind-surfed?
 Yes
 No
 
-Do you wear a suit to work (or female equivalent)?
+1164. Do you wear a suit to work (or female equivalent)?
 Yes
 No
 
-Are you, or have you ever been, in a band?  (A solo act is fine, too. Don't count school bands.)
+1165. Are you, or have you ever been, in a band?  (A solo act is fine, too. Don't count school bands.)
 Yes
 No
 
-Have you ever written a book?
+1166. Have you ever written a book?
 Yes.
 No.
 
-Has anyone ever written you a romantic poem?
+1167. Has anyone ever written you a romantic poem?
 Yes
 No
 
-Have you ever tried Yoga?
+1168. Have you ever tried Yoga?
 Yes
 No
 
-As an adult, have you ever been single for more than a year straight?
+1169. As an adult, have you ever been single for more than a year straight?
 Yes
 No
 
-Have you ever participated in a high school or college marching band?
+1170. Have you ever participated in a high school or college marching band?
 Yes.
 No.
 Both.
 
-Do you enjoy crossword puzzles or jumbled word puzzles?
+1171. Do you enjoy crossword puzzles or jumbled word puzzles?
 Yes
 No
 
-Do you have your own web page?
+1172. Do you have your own web page?
 Yes
 No
 
-Do you regularly paint or sculpt?
+1173. Do you regularly paint or sculpt?
 Yes
 No
 
-Do you chew tobacco?
+1174. Do you chew tobacco?
 Yes.
 No.
 
-Have you ever been a member of an organization like Girl Scouts, Girl Guides, Boy Scouts, or Campfire?
+1175. Have you ever been a member of an organization like Girl Scouts, Girl Guides, Boy Scouts, or Campfire?
 Yes
 No
 
-Do you own a record player?
+1176. Do you own a record player?
 Yes
 No
 
-Can you read sheet music?
+1177. Can you read sheet music?
 Yes
 No
 
-Do you have a photographic memory?
+1178. Do you have a photographic memory?
 Yes
 No
 
-Are you good at explaining things?
+1179. Are you good at explaining things?
 Yes
 No
 
-If you unscramble the letters in \"laity\", what do you get?
+1180. If you unscramble the letters in \"laity\", what do you get?
 A country
 A mountain
 A river
 A planet
 
-When you don't know a word, do you look up its definition?
+1181. When you don't know a word, do you look up its definition?
 Yes
 No
 
-Did you ever study Latin, Ancient Greek, or any other dead language, for at least a year?
+1182. Did you ever study Latin, Ancient Greek, or any other dead language, for at least a year?
 Yes
 No
 
-If you want to get to the top of the stairs sooner, do you:
+1183. If you want to get to the top of the stairs sooner, do you:
 Skip steps
 Go faster without skipping
 
-Do you have a recording of yourself singing?
+1184. Do you have a recording of yourself singing?
 Yes
 No
 
-Were you born on a Zodiac cusp? In other words, do you have two alternating Zodiac signs?
+1185. Were you born on a Zodiac cusp? In other words, do you have two alternating Zodiac signs?
 Yes
 No
 I'm Not Sure
 
-Have you ever initiated contact with a friend who you hadn't talked to in over a year just to see how they are doing?
+1186. Have you ever initiated contact with a friend who you hadn't talked to in over a year just to see how they are doing?
 Yes
 No
 
-Are your birth parents divorced?
+1187. Are your birth parents divorced?
 Yes
 No
 They were never married!
 
-Is your second toe longer than your big toe?
+1188. Is your second toe longer than your big toe?
 Yes
 No
 
-Have you ever tried silent dating?
+1189. Have you ever tried silent dating?
 Yes, and it was fun!
 Yes, but I didn't like it.
 No.
 
-Do you know how to use a darkroom to develop negatives and prints?
+1190. Do you know how to use a darkroom to develop negatives and prints?
 Yes
 No
 
-Are your parents ugly?
+1191. Are your parents ugly?
 Yes
 No
 
-Is it okay for a married person to play around with someone with the permission of their spouse?
+1192. Is it okay for a married person to play around with someone with the permission of their spouse?
 Yes
 No
 
-Do you bring up STD results/risk factors before you start fooling around?
+1193. Do you bring up STD results/risk factors before you start fooling around?
 Not usually
 Only when I suspect there might be risk involved
 Not always, but I always use protection
 Always
 
-Would you ever consider an open marriage? That means you can sleep with other people.
+1194. Would you ever consider an open marriage? That means you can sleep with other people.
 Yes
 No
 
-How often are you tested for STDs?
+1195. How often are you tested for STDs?
 Never
 Before/After every new partner
 Regularly
 Only when I'm worried about specific one
 
-What would you do if you had an unwanted child on the way?
+1196. What would you do if you had an unwanted child on the way?
 Abort it
 Give it up for Adoption
 Keep it regardless
 
-Which biological parent should have legal decision-making power in abortion decisions?
+1197. Which biological parent should have legal decision-making power in abortion decisions?
 The mother.
 The father.
 Both.
 Neither.
 
-Would you consider connecting with someone whose relationship status is 'seeing someone' or 'married'?
+1198. Would you consider connecting with someone whose relationship status is 'seeing someone' or 'married'?
 Yes to both
 No to both
 Yes to 'seeing someone' only
 Yes to 'married' only
 
-If you had to choose one of the following, which best describes the role of sex in your life?
+1199. If you had to choose one of the following, which best describes the role of sex in your life?
 Sex is one of my favorite activities.
 Sex is something I enjoy on occasion.
 Sex is for procreation.

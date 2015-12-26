@@ -30,8 +30,8 @@ using System.Web.Mvc;
 
 namespace okboba.MatchApi.Controllers
 {
-    [System.Web.Mvc.Authorize]
-    [EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
+    //[EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
+    [System.Web.Mvc.Authorize]    
     public class MatchesController : OkbBaseController
     {
         private IMatchRepository _matchRepo;

@@ -6,6 +6,8 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using okboba.Entities;
 using Microsoft.AspNet.Identity;
+using okboba.Repository;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Chat
 {
@@ -13,6 +15,12 @@ namespace okboba.Chat
     public class ChatHub : Hub
     {        
         private static ConnectionMapping _connections = new ConnectionMapping();
+        private IProfileRepository _profileRepo;
+
+        public ChatHub()
+        {
+            _profileRepo = EntityProfileRepository.Instance;
+        }
 
         protected int GetProfileId()
         {
@@ -31,6 +39,11 @@ namespace okboba.Chat
             profileId = user.Profile.Id;
 
             return profileId;
+        }
+
+        public Profile GetProfile(int id)
+        {
+            return _profileRepo.GetProfile(id);
         }
 
         public void SendMessage(int who, string message)

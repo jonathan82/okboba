@@ -1,4 +1,8 @@
-﻿@model okboba.Web.Models.MatchesViewModel
+﻿@{
+    ViewBag.Title = "Matches";
+}
+
+@model okboba.Web.Models.MatchesViewModel
 @using okboba.Web.Helpers
 @using Newtonsoft.Json
 @using okboba.Resources
@@ -21,14 +25,19 @@
     </div>
 </div>
 
+@Html.Partial("_MatchesTemplate")
+
 @section Scripts {
     
     <script>
-        $('#matches-container').matchscroller( {
-            storageUrl: '@Model.StorageUrl',
-            matchUrl: '@Model.MatchApiUrl',
-            searchCriteria: @Html.Raw(JsonConvert.SerializeObject(Model.MatchCriteria))
-        });
+        $(function myfunction() {
+            //document ready
+            $('#matches-container').matchscroller( {
+                storageUrl: '@Model.StorageUrl',
+                matchUrl: '@Model.MatchApiUrl' + '/api/matches',
+                searchCriteria: @Html.Raw(JsonConvert.SerializeObject(Model.MatchCriteria))
+            });
+        });        
             
     </script>
 }

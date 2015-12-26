@@ -14,7 +14,7 @@
         storageUrl: '', //used to generate Avatar photo
         matchUrl: '', //the endpoint where to retrieve matches from
         searchCriteria: '', //the match criteria passed to the api
-        templateId: 'matchesTemplate', //the jsrender template used to render a page of matches
+        templateId: '#matchesTemplate', //the jsrender template used to render a page of matches
         matchTemplate: null
     }
     var $container,
@@ -26,7 +26,7 @@
         var url = "";
         if (match.Photo == "") {
             url = '/content/images/no-avatar-';
-            url += match.Gender == 'M' ? 'male.png' : 'female.png';
+            url += match.Gender == 1 ? 'male.png' : 'female.png';
             return url;
         }
         url = storageUrl + match.UserId + '/' + match.Photo;
@@ -34,7 +34,7 @@
     }
 
     function removeFirstMatches() {
-
+        
         if (lastPage > MAX_PAGES) {
             //remove first page
             $container.children().remove('#p' + (lastPage - MAX_PAGES));
@@ -54,9 +54,6 @@
             Page: page,
             Matches: matches
         });
-
-        //empty page - maybe last page of matches
-        if (matches.length == 0) return;
 
         //append
         $container.append(html);
@@ -79,7 +76,7 @@
                 if (loading) return;
 
                 //append the loading text
-                $container.append('<div class="matches-loading"><span class="opacity-secondary-text">倒入中...</span></div>');
+                $container.append('<div class="matches-loading">倒入中...</div>');
 
                 configMap.searchCriteria.page = lastPage + 1;
 
@@ -93,10 +90,13 @@
                     }
                 }).done(function (data) {
 
-                    lastPage++;
-                    showMatches(data, lastPage);
-                    removeFirstMatches();                    
-
+                    if (data.length > 0) {
+                        //we have matches
+                        lastPage++;
+                        showMatches(data, lastPage);
+                        removeFirstMatches();
+                    }
+                                        
                 }).fail(function () {
 
                     alert('failed loading matches');

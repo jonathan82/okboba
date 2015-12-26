@@ -55,14 +55,10 @@ namespace okboba.Controllers
                 vm.IsMe = false;
                 vm.Questions = _quesRepo.GetQuestions(id, page);
 
-                //Get my own questions for comparison
+                //Get my own questions for comparison - just need to get the answers from the match API cache
                 //Convert to dictionary for easier comparison
-                var compareQuestions = _quesRepo.GetQuestions(id);
-                vm.CompareQuestions = new Dictionary<short, Answer>();
-                foreach (var q in compareQuestions)
-                {
-                    vm.CompareQuestions.Add(q.Question.Id, q.Answer);
-                }
+                vm.CompareQuestions = _quesRepo.GetAnswers(me);
+
             }
 
             return View(vm);

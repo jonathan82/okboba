@@ -29,7 +29,10 @@ function ChatSlider($container, config) {
         sliderClosedHeight: 31,
         emoticonUrl: 'http://twemoji.maxcdn.com/36x36/',
         emoticonUrlSmall: 'http://twemoji.maxcdn.com/16x16/',
-        emoticonPages: null //an array of objects (emoticon pages) with an array of emoticons and their nav icon
+        emoticonPages: null, //an array of objects (emoticon pages) with an array of emoticons and their nav icon
+        nickname: '',
+        profileId: 0,
+        sendMessageCallback: null
     }
     var $chat,
         that,
@@ -54,13 +57,20 @@ function ChatSlider($container, config) {
     }
 
     this.addMessage = function (msg, isMe) {
-        var dialogHtml;
+        var dialogHtml, msgDiv;
+
         if (isMe) {
             dialogHtml = configMap.chatDialogMeTemplate.render({ message: msg });            
         } else {
             dialogHtml = configMap.chatDialogThemTemplate.render({ message: msg });
         }
-        $chat.find('.chat-messages-inner').append(dialogHtml);
+
+        msgDiv = $chat.find('.chat-messages-inner');
+
+        msgDiv.append(dialogHtml);
+
+        //scroll to bottom of messages
+        msgDiv.animate({ scrollTop: msgDiv.prop("scrollHeight") }, 200);
     }
 
     this.getZIndex = function () {
@@ -69,6 +79,10 @@ function ChatSlider($container, config) {
 
     this.setZIndex = function (z) {
         $chat.css('z-index', z);
+    }
+
+    this.getId = function () {
+        return configMap.profileId;
     }
 
     //// Private Functions
@@ -113,12 +127,13 @@ function ChatSlider($container, config) {
 
     function sanitizeHtml(html) {
         var re;
-
         //convert emoji to unicode
-        re = /<img.*?data-id="(.*?)".*?>/mg;
-        
-
+        re = /<img.*?data-id="(.*?)".*?>/mg;       
         //trim whitespace
+    }
+
+    function clearInput() {
+        $chat.find('.chat-input').html('');
     }
 
     //// Constructor logic
@@ -126,7 +141,8 @@ function ChatSlider($container, config) {
     $chat = $(configMap.chatSliderTemplate.render({
         emoticonUrl: configMap.emoticonUrl,
         emoticonUrlSmall: configMap.emoticonUrlSmall,
-        emoticons: configMap.emoticonPages[0].emoticons
+        emoticons: configMap.emoticonPages[0].emoticons,
+        nickname: configMap.nickname
     }));
     $container.append($chat);
     savedHeight = $chat.height();
@@ -160,17 +176,20 @@ function ChatSlider($container, config) {
     $chat.find('.chat-input').keypress(function (e) {
         var html;
 
-        //get the input text
+        //get the input text - remove the <br>'s that IE adds
         html = trimBr($(this).html());
 
         //handle 'enter'
         if (e.which == 13) {            
             e.preventDefault();
-            console.log(html);
-        } else {
-            //otherwise hide the placeholder
-            $chat.find('.chat-input-placeholder').hide();
+            that.addMessage(html, true);
+            clearInput();
+            configMap.sendMessageCallback(configMap.profileId, html);
         }
+        //else {
+        //    //otherwise hide the placeholder
+        //    $chat.find('.chat-input-placeholder').hide();
+        //}
     });
 
     ////Focus on input when placeholder text is clicked
@@ -263,13 +282,33 @@ var chatManager = (function ($) {
 
     //// Private functions
     function receiveMessage(from, msg) {
-        //TODO
-        alert('TODO');
+        //see if any open chat windows
+        for (var i = 0; i < sliders.length; i++) {
+            if (sliders[i].getId() == from) {
+                //chat window already open
+                sliders[i].addMessage(msg, false);
+                return;
+            }
+        }
+        //if not create new one
+        //get the profile info - nickname, avatar and save it
+        chatHubProxy.server.GetProfile(from).done(function (result) {
+            console.log(result);
+        });
+
+        createChat('test', 1);
     }
 
-    function sendMessage(msg, to) {
+    function sendMessage(to, msg) {
         //send already sanitized text
+        console.log('to:' + to + ', ' + msg);
+        chatHubProxy.server.SendMesage(to, msg).done(function (status) {
+            //successful - display status if needed
 
+        }).fail(function () {
+            //failed - display error status to user
+            alert('send message failed');
+        });
     }
 
     function setupSignalR() {
@@ -355,7 +394,7 @@ var chatManager = (function ($) {
 
     }
 
-    createChat = function () {
+    createChat = function (nickname, profileId) {
         var slider, zIndex;
 
         //create a new chat window and position it in browser window
@@ -369,7 +408,10 @@ var chatManager = (function ($) {
                 { emoticons: emoticonSmilies, navIcon: ''  },
                 { emoticons: emoticonFood, navIcon: '' },
                 { emoticons: emoticonLove, navIcon: '' }
-            ]
+            ],
+            nickname: nickname,
+            profileId: profileId,
+            sendMessageCallback: sendMessage
         });
         sliders.push(slider);
         repositionSliders();
@@ -416,6 +458,21 @@ var chatManager = (function ($) {
         chatSliderTemplate = $.templates(configMap.chatSliderTemplateId);
         chatDialogThemTemplate = $.templates(configMap.chatDialogThemTemplateId);
         chatDialogMeTemplate = $.templates(configMap.chatDialogMeTemplateId);
+
+        //hookup message button
+        $('button[data-toggle="chat"]').click(function () {
+            console.log('message user clicked');
+            var nickname, id, i;
+            nickname = $(this).data('name');
+            id = $(this).data('id');
+
+            //check if window already open
+            for (i = 0; i < sliders.length; i++) {
+                if (sliders[i].getId() == id) return;
+            }
+
+            createChat(nickname, id);
+        });
     }
 
     return {

@@ -28,7 +28,7 @@
     <div class="col-sm-3 col-md-2">
         @if (!Model.IsMe)
         {
-            <button class="btn btn-primary btn-block">Message User</button>
+            <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="chat">Message User</button>
             <button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
         }        
     </div>
@@ -68,5 +68,4 @@ else if (photos.Count() == 0)
     @Html.NavTab(Model.Section, "Profile", "/profile/" + userId)
     @Html.NavTab(Model.Section, "Photos", "/photo/" + userId)
     @Html.NavTab(Model.Section, "Questions", "/question/" + userId)
-    @Html.NavTab(Model.Section, "Personality Matrix", "/matrix/" + userId)
 </ul>

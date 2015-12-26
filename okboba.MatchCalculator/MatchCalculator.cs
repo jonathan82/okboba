@@ -135,17 +135,19 @@ namespace okboba.MatchCalculator
                 s = 0;
 
             var result = new MatchResult(); //default values are zero
+            List<CacheAnswer> list; 
 
-            if (!_answerCache.ContainsKey(profileId))
+            if(!_answerCache.TryGetValue(profileId, out list))
             {
                 // User hasn't answered any questions
                 return result;
             }
 
-            foreach (var them in _answerCache[profileId])
-            {
-                if (!myAnswers.ContainsKey(them.QuestionId)) continue; //I haven't answered this question
-                var me = myAnswers[them.QuestionId];
+            CacheAnswer me;
+
+            foreach (var them in list)
+            {                
+                if (!myAnswers.TryGetValue(them.QuestionId, out me)) continue; //I haven't answered this question
                 //if (me.ChoiceBit == null || them.ChoiceBit == null) continue; // either of us skipped this question
                 bool meAccept = (me.ChoiceAccept & them.ChoiceBit) != 0 ? true : false;
                 bool themAccept = (me.ChoiceBit & them.ChoiceAccept) != 0 ? true : false;
@@ -206,35 +208,20 @@ namespace okboba.MatchCalculator
                 //Don't load questions the user skipped (ChoiceBit==null)
                 if (ans.ChoiceIndex == null) continue;
 
-                if (_answerCache.TryGetValue(ans.ProfileId, out list))
+                if (!_answerCache.TryGetValue(ans.ProfileId, out list))
                 {
-                    list.Add(new CacheAnswer
-                    {
-                        QuestionId = ans.QuestionId,
-                        ChoiceBit = ans.ChoiceBit(),
-                        ChoiceAccept = ans.ChoiceAccept,
-                        ChoiceWeight = ans.ChoiceWeight,
-                        LastAnswered = ans.LastAnswered
-                    });
-                }
-                else
-                {
-                    _answerCache.Add(ans.ProfileId, new List<CacheAnswer>());
+                    list = new List<CacheAnswer>();
+                    _answerCache.Add(ans.ProfileId, list);
                 }
 
-                //if (!_answerCache.ContainsKey(ans.ProfileId))
-                //{
-                //    _answerCache.Add(ans.ProfileId, new List<CacheAnswer>());
-                //}
-
-                //_answerCache[ans.ProfileId].Add(new CacheAnswer
-                //{
-                //    QuestionId = ans.QuestionId,
-                //    ChoiceBit = ans.ChoiceBit(),
-                //    ChoiceAccept = ans.ChoiceAccept,
-                //    ChoiceWeight = ans.ChoiceWeight,
-                //    LastAnswered = ans.LastAnswered
-                //});
+                list.Add(new CacheAnswer
+                {
+                    QuestionId = ans.QuestionId,
+                    ChoiceBit = ans.ChoiceBit(),
+                    ChoiceAccept = ans.ChoiceAccept,
+                    ChoiceWeight = ans.ChoiceWeight,
+                    LastAnswered = ans.LastAnswered
+                });                
 
                 count++;
             }
@@ -263,21 +250,6 @@ namespace okboba.MatchCalculator
             }
 
             return dict;
-
-            //var db = new OkbDbContext();
-
-            //var result = from ans in db.Answers.AsNoTracking()
-            //             where ans.ProfileId == profileId
-            //             select ans;
-
-            //var answers = new Dictionary<int, Answer>();
-
-            //foreach (var ans in result)
-            //{
-            //    answers.Add(ans.QuestionId, ans);
-            //}
-
-            //return answers;
         }
 
         /// <summary>

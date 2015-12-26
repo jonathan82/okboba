@@ -31,34 +31,44 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             ////////////////// Split Okcupid questions /////////////////
-            //var file = new StreamReader("../../../Data/okc_questions_curated.txt");
-            //int count = 1;
-            //string buffer = "";
-            //int page = 1;
-            //while (!file.EndOfStream)
-            //{
-            //    var line = file.ReadLine();
+            var file = new StreamReader("../../../Data/okc_questions_curated.txt");
+            int count = 1;
+            string buffer = "";
+            int page = 1;
+            bool newQuestionFlag = true;
+            StreamWriter writer;
+            while (!file.EndOfStream)
+            {
+                var line = file.ReadLine();
+                if (newQuestionFlag)
+                {
+                    line = count + ". " + line;
+                    newQuestionFlag = false;
+                }
+                buffer += line + Environment.NewLine;
+                if (line == "")
+                {
+                    count++;
+                    newQuestionFlag = true;
 
-            //    buffer += line + Environment.NewLine;
-            //    if (line == "")
-            //    {
-            //        count++;
-
-            //        if ((count % 100) == 0)
-            //        {
-            //            //write to file
-            //            var writer = new StreamWriter("../../../Data/okc_" + page + ".txt");
-            //            writer.Write(buffer);
-            //            writer.Flush();
-            //            writer.Close();
-            //            Console.WriteLine(count);
-            //            buffer = "";
-            //            page++;
-            //        }
-            //    }                
-
-            //}
-            //Console.WriteLine("count: " + count);
+                    if ((count % 100) == 0)
+                    {
+                        //write to file
+                        writer = new StreamWriter("../../../Data/okc_" + page + ".txt");
+                        writer.Write(buffer);
+                        writer.Flush();
+                        writer.Close();
+                        Console.WriteLine(count);
+                        buffer = "";
+                        page++;
+                    }
+                }
+            }
+            writer = new StreamWriter("../../../Data/okc_" + page + ".txt");
+            writer.Write(buffer);
+            writer.Flush();
+            writer.Close();
+            Console.WriteLine("count: " + count);
 
             //////////////////// Test Messages /////////////////////////
             //var repo = EntityMessageRepository.Instance;

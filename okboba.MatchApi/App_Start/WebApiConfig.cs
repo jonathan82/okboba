@@ -8,6 +8,7 @@ using Newtonsoft.Json.Serialization;
 using System.Web.Http.Filters;
 using System.Web;
 using Elmah;
+using System.Web.Http.Cors;
 
 namespace okboba.MatchApi
 {

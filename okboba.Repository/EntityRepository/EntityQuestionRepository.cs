@@ -163,5 +163,25 @@ namespace okboba.Repository.EntityRepository
         {
             await AnswerDbAsync(ans);
         }
+
+        /// <summary>
+        /// Gets the users answers in a dictionary.  
+        /// </summary>        
+        public Dictionary<short, Answer> GetAnswers(int profileId)
+        {
+            var db = new OkbDbContext();
+            var dict = new Dictionary<short, Answer>();
+
+            var result = from ans in db.Answers.AsNoTracking()
+                         where ans.ProfileId == profileId
+                         select ans;
+
+            foreach (var ans in result)
+            {
+                dict.Add(ans.QuestionId, ans);
+            }
+
+            return dict;
+        }
     }
 }
