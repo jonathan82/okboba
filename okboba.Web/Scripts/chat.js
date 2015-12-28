@@ -32,6 +32,7 @@ function ChatSlider($container, config) {
         emoticonPages: null, //an array of objects (emoticon pages) with an array of emoticons and their nav icon
         nickname: '',
         profileId: 0,
+        convId: null,
         sendMessageCallback: null
     }
     var $chat,
@@ -262,6 +263,7 @@ var chatManager = (function ($) {
     //// Private vars
     var configMap = {
         sliderGutterWidth: 15, //spacing between chat sliders
+        initialGutterWidth: 60, //position first slider further from right
         minOverlap: 20, //minimum overlap spacing between sliders
         startZIndex: 100, //starting z-index for chat sliders
         chatSliderTemplateId: '#chatSliderTemplate',
@@ -281,7 +283,7 @@ var chatManager = (function ($) {
         emoticonLove = ['1f46a', '1f46b', '1f46c', '1f46d', '1f46e', '1f46f', '1f470', '1f471', '1f472', '1f473', '1f474', '1f475', '1f476', '1f477', '1f478', '1f479', '1f47a', '1f47b', '1f47c', '1f47d', '1f47e', '1f47f', '1f480', '1f481', '1f482', '1f483', '1f484', '1f485', '1f486', '1f487', '1f488', '1f489', '1f48a', '1f48b', '1f48c', '1f48d', '1f48e', '1f48f', '1f490', '1f491', '1f492', '1f493', '1f494', '1f495', '1f496', '1f497', '1f498', '1f499', '1f49a', '1f49b', '1f49c', '1f49d', '1f49e', '1f49f'];
 
     //// Private functions
-    function receiveMessage(from, msg) {
+    function receiveMessage(from, convId, msg) {
         //see if any open chat windows
         for (var i = 0; i < sliders.length; i++) {
             if (sliders[i].getId() == from) {
@@ -290,19 +292,15 @@ var chatManager = (function ($) {
                 return;
             }
         }
-        //if not create new one
-        //get the profile info - nickname, avatar and save it
-        chatHubProxy.server.GetProfile(from).done(function (result) {
-            console.log(result);
-        });
 
-        createChat('test', 1);
+        //if not create new one
+        createChat(from, convId);
     }
 
     function sendMessage(to, msg) {
         //send already sanitized text
         console.log('to:' + to + ', ' + msg);
-        chatHubProxy.server.SendMesage(to, msg).done(function (status) {
+        chatHubProxy.server.sendMessage(to, msg).done(function (status) {
             //successful - display status if needed
 
         }).fail(function () {
@@ -364,7 +362,7 @@ var chatManager = (function ($) {
         if (n == 0) return; //no sliders to position
 
         //get browser width minus the left and right gutters
-        bw = $(window).width() - (2 * gw);
+        bw = $(window).width() - (configMap.initialGutterWidth + gw);
 
         //get sum of all the slider widths
         sum = 0;
@@ -375,7 +373,7 @@ var chatManager = (function ($) {
 
         if (sum < bw || n==1) {
             //layout sliders side by side
-            right = gw;
+            right = configMap.initialGutterWidth;
             for (i = 0; i < n; i++) {
                 sliders[i].setPosition(right);
                 right += sliders[i].getWidth() + gw;
@@ -394,7 +392,11 @@ var chatManager = (function ($) {
 
     }
 
-    createChat = function (nickname, profileId) {
+    /*
+     * Creates a new chat window on the screen with given info. If info is null
+     * creates chat window in loading state with spinner. 
+     */
+    createChat = function (title, info) {
         var slider, zIndex;
 
         //create a new chat window and position it in browser window
@@ -409,8 +411,7 @@ var chatManager = (function ($) {
                 { emoticons: emoticonFood, navIcon: '' },
                 { emoticons: emoticonLove, navIcon: '' }
             ],
-            nickname: nickname,
-            profileId: profileId,
+            title: title,
             sendMessageCallback: sendMessage
         });
         sliders.push(slider);
@@ -435,10 +436,10 @@ var chatManager = (function ($) {
         });
 
         //Add some dummy messages
-        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
-        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
-        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
-        slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
+        //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
+        //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
+        //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
+        //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
     }
 
     initModule = function (options) {
@@ -460,8 +461,13 @@ var chatManager = (function ($) {
         chatDialogMeTemplate = $.templates(configMap.chatDialogMeTemplateId);
 
         //hookup message button
+        /*
+         * Tries to get last conversation Id. If none then create chat window with
+         * null conversation Id inidcating new conversation.  If there is previous 
+         * conversation then loads the first N messages where N is configurable.
+         * Also loads the avatar, gender, and profile info.
+         */
         $('button[data-toggle="chat"]').click(function () {
-            console.log('message user clicked');
             var nickname, id, i;
             nickname = $(this).data('name');
             id = $(this).data('id');

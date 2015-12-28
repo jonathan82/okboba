@@ -175,134 +175,21 @@ namespace okboba.Web.Helpers
 
             return new HtmlString("");
         }
-
         
-
-        //public static HtmlString Choice(this HtmlHelper htmlHelper, QuestionAnswerModel qa, Dictionary<short, Answer> compare, bool isFirst)
-        //{
-        //    var html = "";
-        //    var compareAnswer = GetMutualAnswer(qa.Question.Id, compare);
-
-        //    if (compareAnswer != null)
-        //    {
-        //        //we both answered this questions
-        //        for (int i = 0; i < qa.Question.Choices.Count; i++)
-        //        {
-        //            var tag = new TagBuilder("span");
-        //            if(isFirst) ChosenChoice(tag, i + 1, qa.Answer); //we're in the first part of the question - the chosen choice
-        //            AcceptableChoice(tag, i + 1, isFirst ? compareAnswer.ChoiceAccept : qa.Answer.ChoiceAccept);
-        //            if (isFirst)
-        //            {
-        //                if (qa.Answer.ChoiceIndex == (i + 1)) MatchChoice(tag, i + 1, compareAnswer.ChoiceAccept);
-        //            }
-        //            else
-        //            {
-        //                if (compareAnswer.ChoiceIndex == (i + 1)) MatchChoice(tag, i + 1, qa.Answer.ChoiceAccept);
-        //            }                    
-        //            tag.InnerHtml = qa.Question.Choices[i];
-        //            html += "<li>" + tag.ToString() + "</li>";
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //viewing own question or non mutually answered question
-        //        for (int i = 0; i < qa.Question.Choices.Count; i++)
-        //        {
-        //            var tag = new TagBuilder("span");
-        //            if (isFirst)
-        //            {
-        //                ChosenChoice(tag, i + 1, qa.Answer);
-        //            }
-        //            else
-        //            {
-        //                AcceptableChoice(tag, i + 1, qa.Answer.ChoiceAccept);
-        //            }
-        //            tag.InnerHtml = qa.Question.Choices[i];
-        //            html += "<li>" + tag.ToString() + "</li>";
-        //        }
-        //    }
-
-        //    return new HtmlString(html);
-        //}
-
-        //public static HtmlString Choice(this HtmlHelper htmlHelper, string choiceText, int index, Answer ans, Dictionary<short,Answer> compare )
-        //{
-        //    var html = "";
-        //    var className = "";
-        //    Answer compareAnswer;
-
-        //    if (ans.ChoiceIndex != index)
-        //    {
-        //        //not the chosen answer. show faded text
-        //        className += "question-choice-fade ";
-        //    }
-
-        //    if (compare != null && compare.TryGetValue(ans.QuestionId, out compareAnswer))
-        //    {
-        //        //we're viewing other's question and we both answered this question
-        //        //compare answers for acceptability
-        //        bool accept = true;
-
-        //        if((compareAnswer.ChoiceAccept & (1 << (index - 1))) == 0 )
-        //        {
-        //            //the choice we're on is unacceptable to the other person
-        //            className += "question-choice-unacceptable "; //strikethrough
-        //            accept = false;
-        //        }
-
-        //        if (index==ans.ChoiceIndex)
-        //        {
-        //            //we're on the choice that the user made. show red or green depending on
-        //            //whether answer is acceptable (match or no match)
-        //            if (accept)
-        //            {
-        //                className += "question-choice-match "; //green
-        //            }
-        //            else
-        //            {
-        //                className += "question-choice-nomatch "; //red
-        //            }
-        //        }
-        //    }
-
-        //    html = "<li><span class=\""+className+"\">"+choiceText+"</span></li>";
-
-        //    return new HtmlString(html);
-        //}
-
-        //public static HtmlString ChoiceAccept(this HtmlHelper htmlHelper, string choiceText, int index, Answer ans, Dictionary<short, Answer> compare)
-        //{
-        //    var className = "";
-        //    bool accept = true;
-        //    Answer compareAnswer;       
-
-        //    if (((1 << (index -1)) & ans.ChoiceAccept) == 0)
-        //    {
-        //        //the choice we're on is unacceptable
-        //        className += "question-choice-unacceptable "; //strikethrough
-        //        accept = false;
-        //    }
-
-        //    if (compare != null && 
-        //        compare.TryGetValue(ans.QuestionId, out compareAnswer) && 
-        //        compareAnswer.ChoiceIndex == index)
-        //    {
-        //        //we're comparing answers and we both answered this question and 
-        //        //we're on the choice that the other person answered
-        //        if (accept)
-        //        {
-        //            //compare answer is acceptable to this person
-
-        //        }
-        //        else
-        //        {
-        //            //compare answer is un-acceptable to this person
-        //        }
-        //    }
-
-        //    var html = "<li><span class=\""+className+"\">"+choiceText+"</span></li>";
-
-        //    return new HtmlString(html);
-        //}
+        public static HtmlString DetailDropdown(this HtmlHelper htmlHelper, string detailName, IEnumerable<ProfileDetailOption> options)
+        {
+            var selectTag = new TagBuilder("select");
+            selectTag.MergeAttribute("name", detailName);
+            selectTag.MergeAttribute("id", detailName);
+            selectTag.AddCssClass("form-control");
+            foreach (var option in options)
+            {
+                var optionTag = new TagBuilder("option");
+                optionTag.MergeAttribute("value", ""+option.Id);
+                optionTag.InnerHtml = option.Value;
+                selectTag.InnerHtml += optionTag.ToString();
+            }
+            return new HtmlString(selectTag.ToString());
+        }
     }
 }

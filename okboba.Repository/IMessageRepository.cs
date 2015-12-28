@@ -51,11 +51,11 @@ namespace okboba.Repository
 {
     public interface IMessageRepository
     {
-        IEnumerable<Message> GetMessages(int convId, int page, int numPerPage);
+        IEnumerable<Message> GetMessages(int convId, int page = 1, int numPerPage = 20);
         IEnumerable<ConversationModel> GetConversations(int id, int page, int numPerPage);
         IEnumerable<ConversationModel> GetSent(int id, int page, int numPerPage);
         Conversation GetLastConversation(int id, int other);
-        Task AddMessageAsync(int from, int to, string text, int? convId);
+        Task<int> AddMessageAsync(int from, int to, string text, int? convId);
         int GetMessageCount(int id);
         Task DeleteConversationAsync(int id, int convId);
     }

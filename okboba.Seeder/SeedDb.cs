@@ -219,6 +219,7 @@ namespace okboba.Seeder
             var colName = "";
             var details = new List<ProfileDetailOption>();
             byte id = 0;
+            var db = new OkbDbContext();
 
             while (!sr.EndOfStream)
             {
@@ -226,12 +227,18 @@ namespace okboba.Seeder
                 if (line.IndexOf('\t') != -1)
                 {
                     //detail option
-                    details.Add(new ProfileDetailOption
+                    db.ProfileDetailOptions.Add(new ProfileDetailOption
                     {
                         ColName = colName,
                         Id = id,
                         Value = line.Trim()
                     });
+                    //details.Add(new ProfileDetailOption
+                    //{
+                    //    ColName = colName,
+                    //    Id = id,
+                    //    Value = line.Trim()
+                    //});
 
                     id++;
                 }
@@ -243,11 +250,13 @@ namespace okboba.Seeder
                 }
             }
 
+            db.SaveChanges();
+
             //Dump it out
-            foreach (var option in details)
-            {
-                Console.WriteLine("{0}, {1}, {2}", option.Id, option.ColName, option.Value);
-            }
+            //foreach (var option in details)
+            //{
+            //    Console.WriteLine("{0}, {1}, {2}", option.Id, option.ColName, option.Value);
+            //}
         }
 
         /// <summary>

@@ -30,11 +30,12 @@ namespace okboba.Repository.EntityRepository
         /// <summary>
         /// 
         /// Adds a new message to the Messages table.  Creates a new converation if necessary.
-        /// Updates the LastMessage to point to new message in the ConversationMap table. 
-        /// Sets the HasBeenRead and HasReply flags
+        ///  - Updates the LastMessage to point to new message in the ConversationMap table. 
+        ///  - Sets the HasBeenRead and HasReply flags
         /// 
+        /// Returns the conversation Id the message was added to
         /// </summary>
-        public async Task AddMessageAsync(int from, int to, string text, int? convId = null)
+        public async Task<int> AddMessageAsync(int from, int to, string text, int? convId = null)
         {
             var db = new OkbDbContext();
             Message msg;
@@ -81,7 +82,7 @@ namespace okboba.Repository.EntityRepository
 
                 await db.SaveChangesAsync();
 
-                return;
+                return conv.Id; //return new conversation Id
             }
 
             //// Add to existing conversation
@@ -116,7 +117,9 @@ namespace okboba.Repository.EntityRepository
             mapMe.LastMessage = msg;
             mapOther.LastMessage = msg;
 
-            await db.SaveChangesAsync();            
+            await db.SaveChangesAsync();
+
+            return (int)convId; //return passed in conversation Id
         }
 
 
@@ -152,12 +155,12 @@ namespace okboba.Repository.EntityRepository
         /// Gets the last conversation given user has had with other user.
         /// 
         /// </summary>
-        public Conversation GetLastConversation(int id, int other)
+        public Conversation GetLastConversation(int me, int other)
         {
             var db = new OkbDbContext();
 
             var query = from map in db.ConversationMap.AsNoTracking()
-                        where map.ProfileId == id && map.Other == other
+                        where map.ProfileId == me && map.Other == other
                         orderby map.LastMessage.Timestamp descending
                         select map.Conversation;
 
@@ -166,9 +169,7 @@ namespace okboba.Repository.EntityRepository
 
 
         /// <summary>
-        /// 
-        /// Gets a paged list of messages for a given conversation, ordered by their timestamps.
-        /// 
+        /// Gets a list of messages for the given conversation Id ordered by most recent messages first.
         /// </summary>
         public IEnumerable<Message> GetMessages(int convId, int page = 1, int numPerPage = 20)
         {

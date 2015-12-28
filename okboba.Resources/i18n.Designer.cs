@@ -673,6 +673,51 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 外貌.
+        /// </summary>
+        public static string ProfileDetail_Section_Appearance {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Section_Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我的信息.
+        /// </summary>
+        public static string ProfileDetail_Section_Basic {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Section_Basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工作.
+        /// </summary>
+        public static string ProfileDetail_Section_Job {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Section_Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 生活方式.
+        /// </summary>
+        public static string ProfileDetail_Section_Lifestyle {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Section_Lifestyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 个性.
+        /// </summary>
+        public static string ProfileDetail_Section_Personality {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Section_Personality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 逛街购物.
         /// </summary>
         public static string ProfileDetail_Shopping {

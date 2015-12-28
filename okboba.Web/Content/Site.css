@@ -226,6 +226,10 @@ body {
   position: absolute;
   bottom: 10px;
   left: 50%;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
 .profile-text {
@@ -241,6 +245,8 @@ body {
 .profile-text-edit {
   width: 100%;
   min-height: 200px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 .profile-thumbnail {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -254,6 +260,8 @@ body {
 }
 .profile-detail-category {
   text-align: center;
+  color: #880E4F;
+  font-size: 1.1em;
 }
 .profile-detail-row {
   color: #9b9b9b;
@@ -333,22 +341,19 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
+  opacity: 0.7;
 }
 .profile-details {
-  border: 1px solid;
   background-color: #FCE4EC;
-  border-color: #D81B60;
   padding: 10px;
-  border-radius: 10px;
   position: relative;
+  margin-bottom: 10px;
 }
 .profile-details-me {
-  border: 1px solid;
   background-color: #FCE4EC;
-  border-color: #D81B60;
   padding: 10px;
-  border-radius: 10px;
   position: relative;
+  margin-bottom: 10px;
 }
 .profile-details-me:hover {
   cursor: pointer;
@@ -357,6 +362,27 @@ body {
 .profile-avatar {
   width: 180px;
   height: 180px;
+}
+/*
+    Edit Profile Detail Sytles
+*/
+.pd-modal-label {
+  text-align: right;
+  width: 70px;
+  font-weight: normal;
+}
+.pd-modal-section-header {
+  border-bottom: 1px solid #f7b6cc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #880E4F;
+}
+.pd-modal-form .form-group-sm {
+  margin-bottom: 8px;
+}
+.pd-modal-form select.form-control {
+  height: 25px;
 }
 .matches-container {
   text-align: center;
@@ -655,14 +681,14 @@ body {
 .chat-dialog-me {
   display: inline-block;
   padding: 5px;
-  background-color: #CFD8DC;
+  background-color: #ffffb3;
   border-radius: 5px 0 5px 5px;
   text-align: left;
 }
 .chat-dialog-them {
   display: inline-block;
   padding: 5px;
-  background-color: #fff;
+  background-color: #b3ffb3;
   border-radius: 0 5px 5px 5px;
 }
 .chat-dialog-them-wrapper {
@@ -673,7 +699,7 @@ body {
 .chat-dialog-me-wrapper {
   text-align: right;
   position: relative;
-  margin-right: 15px;
+  margin-right: 10px;
   margin-bottom: 10px;
 }
 .chat-dialog-avatar {
@@ -684,13 +710,13 @@ body {
 }
 .chat-dialog-curve-them {
   position: absolute;
-  left: -15px;
+  left: -10px;
   top: 0;
 }
 .chat-dialog-curve-me {
   position: absolute;
   top: 0;
-  right: -15px;
+  right: -10px;
 }
 .chat-input-wrapper {
   position: relative;

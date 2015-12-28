@@ -12,7 +12,9 @@
 
     // Initialize the plugin. this refers to the edit icon with data-target = id of div
     // containing the profile text
-    $.fn.editinplace = function () {        
+    $.fn.editinplace = function () {
+        
+        var editTemplate = $.templates('#editTextTemplate');
 
         this.click(function (e) {
 
@@ -57,10 +59,15 @@
             //Grab the html to put in the textarea
             var html = $qDiv.hasClass('profile-text-placeholder') ? '' : $qDiv.html();
 
-            $newForm = $('<form><textarea class="profile-text-edit" id=qText-"' + $qDiv.prop('id') + '" name="text">' + br2nl(html) + '</textarea> \
-                          <button type="button" class="btn btn-default">Cancel</button> \
-                          <button type="button" class="btn btn-primary">Save</button> \
-                          <input type="hidden" name="whichQuestion" value="' + $qDiv.prop('id') + '" /></form>');
+            //$newForm = $('<form><textarea class="profile-text-edit form-control" id=qText-"' + $qDiv.prop('id') + '" name="text">' + br2nl(html) + '</textarea> \
+            //              <button type="button" class="btn btn-default">Cancel</button> \
+            //              <button type="button" class="btn btn-primary">Save</button> \
+            //              <input type="hidden" name="whichQuestion" value="' + $qDiv.prop('id') + '" /></form>');
+            $newForm = $(editTemplate.render({
+                id: $qDiv.prop('id'),
+                text: br2nl(html)
+            }));
+
             $qDiv.after($newForm);
 
             //Hide the original text and edit icon

@@ -3,13 +3,17 @@
 @using okboba.Repository
 @using okboba.Web.Helpers
 
+@Html.Partial("_ProfileDetailModal")
+
+@Html.Partial("_EditTextTemplate")
+
 <!-- Profile Details -->
 <div class="row">
     <div class="col-md-8">
         <div class="profile-text-question">
             @i18n.Profile_Question1
         </div>
-        <div class="profile-text">            
+        <div class="profile-text">
             @Html.ProfileText(Model.ProfileText.Question1, "q1", Model.isMe)
             @Html.EditTextIcon("#q1", Model.isMe)
         </div>
@@ -42,20 +46,19 @@
     <div class="col-md-1"></div>
 
     <div class="col-md-3">
+
+        <!-------- Basic Information ---------->
         <div class="@(Model.isMe ? "profile-details-me" : "profile-details")">
-            
             @if (Model.isMe)
             {
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
-            
-            <!-------- Basic ---------->
             <div class="profile-detail-category">
-                Basic
+                @i18n.ProfileDetail_Section_Basic
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_LookingFor:
-                @Model.DetailDict[OkbConstants.DETAIL_LOOKINGFOR]
+                @Model.GetOptionValue(OkbConstants.DETAIL_LOOKINGFOR, Model.ProfileDetail.LookingFor)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Height:
@@ -63,174 +66,198 @@
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Education:
-                @Model.DetailDict[OkbConstants.DETAIL_EDUCATION]
+                @Model.GetOptionValue(OkbConstants.DETAIL_EDUCATION, Model.ProfileDetail.Education)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_RelationshipStatus:
-                @Model.DetailDict[OkbConstants.DETAIL_RELATIONSHIPSTATUS]
+                @Model.GetOptionValue(OkbConstants.DETAIL_RELATIONSHIPSTATUS, Model.ProfileDetail.RelationshipStatus)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_HaveChildren:
-                @Model.DetailDict[OkbConstants.DETAIL_HAVECHILDREN]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HAVECHILDREN, Model.ProfileDetail.HaveChildren)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_WantChildren:
-                @Model.DetailDict[OkbConstants.DETAIL_WANTCHILDREN]
+                @Model.GetOptionValue(OkbConstants.DETAIL_WANTCHILDREN, Model.ProfileDetail.WantChildren)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Nationality:
-                @Model.DetailDict[OkbConstants.DETAIL_NATIONALITY]
+                @Model.GetOptionValue(OkbConstants.DETAIL_NATIONALITY, Model.ProfileDetail.Nationality)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_MonthlyIncome:
-                @Model.DetailDict[OkbConstants.DETAIL_MONTHLYINCOME]
+                @Model.GetOptionValue(OkbConstants.DETAIL_MONTHLYINCOME, Model.ProfileDetail.MonthlyIncome)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_LivingSituation:
-                @Model.DetailDict[OkbConstants.DETAIL_LIVINGSITUATION]
+                @Model.GetOptionValue(OkbConstants.DETAIL_LIVINGSITUATION, Model.ProfileDetail.LivingSituation)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_CarSituation:
-                @Model.DetailDict[OkbConstants.DETAIL_CARSITUATION]
+                @Model.GetOptionValue(OkbConstants.DETAIL_CARSITUATION, Model.ProfileDetail.CarSituation)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_EconomicConcept:
-                @Model.DetailDict[OkbConstants.DETAIL_ECONOMICCONCEPT]
+                @Model.GetOptionValue(OkbConstants.DETAIL_ECONOMICCONCEPT, Model.ProfileDetail.EconomicConcept)
             </div>
+        </div>
 
-            <!-------- Lifestyle ---------->
+        <!-------- Lifestyle ---------->
+        <div class="@(Model.isMe ? "profile-details-me" : "profile-details")">
+            @if (Model.isMe)
+            {
+                <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
+            }
             <div class="profile-detail-category">
-                Lifestyle
+                @i18n.ProfileDetail_Section_Lifestyle
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Smoke:
-                @Model.DetailDict[OkbConstants.DETAIL_SMOKE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SMOKE, Model.ProfileDetail.Smoke)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Drink:
-                @Model.DetailDict[OkbConstants.DETAIL_DRINK]
+                @Model.GetOptionValue(OkbConstants.DETAIL_DRINK, Model.ProfileDetail.Drink)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Exercise:
-                @Model.DetailDict[OkbConstants.DETAIL_EXERCISE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_EXERCISE, Model.ProfileDetail.Exercise)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Eating:
-                @Model.DetailDict[OkbConstants.DETAIL_EATING]
+                @Model.GetOptionValue(OkbConstants.DETAIL_EATING, Model.ProfileDetail.Eating)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Shopping:
-                @Model.DetailDict[OkbConstants.DETAIL_SHOPPING]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SHOPPING, Model.ProfileDetail.Shopping)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Religion:
-                @Model.DetailDict[OkbConstants.DETAIL_RELIGION]
+                @Model.GetOptionValue(OkbConstants.DETAIL_RELIGION, Model.ProfileDetail.Religion)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_SleepSchedule:
-                @Model.DetailDict[OkbConstants.DETAIL_SLEEPSCHEDULE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SLEEPSCHEDULE, Model.ProfileDetail.SleepSchedule)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_SocialCircle:
-                @Model.DetailDict[OkbConstants.DETAIL_SOCIALCIRCLE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SOCIALCIRCLE, Model.ProfileDetail.SocialCircle)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_MostMoney:
-                @Model.DetailDict[OkbConstants.DETAIL_MOSTMONEY]
+                @Model.GetOptionValue(OkbConstants.DETAIL_MOSTMONEY, Model.ProfileDetail.MostMoney)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Housework:
-                @Model.DetailDict[OkbConstants.DETAIL_HOUSEWORK]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HOUSEWORK, Model.ProfileDetail.Housework)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_LovePets:
-                @Model.DetailDict[OkbConstants.DETAIL_LOVEPETS]
+                @Model.GetOptionValue(OkbConstants.DETAIL_LOVEPETS, Model.ProfileDetail.LovePets)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_HavePets:
-                @Model.DetailDict[OkbConstants.DETAIL_HAVEPETS]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HAVEPETS, Model.ProfileDetail.HavePets)
             </div>
+        </div>
 
-            <!-------- Job ---------->
+        <!-------- Job ---------->
+        <div class="@(Model.isMe ? "profile-details-me" : "profile-details")">
+            @if (Model.isMe)
+            {
+                <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
+            }
             <div class="profile-detail-category">
-                Job
+                @i18n.ProfileDetail_Section_Job
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Job:
-                @Model.DetailDict[OkbConstants.DETAIL_JOB]
+                @Model.GetOptionValue(OkbConstants.DETAIL_JOB, Model.ProfileDetail.Job)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Industry:
-                @Model.DetailDict[OkbConstants.DETAIL_INDUSTRY]
+                @Model.GetOptionValue(OkbConstants.DETAIL_INDUSTRY, Model.ProfileDetail.Industry)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_WorkHours:
-                @Model.DetailDict[OkbConstants.DETAIL_WORKHOURS]
+                @Model.GetOptionValue(OkbConstants.DETAIL_WORKHOURS, Model.ProfileDetail.WorkHours)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_CareerAndFamily:
-                @Model.DetailDict[OkbConstants.DETAIL_CAREERANDFAMILY]
+                @Model.GetOptionValue(OkbConstants.DETAIL_CAREERANDFAMILY, Model.ProfileDetail.CareerAndFamily)
             </div>
+        </div>
 
-            <!-------- Appearance ---------->
+        <!-------- Appearance ---------->
+        <div class="@(Model.isMe ? "profile-details-me" : "profile-details")">
+            @if (Model.isMe)
+            {
+                <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
+            }
             <div class="profile-detail-category">
-                Appearance
+                @i18n.ProfileDetail_Section_Appearance
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_BodyType:
-                @Model.DetailDict[OkbConstants.DETAIL_BODYTYPE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_BODYTYPE, Model.ProfileDetail.BodyType)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_FaceType:
-                @Model.DetailDict[OkbConstants.DETAIL_FACETYPE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_FACETYPE, Model.ProfileDetail.FaceType)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Eye:
-                @Model.DetailDict[OkbConstants.DETAIL_EYECOLOR],
-                @Model.DetailDict[OkbConstants.DETAIL_EYESHAPE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_EYECOLOR, Model.ProfileDetail.EyeColor),
+                @Model.GetOptionValue(OkbConstants.DETAIL_EYESHAPE, Model.ProfileDetail.EyeShape)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Hair:
-                @Model.DetailDict[OkbConstants.DETAIL_HAIRCOLOR],
-                @Model.DetailDict[OkbConstants.DETAIL_HAIRTYPE],
-                @Model.DetailDict[OkbConstants.DETAIL_HAIRLENGTH]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HAIRCOLOR, Model.ProfileDetail.HairColor),
+                @Model.GetOptionValue(OkbConstants.DETAIL_HAIRTYPE, Model.ProfileDetail.HairType),
+                @Model.GetOptionValue(OkbConstants.DETAIL_HAIRLENGTH, Model.ProfileDetail.HairLength)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_SkinType:
-                @Model.DetailDict[OkbConstants.DETAIL_SKINTYPE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SKINTYPE, Model.ProfileDetail.SkinType)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Muscle:
-                @Model.DetailDict[OkbConstants.DETAIL_MUSCLE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_MUSCLE, Model.ProfileDetail.Muscle)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_HealthCondition:
-                @Model.DetailDict[OkbConstants.DETAIL_HEALTHCONDITION]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HEALTHCONDITION, Model.ProfileDetail.HealthCondition)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_DressStyle:
-                @Model.DetailDict[OkbConstants.DETAIL_DRESSSTYLE]
+                @Model.GetOptionValue(OkbConstants.DETAIL_DRESSSTYLE, Model.ProfileDetail.DressStyle)
             </div>
+        </div>
 
-            <!-------- Personality ---------->
+        <!-------- Personality ---------->
+        <div class="@(Model.isMe ? "profile-details-me" : "profile-details")">
+            @if (Model.isMe)
+            {
+                <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
+            }
             <div class="profile-detail-category">
-                Personality
+                @i18n.ProfileDetail_Section_Personality
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Sociability:
-                @Model.DetailDict[OkbConstants.DETAIL_SOCIABILITY]
+                @Model.GetOptionValue(OkbConstants.DETAIL_SOCIABILITY, Model.ProfileDetail.Sociability)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Humour:
-                @Model.DetailDict[OkbConstants.DETAIL_HUMOUR]
+                @Model.GetOptionValue(OkbConstants.DETAIL_HUMOUR, Model.ProfileDetail.Humour)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Temper:
-                @Model.DetailDict[OkbConstants.DETAIL_TEMPER]
+                @Model.GetOptionValue(OkbConstants.DETAIL_TEMPER, Model.ProfileDetail.Temper)
             </div>
             <div class="profile-detail-row">
                 @i18n.ProfileDetail_Feelings:
-                @Model.DetailDict[OkbConstants.DETAIL_FEELINGS]
+                @Model.GetOptionValue(OkbConstants.DETAIL_FEELINGS, Model.ProfileDetail.Feelings)
             </div>
 
         </div>

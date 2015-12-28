@@ -27,7 +27,7 @@ namespace okboba.Repository.EntityRepository
         #endregion
 
         //////////////////// Member variables ///////////////////////
-        Dictionary<string, List<ProfileDetailOption>> _detailOptions; //cache the options in memory
+        Dictionary<string, IList<ProfileDetailOption>> _detailOptions; //cache the options in memory
 
 
         ////////////////////// Methods //////////////////
@@ -60,58 +60,67 @@ namespace okboba.Repository.EntityRepository
             return text;
         }
 
-        public string GetOptionValue(string colName, byte id)
-        {
-            if(_detailOptions==null)
-            {
-                //not cached, load from database
-                LoadDetailOptions();
-            }
-
-            if (!_detailOptions.ContainsKey(colName))
-            {
-                //No detail option with this name, probably should log error
-                return "";
-            }
-
-            foreach (var o in _detailOptions[colName])
-            {
-                if (o.Id == id) return o.Value;
-            }
-
-            //no option found for ID - probably should log error
-            return "";
-        }
-
-        public List<ProfileDetailOption> GetOptionValues(string colName)
+        public IDictionary<string,IList<ProfileDetailOption>> GetDetailOptions()
         {
             if (_detailOptions==null)
             {
-                //not cached, load from database
                 LoadDetailOptions();
             }
-
-            if (!_detailOptions.ContainsKey(colName))
-            {
-                //return empty list, probably should log error
-                return new List<ProfileDetailOption>();
-            }
-
-            return _detailOptions[colName];
+            return _detailOptions;
         }
+
+        //public string GetOptionValue(string colName, byte id)
+        //{
+        //    if(_detailOptions==null)
+        //    {
+        //        //not cached, load from database
+        //        LoadDetailOptions();
+        //    }
+
+        //    if (!_detailOptions.ContainsKey(colName))
+        //    {
+        //        //No detail option with this name, probably should log error
+        //        return "";
+        //    }
+
+        //    foreach (var o in _detailOptions[colName])
+        //    {
+        //        if (o.Id == id) return o.Value;
+        //    }
+
+        //    //no option found for ID - probably should log error
+        //    return "";
+        //}
+
+        //public List<ProfileDetailOption> GetOptionValues(string colName)
+        //{
+        //    if (_detailOptions==null)
+        //    {
+        //        //not cached, load from database
+        //        LoadDetailOptions();
+        //    }
+
+        //    if (!_detailOptions.ContainsKey(colName))
+        //    {
+        //        //return empty list, probably should log error
+        //        return new List<ProfileDetailOption>();
+        //    }
+
+        //    return _detailOptions[colName];
+        //}
 
         private void LoadDetailOptions()
         {
             var db = new OkbDbContext();
 
-            _detailOptions = new Dictionary<string, List<ProfileDetailOption>>();
+            _detailOptions = new Dictionary<string, IList<ProfileDetailOption>>();
 
             var query = from o in db.ProfileDetailOptions.AsNoTracking()
                         orderby o.ColName, o.Id ascending
                         select o;
 
             foreach (var option in query)
-            {
+            {               
                 if (!_detailOptions.ContainsKey(option.ColName))
                 {
                     _detailOptions.Add(option.ColName, new List<ProfileDetailOption>());

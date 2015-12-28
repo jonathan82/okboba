@@ -18,6 +18,11 @@ namespace okboba
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             OkbobaConfig.Init();
+
+            //Increase performance by disabling WebForms view engine
+            //http://encosia.com/a-harsh-reminder-about-the-importance-of-debug-false/
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
         }
     }
 }

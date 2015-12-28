@@ -46,20 +46,22 @@ namespace okboba.Controllers
 
             // Get the profile details as a dictionary
             var profileDetail = _profileRepo.GetProfileDetail(profileId);
-            var detailDict = new Dictionary<string, string>();
-            foreach (var prop in profileDetail.GetType().GetProperties())
-            {
-                if (prop.PropertyType != typeof(byte)) continue;
-                var val = _profileRepo.GetOptionValue(prop.Name, (byte)(prop.GetValue(profileDetail)));
-                detailDict.Add(prop.Name, val);
-            }
+            var detailOptions = _profileRepo.GetDetailOptions();
+            //var detailDict = new Dictionary<string, string>();
+            //foreach (var prop in profileDetail.GetType().GetProperties())
+            //{
+            //    if (prop.PropertyType != typeof(byte)) continue;
+            //    var val = _profileRepo.GetOptionValue(prop.Name, (byte)(prop.GetValue(profileDetail)));
+            //    detailDict.Add(prop.Name, val);
+            //}
 
             //Populate view model
             var vm = new ProfileDetailViewModel
             {
                 ProfileText = profileText,
                 ProfileDetail = profileDetail,
-                DetailDict = detailDict,                
+                //DetailDict = detailDict,                
+                DetailOptions = detailOptions,
                 isMe = isMe
             };
 

@@ -1,4 +1,5 @@
-﻿using okboba.Resources;
+﻿using Newtonsoft.Json;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,8 +42,10 @@ namespace okboba.Entities
         [StringLength(128)]
         public string UserId { get; set; }
 
-        //Navigation properties
+        //Navigation properties. We don't want to automatically serialize these properties so use JsonIgnore
+        [JsonIgnore]
         public virtual Location Location { get; set; }
+        [JsonIgnore]
         public virtual ProfileText ProfileText { get; set; }
 
         //Photo Helper methods

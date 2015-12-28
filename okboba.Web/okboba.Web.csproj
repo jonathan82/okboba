@@ -488,7 +488,6 @@
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
     <Content Include="Views\Photo\_PhotoUpload.cshtml" />
-    <Content Include="Views\Profile\_EditProfileDetail.cshtml" />
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
     <Content Include="Views\Photo\_EditThumbnail.cshtml" />
@@ -512,6 +511,8 @@
     <Content Include="Views\Messages\Sent.cshtml" />
     <Content Include="Views\Messages\_Navtab.cshtml" />
     <Content Include="Views\Matches\_MatchesTemplate.cshtml" />
+    <Content Include="Views\Profile\_ProfileDetailModal.cshtml" />
+    <Content Include="Views\Profile\_EditTextTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

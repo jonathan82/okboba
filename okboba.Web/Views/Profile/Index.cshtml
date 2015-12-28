@@ -11,10 +11,17 @@
 
 @Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
 
+
 @section Scripts {
 
     <script>
-        $('.js-editinplace-editicon').editinplace();        
-        $('[data-toggle="photoupload"]').photoUpload();
+        $(function () {
+            //document ready
+            $('.js-editinplace-editicon').editinplace();
+            $('[data-toggle="photoupload"]').photoUpload();
+            $('.profile-detail-editicon').click(function () {
+                $('#editProfileDetailModal').modal('show');
+            });
+        });        
     </script>
 }
