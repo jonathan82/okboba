@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,9 @@ namespace okboba.Repository
         Profile GetProfile(int profileId);
         ProfileText GetProfileText(int profileId);
         ProfileDetail GetProfileDetail(int profileId);
-        //string GetOptionValue(string colName, byte id);
-        //List<ProfileDetailOption> GetOptionValues(string colName);
         void EditProfileText(int profileId, string text, string whichQuestion);
         int GetProfileId(string userId);
         IDictionary<string, IList<ProfileDetailOption>> GetDetailOptions();
+        void EditDetails(ProfileDetail details, OkbConstants.ProfileDetailSections section, int profileId);
     }
 }

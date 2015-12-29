@@ -54,9 +54,6 @@
 /**********************
     Bootstrap Overrides
 ***********************/
-.modal-open {
-  overflow: scroll;
-}
 .container {
   border-radius: 6px;
 }
@@ -258,15 +255,61 @@ body {
   opacity: .54;
   color: #000;
 }
+/*****************************************
+
+    Profile Detail Styles
+
+******************************************/
 .profile-detail-category {
-  text-align: center;
   color: #880E4F;
   font-size: 1.1em;
+  text-align: center;
 }
 .profile-detail-row {
   color: #9b9b9b;
-  font-family: SimSun;
+  position: relative;
 }
+.profile-detail-overlay {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  color: #D81B60;
+}
+.profile-detail-overlay:empty::after {
+  content: '--';
+}
+.profile-detail {
+  color: #D81B60;
+}
+.profile-detail:empty::after {
+  content: '--';
+}
+.profile-details {
+  background-color: #FCE4EC;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.profile-details-me {
+  background-color: #FCE4EC;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.profile-details-me:hover {
+  cursor: pointer;
+  background-color: #fef2f6;
+}
+.pd-form-inline .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+/***********************************
+
+    Profile Header styles
+
+************************************/
 .profile-header-match {
   color: #FF0066;
   font-size: 72px;
@@ -343,22 +386,6 @@ body {
   right: 10px;
   opacity: 0.7;
 }
-.profile-details {
-  background-color: #FCE4EC;
-  padding: 10px;
-  position: relative;
-  margin-bottom: 10px;
-}
-.profile-details-me {
-  background-color: #FCE4EC;
-  padding: 10px;
-  position: relative;
-  margin-bottom: 10px;
-}
-.profile-details-me:hover {
-  cursor: pointer;
-  background-color: #fef2f6;
-}
 .profile-avatar {
   width: 180px;
   height: 180px;
@@ -366,24 +393,35 @@ body {
 /*
     Edit Profile Detail Sytles
 */
+/*.pd-modal-row {
+
+}
+
 .pd-modal-label {
-  text-align: right;
-  width: 70px;
-  font-weight: normal;
+    text-align: right;
+    width: 70px;
+    font-weight: normal;
 }
+
+.pd-modal-select {
+
+}
+
 .pd-modal-section-header {
-  border-bottom: 1px solid #f7b6cc;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  color: #880E4F;
+    border-bottom: 1px solid darken(@primary-color-1,10%);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: @primary-color-3;
 }
+
 .pd-modal-form .form-group-sm {
-  margin-bottom: 8px;
+    margin-bottom: 8px;
 }
+
 .pd-modal-form select.form-control {
-  height: 25px;
-}
+    height: 25px;
+}*/
 .matches-container {
   text-align: center;
 }

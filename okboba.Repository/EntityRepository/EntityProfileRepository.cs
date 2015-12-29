@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,47 +69,7 @@ namespace okboba.Repository.EntityRepository
             }
             return _detailOptions;
         }
-
-        //public string GetOptionValue(string colName, byte id)
-        //{
-        //    if(_detailOptions==null)
-        //    {
-        //        //not cached, load from database
-        //        LoadDetailOptions();
-        //    }
-
-        //    if (!_detailOptions.ContainsKey(colName))
-        //    {
-        //        //No detail option with this name, probably should log error
-        //        return "";
-        //    }
-
-        //    foreach (var o in _detailOptions[colName])
-        //    {
-        //        if (o.Id == id) return o.Value;
-        //    }
-
-        //    //no option found for ID - probably should log error
-        //    return "";
-        //}
-
-        //public List<ProfileDetailOption> GetOptionValues(string colName)
-        //{
-        //    if (_detailOptions==null)
-        //    {
-        //        //not cached, load from database
-        //        LoadDetailOptions();
-        //    }
-
-        //    if (!_detailOptions.ContainsKey(colName))
-        //    {
-        //        //return empty list, probably should log error
-        //        return new List<ProfileDetailOption>();
-        //    }
-
-        //    return _detailOptions[colName];
-        //}
-
+       
         private void LoadDetailOptions()
         {
             var db = new OkbDbContext();
@@ -176,6 +137,66 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var user = db.Users.Find(userId);
             return user == null ? -1 : user.Profile.Id;
+        }
+
+        public void EditDetails(ProfileDetail details, OkbConstants.ProfileDetailSections section, int profileId)
+        {
+            var db = new OkbDbContext();
+
+            //check if we're updating or adding
+            var currDetails = db.ProfileDetails.Find(profileId);
+            if (currDetails==null)
+            {
+                //adding new Profile Detail row
+                details.ProfileId = profileId;
+                db.ProfileDetails.Add(details);
+                db.SaveChanges();
+                return;
+            }
+
+            //otherwise we're updating
+            //db.ProfileDetails.Attach(details);
+            //db.Entry(details).State = System.Data.Entity.EntityState.Modified;
+            
+            switch (section)
+            {
+                case OkbConstants.ProfileDetailSections.Basic:
+                    currDetails.LookingFor = details.LookingFor;
+                    currDetails.Height = details.Height;
+                    currDetails.Education = details.Education;
+                    currDetails.RelationshipStatus = details.RelationshipStatus;
+                    currDetails.HaveChildren = details.HaveChildren;
+                    currDetails.WantChildren = details.WantChildren;
+                    currDetails.Nationality = details.Nationality;
+                    currDetails.MonthlyIncome = details.MonthlyIncome;
+                    currDetails.LivingSituation = details.LivingSituation;
+                    currDetails.CarSituation = details.CarSituation;
+                    currDetails.EconomicConcept = details.EconomicConcept;
+                    //db.Entry(details).Property(col => col.LookingFor).IsModified = true;
+                    //db.Entry(details).Property(col => col.Height).IsModified = true;
+                    //db.Entry(details).Property(col => col.Education).IsModified = true;
+                    //db.Entry(details).Property(col => col.RelationshipStatus).IsModified = true;
+                    //db.Entry(details).Property(col => col.HaveChildren).IsModified = true;
+                    //db.Entry(details).Property(col => col.WantChildren).IsModified = true;
+                    //db.Entry(details).Property(col => col.Nationality).IsModified = true;
+                    //db.Entry(details).Property(col => col.MonthlyIncome).IsModified = true;
+                    //db.Entry(details).Property(col => col.LivingSituation).IsModified = true;
+                    //db.Entry(details).Property(col => col.CarSituation).IsModified = true;
+                    //db.Entry(details).Property(col => col.EconomicConcept).IsModified = true;
+                    break;
+                case OkbConstants.ProfileDetailSections.Lifestyle:
+                    break;
+                case OkbConstants.ProfileDetailSections.Job:
+                    break;
+                case OkbConstants.ProfileDetailSections.Appearance:
+                    break;
+                case OkbConstants.ProfileDetailSections.Personality:
+                    break;
+                default:
+                    break;
+            }
+
+            db.SaveChanges();
         }
     }
 }

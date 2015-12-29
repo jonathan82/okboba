@@ -126,6 +126,18 @@ namespace okboba.Controllers
             return View(vm);
         }
         
+        /// <summary>
+        /// API: edit the profile details
+        /// </summary>
+        [HttpPost]
+        public ActionResult EditDetail(ProfileDetail details, int section)
+        {
+            var me = GetProfileId();
+
+            _profileRepo.EditDetails(details, (OkbConstants.ProfileDetailSections)section, me);
+
+            return Redirect("/profile");
+        }
 
         /// <summary>
         /// API: Update profile text

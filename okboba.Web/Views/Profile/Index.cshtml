@@ -19,8 +19,20 @@
             //document ready
             $('.js-editinplace-editicon').editinplace();
             $('[data-toggle="photoupload"]').photoUpload();
-            $('.profile-detail-editicon').click(function () {
-                $('#editProfileDetailModal').modal('show');
+            $('#detailBasicSection').click(function () {
+                $('#detailBasicModal').modal('show');
+            });
+            $('#detailLifestyleSection').click(function () {
+                $('#detailLifestyleModal').modal('show');
+            });
+            $('#detailJobSection').click(function () {
+                $('#detailJobModal').modal('show');
+            });
+            $('#detailAppearanceSection').click(function () {
+                $('#detailAppearanceModal').modal('show');
+            });
+            $('#detailPersonalitySection').click(function () {
+                $('#detailPersonalityModal').modal('show');
             });
         });        
     </script>

@@ -513,6 +513,11 @@
     <Content Include="Views\Matches\_MatchesTemplate.cshtml" />
     <Content Include="Views\Profile\_ProfileDetailModal.cshtml" />
     <Content Include="Views\Profile\_EditTextTemplate.cshtml" />
+    <Content Include="Views\Profile\_DetailBasicModal.cshtml" />
+    <Content Include="Views\Profile\_DetailLifestyleModal.cshtml" />
+    <Content Include="Views\Profile\_DetailJobModal.cshtml" />
+    <Content Include="Views\Profile\_DetailAppearanceModal.cshtml" />
+    <Content Include="Views\Profile\_DetailPersonalityModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

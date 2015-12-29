@@ -1,0 +1,31 @@
+﻿@model okboba.Web.Models.ProfileDetailViewModel
+@using okboba.Resources
+@using okboba.Web.Helpers
+
+<!-- Modal -->
+<div class="modal fade" id="detailPersonalityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content form-horizontal" method="post" action="/profile/editdetail">
+            <input type="hidden" name="section" value="@((int)OkbConstants.ProfileDetailSections.Personality)" />
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@i18n.ProfileDetail_Section_Personality</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <!--------------------- Personality ----------------------------->
+                
+            </div> <!--End modal body-->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Close</button>
+                <button type="submit" class="btn btn-primary">@i18n.Common_Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

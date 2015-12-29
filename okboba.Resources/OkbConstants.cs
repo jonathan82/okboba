@@ -36,6 +36,13 @@
         public const int MAX_PROFILE_TEXT_SIZE = 4000;
 
         //Profile Details
+        public enum ProfileDetailSections
+        {
+            Basic, Lifestyle, Job, Appearance, Personality
+        }
+        public const int MIN_HEIGHT = 120; //CM
+        public const int MAX_HEIGHT = 220; //CM
+        public const string DETAIL_HEIGHT = "Height";
         public const string DETAIL_EDUCATION = "Education";
         public const string DETAIL_RELATIONSHIPSTATUS = "RelationshipStatus";
         public const string DETAIL_HAVECHILDREN = "HaveChildren";

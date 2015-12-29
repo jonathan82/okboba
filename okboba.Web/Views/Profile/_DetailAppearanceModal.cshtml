@@ -1,0 +1,103 @@
+﻿@model okboba.Web.Models.ProfileDetailViewModel
+@using okboba.Resources
+@using okboba.Web.Helpers
+
+<!-- Modal -->
+<div class="modal fade" id="detailAppearanceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content form-horizontal" method="post" action="/profile/editdetail">
+            <input type="hidden" name="section" value="@((int)OkbConstants.ProfileDetailSections.Appearance)" />
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@i18n.ProfileDetail_Section_Appearance</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <!--------------------- Appearance Information ----------------------------->
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_BODYTYPE" class="col-sm-3 control-label">@i18n.ProfileDetail_BodyType:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_BODYTYPE, Model.GetOptions(OkbConstants.DETAIL_BODYTYPE), Model.ProfileDetail.BodyType)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_FACETYPE" class="col-sm-3 control-label">@i18n.ProfileDetail_FaceType:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_FACETYPE, Model.GetOptions(OkbConstants.DETAIL_FACETYPE), Model.ProfileDetail.FaceType)
+                    </div>
+                </div>
+                <!-- Eye -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@i18n.ProfileDetail_Eye:</label>
+                    <div class="col-sm-9">
+                        <div class="form-inline pd-form-inline">
+                            <div class="form-group">
+                                <label for="@OkbConstants.DETAIL_EYESHAPE">@i18n.ProfileDetail_Shape:</label>
+                                @Html.DetailDropdown(OkbConstants.DETAIL_EYESHAPE, Model.GetOptions(OkbConstants.DETAIL_EYESHAPE), Model.ProfileDetail.EyeShape)
+                            </div>
+                            <div class="form-group">
+                                <label for="@OkbConstants.DETAIL_EYECOLOR">@i18n.ProfileDetail_Color:</label>
+                                @Html.DetailDropdown(OkbConstants.DETAIL_EYECOLOR, Model.GetOptions(OkbConstants.DETAIL_EYECOLOR), Model.ProfileDetail.EyeColor)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hair-->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@i18n.ProfileDetail_Hair:</label>
+                    <div class="col-sm-10">
+                        <div class="form-inline pd-form-inline">
+                            <div class="form-group">
+                                <label for="@OkbConstants.DETAIL_HAIRCOLOR">@i18n.ProfileDetail_Color:</label>
+                                @Html.DetailDropdown(OkbConstants.DETAIL_HAIRCOLOR, Model.GetOptions(OkbConstants.DETAIL_HAIRCOLOR), Model.ProfileDetail.HairColor)
+                            </div>
+                            <div class="form-group">
+                                <label for="@OkbConstants.DETAIL_HAIRTYPE">@i18n.ProfileDetail_Style:</label>
+                                @Html.DetailDropdown(OkbConstants.DETAIL_HAIRTYPE, Model.GetOptions(OkbConstants.DETAIL_HAIRTYPE), Model.ProfileDetail.HairType)
+                            </div>
+                            <div class="form-group">
+                                <label for="@OkbConstants.DETAIL_HAIRLENGTH">@i18n.ProfileDetail_Length:</label>
+                                @Html.DetailDropdown(OkbConstants.DETAIL_HAIRLENGTH, Model.GetOptions(OkbConstants.DETAIL_HAIRLENGTH), Model.ProfileDetail.HairLength)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_SKINTYPE" class="col-sm-3 control-label">@i18n.ProfileDetail_SkinType:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_SKINTYPE, Model.GetOptions(OkbConstants.DETAIL_SKINTYPE), Model.ProfileDetail.SkinType)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_MUSCLE" class="col-sm-3 control-label">@i18n.ProfileDetail_Muscle:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_MUSCLE, Model.GetOptions(OkbConstants.DETAIL_MUSCLE), Model.ProfileDetail.Muscle)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_HEALTHCONDITION" class="col-sm-3 control-label">@i18n.ProfileDetail_HealthCondition:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_HEALTHCONDITION, Model.GetOptions(OkbConstants.DETAIL_HEALTHCONDITION), Model.ProfileDetail.HealthCondition)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_DRESSSTYLE" class="col-sm-3 control-label">@i18n.ProfileDetail_DressStyle:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_DRESSSTYLE, Model.GetOptions(OkbConstants.DETAIL_DRESSSTYLE), Model.ProfileDetail.DressStyle)
+                    </div>
+                </div>
+
+            </div> <!--End modal body-->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Close</button>
+                <button type="submit" class="btn btn-primary">@i18n.Common_Save</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+

@@ -176,20 +176,67 @@ namespace okboba.Web.Helpers
             return new HtmlString("");
         }
         
-        public static HtmlString DetailDropdown(this HtmlHelper htmlHelper, string detailName, IEnumerable<ProfileDetailOption> options)
+        public static HtmlString DetailDropdown(this HtmlHelper htmlHelper, string detailName, IEnumerable<ProfileDetailOption> options, byte id)
         {
             var selectTag = new TagBuilder("select");
             selectTag.MergeAttribute("name", detailName);
             selectTag.MergeAttribute("id", detailName);
             selectTag.AddCssClass("form-control");
+
+            var optionTag = new TagBuilder("option");
+
+            //Add the "unselected" option - value = 0
+            optionTag.MergeAttribute("value", "0");
+            optionTag.InnerHtml = "--";
+            if (id == 0) optionTag.MergeAttribute("selected","");
+            selectTag.InnerHtml += optionTag.ToString();
+
             foreach (var option in options)
             {
-                var optionTag = new TagBuilder("option");
+                optionTag = new TagBuilder("option");
                 optionTag.MergeAttribute("value", ""+option.Id);
+                if (option.Id == id) optionTag.MergeAttribute("selected", "");
                 optionTag.InnerHtml = option.Value;
                 selectTag.InnerHtml += optionTag.ToString();
             }
             return new HtmlString(selectTag.ToString());
+        }
+
+        public static HtmlString HeightDropdown(this HtmlHelper htmlHelper, short height)
+        {
+            var selectTag = new TagBuilder("select");
+            selectTag.MergeAttribute("name", OkbConstants.DETAIL_HEIGHT);
+            selectTag.MergeAttribute("id", OkbConstants.DETAIL_HEIGHT);
+            selectTag.AddCssClass("form-control");
+
+            //add unselected option
+            var optionTag = new TagBuilder("option");
+            optionTag.MergeAttribute("value", "0");
+            optionTag.InnerHtml = "--";
+            if (height == 0) optionTag.MergeAttribute("selected", "");
+            selectTag.InnerHtml += optionTag.ToString();
+
+            for (int i = OkbConstants.MIN_HEIGHT; i <= OkbConstants.MAX_HEIGHT; i++)
+            {
+                optionTag = new TagBuilder("option");
+                optionTag.MergeAttribute("value", i + "");
+                if (i == height) optionTag.MergeAttribute("selected", "");
+                optionTag.InnerHtml = i + " CM";
+                selectTag.InnerHtml += optionTag.ToString();
+            }
+            return new HtmlString(selectTag.ToString());
+        }
+
+        public static HtmlString DetailValue(this HtmlHelper htmlHelper, string val)
+        {
+            var tag = new TagBuilder("div");
+            if (string.IsNullOrEmpty(val))
+            {
+                val = "--";
+            }
+            tag.AddCssClass("profile-detail-overlay");
+            tag.InnerHtml = val;
+            return new HtmlString(tag.ToString());
         }
     }
 }

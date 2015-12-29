@@ -430,6 +430,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 颜色.
+        /// </summary>
+        public static string ProfileDetail_Color {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 穿着风格.
         /// </summary>
         public static string ProfileDetail_DressStyle {
@@ -592,6 +601,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 长度.
+        /// </summary>
+        public static string ProfileDetail_Length {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 居住情况.
         /// </summary>
         public static string ProfileDetail_LivingSituation {
@@ -718,6 +736,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 形状.
+        /// </summary>
+        public static string ProfileDetail_Shape {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 逛街购物.
         /// </summary>
         public static string ProfileDetail_Shopping {
@@ -768,6 +795,15 @@ namespace okboba.Resources {
         public static string ProfileDetail_SocialCircle {
             get {
                 return ResourceManager.GetString("ProfileDetail_SocialCircle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发型.
+        /// </summary>
+        public static string ProfileDetail_Style {
+            get {
+                return ResourceManager.GetString("ProfileDetail_Style", resourceCulture);
             }
         }
         

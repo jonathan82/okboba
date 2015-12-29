@@ -405,4 +405,16 @@
   <data name="ProfileDetail_Section_Personality" xml:space="preserve">
     <value>个性</value>
   </data>
+  <data name="ProfileDetail_Color" xml:space="preserve">
+    <value>颜色</value>
+  </data>
+  <data name="ProfileDetail_Shape" xml:space="preserve">
+    <value>形状</value>
+  </data>
+  <data name="ProfileDetail_Length" xml:space="preserve">
+    <value>长度</value>
+  </data>
+  <data name="ProfileDetail_Style" xml:space="preserve">
+    <value>发型</value>
+  </data>
 </root>
