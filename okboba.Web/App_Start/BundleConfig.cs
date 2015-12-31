@@ -40,7 +40,9 @@ namespace okboba
                 "~/Scripts/questionvalidation.js",
                 "~/Scripts/questionsubmit.js",
                 "~/Scripts/validation.js",
-                "~/Scripts/chat.js"));
+                "~/Scripts/chat.js",
+                "~/Scripts/login.js",
+                "~/Scripts/register.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

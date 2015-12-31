@@ -148,5 +148,32 @@ namespace okboba.Web.Helpers
 
             return new HtmlString(html);
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////
+        public static HtmlString ShowAnswer(this HtmlHelper htmlHelper, Answer answer, Answer otherAnswer, IList<string> choices)
+        {
+            if (answer.ChoiceIndex == null || otherAnswer.ChoiceIndex == null) return new HtmlString("INVALID ANSWER");
+            var tag = new TagBuilder("span");
+            tag.AddCssClass(answer.IsMatch(otherAnswer) ? "question-choice-green" : "question-choice-red");
+            tag.InnerHtml = choices[((int)answer.ChoiceIndex - 1) % choices.Count];
+            return new HtmlString(tag.ToString());
+        }
+
+        public static HtmlString ShowAnswersMe(this HtmlHelper htmlHelper, Answer answer, IList<string> choices)
+        {
+            var html = "";
+
+            for (int i = 1; i <= choices.Count; i++)
+            {
+                var tag = new TagBuilder("li");
+                tag.AddCssClass(answer.ChoiceIndex == i ? "question-choice-check" : "question-choice-bullet");
+                tag.AddCssClass(answer.IsMatch(i) ? "question-choice-green" : "question-choice-strike");
+                tag.InnerHtml = choices[i - 1];
+
+                html += tag.ToString();
+            }
+
+            return new HtmlString(html);
+        }
     }
 }

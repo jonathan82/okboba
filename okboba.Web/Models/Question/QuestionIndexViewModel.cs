@@ -16,5 +16,12 @@ namespace okboba.Web.Models
         public IPagedList<QuestionAnswerModel> Questions { get; set; }
         public Dictionary<short, Answer> CompareQuestions { get; set; }
         public IEnumerable<QuestionModel> NextQuestions { get; set; }
+        public Profile Profile { get; set; }
+        public Profile CompareProfile { get; set; }
+        //public string AvatarSmall { get; set; }
+        //public string AvatarCompareSmall { get; set; }
+        //public byte Gender { get; set; }
+        //public byte GenderCompare { get; set; }
+        //public string UserIdCompare { get; set; }
     }
 }

@@ -1,12 +1,13 @@
 ﻿@model okboba.Web.Models.QuestionIndexViewModel
 @using okboba.Resources
 @using okboba.Web.Helpers
+@using okboba.Entities
 @using Newtonsoft.Json
 @{
     ViewBag.Title = "Questions";
 }
 
-@Html.Action("ProfileHeader", "Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = "Questions" })
+@Html.Action("ProfileHeader", "Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = @i18n.Nav_Questions })
 
 <!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
@@ -18,7 +19,6 @@
 
 <div class="row">
     <div class="col-md-6">
-
         <!-- Question Box -->
         @if (Model.IsMe)
         {
@@ -39,6 +39,57 @@
             <option value="value">Questions I've Answered</option>
             <option value="value">Questions I've Skipped</option>
         </select>
+
+        <hr />
+
+        <!-- Question list -->
+        @foreach (var ques in Model.Questions)
+        {
+
+            <div class="question-answered">
+                @{
+                    Answer compareAnswer;
+                    bool bothAnswered = Model.CompareQuestions.TryGetValue(ques.Question.Id, out compareAnswer);
+                }
+                @if (bothAnswered)
+                {
+                    <p>@ques.Question.Text</p>
+
+                    //show both answers
+                    <!-- Answer -->
+                    <div style="margin-bottom:5px;">
+                        @Html.Avatar(Model.Profile.GetFirstHeadshot(true), Model.Profile.Gender, Model.UserId, "question-avatar")
+                        @Html.ShowAnswer(ques.Answer, compareAnswer, ques.Question.Choices)
+                    </div>
+                    <!-- Comparison Answer -->
+                    <div>
+                        @Html.Avatar(Model.CompareProfile.GetFirstHeadshot(true), Model.CompareProfile.Gender, Model.CompareProfile.UserId, "question-avatar")
+                        @Html.ShowAnswer(compareAnswer, ques.Answer, ques.Question.Choices)
+                    </div>
+                }
+                else
+                {
+                    //hide answer, and show "Answer" button
+                    <div class="question-unanswered-wrapper">
+                        <div class="question-unanswered-text">
+                            @ques.Question.Text
+                        </div>
+                        <div class="question-unanswered-button">
+                            <button type="button" class="btn btn-primary">Answer</button>
+                        </div>
+                    </div>
+                }
+
+
+                @*<ul>
+                        @Html.Choice(ques, Model.CompareQuestions)
+                    </ul>
+                    <p>@i18n.Question_Prompt_Acceptable</p>
+                    <ul>
+                        @Html.ChoiceAcceptable(ques, Model.CompareQuestions)
+                    </ul>*@
+            </div>
+          }
     </div>
 
     <!-- Filler -->
@@ -58,36 +109,8 @@
 
 </div>
 
+<!------ Pagination ----->
 <div class="text-center">
-    <!-- Pagination -->
-    @Html.Partial("_Pagination")
-</div>
-
-<div class="row">
-    <div class="col-md-6">        
-        <!-- Question list -->
-        @foreach (var ques in Model.Questions)
-        {
-            <div class="question-answered">
-                <p>@ques.Question.Text</p>
-                <ul>
-                    @Html.Choice(ques, Model.CompareQuestions)
-                </ul>
-                <p>@i18n.Question_Prompt_Acceptable</p>
-                <ul>
-                    @Html.ChoiceAcceptable(ques, Model.CompareQuestions)
-                </ul>
-                <button class="btn btn-default btn-sm">Update Answer</button>
-            </div>
-        }        
-    </div>    
-
-    <!-- Filler -->
-    <div class="col-md-6"></div>
-</div>
-
-<div class="text-center">
-    <!-- Pagination -->
     @Html.Partial("_Pagination")
 </div>
 

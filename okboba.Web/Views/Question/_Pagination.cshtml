@@ -1,10 +1,15 @@
 ﻿@model okboba.Web.Models.QuestionIndexViewModel
 
+@if (Model.Questions.PageCount <= 1)
+{
+    return;
+}
+
 <nav>
     <ul class="pagination">
-        <li class="@(Model.Questions.HasPreviousPage ? "" : "disabled")">
+        @*<li class="@(Model.Questions.HasPreviousPage ? "" : "disabled")">
             <a href="#"><span>&laquo;</span></a>
-        </li>
+        </li>*@
         @for (int i = 1; i <= Model.Questions.PageCount; i++)
         {
             if (Model.Questions.PageNumber == i)
@@ -16,8 +21,8 @@
                 <li><a href="~/question/@Model.UserId?page=@i">@i</a></li>
             }
         }
-        <li class="@(Model.Questions.HasNextPage ? "" : "disabled")">
+        @*<li class="@(Model.Questions.HasNextPage ? "" : "disabled")">
             <a href="#"><span>&raquo;</span></a>
-        </li>
+        </li>*@
     </ul>
 </nav>

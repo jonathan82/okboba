@@ -105,7 +105,7 @@ namespace okboba.Seeder
                 SqlBulkCopyOptions.TableLock |
                 SqlBulkCopyOptions.UseInternalTransaction))
             {
-                sbc.BatchSize = 4000;
+                sbc.BatchSize = 2000;
                 sbc.DestinationTableName = "Answers";
 
                 foreach (var col in bulkReader.ColumnMappings)

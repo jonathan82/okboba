@@ -15,6 +15,7 @@ using okboba.Repository;
 using Newtonsoft.Json;
 using okboba.Repository.EntityRepository;
 using System.Net;
+using okboba.Resources;
 
 //some comments
 
@@ -54,6 +55,23 @@ namespace okboba.Controllers
             {
                 return HttpContext.GetOwinContext().Authentication;
             }
+        }
+
+        //
+        // GET: /Account/VerifyEmail
+        [AllowAnonymous]
+        public JsonResult VerifyEmail(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+
+            if (user != null)
+            {
+                //email already taken
+                return Json(i18n.Register_EmailTaken, JsonRequestBehavior.AllowGet);
+            }
+
+            //email OK
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         //
@@ -118,9 +136,12 @@ namespace okboba.Controllers
 
             var json = JsonConvert.SerializeObject(provList);
 
-            ViewBag.JsonProvinces = json;
+            var vm = new RegisterViewModel();
+            vm.JsonProvinces = json;
 
-            return View();
+            //ViewBag.JsonProvinces = json;
+
+            return View(vm);
         }
 
         //
@@ -169,8 +190,10 @@ namespace okboba.Controllers
                 //AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form            
-            //return RedirectToAction("Register", "Account", model);
+            // If we got this far, something failed, redisplay form 
+            // Re-populate model with provinces           
+            var prov = _locationRepo.GetProvinces();
+            model.JsonProvinces = JsonConvert.SerializeObject(prov);
             return View(model);
         }
 

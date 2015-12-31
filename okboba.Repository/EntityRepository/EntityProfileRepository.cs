@@ -184,15 +184,52 @@ namespace okboba.Repository.EntityRepository
                     //db.Entry(details).Property(col => col.CarSituation).IsModified = true;
                     //db.Entry(details).Property(col => col.EconomicConcept).IsModified = true;
                     break;
+
                 case OkbConstants.ProfileDetailSections.Lifestyle:
+                    currDetails.Smoke = details.Smoke;
+                    currDetails.Drink = details.Drink;
+                    currDetails.Exercise = details.Exercise;
+                    currDetails.Eating = details.Eating;
+                    currDetails.Shopping = details.Shopping;
+                    currDetails.Religion = details.Religion;
+                    currDetails.SleepSchedule = details.SleepSchedule;
+                    currDetails.SocialCircle = details.SocialCircle;
+                    currDetails.MostMoney = details.MostMoney;
+                    currDetails.Housework = details.Housework;
+                    currDetails.LovePets = details.LovePets;
+                    currDetails.HavePets = details.HavePets;
                     break;
+
                 case OkbConstants.ProfileDetailSections.Job:
+                    currDetails.Job = details.Job;
+                    currDetails.Industry = details.Industry;
+                    currDetails.WorkHours = details.WorkHours;
+                    currDetails.CareerAndFamily = details.CareerAndFamily;
                     break;
+
                 case OkbConstants.ProfileDetailSections.Appearance:
+                    currDetails.BodyType = details.BodyType;
+                    currDetails.FaceType = details.FaceType;
+                    currDetails.EyeColor = details.EyeColor;
+                    currDetails.EyeShape = details.EyeShape;
+                    currDetails.HairColor = details.HairColor;
+                    currDetails.HairLength = details.HairLength;
+                    currDetails.HairType = details.HairType;
+                    currDetails.SkinType = details.SkinType;
+                    currDetails.Muscle = details.Muscle;
+                    currDetails.HealthCondition = details.HealthCondition;
+                    currDetails.DressStyle = details.DressStyle;
                     break;
+
                 case OkbConstants.ProfileDetailSections.Personality:
+                    currDetails.Sociability = details.Sociability;
+                    currDetails.Humour = details.Humour;
+                    currDetails.Temper = details.Temper;
+                    currDetails.Feelings = details.Feelings;
                     break;
+
                 default:
+                    //invalid section. fail silently?
                     break;
             }
 

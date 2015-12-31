@@ -1,10 +1,11 @@
-﻿@model okboba.Web.Models.PhotoIndexViewModel
+﻿@using okboba.Resources
+@model okboba.Web.Models.PhotoIndexViewModel
 
 @{
     ViewBag.Title = "Profile Photos";
 }
 
-@Html.Action("ProfileHeader","Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = "Photos" })
+@Html.Action("ProfileHeader","Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = i18n.Nav_Photos })
 
 @Html.Action("ListPhotos", new {id = Model.ProfileId, isMe = Model.IsMe })
 

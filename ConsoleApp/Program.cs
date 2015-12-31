@@ -108,10 +108,10 @@ namespace ConsoleApp
             //////////////////// Seed the database ///////////////////////
             var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SeedDb seeder = new SeedDb(connString);
-            //Stopwatch timer = new Stopwatch();
+            Stopwatch timer = new Stopwatch();
 
             //Profile Detail Options   
-            seeder.SeedDetailOptions("../../../data/profile_details.txt");
+            //seeder.SeedDetailOptions("../../../data/profile_details.txt");
 
             //// Questions
             //Console.WriteLine("Seeding Questions...");
@@ -130,11 +130,11 @@ namespace ConsoleApp
             //Console.WriteLine("{0} s",timer.ElapsedMilliseconds / 1000);
 
             // User answers
-            //Console.WriteLine("Seeding answers...");
-            //timer.Start();
-            //seeder.SeedAnswers(10000, 100);
-            //timer.Stop();
-            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            Console.WriteLine("Seeding answers...");
+            timer.Start();
+            seeder.SeedAnswers(500, 200);
+            timer.Stop();
+            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Activity feed
             //seeder.SeedActivities(1000);

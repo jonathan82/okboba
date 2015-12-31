@@ -65,7 +65,7 @@ else if (photos.Count() == 0)
 
 <!-- Row 3: Navigation tab -->
 <ul class="nav nav-tabs">
-    @Html.NavTab(Model.Section, "Profile", "/profile/" + userId)
-    @Html.NavTab(Model.Section, "Photos", "/photo/" + userId)
-    @Html.NavTab(Model.Section, "Questions", "/question/" + userId)
+    @Html.NavTab(Model.Section, i18n.Nav_Profile, "/profile/" + userId)
+    @Html.NavTab(Model.Section, i18n.Nav_Photos, "/photo/" + userId)
+    @Html.NavTab(Model.Section, i18n.Nav_Questions, "/question/" + userId)
 </ul>

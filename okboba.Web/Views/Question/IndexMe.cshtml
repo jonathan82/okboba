@@ -1,0 +1,87 @@
+﻿@model okboba.Web.Models.QuestionIndexViewModel
+@using okboba.Resources
+@using okboba.Web.Helpers
+@using okboba.Entities
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Questions";
+}
+
+@Html.Action("ProfileHeader", "Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = @i18n.Nav_Questions })
+
+<!--Named anchor for navigating directly to question box (from Navbar) -->
+<a name="questionBox"></a>
+
+@Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
+
+@Html.Partial("_QuestionTemplate")
+@Html.Partial("_AnswerTemplate")
+
+<div class="row">
+    <div class="col-md-6">
+        <!-- Question Box -->
+        @if (Model.NextQuestions.Count() > 0)
+        {
+            @Html.Partial("_QuestionBox");
+        }
+        else
+        {
+            <p>You have answered all the questions!</p>
+        }
+
+
+        <hr id="question-separator" />
+
+        <!-- Drop down list of answered and skipped questions -->
+        <select class="form-control">
+            <option value="value">Questions I've Answered</option>
+            <option value="value">Questions I've Skipped</option>
+        </select>
+
+        <hr />
+
+        <!-- Question list -->
+        @foreach (var ques in Model.Questions)
+        {
+            <div class="question-answered-me">
+                <p>@ques.Question.Text</p>
+                <ul class="question-me-list">
+                    @Html.ShowAnswersMe(ques.Answer, ques.Question.Choices)
+                </ul>
+            </div>
+         }
+    </div>
+
+    <!-- Filler -->
+    <div class="col-md-2"></div>
+
+    <!-- Question stats -->
+    <div class="col-md-4">
+        <div class="question-stats">
+            <p>Highest Match Percentage possible:</p>
+            <p><h1>53%</h1></p>
+            <p>
+                You have answered: 32 Questions<br />
+                (The more you answer the higher the possible match percentage)
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!------ Pagination ----->
+<div class="text-center">
+    @Html.Partial("_Pagination")
+</div>
+
+
+@section Scripts {
+
+    <script>
+        var NextQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.NextQuestions));
+        var AnsweredQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.Questions));
+
+        $('.question-form').questionValidation();
+        $('.question-form').questionSubmit(true);
+    </script>
+}

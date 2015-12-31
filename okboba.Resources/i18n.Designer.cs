@@ -925,6 +925,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 电子邮件已经注册.
+        /// </summary>
+        public static string Register_EmailTaken {
+            get {
+                return ResourceManager.GetString("Register_EmailTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 我是.
         /// </summary>
         public static string Register_IAm {

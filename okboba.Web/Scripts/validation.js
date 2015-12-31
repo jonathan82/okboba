@@ -1,7 +1,8 @@
 ﻿/*
  *  Author : Jonathan Lin
  *  Date   : 12/2/2015
- *  Notes  : Set the defaults for jQuery Validation plugin to make it work with Bootstrap.
+ *  Notes  : Global Validation settings for okboba. Override jQuery Validation 
+ *           methods to display Bootstrap error classes.
  */
 (function ($) {
 
@@ -13,12 +14,25 @@
 
         //},
         
+        /*
+         * Highlight: If there's an error we highlight it by 
+         *  - adding the has-error class to the form-group container
+         *  - adding an "X" glyphicon to the input control
+         */
         highlight: function (element, errorClass) {
+            var fg = $(element).closest('.form-group');
+            if (fg.hasClass('has-error')) {
+                //if element is already highlighted we don't do anything. prevent multiple "X"'s from being added
+                return;
+            }
             $(element).closest('.form-group').addClass('has-error');
             $(element).closest('.form-group').addClass('has-feedback');
             $(element).after('<span class="glyphicon glyphicon-remove form-control-feedback"></span>');
         },
 
+        /*
+         * Unhighlight: we undo what highlight did
+         */
         unhighlight: function (element, errorClass) {
             $(element).closest('.form-group').removeClass('has-error');
             $(element).closest('.form-group').removeClass('has-feedback');

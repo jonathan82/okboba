@@ -16,6 +16,30 @@
             <div class="modal-body">
 
                 <!--------------------- Personality ----------------------------->
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_SOCIABILITY" class="col-sm-3 control-label">@i18n.ProfileDetail_Sociability:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_SOCIABILITY, Model.GetOptions(OkbConstants.DETAIL_SOCIABILITY), Model.ProfileDetail.Sociability)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_HUMOUR" class="col-sm-3 control-label">@i18n.ProfileDetail_Humour:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_HUMOUR, Model.GetOptions(OkbConstants.DETAIL_HUMOUR), Model.ProfileDetail.Humour)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_TEMPER" class="col-sm-3 control-label">@i18n.ProfileDetail_Temper:</label>
+                    <div class="col-sm-4">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_TEMPER, Model.GetOptions(OkbConstants.DETAIL_TEMPER), Model.ProfileDetail.Temper)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="@OkbConstants.DETAIL_FEELINGS" class="col-sm-3 control-label">@i18n.ProfileDetail_Feelings:</label>
+                    <div class="col-sm-6">
+                        @Html.DetailDropdown(OkbConstants.DETAIL_FEELINGS, Model.GetOptions(OkbConstants.DETAIL_FEELINGS), Model.ProfileDetail.Feelings)
+                    </div>
+                </div>
                 
             </div> <!--End modal body-->
 

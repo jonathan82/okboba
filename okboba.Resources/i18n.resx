@@ -417,4 +417,7 @@
   <data name="ProfileDetail_Style" xml:space="preserve">
     <value>发型</value>
   </data>
+  <data name="Register_EmailTaken" xml:space="preserve">
+    <value>电子邮件已经注册</value>
+  </data>
 </root>

@@ -93,29 +93,78 @@
     font-weight: bold;
 }
 
-.question-choice-unacceptable {
+.question-choice-strike {
     text-decoration: line-through;
 }
 
-.question-choice-match {
-    color: green;
+.question-choice-green {
+    color: darken(#00ff00, 10%);
 }
 
-.question-choice-nomatch {
-    color: darkred;
+.question-choice-red {
+    color: darken(#f00,8%);
+}
+
+.question-me-list {
+    list-style-type:none;
+    padding-left: 0;
+}
+
+.question-me-list li {
+    padding-left: 40px;
+}
+
+.question-choice-check::before {
+    content: '\2714';
+    margin-left: -40px;
+    width: 40px;
+    display: inline-block;
+    text-align:center;
+}
+
+.question-choice-bullet::before {
+    content: '\2022';
+    margin-left: -40px;
+    width: 40px;
+    display: inline-block;
+    text-align:center;
 }
 
 .question-answered {
     .shadow-z-1;
     background-color: lighten(#F5F5F0, 2%);
-    padding: 10px 15px 10px 15px;
+    padding: 15px  20px;
     color: @gray;
     margin-bottom: 15px;
     position: relative;
+    font-size: 18px;
 }
 
-.question-answered  button {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+.question-answered-me {
+    .question-answered;
+    font-size: 16px;
+}
+
+.question-avatar {
+    .img-circle;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.question-unanswered-wrapper {
+    display: table;
+    width: 100%;
+}
+
+.question-unanswered-text {
+    display: table-cell;
+}
+
+.question-unanswered-button {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100px;
 }

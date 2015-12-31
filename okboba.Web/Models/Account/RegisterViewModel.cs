@@ -36,5 +36,7 @@ namespace okboba.Web.Models
 
         [Required]
         public Int16 LocationId2 { get; set; }
+
+        public string JsonProvinces { get; set; }
     }
 }

@@ -28,6 +28,14 @@ namespace okboba
                 defaults: new { controller = "Static", action = "Page" }
             );
 
+            //manual overrides
+            routes.MapRoute(
+                name: "AccountVerifyEmail",
+                url: "account/verifyemail",
+                defaults: new { controller = "account", action = "verifyemail" }
+            );
+            //end manual overrides
+
             routes.MapRoute(
                 name: "IndexWithId",
                 url: "{controller}/{userId}",

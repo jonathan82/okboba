@@ -1,11 +1,12 @@
-﻿@model okboba.Web.Models.ProfileViewModel
+﻿@using okboba.Resources
+@model okboba.Web.Models.ProfileViewModel
 
 @{
     ViewBag.Title = "Profile";
     ViewBag.Section = "Profile";
 }
 
-@Html.Action("ProfileHeader", new {profileId = Model.ProfileId, isMe = Model.IsMe, section = "Profile" })
+@Html.Action("ProfileHeader", new {profileId = Model.ProfileId, isMe = Model.IsMe, section = i18n.Nav_Profile })
 
 @Html.Action("ProfileDetailAndText", new { profileId = Model.ProfileId, isMe = Model.IsMe })
 

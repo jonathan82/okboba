@@ -34,7 +34,7 @@
 
     <div class="splash-container">
 
-        <!-- Navbar -->
+        <!-- Login Button Navbar -->
         <div class="splash-navbar">
             <button class="btn btn-primary login-button" data-toggle="modal" data-target="#loginModal">@i18n.Common_Login</button>
         </div>
@@ -50,44 +50,19 @@
 
     @Html.Partial("_Marketing")
 
+    @Html.Partial("_Footer")
 
     @Scripts.Render("~/bundles/js/vendor")
     @Scripts.Render("~/bundles/js/okboba")
     @RenderSection("scripts", required: false)
 
-    <footer style="padding-top: 100px;">
-        <span class="text-info">&copy; @DateTime.Now.Year - Okboba.com</span>
-    </footer>
-
-    <script>
-        function LoginSuccess() {
-            //load return url
-            //alert('login success');
-            window.location.replace('/home');
-        }
-
-        //Validation options for login form
-        var opt = {
-            rules: {
-                Email: "required",
-                Password: "required"
-            },
-
-            submitHandler: function (form) {
-                var validator = this;
-                validator.resetForm();
-                $(form).find('button[type="submit"]').prop("disabled", true);
-                $.post('/account/login', $(form).serialize(), LoginSuccess)
-                    .fail(function () {
-                        //show login error
-                        //alert('login error');
-                        validator.showErrors({ "Password": "@i18n.Login_BadPassword" });
-                        $(form).find('button[type="submit"]').prop("disabled", false);
-                    });
-            }
-        }
-
-        $('#loginForm').validate(opt);
+    <script>       
+        $(function () {
+            //document ready
+            $('#loginModal').login({
+                loginErrMsg: '@i18n.Login_BadPassword'
+            });
+        });
     </script>
 
 </body>

@@ -54,14 +54,14 @@ namespace okboba.Controllers
                 vm.ProfileId = id;
                 vm.IsMe = false;
                 vm.Questions = _quesRepo.GetQuestions(id, page);
+                vm.Profile = _profileRepo.GetProfile(id);
+                vm.CompareProfile = _profileRepo.GetProfile(me);
 
                 //Get my own questions for comparison - just need to get the answers from the match API cache
-                //Convert to dictionary for easier comparison
                 vm.CompareQuestions = _quesRepo.GetAnswers(me);
-
             }
 
-            return View(vm);
+            return vm.IsMe ? View("IndexMe", vm) : View(vm);
         }
 
         /// <summary>

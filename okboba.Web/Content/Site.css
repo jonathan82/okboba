@@ -233,7 +233,7 @@ body {
   min-height: 100px;
   position: relative;
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
   font-size: 1.2em;
   opacity: .87;
@@ -262,8 +262,9 @@ body {
 ******************************************/
 .profile-detail-category {
   color: #880E4F;
-  font-size: 1.1em;
+  font-size: 1.2em;
   text-align: center;
+  margin-bottom: 5px;
 }
 .profile-detail-row {
   color: #9b9b9b;
@@ -287,13 +288,13 @@ body {
 }
 .profile-details {
   background-color: #FCE4EC;
-  padding: 10px;
+  padding: 6px 10px 8px;
   position: relative;
   margin-bottom: 10px;
 }
 .profile-details-me {
   background-color: #FCE4EC;
-  padding: 10px;
+  padding: 6px 10px 8px;
   position: relative;
   margin-bottom: 10px;
 }
@@ -541,27 +542,74 @@ body {
 .question-choice-bold {
   font-weight: bold;
 }
-.question-choice-unacceptable {
+.question-choice-strike {
   text-decoration: line-through;
 }
-.question-choice-match {
-  color: green;
+.question-choice-green {
+  color: #00cc00;
 }
-.question-choice-nomatch {
-  color: darkred;
+.question-choice-red {
+  color: #d60000;
+}
+.question-me-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.question-me-list li {
+  padding-left: 40px;
+}
+.question-choice-check::before {
+  content: '\2714';
+  margin-left: -40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+}
+.question-choice-bullet::before {
+  content: '\2022';
+  margin-left: -40px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
 }
 .question-answered {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   background-color: #f9f9f6;
-  padding: 10px 15px 10px 15px;
+  padding: 15px  20px;
   color: #555555;
   margin-bottom: 15px;
   position: relative;
+  font-size: 18px;
 }
-.question-answered button {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+.question-answered-me {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #f9f9f6;
+  padding: 15px  20px;
+  color: #555555;
+  margin-bottom: 15px;
+  position: relative;
+  font-size: 18px;
+  font-size: 16px;
+}
+.question-avatar {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.question-unanswered-wrapper {
+  display: table;
+  width: 100%;
+}
+.question-unanswered-text {
+  display: table-cell;
+}
+.question-unanswered-button {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100px;
 }
 .conversation-row {
   padding: 10px;

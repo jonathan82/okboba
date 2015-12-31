@@ -57,5 +57,18 @@ namespace okboba.Entities
         {
             return ChoiceIndex != null ? (byte)(1 << (ChoiceIndex - 1)) : (byte)0;
         }
+
+        /// <summary>
+        /// Returns true if the other answer matches my requirements
+        /// </summary>
+        public bool IsMatch(Answer otherAnswer)
+        {
+            return (otherAnswer.ChoiceBit() & ChoiceAccept) != 0;
+        }
+
+        public bool IsMatch(int index)
+        {
+            return ((1 << (index - 1)) & ChoiceAccept) != 0;
+        }
     }
 }
