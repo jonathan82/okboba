@@ -1,25 +1,51 @@
 ﻿@import "common";
 
-.activity-feed-row,
-.activity-feed-row:hover,
-.activity-feed-row:active,
-.activity-feed-row:focus
- {
-    padding: 8px 15px;
-    margin-bottom: 12px;
-    color: @gray;
-    font-family: @font-simsun;
-    display: block;
-}
+/**********************************
 
-.activity-feed-blurb {
-    vertical-align: top;
-    margin-left: 15px;
-    display: inline-block;
+    Activity Feed styles
+
+***********************************/
+.activity-feed-row
+ {
+    margin-bottom: 12px;
+    position: relative;
+    width: 100%;
+    min-height: 70px;
+    .shadow-z-1;
 }
 
 .activity-avatar {
     .img-circle;
-    width: 40px;
-    height: 40px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    margin-top: -25px;
+}
+
+.activity-feed-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    text-align: center;
+}
+
+.activity-feed-content {    
+    margin-left: 80px;
+    padding: 10px 10px 10px 0;
+    .dont-break-out;
+}
+
+.activity-profiletext {
+    color: @primary-color-3;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.activity-summary {
+    color: @gray-light;
+    font-size: 1.1em;
+    font-style: italic;
 }

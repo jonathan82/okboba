@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using okboba.Repository.WebClient;
 using System.Configuration;
 using System.Net;
+using okboba.Resources;
 
 namespace okboba.Controllers
 {
@@ -68,6 +69,54 @@ namespace okboba.Controllers
             var url = ConfigurationManager.AppSettings["MatchApiUrl"];
 
             return new MatchApiClient(url, cookie);
+        }
+
+
+        /// <summary>
+        /// Returns true if it is ok to add the activity to the feed. It is OK if the time
+        /// elapsed is less than the pre-defined interval since the last time the activity was added.
+        /// We use Session to store the last added activity time. Prevents the activity feed from
+        /// being overloaded with a user's activities.
+        /// </summary>
+        protected bool IsOkToAddActivity(OkbConstants.ActivityCategories category)
+        {            
+            DateTime threshold;
+
+            switch (category)
+            {
+                case OkbConstants.ActivityCategories.Joined:
+                    return true;
+                case OkbConstants.ActivityCategories.UploadedPhoto:
+                    threshold = DateTime.Now.AddMinutes(-OkbConstants.ACTIVITY_UPLOADEDPHOTO_INTERVAL);
+                    break;
+                case OkbConstants.ActivityCategories.EditedProfileText:
+                    threshold = DateTime.Now.AddMinutes(-OkbConstants.ACTIVITY_EDITEDPROFILE_INTERVAL);
+                    break;
+                case OkbConstants.ActivityCategories.AnsweredQuestion:
+                    threshold = DateTime.Now.AddMinutes(-OkbConstants.ACTIVITY_ANSWEREDQUESTION_INTERVAL);
+                    break;
+                default:
+                    //throw exception?
+                    return true;
+            }
+
+            var lastAdded = Session["Activity:" + category.ToString()];
+
+            if (lastAdded == null || (DateTime)lastAdded < threshold)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Updates the activity's last added date in the Session
+        /// </summary>
+        protected void UpdateActivityLastAdded(OkbConstants.ActivityCategories category)
+        {
+            if (category == OkbConstants.ActivityCategories.Joined) return; //no need to store join activity
+            Session["Activity:" + category.ToString()] = DateTime.Now;
         }
     }
 }

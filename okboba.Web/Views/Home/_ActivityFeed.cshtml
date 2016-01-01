@@ -7,14 +7,59 @@
 
 @foreach (var activity in Model)
 {
-    <a href="#" class="shadow-z-1 activity-feed-row">
-        @{var photo = activity.Profile.GetFirstHeadshot(true);}
-        @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
-        <div class="activity-feed-blurb">
-            @Html.FeedBlurb(activity)
+    var photo = activity.Profile.GetFirstHeadshot(true);
+
+    if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.Joined)
+    {
+        //Joined activity
+        <div class="activity-feed-row">
+            <div class="activity-feed-left">
+                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+            </div>
+            <div class="activity-feed-content">
+                @activity.Profile.Nickname @i18n.Feed_Joined
+            </div>
         </div>
-        <div class="pull-right">
-            just now
+    }
+    else if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.EditedProfileText)
+    {
+        //Edited profile text
+        <div class="activity-feed-row">
+            <div class="activity-feed-left">
+                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+            </div>
+            <div class="activity-feed-content">
+                <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_EditedProfileText</p>
+                <div class="activity-profiletext">@activity.Activity.What</div>
+            </div>
+            <a href="/profile/@activity.Profile.UserId" class="div-link"></a>
         </div>
-    </a>
+    }
+    else if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.UploadedPhoto)
+    {
+        //Uploaded photo
+        <div class="activity-feed-row">
+            <div class="activity-feed-left">
+                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+            </div>
+            <div class="activity-feed-content">
+                @activity.Profile.Nickname @i18n.Feed_UploadedPhoto;
+                
+            </div>
+        </div>
+    }
+    else if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.AnsweredQuestion)
+    {
+        //answered question
+        <div class="activity-feed-row">
+            <div class="activity-feed-left">
+                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+            </div>
+            <div class="activity-feed-content">
+                @activity.Profile.Nickname @i18n.Feed_AnsweredQuestion;
+
+            </div>
+        </div>
+    }
+
 }

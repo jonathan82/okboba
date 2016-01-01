@@ -47,20 +47,12 @@ namespace okboba.Controllers
             // Get the profile details as a dictionary
             var profileDetail = _profileRepo.GetProfileDetail(profileId);
             var detailOptions = _profileRepo.GetDetailOptions();
-            //var detailDict = new Dictionary<string, string>();
-            //foreach (var prop in profileDetail.GetType().GetProperties())
-            //{
-            //    if (prop.PropertyType != typeof(byte)) continue;
-            //    var val = _profileRepo.GetOptionValue(prop.Name, (byte)(prop.GetValue(profileDetail)));
-            //    detailDict.Add(prop.Name, val);
-            //}
 
             //Populate view model
             var vm = new ProfileDetailViewModel
             {
                 ProfileText = profileText,
-                ProfileDetail = profileDetail,
-                //DetailDict = detailDict,                
+                ProfileDetail = profileDetail,             
                 DetailOptions = detailOptions,
                 isMe = isMe
             };
@@ -146,13 +138,20 @@ namespace okboba.Controllers
         [ValidateInput(false)]
         public ActionResult EditProfileText(string text, string whichQuestion)
         {
+            var me = GetProfileId();
+
             //Massage the input
             text = Truncate(text, OkbConstants.MAX_PROFILE_TEXT_SIZE);
             text = HttpContext.Server.HtmlEncode(text);
 
-            _profileRepo.EditProfileText(GetProfileId(), text, whichQuestion);
-            _feedRepo.EditProfileTextActivity(GetProfileId(), text);
+            _profileRepo.EditProfileText(me, text, whichQuestion);
 
+            if (IsOkToAddActivity(OkbConstants.ActivityCategories.EditedProfileText))
+            {
+                _feedRepo.EditProfileTextActivity(me, text);
+                UpdateActivityLastAdded(OkbConstants.ActivityCategories.EditedProfileText);
+            }
+            
             return Content("{}");
         }
     }

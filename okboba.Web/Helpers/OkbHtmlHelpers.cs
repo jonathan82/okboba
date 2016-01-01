@@ -54,20 +54,20 @@ namespace okboba.Web.Helpers
         {
             var str = act.Profile.Nickname + " ";
 
-            switch ((ActivityCategories)act.Activity.CategoryId)
+            switch ((OkbConstants.ActivityCategories)act.Activity.CategoryId)
             {
-                case ActivityCategories.Joined:
+                case OkbConstants.ActivityCategories.Joined:
                     str += i18n.Feed_Joined;
                     break;
-                case ActivityCategories.AnsweredQuestion:
+                case OkbConstants.ActivityCategories.AnsweredQuestion:
                     str +=  i18n.Feed_AnsweredQuestion + "<br />";
                     str += "“" + act.Activity.What + "”";
                     break;
-                case ActivityCategories.EditedProfileText:
+                case OkbConstants.ActivityCategories.EditedProfileText:
                     str += i18n.Feed_EditedProfileText + "<br />";
                     str += "“" + act.Activity.What + "”";
                     break;
-                case ActivityCategories.UploadedPhoto:
+                case OkbConstants.ActivityCategories.UploadedPhoto:
                     str += i18n.Feed_UploadedPhoto;
                     break;
                 default:

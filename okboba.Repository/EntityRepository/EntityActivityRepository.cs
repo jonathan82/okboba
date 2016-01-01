@@ -38,7 +38,7 @@ namespace okboba.Repository.EntityRepository
             db.ActivityFeed.Add(new Activity
             {
                 Who = who,
-                CategoryId = (int)ActivityCategories.AnsweredQuestion,
+                CategoryId = (int)OkbConstants.ActivityCategories.AnsweredQuestion,
                 What = Truncate(what, OkbConstants.FEED_BLURB_SIZE),
                 When = DateTime.Now
             });
@@ -51,7 +51,7 @@ namespace okboba.Repository.EntityRepository
             var act = new Activity
             {
                 Who = who,
-                CategoryId = (int)ActivityCategories.EditedProfileText,
+                CategoryId = (int)OkbConstants.ActivityCategories.EditedProfileText,
                 What = Truncate(what, OkbConstants.FEED_BLURB_SIZE),
                 When = DateTime.Now
             };
@@ -92,7 +92,7 @@ namespace okboba.Repository.EntityRepository
             db.ActivityFeed.Add(new Activity
             {
                 Who = who,
-                CategoryId = (int)ActivityCategories.Joined,
+                CategoryId = (int)OkbConstants.ActivityCategories.Joined,
                 What = "",
                 When = DateTime.Now
             });
@@ -105,7 +105,7 @@ namespace okboba.Repository.EntityRepository
             db.ActivityFeed.Add(new Activity
             {
                 Who = who,
-                CategoryId = (int)ActivityCategories.UploadedPhoto,
+                CategoryId = (int)OkbConstants.ActivityCategories.UploadedPhoto,
                 What = what,
                 When = DateTime.Now
             });

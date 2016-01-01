@@ -29,7 +29,7 @@ namespace okboba.Controllers
             //retrieve the preferences for the user and show 'em what they want
             var profile = _profileRepo.GetProfile(GetProfileId());
 
-            var vm = _activityRepo.GetActivities(profile.LookingForGender, 50);
+            var vm = _activityRepo.GetActivities(profile.LookingForGender, OkbConstants.NUM_ACTIVITIES_TO_SHOW);
 
             return PartialView("_ActivityFeed",vm);
         }

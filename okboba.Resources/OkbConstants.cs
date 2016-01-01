@@ -1,10 +1,11 @@
 ﻿namespace okboba.Resources
 {
-    //Activities
-    public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }
-
+   
     public static class OkbConstants
     {
+        //Questions
+        public const int NUM_QUES_PER_PAGE = 30;
+
         //Matches
         public const int MAX_MATCH_RESULTS = 4000;
 
@@ -12,10 +13,15 @@
         public const int MAX_MESSAGE_LENGTH = 1000;
 
         //Activity Feed
+        public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }
         public const int FEED_BLURB_SIZE = 100;
+        public const int ACTIVITY_UPLOADEDPHOTO_INTERVAL = 5; // interval between photo uploads in minutes
+        public const int ACTIVITY_EDITEDPROFILE_INTERVAL = 5; // interval between profile edits in minutes
+        public const int ACTIVITY_ANSWEREDQUESTION_INTERVAL = 5; // interval between answering questions in minutes
+        public const int NUM_ACTIVITIES_TO_SHOW = 20; //# of activities to show on the Home page
 
         //Photo
-        public const int MAX_PHOTO_SIZE = 5000000; //MB
+        public const int MAX_PHOTO_SIZE = 4000000; //MB
         public const int MAX_NUM_PHOTOS = 10; //max photos per user
         public const string HEADSHOT_SUFFIX = "t";
         public const string HEADSHOT_SMALL_SUFFIX = "s";

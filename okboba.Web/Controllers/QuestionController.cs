@@ -4,6 +4,7 @@ using okboba.Repository;
 using okboba.Repository.EntityRepository;
 using okboba.Repository.Models;
 using okboba.Repository.WebClient;
+using okboba.Resources;
 using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,15 @@ namespace okboba.Controllers
     {
         private IProfileRepository _profileRepo;
         private IQuestionRepository _quesRepo;
+        private IActivityRepository _feedRepo;
+
         private MatchApiClient _matchApiClient;
 
         public QuestionController()
         {
             _profileRepo = EntityProfileRepository.Instance;
             _quesRepo = EntityQuestionRepository.Instance;
+            _feedRepo = EntityActivityRepository.Instance;
         }
 
         // GET: Question
@@ -42,7 +46,7 @@ namespace okboba.Controllers
                 vm.UserId = "";
                 vm.ProfileId = me;
                 vm.IsMe = true;
-                vm.Questions = _quesRepo.GetQuestions(me, page);
+                vm.Questions = _quesRepo.GetQuestions(me, page, OkbConstants.NUM_QUES_PER_PAGE);
                 vm.NextQuestions = _quesRepo.Next2Questions(me);
             }
             else
@@ -53,7 +57,7 @@ namespace okboba.Controllers
                 vm.UserId = userId;
                 vm.ProfileId = id;
                 vm.IsMe = false;
-                vm.Questions = _quesRepo.GetQuestions(id, page);
+                vm.Questions = _quesRepo.GetQuestions(id, page, OkbConstants.NUM_QUES_PER_PAGE);
                 vm.Profile = _profileRepo.GetProfile(id);
                 vm.CompareProfile = _profileRepo.GetProfile(me);
 
@@ -113,7 +117,7 @@ namespace okboba.Controllers
                 QuestionId = (short)input.QuestionId
             };
 
-            //Convert user input to Answer object for repository
+            //Convert checkboxes to bit array for Acceptable choices
             byte acceptBits = 0;
 
             foreach (var index in input.ChoiceAccept)
@@ -141,7 +145,7 @@ namespace okboba.Controllers
                 Timeout = TimeSpan.FromMinutes(5)
             };
 
-            //Wrap the operations in a transaction
+            //Update DB and Cache in a transaction
             //By default if scope.Complete() isn't called the transaction is rolled back.
             using (var scope = new TransactionScope(TransactionScopeOption.Required, options, TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -154,8 +158,18 @@ namespace okboba.Controllers
                 scope.Complete();
             }
 
+            //Update the Activity feed
+            if(IsOkToAddActivity(OkbConstants.ActivityCategories.AnsweredQuestion))
+            {
+                //Get the question text
+                var ques = _quesRepo.GetQuestionText(input.QuestionId);
+                _feedRepo.AnsweredQuestionActivity(profileId, ques.Text);
+                UpdateActivityLastAdded(OkbConstants.ActivityCategories.AnsweredQuestion);
+            }
+
             IList<QuestionModel> nextQuestions = null;
 
+            //Get the next questions
             if (getNextFlag)
             {
                 nextQuestions = _quesRepo.Next2Questions(profileId);

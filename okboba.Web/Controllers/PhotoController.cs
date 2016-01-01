@@ -18,11 +18,13 @@ namespace okboba.Controllers
     {
         private IPhotoRepository _photoRepo;
         private IProfileRepository _profileRepo;
+        private IActivityRepository _feedRepo;
 
         public PhotoController()
         {
             _photoRepo = EntityPhotoRepository.Instance;
             _profileRepo = EntityProfileRepository.Instance;
+            _feedRepo = EntityActivityRepository.Instance;
         }
 
         [ChildActionOnly]
@@ -62,7 +64,8 @@ namespace okboba.Controllers
         [HttpPost]
         public async Task<ActionResult> Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
         {
-            var profileId = GetProfileId();
+            var me = GetProfileId();
+            var userId = User.Identity.GetUserId();
 
             //Check if file size too big
             if(upload.ContentLength > OkbConstants.MAX_PHOTO_SIZE)
@@ -71,12 +74,19 @@ namespace okboba.Controllers
             }
 
             //Check if user has more than max allowed photos
-            if(_photoRepo.GetNumOfPhotos(profileId) > OkbConstants.MAX_NUM_PHOTOS)
+            if(_photoRepo.GetNumOfPhotos(me) > OkbConstants.MAX_NUM_PHOTOS)
             {
                 return new HttpStatusCodeResult(400, "More than max photos");
             }
 
-            await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, profileId);
+            var photo = await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, userId, me);
+
+            //Update activity feed
+            if (IsOkToAddActivity(OkbConstants.ActivityCategories.UploadedPhoto))
+            {
+                _feedRepo.UploadPhotoActivity(me, photo);
+                UpdateActivityLastAdded(OkbConstants.ActivityCategories.UploadedPhoto);
+            }
 
             return RedirectToAction("Index");
         }
@@ -84,9 +94,9 @@ namespace okboba.Controllers
         [HttpPost]
         public async Task<ActionResult> EditThumbnail(string photo, int topThumb, int leftThumb, int widthThumb, int photoScreenWidth)
         {
-            var profileId = GetProfileId();
+            var userId = User.Identity.GetUserId();
 
-            await _photoRepo.EditThumbnailAsync(photo, topThumb, leftThumb, widthThumb, photoScreenWidth, profileId);
+            await _photoRepo.EditThumbnailAsync(photo, topThumb, leftThumb, widthThumb, photoScreenWidth, userId);
 
             return RedirectToAction("Index");
         }
@@ -94,7 +104,10 @@ namespace okboba.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string photo)
         {
-            await _photoRepo.DeleteAsync(photo, GetProfileId());
+            var me = GetProfileId();
+            var userId = User.Identity.GetUserId();
+
+            await _photoRepo.DeleteAsync(photo, me, userId);
 
             return Content("");
         }

@@ -13,7 +13,7 @@ namespace okboba
                 "~/lib/jquery-ui/jquery-ui.js",
                 "~/lib/jquery-validate/jquery.validate.js",
                 "~/lib/jquery-validate/localization/messages*",
-                "~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.js",
+                //"~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.js",
                 "~/lib/bootstrap/js/bootstrap.js",
                 "~/lib/datepicker/js/bootstrap-datepicker.js",
                 "~/lib/datepicker/locales/bootstrap-datepicker.zh-CN.min.js",

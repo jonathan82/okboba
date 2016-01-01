@@ -16,5 +16,6 @@ namespace okboba.Repository
         Dictionary<short, Answer> GetAnswers(int profileId);
         IList<QuestionModel> Next2Questions(int profileId);
         bool ValidateAnswer(Answer ans);
+        Question GetQuestionText(int id);
     }
 }

@@ -3,8 +3,12 @@
 
 <!-- Regisration Form: Step 2 -->
 <div class="row register-form" id="register-step-2" style="display: none;">
-    <div class="col-md-4 col-md-offset-1 text-right">
-        <img src="~/Content/images/dialog_box.png" alt="Alternate Text" />
+    <div class="col-md-5 text-right">
+        @*<img src="~/Content/images/dialog_box.png" alt="Alternate Text" />*@
+        <div class="register-dialog-box">
+            <img src="~/Content/images/chat-curve-register.png" alt="" class="chat-curve-register" />
+            Hi! Just fill in a few fields to get started!
+        </div>
         <img src="~/Content/images/cartoon_lady.png" class="register-lady" alt="Cartoon Lady" />
         @Html.ValidationSummary()
     </div>
@@ -18,8 +22,8 @@
                 <label for="Email" class="col-sm-3 control-label">@i18n.Account_Email:</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
-                    <input type="email" name="Email" value="" class="form-control" required/>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+                    <input type="email" name="Email" value="" class="form-control" required />
                 </div>
             </div>
 
@@ -28,7 +32,7 @@
                 <label for="Password" class="col-sm-3 control-label">@i18n.Account_Password:</label>
                 <div class="col-sm-9">
                     @*@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
                     <input type="password" name="Password" value="" class="form-control" required />
                 </div>
             </div>
@@ -38,7 +42,7 @@
                 <label for="Nickname" class="col-sm-3 control-label">@i18n.Register_Nickname:</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
                     <input type="text" name="Nickname" value="" class="form-control" required />
                 </div>
             </div>
@@ -47,7 +51,7 @@
             <div class="form-group">
                 <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Register_Birthdate:</label>
                 <div class="col-sm-9">
-                    <input type="text" name="BirthdateText" value="" class="form-control" id="BirthdateText" required readonly/>
+                    <input type="text" name="BirthdateText" value="" class="form-control" id="BirthdateText" required readonly />
                     <input type="hidden" name="Birthdate" value="" id="Birthdate" />
                 </div>
             </div>
@@ -56,7 +60,7 @@
             <div class="form-group">
                 <label for="locationText" class="col-sm-3 control-label">@i18n.Register_Location:</label>
                 <div class="col-sm-9">
-                    <input id="locationText" type="text" name="locationText" value="" class="form-control" required readonly/>
+                    <input id="locationText" type="text" name="locationText" value="" class="form-control" required readonly />
                     <input type="hidden" name="locationId1" value="" id="locationId1" />
                     <input type="hidden" name="locationId2" value="" id="locationId2" />
                 </div>

@@ -50,18 +50,30 @@ namespace okboba.Repository.EntityRepository
         }
 
         /// <summary>
-        /// Uploads a photo to the database as well as Azure cloud.  Creates a thumbnail and r
-        /// resizes image before doing so.  Also generates a random filename.
+        /// Uploads a photo to the database as well as Azure cloud.  Creates four versions of the photo:
+        /// 
+        ///   - a 200x200 headshot
+        ///   - a 90x90 smaller headshot
+        ///   - a thumbnail of the full image with a height of 250 px
+        ///   - the original photo (max height of 1000 px)
+        /// 
+        /// The photo is stored in Azure Storage with the UserId as the foldername. A random filename is
+        /// generated for each photo using RNGCrypto based filename generator. The dimensions of the original
+        /// photo are encoded in Base62 and stored in the filenames.
+        /// 
+        /// Returns the filename of the thumbnail generated. Used by the Activity Feed to show additional info.
         /// </summary>
-        public async Task UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId)
+        public async Task<string> UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, string userId, int profileId)
         {
+            string filename = "";
+
             using (var imgFactory = new ImageFactory())
             {
                 Stream thumbStream, origStream;
                 CloudBlockBlob thumbBlob, origBlob;
 
                 //Setup
-                var cont = GetBlobContainer(profileId);
+                var cont = GetBlobContainer(userId);
                 var unique = GenerateUniqueFilename(cont);
                 imgFactory.Load(upload);
 
@@ -75,7 +87,7 @@ namespace okboba.Repository.EntityRepository
                     origStream = upload;
                 }
                 var code = Profile.EncodeDimensions(imgFactory.Image.Width, imgFactory.Image.Height);
-                var filename = unique + '_' + code;
+                filename = unique + '_' + code;
                 origBlob = cont.GetBlockBlobReference(filename);
                 var t4 = origBlob.UploadFromStreamAsync(origStream);
 
@@ -102,17 +114,19 @@ namespace okboba.Repository.EntityRepository
                 //Finally Save filename to DB
                 await AddPhotoToDbAsync(filename, profileId);
             }
+
+            return filename + "_" + OkbConstants.THUMBNAIL_SUFFIX;
         }
 
 
         /// <summary>
         /// Gets the Windows Azure Storage container
         /// </summary>
-        private CloudBlobContainer GetBlobContainer(int profileId)
+        private CloudBlobContainer GetBlobContainer(string userId)
         {
             var cont = CloudStorageAccount.Parse(StorageConnectionString)
                 .CreateCloudBlobClient()
-                .GetContainerReference(profileId.ToString());
+                .GetContainerReference(userId);
 
             cont.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
 
@@ -190,9 +204,9 @@ namespace okboba.Repository.EntityRepository
             throw new Exception("Couldn't generate unique filename");
         }
 
-        public async Task EditThumbnailAsync(string photo, int topThumb, int leftThumb, int widthThumb, int screenWidth, int profileId)
+        public async Task EditThumbnailAsync(string photo, int topThumb, int leftThumb, int widthThumb, int screenWidth, string userId)
         {
-            var cont = GetBlobContainer(profileId);
+            var cont = GetBlobContainer(userId);
             var blob = cont.GetBlockBlobReference(photo);
 
             using (var imgFactory = new ImageFactory())
@@ -216,7 +230,7 @@ namespace okboba.Repository.EntityRepository
             }            
         }
 
-        public async Task DeleteAsync(string photo, int profileId)
+        public async Task DeleteAsync(string photo, int profileId, string userId)
         {
             //first delete the photo in the database
             var db = new OkbDbContext();
@@ -231,7 +245,7 @@ namespace okboba.Repository.EntityRepository
             var t1 = db.SaveChangesAsync();
 
             //delete from storage
-            var cont = GetBlobContainer(profileId);
+            var cont = GetBlobContainer(userId);
             var t2 = cont.GetBlockBlobReference(photo).DeleteAsync();
             var t3 = cont.GetBlockBlobReference(photo + "_t").DeleteAsync();
             var t4 = cont.GetBlockBlobReference(photo + "_s").DeleteAsync();

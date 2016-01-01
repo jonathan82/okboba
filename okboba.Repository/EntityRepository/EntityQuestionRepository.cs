@@ -183,5 +183,12 @@ namespace okboba.Repository.EntityRepository
 
             return dict;
         }
+
+        public Question GetQuestionText(int id)
+        {
+            var db = new OkbDbContext();
+            var ques = db.Questions.Find(id);
+            return ques;
+        }
     }
 }

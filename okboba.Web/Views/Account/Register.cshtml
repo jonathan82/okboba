@@ -4,12 +4,14 @@
     ViewBag.Title = "OkBoba - The Premier Dating Site for Smart Singles";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
-{
+@*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "registerForm" }))
+{*@
+<form method="post" id="registerForm" action="/account/register">
     @Html.Partial("_RegisterStep1")
 
     @Html.Partial("_RegisterStep2")
-}
+</form>
+@*}*@
 
 @Html.Partial("_LocationPicker")
 
