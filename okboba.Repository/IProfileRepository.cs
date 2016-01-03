@@ -11,6 +11,7 @@ namespace okboba.Repository
     public interface IProfileRepository
     {
         Profile GetProfile(int profileId);
+        Profile GetProfile(string userId);
         ProfileText GetProfileText(int profileId);
         ProfileDetail GetProfileDetail(int profileId);
         void EditProfileText(int profileId, string text, string whichQuestion);

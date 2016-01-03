@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -63,7 +64,7 @@ namespace okboba.Repository.EntityRepository
         /// 
         /// Returns the filename of the thumbnail generated. Used by the Activity Feed to show additional info.
         /// </summary>
-        public async Task<string> UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, string userId, int profileId)
+        public async Task<string> UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId, string userId)
         {
             string filename = "";
 
@@ -73,11 +74,11 @@ namespace okboba.Repository.EntityRepository
                 CloudBlockBlob thumbBlob, origBlob;
 
                 //Setup
-                var cont = GetBlobContainer(userId);
-                var unique = GenerateUniqueFilename(cont);
+                var dir = GetPhotoDirectory(userId);
+                var unique = GenerateUniqueFilename(dir);
                 imgFactory.Load(upload);
 
-                // Upload resized image if necessary
+                //Resize original image if necessary
                 if (imgFactory.Image.Height > MAX_IMAGE_HEIGHT)
                 {
                     origStream = ResizeImage(imgFactory, MAX_IMAGE_HEIGHT);
@@ -86,51 +87,58 @@ namespace okboba.Repository.EntityRepository
                 {
                     origStream = upload;
                 }
+
+                //Generate filename with size code
                 var code = Profile.EncodeDimensions(imgFactory.Image.Width, imgFactory.Image.Height);
                 filename = unique + '_' + code;
-                origBlob = cont.GetBlockBlobReference(filename);
+
+                //Upload original
+                origBlob = dir.GetBlockBlobReference(filename);
                 var t4 = origBlob.UploadFromStreamAsync(origStream);
 
-                // Create and Upload the thumbnail
+                //Crop and upload headshot
                 imgFactory.Reset();
                 thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH);
-                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.HEADSHOT_SUFFIX);
+                thumbBlob = dir.GetBlockBlobReference(filename + OkbConstants.HEADSHOT_SUFFIX);
                 var t1 = thumbBlob.UploadFromStreamAsync(thumbStream);
 
-                //create and upload small thumbnail
+                //Crop and upload small headshot
                 imgFactory.Reset();
                 thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH_SMALL);
-                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.HEADSHOT_SMALL_SUFFIX);
+                thumbBlob = dir.GetBlockBlobReference(filename + OkbConstants.HEADSHOT_SMALL_SUFFIX);
                 var t2 = thumbBlob.UploadFromStreamAsync(thumbStream);
 
-                //create and upload full thumbnail
+                //Resize and upload full thumbnail
                 imgFactory.Reset();
                 thumbStream = ResizeImage(imgFactory, FULL_THUMBNAIL_HEIGHT);
-                thumbBlob = cont.GetBlockBlobReference(filename + "_" + OkbConstants.THUMBNAIL_SUFFIX);
-                var t3 = thumbBlob.UploadFromStreamAsync(thumbStream);                
+                thumbBlob = dir.GetBlockBlobReference(filename + OkbConstants.THUMBNAIL_SUFFIX);
+                var t3 = thumbBlob.UploadFromStreamAsync(thumbStream);
 
-                await t1; await t2; await t3; await t4;
+                await Task.WhenAll(t1, t2, t3, t4);
+                //await t1; await t2; await t3; await t4;
 
                 //Finally Save filename to DB
                 await AddPhotoToDbAsync(filename, profileId);
             }
 
-            return filename + "_" + OkbConstants.THUMBNAIL_SUFFIX;
+            //Return the thumbnail
+            return filename + OkbConstants.THUMBNAIL_SUFFIX;
         }
 
 
         /// <summary>
-        /// Gets the Windows Azure Storage container
+        /// Gets the virtual directory for a user's photos. Creates the photo container if
+        /// it doesn't exist.
         /// </summary>
-        private CloudBlobContainer GetBlobContainer(string userId)
+        private CloudBlobDirectory GetPhotoDirectory(string userId)
         {
             var cont = CloudStorageAccount.Parse(StorageConnectionString)
-                .CreateCloudBlobClient()
-                .GetContainerReference(userId);
+           .CreateCloudBlobClient()
+           .GetContainerReference(OkbConstants.PHOTO_CONTAINER);
 
             cont.CreateIfNotExists(BlobContainerPublicAccessType.Blob);
 
-            return cont;
+            return cont.GetDirectoryReference(userId);
         }
 
         /// <summary>
@@ -178,7 +186,7 @@ namespace okboba.Repository.EntityRepository
 
             //Maintain aspect ratio
             var width = (int)(((float)height / imgFactory.Image.Height) * imgFactory.Image.Width);
-            
+
             //Maintain aspect ratio
             //int height = (int)(((float)width / imgFactory.Image.Width) * imgFactory.Image.Height);
 
@@ -189,12 +197,12 @@ namespace okboba.Repository.EntityRepository
             return outStream;
         }
 
-        private string GenerateUniqueFilename(CloudBlobContainer cont)
+        private string GenerateUniqueFilename(CloudBlobDirectory dir)
         {
             for (int i = 0; i < MAX_FILENAME_RETRY; i++)
             {
                 var filename = Path.GetRandomFileName().Split('.')[0];
-                if (!cont.GetBlockBlobReference(filename).Exists())
+                if (!dir.GetBlockBlobReference(filename).Exists())
                 {
                     return filename;
                 }
@@ -206,11 +214,12 @@ namespace okboba.Repository.EntityRepository
 
         public async Task EditThumbnailAsync(string photo, int topThumb, int leftThumb, int widthThumb, int screenWidth, string userId)
         {
-            var cont = GetBlobContainer(userId);
-            var blob = cont.GetBlockBlobReference(photo);
+            var dir = GetPhotoDirectory(userId);
+            var blob = dir.GetBlockBlobReference(photo);
 
             using (var imgFactory = new ImageFactory())
             {
+                //Download original image to crop
                 var stream = new MemoryStream();
                 await blob.DownloadToStreamAsync(stream);
                 imgFactory.Load(stream);
@@ -218,16 +227,27 @@ namespace okboba.Repository.EntityRepository
                 //Calculate the scaled thumbnail dimensions
                 float scale = (float)imgFactory.Image.Width / screenWidth;
 
-                var thumbStream = CreateThumbnail(imgFactory, 
+                //Create and upload Headshot
+                var thumbStream = CreateThumbnail(imgFactory,
                     (int)(leftThumb * scale),
                     (int)(topThumb * scale),
-                    (int)(widthThumb * scale), 
+                    (int)(widthThumb * scale),
                     OkbConstants.AVATAR_WIDTH);
 
-                //Upload the new thumbnail
-                blob = cont.GetBlockBlobReference(photo + "_t");
+                blob = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SUFFIX);
                 await blob.UploadFromStreamAsync(thumbStream);
-            }            
+
+                //Create and upload small headshot
+                imgFactory.Reset();
+                thumbStream = CreateThumbnail(imgFactory,
+                    (int)(leftThumb * scale),
+                    (int)(topThumb * scale),
+                    (int)(widthThumb * scale),
+                    OkbConstants.AVATAR_WIDTH_SMALL);
+
+                blob = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SMALL_SUFFIX);
+                await blob.UploadFromStreamAsync(thumbStream);
+            }
         }
 
         public async Task DeleteAsync(string photo, int profileId, string userId)
@@ -245,13 +265,14 @@ namespace okboba.Repository.EntityRepository
             var t1 = db.SaveChangesAsync();
 
             //delete from storage
-            var cont = GetBlobContainer(userId);
-            var t2 = cont.GetBlockBlobReference(photo).DeleteAsync();
-            var t3 = cont.GetBlockBlobReference(photo + "_t").DeleteAsync();
-            var t4 = cont.GetBlockBlobReference(photo + "_s").DeleteAsync();
-            var t5 = cont.GetBlockBlobReference(photo + "_u").DeleteAsync();
+            var dir = GetPhotoDirectory(userId);
+            var t2 = dir.GetBlockBlobReference(photo).DeleteAsync();
+            var t3 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SUFFIX).DeleteAsync();
+            var t4 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SMALL_SUFFIX).DeleteAsync();
+            var t5 = dir.GetBlockBlobReference(photo + OkbConstants.THUMBNAIL_SUFFIX).DeleteAsync();
 
-            await t1; await t2; await t3; await t4; await t5;
+            //await t1; await t2; await t3; await t4; await t5;
+            await Task.WhenAll(t1, t2, t3, t4, t5);
         }
     }
 }

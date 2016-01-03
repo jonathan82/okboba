@@ -420,4 +420,10 @@
   <data name="Register_EmailTaken" xml:space="preserve">
     <value>电子邮件已经注册</value>
   </data>
+  <data name="Nav_Messages_Received" xml:space="preserve">
+    <value>接受</value>
+  </data>
+  <data name="Nav_Messages_Sent" xml:space="preserve">
+    <value>发送</value>
+  </data>
 </root>

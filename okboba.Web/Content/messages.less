@@ -1,4 +1,6 @@
-﻿.conversation-row {
+﻿@import (reference) "common.less";
+
+.conversation-row {
     padding: 10px;
     border-top: 1px solid lightgray;
 }
@@ -21,4 +23,25 @@
 }
 .conversation-read .circle {
     opacity: 0;
+}
+
+//////////////////////////////////////////////////////
+.message-row {
+    .shadow-z-1;
+    display: table;
+    width: 100%;
+}
+
+.message-row-left,
+.message-row-center,
+.message-row-right {
+    display: table-cell;
+}
+
+.message-row-left {
+    width: 100px;
+}
+
+.message-row-right {
+    width: 100px;
 }

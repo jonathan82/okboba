@@ -12,12 +12,12 @@
     @foreach (var photo in Model.Thumbnails)
     {
         <div class="grid-item">
-            @Html.Thumbnail(photo, Model.ProfileId)
+            @Html.Thumbnail(photo, Model.UserId, "photo-thumbnail-full")
 
             @if (Model.IsMe)
             {
                 <div class="photo-edit-overlay">
-                    <button class="btn btn-default btn-sm" data-src="@Html.PhotoUrl(photo.Original, Model.ProfileId)" data-photo="@photo.Original" data-toggle="editthumbnail">@i18n.Photo_EditThumbnail</button>
+                    <button class="btn btn-default btn-sm" data-src="@Html.PhotoUrl(photo.Original, Model.UserId)" data-photo="@photo.Original" data-toggle="editthumbnail">@i18n.Photo_EditThumbnail</button>
                     <button class="btn btn-default btn-sm" data-photo="@photo" data-toggle="deletephoto">@i18n.Photo_Delete</button>
                 </div>
             }            

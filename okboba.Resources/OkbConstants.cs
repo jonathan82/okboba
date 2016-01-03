@@ -23,9 +23,10 @@
         //Photo
         public const int MAX_PHOTO_SIZE = 4000000; //MB
         public const int MAX_NUM_PHOTOS = 10; //max photos per user
-        public const string HEADSHOT_SUFFIX = "t";
-        public const string HEADSHOT_SMALL_SUFFIX = "s";
-        public const string THUMBNAIL_SUFFIX = "u";        
+        public const string HEADSHOT_SUFFIX = "_t";
+        public const string HEADSHOT_SMALL_SUFFIX = "_s";
+        public const string THUMBNAIL_SUFFIX = "_u";
+        public const string PHOTO_CONTAINER = "photos";
 
         //Gender
         public const byte UNKNOWN_GENDER = 0;

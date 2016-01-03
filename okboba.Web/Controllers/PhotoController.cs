@@ -7,6 +7,7 @@ using okboba.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -28,13 +29,13 @@ namespace okboba.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult ListPhotos(int id, bool isMe)
+        public ActionResult ListPhotos(string userId, bool isMe)
         {
             var vm = new ListPhotosViewModel();
 
-            var profile = _profileRepo.GetProfile(id);
+            var profile = _profileRepo.GetProfile(userId);
 
-            vm.ProfileId = id;
+            vm.UserId = userId;
             vm.IsMe = isMe;
             vm.Thumbnails = profile.GetThumbnails();
 
@@ -51,11 +52,13 @@ namespace okboba.Controllers
                 //Viewing own profile
                 vm.IsMe = true;
                 vm.ProfileId = GetProfileId();
+                vm.UserId = User.Identity.GetUserId();
             }
             else
             {
                 vm.IsMe = false;
                 vm.ProfileId = _profileRepo.GetProfileId(userId);
+                vm.UserId = userId;
             }
 
             return View(vm);
@@ -79,7 +82,16 @@ namespace okboba.Controllers
                 return new HttpStatusCodeResult(400, "More than max photos");
             }
 
-            var photo = await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, userId, me);
+            string photo = "";
+            try
+            {
+                photo = await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, me, userId);
+            }
+            catch (Exception ex)
+            {
+                throw ex.InnerException;
+            }
+            
 
             //Update activity feed
             if (IsOkToAddActivity(OkbConstants.ActivityCategories.UploadedPhoto))

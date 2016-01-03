@@ -3,11 +3,14 @@
 @using okboba.Repository
 @using okboba.Web.Helpers
 
-@Html.Partial("_DetailBasicModal")
-@Html.Partial("_DetailLifestyleModal")
-@Html.Partial("_DetailJobModal")
-@Html.Partial("_DetailAppearanceModal")
-@Html.Partial("_DetailPersonalityModal")
+@if (Model.isMe)
+{
+    Html.RenderPartial("_DetailBasicModal");
+    Html.RenderPartial("_DetailLifestyleModal");
+    Html.RenderPartial("_DetailJobModal");
+    Html.RenderPartial("_DetailAppearanceModal");
+    Html.RenderPartial("_DetailPersonalityModal");
+}
 
 @Html.Partial("_EditTextTemplate")
 

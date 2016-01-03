@@ -47,7 +47,7 @@ namespace okboba.Controllers
             {
                 Matches = matches,
                 MatchApiUrl = ConfigurationManager.AppSettings["MatchApiUrl"],
-                StorageUrl = ConfigurationManager.AppSettings["StorageUrl"],
+                StorageUrl = ConfigurationManager.AppSettings["StorageUrl"] + OkbConstants.PHOTO_CONTAINER + "/",
                 MatchCriteria = criteria
             };
 

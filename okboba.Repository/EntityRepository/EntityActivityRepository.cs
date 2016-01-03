@@ -109,6 +109,7 @@ namespace okboba.Repository.EntityRepository
                 What = what,
                 When = DateTime.Now
             });
+            db.SaveChanges();
         }
     }
 }

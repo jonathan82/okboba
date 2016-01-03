@@ -1,0 +1,10 @@
+﻿@using okboba.Resources
+@using okboba.Web.Helpers
+@model okboba.Web.Models.MessagesHeaderViewModel
+
+<h1>Messages</h1>
+
+<ul class="nav nav-tabs">
+    @Html.NavTab(Model.Section, i18n.Nav_Messages_Received, "/messages")
+    @Html.NavTab(Model.Section, i18n.Nav_Messages_Sent, "/messages/sent")
+</ul>

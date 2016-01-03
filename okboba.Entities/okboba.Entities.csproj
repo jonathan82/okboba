@@ -136,6 +136,10 @@
     <Compile Include="Migrations\201512210708244_question.Designer.cs">
       <DependentUpon>201512210708244_question.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601022120326_AddProfileIdToUsers.cs" />
+    <Compile Include="Migrations\201601022120326_AddProfileIdToUsers.Designer.cs">
+      <DependentUpon>201601022120326_AddProfileIdToUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512210708244_question.resx">
       <DependentUpon>201512210708244_question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601022120326_AddProfileIdToUsers.resx">
+      <DependentUpon>201601022120326_AddProfileIdToUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,7 +7,7 @@
 
 @Html.Action("ProfileHeader","Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = i18n.Nav_Photos })
 
-@Html.Action("ListPhotos", new {id = Model.ProfileId, isMe = Model.IsMe })
+@Html.Action("ListPhotos", new {userId = Model.UserId, isMe = Model.IsMe })
 
 @Html.Partial("_PhotoUpload")
 

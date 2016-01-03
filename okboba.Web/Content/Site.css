@@ -652,6 +652,22 @@ a.div-link {
 .conversation-read .circle {
   opacity: 0;
 }
+.message-row {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  display: table;
+  width: 100%;
+}
+.message-row-left,
+.message-row-center,
+.message-row-right {
+  display: table-cell;
+}
+.message-row-left {
+  width: 100px;
+}
+.message-row-right {
+  width: 100px;
+}
 .grid {
   position: relative;
   margin-top: 20px;
@@ -972,30 +988,29 @@ img.emoji {
 .activity-feed-content {
   margin-left: 80px;
   padding: 10px 10px 10px 0;
-  /* These are technically the same, but use both */
-  overflow-wrap: break-word;
-  -ms-word-wrap: break-word;
-  word-wrap: break-word;
-  -ms-word-break: break-all;
-  /* This is the dangerous one in WebKit, as it breaks things wherever */
-  word-break: break-all;
-  /* Instead use this non-standard one: */
-  word-break: break-word;
-  /* Adds a hyphen where the word breaks, if supported (No Blink) */
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-}
-.activity-profiletext {
-  color: #880E4F;
-  padding-left: 15px;
-  margin-bottom: 10px;
 }
 .activity-summary {
   color: #9b9b9b;
   font-size: 1.1em;
   font-style: italic;
+}
+.activity-profiletext {
+  color: #880E4F;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+.activity-thumbnail {
+  height: 100px;
+  opacity: 0.8;
+  border-radius: 6px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.activity-question {
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-size: 1.4em;
+  color: #555555;
 }
 /****************************************
     Photo Upload

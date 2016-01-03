@@ -32,21 +32,20 @@ namespace okboba.Web.Helpers
             return ConfigurationManager.AppSettings["ChatUrl"];
         }
 
-        public static string PhotoUrl(this HtmlHelper htmlHelper,string photo, int profileId)
+        public static string PhotoUrl(this HtmlHelper htmlHelper,string photo, string userId)
         {
             var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
-            return storageUrl + profileId.ToString() + "/" + photo;
+            return storageUrl + OkbConstants.PHOTO_CONTAINER + "/" + userId + "/" + photo;
         }
 
-        public static HtmlString Thumbnail(this HtmlHelper htmlHelper, Photo photo, int profileId)
+        public static HtmlString Thumbnail(this HtmlHelper htmlHelper, Photo photo, string userId, string className)
         {
-            var storageUrl = ConfigurationManager.AppSettings["StorageUrl"];
             var img = new TagBuilder("img");
-            img.MergeAttribute("src", PhotoUrl(null, photo.Thumb,profileId));
-            img.MergeAttribute("data-original", PhotoUrl(null, photo.Original, profileId));
+            img.MergeAttribute("src", PhotoUrl(null, photo.Thumb, userId));
+            img.MergeAttribute("data-original", PhotoUrl(null, photo.Original, userId));
             img.MergeAttribute("data-w", photo.Width.ToString());
             img.MergeAttribute("data-h", photo.Height.ToString());
-            img.AddCssClass("photo-thumbnail-full");
+            img.AddCssClass(className);
             return new HtmlString(img.ToString(TagRenderMode.SelfClosing));
         }
 
@@ -99,7 +98,7 @@ namespace okboba.Web.Helpers
             else
             {
                 //Use the storage key in web.config to construct URL
-                src = ConfigurationManager.AppSettings["StorageUrl"] + userId + "/";
+                src = ConfigurationManager.AppSettings["StorageUrl"] + OkbConstants.PHOTO_CONTAINER + "/" + userId + "/";
                 src += photo;
             }
 

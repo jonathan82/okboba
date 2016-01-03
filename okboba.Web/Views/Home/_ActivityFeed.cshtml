@@ -17,8 +17,9 @@
                 @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
             </div>
             <div class="activity-feed-content">
-                @activity.Profile.Nickname @i18n.Feed_Joined
+                <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_Joined</p>
             </div>
+            <a href="/profile/@activity.Profile.UserId" class="div-link"></a>
         </div>
     }
     else if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.EditedProfileText)
@@ -43,9 +44,10 @@
                 @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
             </div>
             <div class="activity-feed-content">
-                @activity.Profile.Nickname @i18n.Feed_UploadedPhoto;
-                
+                <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_UploadedPhoto</p>
+                <img src="@Html.PhotoUrl(activity.Activity.What, activity.Profile.UserId)" alt="@activity.Profile.Nickname" class="activity-thumbnail" />
             </div>
+            <a href="/photo/@activity.Profile.UserId" class="div-link"></a>
         </div>
     }
     else if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.AnsweredQuestion)
@@ -56,9 +58,10 @@
                 @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
             </div>
             <div class="activity-feed-content">
-                @activity.Profile.Nickname @i18n.Feed_AnsweredQuestion;
-
+                <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_AnsweredQuestion</p>
+                <div class="activity-question">@activity.Activity.What</div>
             </div>
+            <a href="/question/@activity.Profile.UserId" class="div-link"></a>
         </div>
     }
 

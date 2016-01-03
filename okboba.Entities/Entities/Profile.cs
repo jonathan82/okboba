@@ -60,7 +60,7 @@ namespace okboba.Entities
                 photoList.Add(new Photo
                 {
                     Original = photos[i],
-                    Thumb = photos[i] + "_" + suffix,
+                    Thumb = photos[i] + suffix,
                     Width = size.width,
                     Height = size.height
                 });
@@ -94,7 +94,7 @@ namespace okboba.Entities
                 index = PhotosInternal.Length;
             }
 
-            return PhotosInternal.Substring(0, index) + '_' + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
+            return PhotosInternal.Substring(0, index) + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
         }
         
 

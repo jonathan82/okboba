@@ -250,6 +250,24 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 接受.
+        /// </summary>
+        public static string Nav_Messages_Received {
+            get {
+                return ResourceManager.GetString("Nav_Messages_Received", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发送.
+        /// </summary>
+        public static string Nav_Messages_Sent {
+            get {
+                return ResourceManager.GetString("Nav_Messages_Sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 性格.
         /// </summary>
         public static string Nav_Personality {

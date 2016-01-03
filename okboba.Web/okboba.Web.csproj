@@ -277,6 +277,7 @@
     <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
+    <Compile Include="Models\Messages\MessagesHeaderViewModel.cs" />
     <Compile Include="Models\Photo\ListPhotosViewModel.cs" />
     <Compile Include="Models\Photo\PhotoIndexViewModel.cs" />
     <Compile Include="Models\Profile\ProfileDetailViewModel.cs" />
@@ -521,6 +522,8 @@
     <Content Include="Views\Profile\_DetailAppearanceModal.cshtml" />
     <Content Include="Views\Profile\_DetailPersonalityModal.cshtml" />
     <Content Include="Views\Question\IndexMe.cshtml" />
+    <Content Include="Views\Messages\_MessagesHeader.cshtml" />
+    <Content Include="Views\Messages\Index_backup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
