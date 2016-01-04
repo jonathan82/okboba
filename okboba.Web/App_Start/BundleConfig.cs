@@ -40,7 +40,8 @@ namespace okboba
                 "~/Scripts/questionvalidation.js",
                 "~/Scripts/questionsubmit.js",
                 "~/Scripts/validation.js",
-                "~/Scripts/chat.js",
+                "~/Scripts/chatslider.js",
+                "~/Scripts/chatmanager.js",
                 "~/Scripts/login.js",
                 "~/Scripts/register.js"));
 

@@ -33,11 +33,13 @@ function ChatSlider($container, config) {
         nickname: '',
         profileId: 0,
         convId: null,
+        avatarUrl: '',
         sendMessageCallback: null
     }
     var $chat,
         that,
-        savedHeight;
+        savedHeight,
+        loading = true;
 
     that = this;
 
@@ -57,13 +59,15 @@ function ChatSlider($container, config) {
         $chat.remove();
     }
 
-    this.addMessage = function (msg, isMe) {
-        var dialogHtml, msgDiv;
+    this.addMessage = function (msg, from) {
+        var dialogHtml, msgDiv, isMe;
+
+        isMe = configMap.profileId != from;
 
         if (isMe) {
             dialogHtml = configMap.chatDialogMeTemplate.render({ message: msg });            
         } else {
-            dialogHtml = configMap.chatDialogThemTemplate.render({ message: msg });
+            dialogHtml = configMap.chatDialogThemTemplate.render({ message: msg, avatarUrl: configMap.avatarUrl });
         }
 
         msgDiv = $chat.find('.chat-messages-inner');
@@ -82,8 +86,36 @@ function ChatSlider($container, config) {
         $chat.css('z-index', z);
     }
 
-    this.getId = function () {
+    this.getProfileId = function () {
         return configMap.profileId;
+    }
+
+    /*
+     * info = {
+     *   LastConversation: {
+     *     Id
+     *     Subject
+     *   }
+     *   Profile: Profile
+     *   Messages: [Message] 
+     * }
+     */
+    this.loadInitialInfo = function (info) {
+        var i, msg;
+
+        //load the profile info of the other person and conversation id
+        configMap.avatarUrl = info.AvatarUrl;
+        if(info.LastConversation != null) configMap.conversationId = info.LastConversation.Id;
+
+        //load the messages
+        for (var i = 0; i < info.Messages.length; i++) {
+            msg = info.Messages[i];
+            this.addMessage(msg.MessageText, msg.From);
+        }
+    }
+
+    this.setLoadingState = function (state) {
+        loading = state;
     }
 
     //// Private Functions
@@ -286,7 +318,7 @@ var chatManager = (function ($) {
     function receiveMessage(from, convId, msg) {
         //see if any open chat windows
         for (var i = 0; i < sliders.length; i++) {
-            if (sliders[i].getId() == from) {
+            if (sliders[i].getProfileId() == from) {
                 //chat window already open
                 sliders[i].addMessage(msg, false);
                 return;
@@ -393,10 +425,10 @@ var chatManager = (function ($) {
     }
 
     /*
-     * Creates a new chat window on the screen with given info. If info is null
-     * creates chat window in loading state with spinner. 
+     * Creates a new chat window on the screen in the loading state.  Get the last N
+     * messages of the conversation and load the initial info. 
      */
-    createChat = function (title, info) {
+    createChat = function (title, profileId) {
         var slider, zIndex;
 
         //create a new chat window and position it in browser window
@@ -435,6 +467,12 @@ var chatManager = (function ($) {
             this.setZIndex(maxZ);
         });
 
+        //Ajax call to load the initial messages and profile info
+        chatHubProxy.server.getInitialInfo(profileId, null).done(function (result) {
+            //load the initial info in the what window
+            
+        });
+
         //Add some dummy messages
         //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', true);
         //slider.addMessage('hello world my name is jonathan and I am programming okboba.com', false);
@@ -468,16 +506,16 @@ var chatManager = (function ($) {
          * Also loads the avatar, gender, and profile info.
          */
         $('button[data-toggle="chat"]').click(function () {
-            var nickname, id, i;
+            var nickname, profileId, i;
             nickname = $(this).data('name');
-            id = $(this).data('id');
+            profileId = $(this).data('id');
 
             //check if window already open
             for (i = 0; i < sliders.length; i++) {
-                if (sliders[i].getId() == id) return;
+                if (sliders[i].getProfileId() == profileId) return;
             }
 
-            createChat(nickname, id);
+            createChat(nickname, profileId);
         });
     }
 

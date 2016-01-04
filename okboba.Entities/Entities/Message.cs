@@ -1,4 +1,5 @@
-﻿using okboba.Resources;
+﻿using Newtonsoft.Json;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,7 +26,9 @@ namespace okboba.Entities
         public int From { get; set; }
 
         // Navigation properties
+        [JsonIgnore]
         public virtual Conversation Conversation { get; set; }
+        [JsonIgnore]
         public virtual Profile FromProfile { get; set; }
     }
 }

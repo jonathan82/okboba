@@ -8,14 +8,25 @@ using okboba.Entities;
 using Microsoft.AspNet.Identity;
 using okboba.Repository;
 using okboba.Repository.EntityRepository;
+using System.Configuration;
+using okboba.Resources;
 
 namespace okboba.Chat
 {
     public class ChatInfo
     {
-        public Conversation LastConversation { get; set; }
+        //public Conversation LastConversation { get; set; }
         public Profile Profile { get; set; }
+        public int? ConversationId { get; set; }
         public IEnumerable<Message> Messages { get; set; }
+        public string AvatarUrl { get; set; }
+    }
+
+    public class MessageStatus
+    {
+        public int ConversationId { get; set; }
+        public int Status { get; set; }
+        public string StatusText { get; set; }
     }
 
     /// <summary>
@@ -64,6 +75,26 @@ namespace okboba.Chat
             return profileId;
         }
 
+        private string AvatarUrl(Profile profile)
+        {            
+            var photo = profile.GetFirstHeadshot(true);
+            var url = "";
+
+            if (string.IsNullOrEmpty(photo))
+            {
+                //Use one of the default avatars
+                url = "/Content/images/";
+                url += profile.Gender == OkbConstants.MALE ? "no-avatar-male-chat.png" : "no-avatar-female-chat.png";
+            }
+            else
+            {
+                //use user profile photo
+                var baseUrl = ConfigurationManager.AppSettings["StorageUrl"] + OkbConstants.PHOTO_CONTAINER + "/";
+                url = baseUrl + profile.UserId + "/" + photo;
+            }
+            return url;
+        }
+
         /// <summary>
         /// Gets the info for the chat window when it is first opened. If the convId passed in is null
         /// it will look for the last conversation with that user, otherwise it retreive messages for given
@@ -81,36 +112,45 @@ namespace okboba.Chat
             var me = GetProfileId();            
 
             var info = new ChatInfo();
-
             info.Profile = _profileRepo.GetProfile(otherId);
+            info.AvatarUrl = AvatarUrl(info.Profile);
+            info.ConversationId = convId;
 
             if (convId==null)
             {
                 //look for last conversation
                 var lastConv = _msgRepo.GetLastConversation(me, otherId);
-                convId = (lastConv == null ? null : (int?)lastConv.Id);
-            }
-            
-            if (convId==null)
-            {
-                //new conversation
-                return info;               
+                info.ConversationId = (lastConv == null ? null : (int?)lastConv.Id);
             }
 
+            if (info.ConversationId == null) return info;            
+
             //existing conversation get first page of last messages
-            info.Messages = _msgRepo.GetMessages((int)convId, 1);
+            info.Messages = _msgRepo.GetMessages((int)info.ConversationId, 1);
 
             return info;
         }
 
-        public void SendMessage(int who, string message)
+        public async Task<MessageStatus> SendMessageAsync(int to, string message, int? convId)
         {
             var from = GetProfileId();
 
-            foreach (var connId in _connections.GetConnections(who))
+            //Add message to database first - get the conversation ID in case new conversation
+            //should probably wrap in try/catch block 
+            convId = await _msgRepo.AddMessageAsync(from, to, message, convId);
+
+            //Loop thru all the open connections for the user and 
+            foreach (var connId in _connections.GetConnections(to))
             {
-                Clients.Client(connId).receiveMessage(from, message);
+                Clients.Client(connId).receiveMessage(from, convId, message);
             }
+            
+            var status = new MessageStatus
+            {
+                ConversationId = (int)convId
+            };
+
+            return status;
         }
 
         public override Task OnConnected()

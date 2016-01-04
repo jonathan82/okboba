@@ -51,10 +51,16 @@
     </div>
 </script>
 
+@*
+    Data Context: {
+        message: message text
+        avatarUrl: url of the avatar to use
+    }
+*@
 <script id="chatDialogThemTemplate" type="text/x-jsrender">
     <div class="chat-dialog-them-wrapper">
         <div class="chat-dialog-them">{{:message}}</div>
-        <img src="/Content/images/no-avatar-female-chat.png" alt="Avatar" class="chat-dialog-avatar" width="35" height="35" />
+        <img src="{{:avatarUrl}}" alt="Avatar" class="chat-dialog-avatar" width="35" height="35" />
         <img src="/Content/images/chat-curve-them-10.png" class="chat-dialog-curve-them" />
     </div>
 </script>
