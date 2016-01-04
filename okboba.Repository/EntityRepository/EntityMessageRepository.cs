@@ -164,7 +164,7 @@ namespace okboba.Repository.EntityRepository
                         orderby map.LastMessage.Timestamp descending
                         select map.Conversation;
 
-            return query.First();
+            return query.FirstOrDefault();
         }
 
 

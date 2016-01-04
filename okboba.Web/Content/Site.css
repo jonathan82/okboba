@@ -860,6 +860,18 @@ a.div-link {
   top: 0;
   right: -10px;
 }
+.chat-status-message {
+  border-radius: 10px;
+  background-color: #9b9b9b;
+  font-size: 0.8em;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  color: #eeeeee;
+}
 .chat-input-wrapper {
   position: relative;
   z-index: 1;

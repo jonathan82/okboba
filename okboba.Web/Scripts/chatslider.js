@@ -52,6 +52,13 @@ function ChatSlider($container, config) {
         $chat.remove();
     }
 
+    this.addStatusMessage = function (msg) {
+        var div, msgContainer;
+        div = '<div><div class="chat-status-message">' + msg + '</div></div>';
+        msgContainer = $chat.find('.chat-messages-inner');
+        msgContainer.append(div);
+    }
+
     this.addMessage = function (msg, from) {
         var dialogHtml, msgDiv, isMe;
 
@@ -68,7 +75,7 @@ function ChatSlider($container, config) {
         msgDiv.append(dialogHtml);
 
         //scroll to bottom of messages
-        msgDiv.animate({ scrollTop: msgDiv.prop("scrollHeight") }, 200);
+        //msgDiv.animate({ scrollTop: msgDiv.prop("scrollHeight") }, 0);
     }
 
     this.getZIndex = function () {
@@ -87,12 +94,18 @@ function ChatSlider($container, config) {
         configMap.convId = id;
     }
 
+    this.scrollBottom = function () {
+        var div = $chat.find('.chat-messages-inner');
+        div.scrollTop(div.prop('scrollHeight'));
+    }
+
     /*
      * info = {
      *   ConversationId: integer nullable
      *   Profile: Profile
      *   Messages: [array of Message] 
      *   AvatarUrl: string
+     *   IsOnline: boolean
      * }
      *   - load avatar url
      *   - load messages
@@ -105,13 +118,20 @@ function ChatSlider($container, config) {
         configMap.avatarUrl = info.AvatarUrl;
         configMap.convId = info.ConversationId;
 
-        if (info.Messages == null) return; //no messages to load, probably new conversation
-
-        //load the messages - in reverse order
-        for (i = info.Messages.length - 1; i >= 0; i--) {
-            msg = info.Messages[i];
-            this.addMessage(msg.MessageText, msg.From);
+        if (info.Messages != null) {
+            //load the messages - in reverse order
+            for (i = info.Messages.length - 1; i >= 0; i--) {
+                msg = info.Messages[i];
+                this.addMessage(msg.MessageText, msg.From);
+            }
         }
+        
+        //show online status of user if they're offline
+        if (!info.IsOnline) {
+            this.addStatusMessage('User offline. Messages will be delivered to inbox.');
+        }
+
+        this.scrollBottom();
     }
 
     this.setLoadingState = function (state) {
@@ -215,9 +235,10 @@ function ChatSlider($container, config) {
         //handle 'enter'
         if (e.which == 13) {
             e.preventDefault();
-            that.addMessage(html, -1); //pass -1 for from to indicate message is from me
+            that.addMessage(html, -1); //pass -1 for from to indicate message is from me            
             clearInput();
             configMap.sendMessageCallback(configMap.profileId, html, configMap.convId);
+            that.scrollBottom();
         }
     });    
 

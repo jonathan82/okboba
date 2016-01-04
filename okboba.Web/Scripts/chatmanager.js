@@ -24,7 +24,8 @@ var chatManager = (function ($) {
         chatHubProxy,
         chatSliderTemplate,
         chatDialogThemTemplate,
-        chatDialogMeTemplate;
+        chatDialogMeTemplate,
+        connectionEstablished = false;
 
     var emoticonSmilies = ['1f600', '1f601', '1f602', '1f603', '1f604', '1f605', '1f606', '1f607', '1f608', '1f609', '1f60a', '1f60b', '1f60c', '1f60d', '1f60e', '1f60f', '1f610', '1f611', '1f612', '1f613', '1f614', '1f615', '1f616', '1f617', '1f618', '1f619', '1f61a', '1f61b', '1f61c', '1f61d', '1f61e', '1f61f', '1f620', '1f621', '1f622', '1f623', '1f624', '1f625', '1f626', '1f627', '1f628', '1f629', '1f62a', '1f62b', '1f62c', '1f62d', '1f62e', '1f62f', '1f630', '1f631', '1f632', '1f633', '1f634', '1f635', '1f636', '1f637', '1f638', '1f639', '1f63a', '1f63b', '1f63c', '1f63d', '1f63e', '1f63f', '1f640'],
         emoticonFood = ['1f354', '1f355', '1f356', '1f357', '1f358', '1f359', '1f35a', '1f35b', '1f35c', '1f35d', '1f35e', '1f35f', '1f360', '1f361', '1f362', '1f363', '1f364', '1f365', '1f366', '1f367', '1f368', '1f369', '1f36a', '1f36b', '1f36c', '1f36d', '1f36e', '1f36f', '1f370', '1f371', '1f372', '1f373', '1f374', '1f375', '1f376', '1f377', '1f378', '1f379', '1f37a', '1f37b'],
@@ -39,15 +40,17 @@ var chatManager = (function ($) {
             if (sliders[i].getProfileId() == from) {
                 //chat window already open
                 sliders[i].addMessage(msg, from);
+                sliders[i].scrollBottom();
                 return;
             }
         }
 
-        //We're creating a new window on screen - load initial info
+        //We're creating a new window on screen. First load info before showing window
         chatHubProxy.server.getInitialInfo(from, convId).done(function (info) {
             //create new chat
-            slider = createChat(info.Profile.Nickname, from);
+            slider = createChat(info.Nickname, from);
             slider.loadInitialInfo(info);
+            chatHubProxy.server.addWindow(from, info.Nickname);
 
         }).fail(function () {
             alert('message recevied but couldnt get initial chat info');
@@ -62,11 +65,9 @@ var chatManager = (function ($) {
         slider = this;
 
         //send already sanitized text
-        console.log('to:' + to + ', ' + msg);
         chatHubProxy.server.sendMessageAsync(to, msg, convId).done(function (status) {
             //successful - display status if needed
-            console.log(slider);
-            console.log('conversation id: ' + status.ConversationId);
+
         }).fail(function () {
             //failed - display error status to user
             alert('send message failed');
@@ -74,6 +75,8 @@ var chatManager = (function ($) {
     }
 
     function setupSignalR() {
+        var slider;
+
         $.connection.hub.url = configMap.hubUrl;
 
         chatHubProxy = $.connection.chatHub;
@@ -81,7 +84,19 @@ var chatManager = (function ($) {
 
         $.connection.hub.start().done(function () {
             //connection established
-            //alert('connection established');
+            connectionEstablished = true;
+
+            //get the open chat windows from the server
+            chatHubProxy.server.getWindows().done(function (windows) {
+                //an array of ChatWindowInfo objects is returned
+                for (i = 0; i < windows.length; i++) {
+                    slider = createChat(windows[i].Nickname, windows[i].ProfileId);
+                    loadInitialInfo(slider, windows[i].ProfileId);
+                }
+            }).fail(function () {
+                aler('get chat windows from server failed');
+            });
+
         }).fail(function () {
             //connection failed
             alert('signalr connection failed');
@@ -106,6 +121,14 @@ var chatManager = (function ($) {
                 sliders[i].setZIndex(z - 1);
             }
         }
+    }
+
+    function loadInitialInfo (slider, profileId) {
+        chatHubProxy.server.getInitialInfo(profileId, null).done(function (info) {
+            slider.loadInitialInfo(info);
+        }).fail(function () {
+            alert('loading initial info failed');
+        });
     }
 
     //// Public functions
@@ -181,6 +204,7 @@ var chatManager = (function ($) {
             delete sliders[i];
             sliders.splice(i, 1);
             repositionSliders();
+            chatHubProxy.server.removeWindow(profileId);
         });
 
         //bring to foreground handler
@@ -196,11 +220,12 @@ var chatManager = (function ($) {
 
     initModule = function (options) {
 
+        var slider, i;
+
         configMap = $.extend(configMap, options);
 
         //listen for resize event
         $(window).resize($.throttle(250, function () {
-            console.log('resize');
             repositionSliders();
         }));
 
@@ -210,15 +235,9 @@ var chatManager = (function ($) {
         //load the templates (so we can reuse them when creating new sliders)
         chatSliderTemplate = $.templates(configMap.chatSliderTemplateId);
         chatDialogThemTemplate = $.templates(configMap.chatDialogThemTemplateId);
-        chatDialogMeTemplate = $.templates(configMap.chatDialogMeTemplateId);
+        chatDialogMeTemplate = $.templates(configMap.chatDialogMeTemplateId);        
 
         //hookup message button
-        /*
-         * Tries to get last conversation Id. If none then create chat window with
-         * null conversation Id inidcating new conversation.  If there is previous 
-         * conversation then loads the first N messages where N is configurable.
-         * Also loads the avatar, gender, and profile info.
-         */
         $('button[data-toggle="chat"]').click(function () {
 
             var nickname, profileId, i, slider;
@@ -233,12 +252,11 @@ var chatManager = (function ($) {
 
             slider = createChat(nickname, profileId);
 
+            //save window to server
+            chatHubProxy.server.addWindow(profileId, nickname);
+
             //load inital info
-            chatHubProxy.server.getInitialInfo(profileId, null).done(function (info) {
-                slider.loadInitialInfo(info);
-            }).fail(function () {
-                alert('loading initial info failed');
-            });
+            loadInitialInfo(slider, profileId);
         });
     }
 

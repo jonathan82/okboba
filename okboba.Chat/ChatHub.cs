@@ -16,10 +16,12 @@ namespace okboba.Chat
     public class ChatInfo
     {
         //public Conversation LastConversation { get; set; }
-        public Profile Profile { get; set; }
+        //public Profile Profile { get; set; }
         public int? ConversationId { get; set; }
         public IEnumerable<Message> Messages { get; set; }
         public string AvatarUrl { get; set; }
+        public bool IsOnline { get; set; }
+        public string Nickname { get; set; }
     }
 
     public class MessageStatus
@@ -47,6 +49,8 @@ namespace okboba.Chat
     public class ChatHub : Hub
     {        
         private static ConnectionMapping _connections = new ConnectionMapping();
+        private static ChatWindowManager _chatWindows = new ChatWindowManager();
+
         private IProfileRepository _profileRepo;
         private IMessageRepository _msgRepo;
 
@@ -56,6 +60,7 @@ namespace okboba.Chat
             _msgRepo = EntityMessageRepository.Instance;
         }
 
+        /////////////////////////// Private Methods ///////////////////////////////////
         protected int GetProfileId()
         {
             int profileId;
@@ -95,6 +100,9 @@ namespace okboba.Chat
             return url;
         }
 
+
+        ////////////////////////// Public Methods ////////////////////////////////////////
+
         /// <summary>
         /// Gets the info for the chat window when it is first opened. If the convId passed in is null
         /// it will look for the last conversation with that user, otherwise it retreive messages for given
@@ -112,9 +120,11 @@ namespace okboba.Chat
             var me = GetProfileId();            
 
             var info = new ChatInfo();
-            info.Profile = _profileRepo.GetProfile(otherId);
-            info.AvatarUrl = AvatarUrl(info.Profile);
+            var profile = _profileRepo.GetProfile(otherId);
+            info.AvatarUrl = AvatarUrl(profile);
             info.ConversationId = convId;
+            info.IsOnline = IsOnline(otherId);
+            info.Nickname = profile.Nickname;
 
             if (convId==null)
             {
@@ -131,6 +141,12 @@ namespace okboba.Chat
             return info;
         }
 
+        /// <summary>
+        /// 
+        /// Sends a message to the given user by adding it to the database and delivering to the user
+        /// if they're online. 
+        /// 
+        /// </summary>
         public async Task<MessageStatus> SendMessageAsync(int to, string message, int? convId)
         {
             var from = GetProfileId();
@@ -153,6 +169,17 @@ namespace okboba.Chat
             return status;
         }
 
+        public bool IsOnline(int profileId)
+        {
+            var conn = _connections.GetConnections(profileId);
+            return conn.Count() != 0;
+        }
+
+        /*****************************************************************
+
+            Functions for when clients connect/disconnect
+
+        ******************************************************************/
         public override Task OnConnected()
         {
             var id = GetProfileId();
@@ -181,6 +208,34 @@ namespace okboba.Chat
             }
 
             return base.OnReconnected();
+        }
+
+        /*****************************************************************
+
+            Functions for managing chat window state
+
+        ******************************************************************/
+        public void AddWindow(int profileId, string nickname)
+        {
+            var me = GetProfileId();
+            _chatWindows.Add(me, profileId, nickname);
+        }
+
+        public void RemoveWindow(int profileId)
+        {
+            var me = GetProfileId();
+            _chatWindows.Remove(me, profileId);
+        }
+
+        public IEnumerable<ChatWindowInfo> GetWindows()
+        {
+            var me = GetProfileId();
+            return _chatWindows.GetWindows(me);
+        }
+
+        public void SetMinimized(bool isMinimized, int profileId)
+        {
+
         }
     }
 }
