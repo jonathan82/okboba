@@ -1,47 +1,176 @@
 ﻿@import (reference) "common.less";
 
-.conversation-row {
+/*********************************************************
+
+    Styles for Conversation view
+
+**********************************************************/
+.conv-row {
+    .shadow-z-1;
+    display: table;
+    width: 100%;
+    background-color: #FFF;
+    margin-bottom: 10px;
     padding: 10px;
-    border-top: 1px solid lightgray;
+    position: relative;
 }
-.conversation-read {
-    background-color: ghostwhite;
+
+.conv-row-1,
+.conv-row-2,
+.conv-row-3,
+.conv-row-4 {
+    display: table-cell;
 }
-.conversation-blurb {
+
+.conv-row-1,
+.conv-row-2,
+.conv-row-4 {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.conv-row-1 {
+    width: 40px;
+    color: lighten(@gray-light, 10%);
+    font-size: 1.2em;    
+}
+
+.conv-row-2 {
+    width: 60px;
+}
+
+.conv-row-3 {
     vertical-align: top;
-    display: inline-block;
-    padding-left: 10px;
+    padding-left: 15px;
 }
-.circle {
+
+.conv-row-4 {
+    width: 100px;
+    color: @gray-light;
+    font-style:italic;
+}
+
+.conv-circle {
     width: 12px;
     height: 12px;
     border-radius: 6px;
-    background-color: lightpink;
+    background-color: @primary-color-2;
     display: inline-block;
-    margin: 0 10px 0 10px;
-    vertical-align: middle;
-}
-.conversation-read .circle {
-    opacity: 0;
 }
 
-//////////////////////////////////////////////////////
-.message-row {
+.conv-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.conv-name {
+    padding-top: 5px;
+    font-size: 1.2em;
+    color: @gray;
+}
+
+.conv-blurb {
+    margin-top: 4px;
+    color: @gray-light;
+    width: 350px;
+}
+
+.conv-delete-icon {
+    display: none;
+    font-size: 1.3em;
+}
+
+/*********************************************************
+
+    Styles for Messages view
+
+**********************************************************/
+.msg-row {
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+    color: @gray;
+}
+
+.msg-row-left,
+.msg-row-right {
+    display: table-cell;
+}
+
+.msg-row-left {
+    width: 120px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.msg-dialog-me,
+.msg-dialog-them {
+    border-radius: 0 5px 5px 5px;
+    padding: 20px;
+    position: relative;
+}
+
+.msg-dialog-me {
+    background-color: darken(@bg-color, 8%);
+}
+
+.msg-dialog-them {
+    background-color: #FFF;
+}
+
+.msg-avatar {
+    .img-circle;
+    width: 60px;
+    height: 60px;
+}
+
+.msg-time {
+    color: @gray-light;
+    font-size: 0.9em;
+    padding-top: 15px;
+}
+
+.msg-triangle-them {
+	width: 0;
+	height: 0;
+	border-top: 20px solid #FFF;
+	border-left: 20px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -20px;
+}
+
+.msg-triangle-me {
+    .msg-triangle-them;
+    border-top: 20px solid darken(@bg-color, 8%);
+}
+
+.msg-dialog-me textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 5px;
+}
+
+.msg-profile-header {
     .shadow-z-1;
+    background-color: #FFF;
+    padding: 10px 0;
+    margin-bottom: 20px;
     display: table;
     width: 100%;
 }
 
-.message-row-left,
-.message-row-center,
-.message-row-right {
+.msg-header-center {
     display: table-cell;
 }
 
-.message-row-left {
+.msg-header-right {
+    display: table-cell;
     width: 100px;
 }
 
-.message-row-right {
-    width: 100px;
+.msg-load-previous {
+    text-align: center;
+    padding: 0 0 15px 0;
 }

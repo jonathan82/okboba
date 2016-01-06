@@ -171,7 +171,7 @@ namespace okboba.Repository.EntityRepository
         /// <summary>
         /// Gets a list of messages for the given conversation Id ordered by most recent messages first.
         /// </summary>
-        public IEnumerable<Message> GetMessages(int convId, int page = 1, int numPerPage = 20)
+        public IList<Message> GetMessages(int convId, int low = 0, int take = 5)
         {
             var db = new OkbDbContext();
 
@@ -180,9 +180,7 @@ namespace okboba.Repository.EntityRepository
                         orderby msg.Timestamp descending
                         select msg;
 
-            var skip = (page - 1) * numPerPage;
-
-            return query.Skip(skip).Take(numPerPage);
+            return query.Skip(low).Take(take).ToList();
         }
 
 
@@ -192,7 +190,7 @@ namespace okboba.Repository.EntityRepository
         /// is one where the user sent the last message. Ordered by timestamp.
         /// 
         /// </summary>
-        public IEnumerable<ConversationModel> GetSent(int id, int page = 1, int numPerPage = 20)
+        public IEnumerable<ConversationModel> GetSent(int id, int low, int numPerPage)
         {
             var db = new OkbDbContext();
 
@@ -205,9 +203,7 @@ namespace okboba.Repository.EntityRepository
                             LastMessage = map.LastMessage
                         };
 
-            var skip = (page - 1) * numPerPage;
-
-            return query.Skip(skip).Take(numPerPage);                        
+            return query.Skip(low).Take(numPerPage);                        
         }
 
 
@@ -247,6 +243,13 @@ namespace okboba.Repository.EntityRepository
             //Decrement message count for user
 
             await db.SaveChangesAsync();
+        }
+
+        public ConversationMap GetConversationMap(int profileId, int convId)
+        {
+            var db = new OkbDbContext();
+            var map = db.ConversationMap.Find(profileId, convId);
+            return map;
         }
     }
 }

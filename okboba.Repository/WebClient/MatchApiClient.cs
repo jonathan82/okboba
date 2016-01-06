@@ -1,4 +1,5 @@
-﻿using okboba.Entities;
+﻿using Newtonsoft.Json;
+using okboba.Entities;
 using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -53,9 +54,9 @@ namespace okboba.Repository.WebClient
         /// <summary>
         /// Makes a web service call to retrieve a page of matches, and returns a List of MatchModels
         /// </summary>
-        public async Task<List<MatchModel>> GetMatchesAsync(MatchCriteriaModel criteria, int page = 1)
+        public async Task<IList<MatchModel>> GetMatchesAsync(MatchCriteriaModel criteria, int page = 1)
         {
-            var matches = await CallMatchApiAsync<List<MatchModel>>(FormatMatchQuery(page, criteria), false).ConfigureAwait(false);
+            var matches = await CallMatchApiAsync<IList<MatchModel>>(FormatMatchQuery(page, criteria), false).ConfigureAwait(false);
             return matches;
         }
 
@@ -105,9 +106,10 @@ namespace okboba.Repository.WebClient
                 
                 response.EnsureSuccessStatusCode();
 
-                var content = await response.Content.ReadAsAsync<T>().ConfigureAwait(false);
+                //var content = await response.Content.ReadAsAsync<T>().ConfigureAwait(false);
+                var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                return content;
+                return JsonConvert.DeserializeObject<T>(content);
             }
         }
 

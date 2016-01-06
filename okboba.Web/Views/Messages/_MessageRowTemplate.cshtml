@@ -1,0 +1,22 @@
+﻿@*
+    Data context: {
+        avatarUrl: string
+        messageText: string
+        isMe: boolean
+        friendlyTime: string with friendly time like "yesterday", "today" etc
+    }    
+*@
+<script id="messageRowTemplate" type="text/x-jsrender">
+    <div class="msg-row">
+        <div class="msg-row-left">
+            <img src="{{:avatarUrl}}" class="msg-avatar" />
+        </div>
+        <div class="msg-row-right">
+            <div class="{{:isMe ? 'msg-dialog-me' : 'msg-dialog-them'}}">
+                {{:messageText}}
+                <div class="msg-time">Sent {{:friendlyTime}}</div>
+                <div class="{{:isMe ? 'msg-triangle-me' : 'msg-triangle-them'}}"></div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,8 +1,8 @@
 ﻿/******************
     Less Variables
 *******************/
+@bg-color: #F7F2F7;
 @primary-color-1: #FCE4EC;
-//@primary-color-2: #F06292;
 @primary-color-2: #D81B60;
 @primary-color-3: #880E4F;
 @accent-color: #FFEB3B;
@@ -113,6 +113,15 @@
     background-color: #FFF;
 }
 
+hr {
+    border-top: solid 1px #D7CDD8;
+}
+
+.active > a {
+    //disable link on active navigation
+    pointer-events: none;
+}
+
 /***************************
     Okboba Specific Sytles
 ****************************/
@@ -149,9 +158,8 @@ body {
 
 .container-auth,
 .container-anon {
-    background-color: #FFF;
+    background-color: @bg-color; 
     padding: 30px 40px;
-    //min-height: 1200px;
 }
 
 .splash-buffer {
@@ -242,4 +250,17 @@ a.div-link {
     /*workaround to make clickable in IE */
     filter: alpha(opacity=0);
     /*workaround to make clickable in IE */
+}
+
+.section-header {
+    font-size: 2em;
+    color: @gray-light;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
 }

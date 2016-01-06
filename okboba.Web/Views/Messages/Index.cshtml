@@ -1,5 +1,7 @@
-﻿@using okboba.Resources
+﻿@model IEnumerable<okboba.Repository.Models.ConversationModel>
+@using okboba.Resources
 @using okboba.Web.Models
+@using okboba.Web.Helpers
 
 @{
     ViewBag.Title = "Messages";
@@ -8,12 +10,36 @@
 @Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Received })
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
         <!-- List of messages -->
-        <div class="message-row">
-            <div class="message-row-left">left</div>
-            <div class="message-row-center">center</div>
-            <div class="message-row-right">right</div>
-        </div>
+        @foreach (var conv in Model)
+        {
+            bool replied = conv.LastMessage.From != conv.OtherProfile.Id;
+
+            <div class="conv-row">
+                <div class="conv-row-1">
+                    @if (!conv.HasBeenRead)
+                    {
+                        <div class="conv-circle"></div>
+                    }
+                    else if(replied)
+                    {
+                        <span class="glyphicon glyphicon-share-alt"></span>
+                    }
+                </div>
+                <div class="conv-row-2">
+                    @Html.Avatar(conv.OtherProfile.GetFirstHeadshot(true), conv.OtherProfile.Gender, conv.OtherProfile.UserId, "conv-avatar")
+                </div>
+                <div class="conv-row-3">
+                    <div class="conv-name">@conv.OtherProfile.Nickname</div>
+                    <div class="conv-blurb truncate">@conv.LastMessage.MessageText</div>
+                </div>
+                <div class="conv-row-4">
+                    @conv.LastMessage.Timestamp.ToShortDateString()
+                    <div class="conv-delete-icon" data-id="id"><span class="glyphicon glyphicon-trash"></span></div>
+                </div>
+                <a href="~/messages/conversation/@conv.LastMessage.ConversationId" class="div-link"></a>
+            </div>
+        }
     </div>
 </div>

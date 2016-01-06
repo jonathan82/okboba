@@ -16,6 +16,10 @@ function br2nl(str) {
     return str.replace(/<br\s*\/?>/mg, "\n");
 }
 
+/*
+ * Removes trailing spaces, newlines as well as html spaces and <br>'s from the string.
+ * Useful when getting input from a contenteditable div
+ */
 function trimBr(str) {
     str = str.trim();
     str = str.replace(/(<br\s*\/*?>)+$/mg, "");    

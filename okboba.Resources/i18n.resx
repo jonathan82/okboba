@@ -426,4 +426,13 @@
   <data name="Nav_Messages_Sent" xml:space="preserve">
     <value>发送</value>
   </data>
+  <data name="Nav_Messages_Reply" xml:space="preserve">
+    <value>回复</value>
+  </data>
+  <data name="Messages_Them" xml:space="preserve">
+    <value>他</value>
+  </data>
+  <data name="Messages_You" xml:space="preserve">
+    <value>你</value>
+  </data>
 </root>

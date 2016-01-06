@@ -15,9 +15,18 @@
             <div class="match-result">
                 <a href="~/profile/@m.UserId">@Html.Avatar(m.Photo, m.Gender, m.UserId, "match-avatar")</a>
                 <div class="match-info-wrapper">
-                    <p>@m.Nickname</p>
-                    <p>@m.Age &middot; @m.Location</p>
-                    <p>@m.MatchPercent% @i18n.Common_Match | @m.EnemyPercent% @i18n.Common_Enemy</p>
+                    <div class="match-info-name">@m.Nickname</div>
+                    <div class="match-info-row2">@m.Age &#x2022; @m.Location</div>
+                    <div class="match-info-score">
+                        <div class="match-info-score-match">
+                            <div>@m.MatchPercent%</div>
+                            <div class="match-info-score-smaller">@i18n.Common_Match</div>
+                        </div>
+                        <div class="match-info-score-enemy">
+                            <div>@m.EnemyPercent%</div>
+                            <div class="match-info-score-smaller">@i18n.Common_Enemy</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             count++;

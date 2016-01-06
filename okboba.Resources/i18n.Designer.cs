@@ -250,11 +250,38 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 他.
+        /// </summary>
+        public static string Messages_Them {
+            get {
+                return ResourceManager.GetString("Messages_Them", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你.
+        /// </summary>
+        public static string Messages_You {
+            get {
+                return ResourceManager.GetString("Messages_You", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 接受.
         /// </summary>
         public static string Nav_Messages_Received {
             get {
                 return ResourceManager.GetString("Nav_Messages_Received", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 回复.
+        /// </summary>
+        public static string Nav_Messages_Reply {
+            get {
+                return ResourceManager.GetString("Nav_Messages_Reply", resourceCulture);
             }
         }
         

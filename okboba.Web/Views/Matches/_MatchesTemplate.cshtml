@@ -29,12 +29,21 @@
         <div class="match-result">
             <a href="/profile/{{:UserId}}"><img src="{{:AvatarUrl}}" alt="Photo" class="match-avatar" /></a>
             <div class="match-info-wrapper">
-                <p>{{:Nickname}}</p>
-                <p>{{:Age}} &middot; {{:Location}}</p>
-                <p>{{:MatchPercent}}% @i18n.Common_Match | {{:EnemyPercent}}% @i18n.Common_Enemy</p>
+                <div class="match-info-name">{{:Nickname}}</div>
+                <div class="match-info-row2">{{:Age}} &#x2022; {{:Location}}</div>
+                <div class="match-info-score">
+                    <div class="match-info-score-match">
+                        <div>{{:MatchPercent}}%</div>
+                        <div class="match-info-score-smaller">@i18n.Common_Match</div>
+                    </div>
+                    <div class="match-info-score-enemy">
+                        <div>{{:EnemyPercent}}%</div>
+                        <div class="match-info-score-smaller">@i18n.Common_Enemy</div>
+                    </div>
+                </div>                
             </div>
         </div>
         {{/for}}
     </div>
-    
+
 </script>

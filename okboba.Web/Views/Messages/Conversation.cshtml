@@ -1,7 +1,89 @@
-﻿
+﻿@using okboba.Web.Models
+@using okboba.Resources
+@using okboba.Web.Helpers
+@model okboba.Web.Models.ReplyViewModel
+
 @{
     ViewBag.Title = "Conversation with ...";
 }
 
-<h2>Compose</h2>
+@Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Reply })
 
+@Html.Partial("_MessageRowTemplate")
+
+<div class="row">
+    <div class="col-md-10">
+        <!-- Profile of the person we're taking with -->
+        <div class="msg-profile-header">
+            <div class="msg-row-left">
+                @Html.Avatar(Model.Other.GetFirstHeadshot(true), Model.Other.Gender, Model.Other.UserId, "msg-avatar")
+            </div>
+            <div class="msg-header-center">
+                test
+            </div>
+            <div class="msg-header-right">
+                test
+            </div>
+        </div>
+
+        <!-- Load previous messages button -->
+        <div class="msg-load-previous">
+            <button class="btn btn-default ladda-button" data-toggle="loadpreviousmessages" data-style="expand-left"><span class="ladda-label">Load Previous Messages</span></button>
+        </div>
+
+        <div id="messagesContainer">
+            @foreach (var msg in Model.Messages.Reverse())
+            {
+                bool isMe = msg.From == Model.Me.Id;
+
+                var profile = isMe ? Model.Me : Model.Other;
+
+                <div class="msg-row">
+                    <div class="msg-row-left">
+                        @Html.Avatar(profile.GetFirstHeadshot(true), profile.Gender, profile.UserId, "msg-avatar")
+                    </div>
+                    <div class="msg-row-right">
+                        <div class="@(isMe ? "msg-dialog-me" : "msg-dialog-them")">
+                            @msg.MessageText
+                            <div class="msg-time">Sent @msg.Timestamp</div>
+                            <div class="@(isMe ? "msg-triangle-me" : "msg-triangle-them")"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Reply box -->
+        <div class="msg-row">
+            <div class="msg-row-left">
+                @Html.Avatar(Model.Me.GetFirstHeadshot(true), Model.Me.Gender, Model.Me.UserId, "msg-avatar")
+            </div>
+            <div class="msg-row-right">
+                <div class="msg-dialog-me">
+                    <textarea id="replyBox"></textarea>
+                    <div class="msg-triangle-me"></div>
+                    <button class="btn btn-primary ladda-button" data-toggle="reply" data-style="expand-left"><span class="lada-label">Send</span></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+            //document ready
+            messaging.initModule({
+                initialLow: @OkbConstants.INITIAL_NUM_MESSAGES, //number of messages already loaded
+                convId: @Model.ConversationId,
+                msgContainerSel: '#messagesContainer',
+                replyBoxSel: '#replyBox',
+                me: @Model.Me.Id,
+                other: @Model.Other.Id,
+                avatarMeUrl: '@Html.AvatarUrl(Model.Me.GetFirstHeadshot(true), Model.Me.Gender, Model.Me.UserId)',
+                avatarOtherUrl: '@Html.AvatarUrl(Model.Other.GetFirstHeadshot(true), Model.Other.Gender, Model.Other.UserId)'
+            });
+        });
+    </script>
+}

@@ -7,6 +7,7 @@ using okboba.Repository.EntityRepository;
 using okboba.Repository.MemoryRepository;
 using okboba.Repository.Models;
 using okboba.Repository.RedisRepository;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,20 +31,16 @@ using System.Web.Mvc;
 
 namespace okboba.MatchApi.Controllers
 {
-    //[EnableCors(origins: "http://dev.okboba.com", headers: "*", methods: "*", SupportsCredentials = true)]
     [System.Web.Mvc.Authorize]    
     public class MatchesController : OkbBaseController
     {
         private IMatchRepository _matchRepo;
-        private RedisMatchRepository _redisRepo;
-        private MatchCalc _matchCalc;
-        const int NUM_MATCHES_PER_PAGE = 28;
+        private IRedisMatchRepository _redisRepo;
 
         public MatchesController()
         {
-            _matchRepo = MemoryMatchRepository.Instance;
-            _redisRepo = RedisMatchRepository.Instance;
-            _matchCalc = MatchCalc.Instance;
+            _matchRepo = EntityMatchRepository.Instance;
+            _redisRepo = SXRedisMatchRepository.Instance;
         }
 
         /// <summary>
@@ -53,7 +50,7 @@ namespace okboba.MatchApi.Controllers
         public MatchModel CalculateMatch(int otherProfileId)
         {
             var myProfileId = GetProfileId();
-            var result = _matchRepo.CalculateMatch(myProfileId, otherProfileId);
+            var result = _matchRepo.Calculate(myProfileId, otherProfileId);
             return result;
         }
 
@@ -64,51 +61,29 @@ namespace okboba.MatchApi.Controllers
         public HttpResponseMessage GetMatches([FromUri]MatchCriteriaModel criteria, int page = 1)
         {
             //We should be authenticated at this point.  Only allow users to get their own matches
-            var profileId = GetProfileId();
+            var me = GetProfileId();
 
-            var key = _redisRepo.FormatKey(profileId, criteria);
-            string json;
+            string json = "";
 
-            //Check if in cache, if so use it.  otherwise calculate matches and store in cache
-            if (_redisRepo.HasMatches(key))
+            var matches = _redisRepo.Get(me, criteria, page);
+
+            if (matches != null)
             {
-                //Get cached results
-                int count = _redisRepo.GetMatchCount(key);
-                var range = PageRange(page, count);
-
-                if (range==null)
-                {
-                    json = "[]";
-                }
-                else
-                {
-                    var jsonList = _redisRepo.GetMatches(key, range.Item1, range.Item2);
-                    json = "[" + string.Join(",", jsonList) + "]";
-                }                
+                //Hit - results in cache.  Serialize them to JSON
+                json = JsonConvert.SerializeObject(matches);                               
             }
             else
             {
-                //calculate matches and save in cache
-                var matches = _matchRepo.MatchSearch(profileId, criteria);
-                var range = PageRange(page, matches.Count);
+                //Miss - calculate matches and save in cache. 
+                matches = _matchRepo.Search(me, criteria);
 
-                _redisRepo.SaveMatchResults(key, matches);
+                _redisRepo.Save(me, matches, criteria);
 
-                if (range==null)
-                {
-                    json = "[]";
-                }
-                else
-                {
-                    json = "[";
-                    for (int i = range.Item1; i < range.Item2; i++)
-                    {
-                        //serialize matches[i] to return to caller                    
-                        json += JsonConvert.SerializeObject(matches[i]) + ",";
-                    }
-                    json = json.TrimEnd(',');
-                    json += "]";
-                }                
+                //Serialize them to JSON
+                int start = (page - 1) * OkbConstants.MATCHES_PER_PAGE;
+                var pagedMatches = matches.Skip(start).Take(OkbConstants.MATCHES_PER_PAGE);
+
+                json = JsonConvert.SerializeObject(pagedMatches);
             }
 
             //var response = Request.CreateResponse(HttpStatusCode.OK, json, "application/json");
@@ -117,50 +92,42 @@ namespace okboba.MatchApi.Controllers
             return response;
         }  
 
-        private string GetCachedResults(int page, string key)
-        {
-            var json = "";
-            //Get cached results
-            int count = _redisRepo.GetMatchCount(key);
-            var range = PageRange(page, count);
 
-            if (range == null)
-            {
-                json = "[]";
-            }
-            else
-            {
-                var jsonList = _redisRepo.GetMatches(key, range.Item1, range.Item2);
-                json = "[" + string.Join(",", jsonList) + "]";
-            }
-            return json;
-        }
-
+        //////////////////////// Private Methods ////////////////////////////////////////
+        //private string SerializeMatches(IEnumerable<MatchModel> matches)
+        //{
+        //    var json = "[";
+        //    foreach (var match in matches)
+        //    {
+        //        json += JsonConvert.SerializeObject(match);
+        //    }
+        //}
+        
         /// <summary>
         /// Calculates the start and end indexes for a given page.  Checks that page is within range.
         /// Returns null if page outside of range.
         /// </summary>
-        private Tuple<int, int> PageRange(int page, int count)
-        {
-            // Sanity check for page
-            if (page < 1 || page > Math.Ceiling((float)count / NUM_MATCHES_PER_PAGE))
-            {
-                //return null to indicate page is outside of valid range
-                //page = 1;
-                return null;
-            }
+        //private Tuple<int, int> PageRange(int page, int count)
+        //{
+        //    // Sanity check for page
+        //    if (page < 1 || page > Math.Ceiling((float)count / NUM_MATCHES_PER_PAGE))
+        //    {
+        //        //return null to indicate page is outside of valid range
+        //        //page = 1;
+        //        return null;
+        //    }
 
-            int start, end;
-            start = (page - 1) * NUM_MATCHES_PER_PAGE;
-            end = start + NUM_MATCHES_PER_PAGE;
+        //    int start, end;
+        //    start = (page - 1) * NUM_MATCHES_PER_PAGE;
+        //    end = start + NUM_MATCHES_PER_PAGE;
 
-            if (end > count)
-            {
-                end = count;
-            }
+        //    if (end > count)
+        //    {
+        //        end = count;
+        //    }
 
-            return new Tuple<int, int>(start, end);
-        }
+        //    return new Tuple<int, int>(start, end);
+        //}
         
     }
 }

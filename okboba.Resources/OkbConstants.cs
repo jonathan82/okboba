@@ -8,9 +8,13 @@
 
         //Matches
         public const int MAX_MATCH_RESULTS = 4000;
+        public const int MATCHES_PER_PAGE = 28;
+        public const int EXPIRE_MATCHES = 5; //minutes that matches will exist in cache
 
         //Messages
         public const int MAX_MESSAGE_LENGTH = 1000;
+        public const int MESSAGES_PER_PAGE = 20; //number of messages to show per "load" request
+        public const int INITIAL_NUM_MESSAGES = 5; //number of messages show initially
 
         //Activity Feed
         public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }

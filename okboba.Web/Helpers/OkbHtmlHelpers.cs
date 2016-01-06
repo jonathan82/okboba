@@ -76,6 +76,27 @@ namespace okboba.Web.Helpers
             return new HtmlString(str);
         }
 
+
+        public static string AvatarUrl(this HtmlHelper htmlHelper, string photo, byte gender, string userId)
+        {
+            string url;
+
+            if (string.IsNullOrEmpty(photo))
+            {
+                //Use one of the default avatars
+                url = "/Content/images/";
+                url += gender == OkbConstants.MALE ? "no-avatar-male.png" : "no-avatar-female.png";
+            }
+            else
+            {
+                //Use the storage key in web.config to construct URL
+                url = ConfigurationManager.AppSettings["StorageUrl"] + OkbConstants.PHOTO_CONTAINER + "/" + userId + "/";
+                url += photo;
+            }
+
+            return url;
+        }
+
         /// <summary>
         /// Generates an Avatar by buidling an img tag with the given parameters. If no photo is 
         /// specified it will use the "no avatar" default photo. The image is styled with the given className.
@@ -86,21 +107,8 @@ namespace okboba.Web.Helpers
             byte gender, 
             string userId, 
             string className)
-        {
-            string src;
-
-            if (string.IsNullOrEmpty(photo))
-            {
-                //Use one of the default avatars
-                src = "/Content/images/";
-                src += gender == OkbConstants.MALE ? "no-avatar-male.png" : "no-avatar-female.png";
-            }
-            else
-            {
-                //Use the storage key in web.config to construct URL
-                src = ConfigurationManager.AppSettings["StorageUrl"] + OkbConstants.PHOTO_CONTAINER + "/" + userId + "/";
-                src += photo;
-            }
+        {            
+            var src = htmlHelper.AvatarUrl(photo, gender, userId);
 
             var builder = new TagBuilder("img");
             builder.MergeAttribute("src", src);

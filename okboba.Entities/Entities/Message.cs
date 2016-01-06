@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace okboba.Entities
 {
+    [JsonObject] //Json.NET
     public class Message
     {
         public int Id { get; set; }
@@ -26,7 +27,7 @@ namespace okboba.Entities
         public int From { get; set; }
 
         // Navigation properties
-        [JsonIgnore]
+        [JsonIgnore] //Json.NET 
         public virtual Conversation Conversation { get; set; }
         [JsonIgnore]
         public virtual Profile FromProfile { get; set; }

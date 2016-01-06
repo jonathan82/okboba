@@ -11,17 +11,26 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
+using okboba.Repository.RedisRepository;
 
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace ConsoleApp
 {
+    [Serializable]
     class Person
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
-        public string Description { get; set; }
+        public DateTime Birthdate { get; set; }
+        public Company Company { get; set; }
+    }
+
+    [Serializable]
+    class Company
+    {
+        public int CompId { get; set; }
+        public string CompName { get; set; }
     }
 
     class Program
@@ -30,6 +39,32 @@ namespace ConsoleApp
 
         static void Main(string[] args)
         {
+            //Test StackExchange Redis
+            var p = new Person
+            {
+                Id = 3,
+                Name = "Jonathan",
+                Birthdate = DateTime.Now,
+                Company = new Company
+                {
+                    CompId = 5,
+                    CompName = "Okboba"
+                }
+            };
+            var list = new List<Person>();
+            list.Add(p);
+            list.Add(p);
+            list.Add(p);
+            SXRedisMatchRepository.Create("localhost");
+            var redis = SXRedisMatchRepository.Instance;
+            var db = redis.GetDb();
+            db.Set("mykey123", list);
+            var list2 = db.Get<List<Person>>("mykey123");
+            foreach (var p2 in list2)
+            {
+                Console.WriteLine(p2.Name + " - " + p2.Company.CompName);
+            }
+
             ////////////////// Split Okcupid questions /////////////////
             //var file = new StreamReader("../../../Data/okc_questions_curated.txt");
             //int count = 1;
@@ -106,9 +141,9 @@ namespace ConsoleApp
             //}
 
             //////////////////// Seed the database ///////////////////////
-            var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            SeedDb seeder = new SeedDb(connString);
-            Stopwatch timer = new Stopwatch();
+            //var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            //SeedDb seeder = new SeedDb(connString);
+            //Stopwatch timer = new Stopwatch();
 
             //Profile Detail Options   
             //seeder.SeedDetailOptions("../../../data/profile_details.txt");
@@ -130,11 +165,11 @@ namespace ConsoleApp
             //Console.WriteLine("{0} s",timer.ElapsedMilliseconds / 1000);
 
             // User answers
-            Console.WriteLine("Seeding answers...");
-            timer.Start();
-            seeder.SeedAnswers(500, 200);
-            timer.Stop();
-            Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
+            //Console.WriteLine("Seeding answers...");
+            //timer.Start();
+            //seeder.SeedAnswers(500, 200);
+            //timer.Stop();
+            //Console.WriteLine("Total time for seeding answers: " + timer.ElapsedMilliseconds / 1000 + "s ");
 
             //Activity feed
             //seeder.SeedActivities(1000);

@@ -8,28 +8,27 @@ using okboba.Repository.Models;
 using okboba.Entities;
 using okboba.MatchCalculator;
 using okboba.Resources;
-using okboba.Repository.EntityRepository;
 
-namespace okboba.Repository.MemoryRepository
+namespace okboba.Repository.EntityRepository
 {
 
-    public class MemoryMatchRepository : IMatchRepository
+    public class EntityMatchRepository : IMatchRepository
     {
         #region Singelton
-        private static MemoryMatchRepository instance;
-        private MemoryMatchRepository()
+        private static EntityMatchRepository instance;
+        private EntityMatchRepository()
         {
             _matchCalc = MatchCalc.Instance;
             _locRepo = EntityLocationRepository.Instance;
         }
 
-        public static MemoryMatchRepository Instance
+        public static EntityMatchRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new MemoryMatchRepository();
+                    instance = new EntityMatchRepository();
                 }
                 return instance;
             }
@@ -65,7 +64,7 @@ namespace okboba.Repository.MemoryRepository
         /// Peforms a match search for a user given their search preferences and returns a list
         /// of sorted matches.
         /// </summary>
-        public List<MatchModel> MatchSearch(int profileId, MatchCriteriaModel criteria)
+        public List<MatchModel> Search(int profileId, MatchCriteriaModel criteria)
         {
             var db = new OkbDbContext();
             var matches = new List<MatchModel>();
@@ -105,7 +104,7 @@ namespace okboba.Repository.MemoryRepository
         /// <summary>
         /// Calculates match between two users
         /// </summary>
-        public MatchModel CalculateMatch(int profileId1, int profileId2)
+        public MatchModel Calculate(int profileId1, int profileId2)
         {
             var ans1 = _matchCalc.GetAnswerDict(profileId1);
             var result = _matchCalc.CalculateMatchPercent(profileId2, ans1);

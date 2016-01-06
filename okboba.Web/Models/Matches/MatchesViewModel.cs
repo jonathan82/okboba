@@ -16,7 +16,7 @@ namespace okboba.Web.Models
     /// </summary>
     public class MatchesViewModel
     {
-        public List<MatchModel> Matches { get; set; }
+        public IList<MatchModel> Matches { get; set; }
         public string StorageUrl { get; set; }
         public string MatchApiUrl { get; set; }
         public MatchCriteriaModel MatchCriteria { get; set; }

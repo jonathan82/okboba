@@ -27,7 +27,10 @@ namespace okboba
                 "~/lib/photoswipe/photoswipe-ui-default.js",
                 "~/lib/nicescroll/jquery.nicescroll.js",
                 "~/lib/throttle/jquery.ba-throttle-debounce.js",
-                "~/lib/signalr/jquery.signalR-2.2.0.js"));
+                "~/lib/signalr/jquery.signalR-2.2.0.js",
+                //"~/lib/ladda/spin.min.js", //spinner already added above
+                "~/lib/ladda-bootstrap/ladda.js",
+                "~/lib/ladda-bootstrap/ladda.jquery.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js/okboba").Include(
                 "~/Scripts/utilities.js",
@@ -43,7 +46,8 @@ namespace okboba
                 "~/Scripts/chatslider.js",
                 "~/Scripts/chatmanager.js",
                 "~/Scripts/login.js",
-                "~/Scripts/register.js"));
+                "~/Scripts/register.js",
+                "~/Scripts/messaging.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",
@@ -52,6 +56,7 @@ namespace okboba
                 "~/lib/jquery-ui/jquery-ui.css",
                 "~/lib/photoswipe/photoswipe.css",
                 "~/lib/photoswipe/default-skin/default-skin.css",
+                "~/lib/ladda-bootstrap/ladda-themeless.css",
                 "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/react").Include(
