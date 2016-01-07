@@ -31,7 +31,8 @@ var messaging = (function ($) {
         msgRowTemplateSel: '#messageRowTemplate',
         getPreviousApi: '/messages/previous',
         replyApi: '/messages/reply',
-        fadeInTime: 1000 //ms to fade in new messages
+        deleteApi: '/messages/delete',
+        fadeInTime: 1500 //ms to fade in new messages
     }
     var _numMessagesLoaded,
         _msgRowTemplate,
@@ -75,8 +76,30 @@ var messaging = (function ($) {
         });
     }
 
-    function deleteConvHandler() {
+    function deleteConvHandler(e) {
+        var name, convId;
 
+        //prevent from following link
+        e.stopPropagation();
+
+        name = $(this).data('name');
+
+        if (confirm('Delete conversation with ' + name + '?')) {
+
+            convId = $(this).data('id');
+
+            //make ajax call to delete conversation
+            $.post(configMap.deleteApi, { convId: convId }, function () {
+                //success
+            }).fail(function myfunction() {
+                alert('failed');
+            });
+
+            //optimistically remove
+            $(this).closest('.conv-row').fadeOut(configMap.fadeInTime, function () {
+                $(this).remove();
+            });
+        } 
     }
 
     function loadPreviousHandler() {
@@ -142,6 +165,12 @@ var messaging = (function ($) {
 
         //load templates
         _msgRowTemplate = $.templates(configMap.msgRowTemplateSel);
+
+        //setup click handler for conversation row
+        $('.conv-row').click(function () {
+            var link = $(this).data('link');
+            window.location.href = link;
+        });
 
         $('[data-toggle="compose"]').click(composeHandler);
         $('[data-toggle="reply"]').click(replyHandler);

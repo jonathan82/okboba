@@ -435,4 +435,13 @@
   <data name="Messages_You" xml:space="preserve">
     <value>你</value>
   </data>
+  <data name="Time_DaysAgo" xml:space="preserve">
+    <value>天前</value>
+  </data>
+  <data name="Time_JustNow" xml:space="preserve">
+    <value>现在</value>
+  </data>
+  <data name="Time_Yesterday" xml:space="preserve">
+    <value>昨天</value>
+  </data>
 </root>

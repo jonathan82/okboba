@@ -458,7 +458,6 @@
     <Content Include="lib\spinner\spin.min.js" />
     <Content Include="lib\throttle\jquery.ba-throttle-debounce.js" />
     <Content Include="lib\throttle\jquery.ba-throttle-debounce.min.js" />
-    <Content Include="Scripts\chat.js" />
     <Content Include="Scripts\chatmanager.js" />
     <Content Include="Scripts\chatslider.js" />
     <Content Include="Scripts\editinplace.js" />
@@ -546,6 +545,7 @@
     <Content Include="Views\Messages\_MessagesHeader.cshtml" />
     <Content Include="Views\Messages\Index_backup.cshtml" />
     <Content Include="Views\Messages\_MessageRowTemplate.cshtml" />
+    <Content Include="Views\Messages\_ConversationList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

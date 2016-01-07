@@ -9,26 +9,13 @@
 
 @Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Sent })
 
-<div class="row">
-    <div class="col-md-7">
-        <!-- List of messages -->
-        @foreach (var conv in Model)
-        {
-            <div class="conv-row @(conv.HasBeenRead ? "conv-read" : "")">
-                <div class="conv-row-left">
-                    <div class="conv-circle"></div>
-                    @Html.Avatar(conv.OtherProfile.GetFirstHeadshot(true), conv.OtherProfile.Gender, conv.OtherProfile.UserId, "conv-avatar")
-                </div>
-                <div class="conv-row-center">
-                    <div class="conv-name">@conv.OtherProfile.Nickname &#x2022; @conv.OtherProfile.GetAge() &#x2022; [location string]</div>
-                    <div class="conv-blurb">@conv.LastMessage.MessageText</div>
-                </div>
-                <div class="conv-row-right">
-                    @conv.LastMessage.Timestamp.ToShortDateString()
-                    <span class="glyphicon glyphicon-trash"></span>
-                </div>
-                <a href="~/messages/conversation/@conv.LastMessage.ConversationId" class="div-link"></a>
-            </div>
-        }
-    </div>
-</div>
+@Html.Partial("_ConversationList")
+
+@section Scripts{
+    <script>
+        $(function () {
+            //document ready
+            messaging.initModule();
+        });
+    </script>
+}

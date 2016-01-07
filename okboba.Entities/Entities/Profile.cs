@@ -68,7 +68,7 @@ namespace okboba.Entities
 
             return photoList;
         }
-        
+
         public IEnumerable<Photo> GetHeadshots()
         {
             return Photos(OkbConstants.HEADSHOT_SUFFIX);
@@ -96,13 +96,13 @@ namespace okboba.Entities
 
             return PhotosInternal.Substring(0, index) + (small ? OkbConstants.HEADSHOT_SMALL_SUFFIX : OkbConstants.HEADSHOT_SUFFIX);
         }
-        
+
 
         ////////////////////////////// Base62 Functions ////////////////////////////////
         private const string Base62Codes = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
         public static string EncodeDimensions(int width, int height)
-        {            
+        {
             var code = new char[4];
 
             code[1] = Base62Codes[width % 62];
@@ -134,21 +134,7 @@ namespace okboba.Entities
         }
         ////////////////////////////////////////////////////////////////////////////////
 
-        //Helper methods
-        //public string[] GetPhotos()
-        //{
-        //    if (string.IsNullOrEmpty(PhotosInternal)) return new string[0];
-        //    return PhotosInternal.Split(';');
-        //}
-
-        //public string GetFirstPhoto()
-        //{
-        //    if (string.IsNullOrEmpty(PhotosInternal)) return "";
-        //    var index = PhotosInternal.IndexOf(';');
-        //    if (index == -1) index = PhotosInternal.Length;
-        //    return PhotosInternal.Substring(0, index);
-        //}
-
+        // Convenience properties, not saved to DB
         public int GetAge()
         {
             DateTime today = DateTime.Today;
@@ -156,5 +142,8 @@ namespace okboba.Entities
             if (Birthdate > today.AddYears(-age)) age--;
             return age;
         }
+
+        [NotMapped]
+        public string LocationSring { get; set; }
     }
 }

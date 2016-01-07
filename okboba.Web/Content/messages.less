@@ -15,6 +15,10 @@
     position: relative;
 }
 
+.conv-row:hover {
+    cursor: pointer;
+}
+
 .conv-row-1,
 .conv-row-2,
 .conv-row-3,
@@ -45,7 +49,7 @@
 }
 
 .conv-row-4 {
-    width: 100px;
+    width: 120px;
     color: @gray-light;
     font-style:italic;
 }
@@ -79,6 +83,16 @@
 .conv-delete-icon {
     display: none;
     font-size: 1.3em;
+    z-index: 100;
+}
+
+// hide time and show delete icon on hover
+.conv-row:hover .conv-delete-icon {
+    display: inline-block;
+}
+
+.conv-row:hover .conv-time {
+    display: none;
 }
 
 /*********************************************************
@@ -173,4 +187,14 @@
 .msg-load-previous {
     text-align: center;
     padding: 0 0 15px 0;
+}
+
+.msg-header-name {
+    padding-top: 5px;
+    font-size: 1.2em;
+    color: @gray;
+}
+
+.msg-header-details {
+    color: @gray-light;
 }

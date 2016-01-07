@@ -248,6 +248,16 @@ a.div-link {
 .navbar-right {
   margin-right: 0;
 }
+/******************************************
+    Okboba Nav styles
+*******************************************/
+.unread-conversation-count {
+  background-color: red;
+  opacity: 1;
+  margin-top: 3px;
+  margin-left: -8px;
+  z-index: 10;
+}
 .profile-header-photo {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
@@ -531,7 +541,8 @@ a.div-link {
   color: #555555;
 }
 .question-stats {
-  background-color: #F5F5F0;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #FFF;
   text-align: center;
   padding: 20px 10px;
 }
@@ -686,6 +697,9 @@ a.div-link {
   padding: 10px;
   position: relative;
 }
+.conv-row:hover {
+  cursor: pointer;
+}
 .conv-row-1,
 .conv-row-2,
 .conv-row-3,
@@ -711,7 +725,7 @@ a.div-link {
   padding-left: 15px;
 }
 .conv-row-4 {
-  width: 100px;
+  width: 120px;
   color: #9b9b9b;
   font-style: italic;
 }
@@ -740,6 +754,13 @@ a.div-link {
 .conv-delete-icon {
   display: none;
   font-size: 1.3em;
+  z-index: 100;
+}
+.conv-row:hover .conv-delete-icon {
+  display: inline-block;
+}
+.conv-row:hover .conv-time {
+  display: none;
 }
 /*********************************************************
 
@@ -825,6 +846,14 @@ a.div-link {
 .msg-load-previous {
   text-align: center;
   padding: 0 0 15px 0;
+}
+.msg-header-name {
+  padding-top: 5px;
+  font-size: 1.2em;
+  color: #555555;
+}
+.msg-header-details {
+  color: #9b9b9b;
 }
 .grid {
   position: relative;

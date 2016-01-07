@@ -1,5 +1,6 @@
 ﻿using okboba.Entities;
 using okboba.Repository.Models;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -200,7 +201,8 @@ namespace okboba.Repository.EntityRepository
                         select new ConversationModel
                         {
                             OtherProfile = map.OtherProfile,
-                            LastMessage = map.LastMessage
+                            LastMessage = map.LastMessage,
+                            HasBeenRead = map.HasBeenRead
                         };
 
             return query.Skip(low).Take(numPerPage);                        
@@ -228,19 +230,19 @@ namespace okboba.Repository.EntityRepository
         {
             var db = new OkbDbContext();
 
-            //Get number of messages in conversation
-            var query = from msg in db.Messages.AsNoTracking()
-                        where msg.ConversationId == convId
-                        select msg;
+            //TODO: Get number of messages in conversation
+            //var query = from msg in db.Messages.AsNoTracking()
+            //            where msg.ConversationId == convId
+            //            select msg;
 
-            var count = query.Count();
+            //var count = query.Count();
 
             //Delete conversation
             var toDelete = new ConversationMap { ConversationId = convId, ProfileId = id };
             db.ConversationMap.Attach(toDelete);
             db.ConversationMap.Remove(toDelete);
 
-            //Decrement message count for user
+            //TODO: Decrement message count for user
 
             await db.SaveChangesAsync();
         }
@@ -250,6 +252,25 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var map = db.ConversationMap.Find(profileId, convId);
             return map;
+        }
+
+        public void MarkAsRead(int profileId, int convId)
+        {
+            var db = new OkbDbContext();
+            var map = db.ConversationMap.Find(profileId, convId);
+            if(map != null)
+            {
+                map.HasBeenRead = true;
+                db.SaveChanges();
+            }            
+            //var map = new ConversationMap
+            //{
+            //    ProfileId = profileId,
+            //    ConversationId = convId,
+            //    HasBeenRead = true
+            //};
+            //db.ConversationMap.Attach(map);
+            //db.Entry(map).State = System.Data.Entity.EntityState.Modified;            
         }
     }
 }

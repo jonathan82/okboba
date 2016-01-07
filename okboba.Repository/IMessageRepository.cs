@@ -59,5 +59,6 @@ namespace okboba.Repository
         int GetMessageCount(int id);
         Task DeleteConversationAsync(int id, int convId);
         ConversationMap GetConversationMap(int profileId, int convId);
+        void MarkAsRead(int profileId, int convId);
     }
 }

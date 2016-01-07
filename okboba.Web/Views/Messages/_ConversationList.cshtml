@@ -1,13 +1,6 @@
 ﻿@model IEnumerable<okboba.Repository.Models.ConversationModel>
-@using okboba.Resources
-@using okboba.Web.Models
 @using okboba.Web.Helpers
-
-@{
-    ViewBag.Title = "Messages";
-}
-
-@Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Received })
+@using okboba.Resources
 
 <div class="row">
     <div class="col-md-7">
@@ -22,7 +15,7 @@
                     {
                         <div class="conv-circle"></div>
                     }
-                    else if(replied)
+                    else if (replied)
                     {
                         <span class="glyphicon glyphicon-share-alt"></span>
                     }
@@ -43,12 +36,3 @@
         }
     </div>
 </div>
-
-@section Scripts{
-    <script>
-        $(function () {
-            //document ready
-            messaging.initModule();
-        });
-    </script>
-}

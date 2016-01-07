@@ -1013,5 +1013,32 @@ namespace okboba.Resources {
                 return ResourceManager.GetString("Register_Nickname", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 天前.
+        /// </summary>
+        public static string Time_DaysAgo {
+            get {
+                return ResourceManager.GetString("Time_DaysAgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 现在.
+        /// </summary>
+        public static string Time_JustNow {
+            get {
+                return ResourceManager.GetString("Time_JustNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 昨天.
+        /// </summary>
+        public static string Time_Yesterday {
+            get {
+                return ResourceManager.GetString("Time_Yesterday", resourceCulture);
+            }
+        }
     }
 }

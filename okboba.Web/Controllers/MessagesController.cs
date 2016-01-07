@@ -23,15 +23,16 @@ namespace okboba.Controllers
 {
     [Authorize]
     public class MessagesController : OkbBaseController
-    {
-        const int MESSAGES_PER_PAGE = 25;
+    {        
         private IMessageRepository _msgRepo;
         private IProfileRepository _profileRepo;
+        private ILocationRepository _locRepo;
 
         public MessagesController()
         {
             _msgRepo = EntityMessageRepository.Instance;
             _profileRepo = EntityProfileRepository.Instance;
+            _locRepo = EntityLocationRepository.Instance;
         }
 
         /// <summary>
@@ -82,6 +83,11 @@ namespace okboba.Controllers
                 Other = profile
             };
 
+            vm.Other.LocationSring = _locRepo.GetLocationString(profile.LocationId1, profile.LocationId2);
+
+            //Mark conversation as read
+            _msgRepo.MarkAsRead(me, id);
+
             return View(vm);
         }
 
@@ -124,6 +130,15 @@ namespace okboba.Controllers
             if (map.ProfileId != me) throw new HttpException(404, "conversation not found");
 
             await _msgRepo.AddMessageAsync(me, map.Other, message, convId);
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> Delete(int convId)
+        {
+            var me = GetProfileId();
+
+            await _msgRepo.DeleteConversationAsync(me, convId);
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }

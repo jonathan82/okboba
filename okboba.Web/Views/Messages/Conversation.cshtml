@@ -19,17 +19,21 @@
                 @Html.Avatar(Model.Other.GetFirstHeadshot(true), Model.Other.Gender, Model.Other.UserId, "msg-avatar")
             </div>
             <div class="msg-header-center">
-                test
+                <div class="msg-header-name">@Model.Other.Nickname</div>
+                <div class="msg-header-details">@Model.Other.GetAge() &#x2022; @Model.Other.LocationSring</div>
             </div>
             <div class="msg-header-right">
-                test
+                Match Score
             </div>
         </div>
 
         <!-- Load previous messages button -->
-        <div class="msg-load-previous">
-            <button class="btn btn-default ladda-button" data-toggle="loadpreviousmessages" data-style="expand-left"><span class="ladda-label">Load Previous Messages</span></button>
-        </div>
+        @if (Model.Messages.Count() >= OkbConstants.INITIAL_NUM_MESSAGES)
+        {
+            <div class="msg-load-previous">
+                <button class="btn btn-default ladda-button" data-toggle="loadpreviousmessages" data-style="expand-left"><span class="ladda-label">Load Previous Messages</span></button>
+            </div>
+        }        
 
         <div id="messagesContainer">
             @foreach (var msg in Model.Messages.Reverse())
