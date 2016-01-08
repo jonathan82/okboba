@@ -546,6 +546,8 @@
     <Content Include="Views\Messages\Index_backup.cshtml" />
     <Content Include="Views\Messages\_MessageRowTemplate.cshtml" />
     <Content Include="Views\Messages\_ConversationList.cshtml" />
+    <Content Include="Views\Home\_MatchCarousel.cshtml" />
+    <Content Include="Views\Messages\_ComposeTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

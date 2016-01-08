@@ -40,7 +40,7 @@ namespace okboba.MatchApi.Controllers
         public MatchesController()
         {
             _matchRepo = EntityMatchRepository.Instance;
-            _redisRepo = SXRedisMatchRepository.Instance;
+            _redisRepo = SXMatchRepository.Instance;
         }
 
         /// <summary>

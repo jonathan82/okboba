@@ -3,8 +3,11 @@
    
     public static class OkbConstants
     {
+        //Miscellaneous
+        public const int CACHE_DEFAULT_EXPIRATION = 30; //default time in minutes for items to expire in redis cache
+
         //Questions
-        public const int NUM_QUES_PER_PAGE = 30;
+        public const int NUM_QUES_PER_PAGE = 20;
 
         //Matches
         public const int MAX_MATCH_RESULTS = 4000;
@@ -14,7 +17,7 @@
         //Messages
         public const int MAX_MESSAGE_LENGTH = 1000;
         public const int MESSAGES_PER_PAGE = 20; //number of messages to show per "load" request
-        public const int INITIAL_NUM_MESSAGES = 5; //number of messages show initially
+        public const int INITIAL_NUM_MESSAGES = 4; //number of messages show initially
 
         //Activity Feed
         public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }

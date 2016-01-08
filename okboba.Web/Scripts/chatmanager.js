@@ -94,7 +94,7 @@ var chatManager = (function ($) {
                     loadInitialInfo(slider, windows[i].ProfileId);
                 }
             }).fail(function () {
-                aler('get chat windows from server failed');
+                alert('get chat windows from server failed');
             });
 
         }).fail(function () {

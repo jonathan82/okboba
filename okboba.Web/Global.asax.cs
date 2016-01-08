@@ -1,6 +1,8 @@
 ﻿using okboba.App_Start;
+using okboba.Repository.RedisRepository;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +25,10 @@ namespace okboba
             //http://encosia.com/a-harsh-reminder-about-the-importance-of-debug-false/
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
+
+            // Create singleton for Redis connection object
+            var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;
+            SXGenericRepository.Create(redisConnStr);
         }
     }
 }

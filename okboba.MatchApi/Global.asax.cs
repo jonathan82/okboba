@@ -33,9 +33,9 @@ namespace okboba.MatchApi
             timer.Stop();            
             log.Info(string.Format("{0} answers loaded in {1} s", numAnswersLoaded, timer.ElapsedMilliseconds / 1000));
 
-            // Create Redis match repository
+            // Create singleton for Redis connection object
             var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;
-            SXRedisMatchRepository.Create(redisConnStr);                       
+            SXGenericRepository.Create(redisConnStr);                       
         }
     }
 }

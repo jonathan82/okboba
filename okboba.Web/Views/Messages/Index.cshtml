@@ -9,40 +9,44 @@
 
 @Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Received })
 
-<div class="row">
-    <div class="col-md-7">
-        <!-- List of messages -->
-        @foreach (var conv in Model)
-        {
-            bool replied = conv.LastMessage.From != conv.OtherProfile.Id;
+@Html.Partial("_ConversationList")
 
-            <div class="conv-row" data-link="/messages/conversation/@conv.LastMessage.ConversationId">
-                <div class="conv-row-1">
-                    @if (!conv.HasBeenRead)
-                    {
-                        <div class="conv-circle"></div>
-                    }
-                    else if(replied)
-                    {
-                        <span class="glyphicon glyphicon-share-alt"></span>
-                    }
+@*
+    <div class="row">
+        <div class="col-md-7">
+            <!-- List of messages -->
+            @foreach (var conv in Model)
+            {
+                bool replied = conv.LastMessage.From != conv.OtherProfile.Id;
+
+                <div class="conv-row" data-link="/messages/conversation/@conv.LastMessage.ConversationId">
+                    <div class="conv-row-1">
+                        @if (!conv.Map.HasBeenRead)
+                        {
+                            <div class="conv-circle"></div>
+                        }
+                        else if(replied)
+                        {
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                        }
+                    </div>
+                    <div class="conv-row-2">
+                        @Html.Avatar(conv.OtherProfile.GetFirstHeadshot(true), conv.OtherProfile.Gender, conv.OtherProfile.UserId, "conv-avatar")
+                    </div>
+                    <div class="conv-row-3">
+                        <div class="conv-name">@conv.OtherProfile.Nickname</div>
+                        <div class="conv-blurb truncate">@conv.LastMessage.MessageText</div>
+                    </div>
+                    <div class="conv-row-4">
+                        <div class="conv-time">@FriendlyTime.Format(conv.LastMessage.Timestamp)</div>
+                        <div class="conv-delete-icon" data-toggle="deleteconversation" data-id="@conv.LastMessage.ConversationId" data-name="@conv.OtherProfile.Nickname"><span class="glyphicon glyphicon-trash"></span></div>
+                    </div>
                 </div>
-                <div class="conv-row-2">
-                    @Html.Avatar(conv.OtherProfile.GetFirstHeadshot(true), conv.OtherProfile.Gender, conv.OtherProfile.UserId, "conv-avatar")
-                </div>
-                <div class="conv-row-3">
-                    <div class="conv-name">@conv.OtherProfile.Nickname</div>
-                    <div class="conv-blurb truncate">@conv.LastMessage.MessageText</div>
-                </div>
-                <div class="conv-row-4">
-                    <div class="conv-time">@FriendlyTime.Format(conv.LastMessage.Timestamp)</div>
-                    <div class="conv-delete-icon" data-toggle="deleteconversation" data-id="@conv.LastMessage.ConversationId" data-name="@conv.OtherProfile.Nickname"><span class="glyphicon glyphicon-trash"></span></div>
-                </div>
-                @*<a href="~/messages/conversation/@conv.LastMessage.ConversationId" class="div-link"></a>*@
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
+*@
+
 
 @section Scripts{
     <script>

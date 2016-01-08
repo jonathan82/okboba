@@ -55,9 +55,9 @@ namespace ConsoleApp
             list.Add(p);
             list.Add(p);
             list.Add(p);
-            SXRedisMatchRepository.Create("localhost");
-            var redis = SXRedisMatchRepository.Instance;
-            var db = redis.GetDb();
+            SXGenericRepository.Create("localhost");
+            var redis = SXGenericRepository.Instance;
+            var db = redis.GetDatabase();
             db.Set("mykey123", list);
             var list2 = db.Get<List<Person>>("mykey123");
             foreach (var p2 in list2)

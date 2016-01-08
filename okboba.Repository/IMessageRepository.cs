@@ -56,7 +56,8 @@ namespace okboba.Repository
         IEnumerable<ConversationModel> GetSent(int id, int low = 0, int numPerPage = 20);
         Conversation GetLastConversation(int id, int other);
         Task<int> AddMessageAsync(int from, int to, string text, int? convId);
-        int GetMessageCount(int id);
+        int GetUnreadCount(int profileId);
+        void DecrementUnreadCount(int profileId);
         Task DeleteConversationAsync(int id, int convId);
         ConversationMap GetConversationMap(int profileId, int convId);
         void MarkAsRead(int profileId, int convId);

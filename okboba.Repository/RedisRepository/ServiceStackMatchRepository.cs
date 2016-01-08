@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace okboba.Repository.RedisRepository
 {
-    public class RedisMatchRepository
+    public class ServiceStackMatchRepository
     {
         #region Singelton
-        private static RedisMatchRepository instance;
-        private RedisMatchRepository() { }
+        private static ServiceStackMatchRepository instance;
+        private ServiceStackMatchRepository() { }
 
-        public static RedisMatchRepository Instance
+        public static ServiceStackMatchRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new RedisMatchRepository();
+                    instance = new ServiceStackMatchRepository();
                 }
                 return instance;
             }

@@ -5,10 +5,12 @@ using Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin.Security.Cookies;
+using System.Configuration;
+using okboba.Repository.RedisRepository;
 
-[assembly: OwinStartup(typeof(okboba.Chat.Startup))]
+[assembly: OwinStartup(typeof(okboba.Instant.Startup))]
 
-namespace okboba.Chat
+namespace okboba.Instant
 {
     public class Startup
     {
@@ -56,7 +58,11 @@ namespace okboba.Chat
                 // since this branch already runs under the "/signalr"
                 // path.
                 map.RunSignalR(hubConfiguration);
-            });            
+            });
+
+            // Create singleton Redis connection object - used by message repository
+            var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;
+            SXGenericRepository.Create(redisConnStr);
         }
     }
 }

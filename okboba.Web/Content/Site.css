@@ -251,12 +251,19 @@ a.div-link {
 /******************************************
     Okboba Nav styles
 *******************************************/
-.unread-conversation-count {
+.unread-conv-count {
+  display: inline-block;
   background-color: red;
-  opacity: 1;
-  margin-top: 3px;
-  margin-left: -8px;
-  z-index: 10;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px;
+  border-radius: 3px;
+  line-height: 1;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 12px;
 }
 .profile-header-photo {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
@@ -855,6 +862,106 @@ a.div-link {
 .msg-header-details {
   color: #9b9b9b;
 }
+/*********************************************************
+
+    Styles for Compose new message popup
+
+**********************************************************/
+.compose-wrapper {
+  position: fixed;
+  bottom: 0;
+  right: 40px;
+  width: 400px;
+  border-radius: 5px 5px 0 0;
+  background-color: #F7F2F7;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.compose-header {
+  background: #D81B60;
+  border-radius: 5px 5px 0 0;
+  padding: 6px 10px;
+  color: #FFF;
+}
+.compose-subject {
+  padding: 12px;
+}
+.compose-body {
+  padding: 0 12px 12px 12px;
+}
+.compose-body-edit {
+  height: 150px;
+  border: 1px solid #9b9b9b;
+  border-radius: 4px;
+  background-color: #FFF;
+  padding: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.compose-send-row {
+  padding: 0 12px 12px 12px;
+}
+.compose-close {
+  cursor: pointer;
+  float: right;
+  opacity: 0.7;
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  color: #FFF;
+  margin-top: -2px;
+  margin-right: -2px;
+}
+.compose-close:hover {
+  background-color: #ed6c9b;
+}
+.compose-emoticon-btn {
+  cursor: pointer;
+  margin-left: 10px;
+  display: inline-block;
+}
+/*********************************************************
+
+    Styles for emoticon slider
+
+**********************************************************/
+.compose-emoticon-slider {
+  display: none;
+}
+.compose-emoticon-nav {
+  background-color: #e6e6e6;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border-top: solid 1px #9b9b9b;
+}
+.compose-emoticon-nav > li {
+  display: inline-block;
+  opacity: 0.8;
+  padding: 3px 5px;
+  cursor: pointer;
+  margin: 0;
+}
+.compose-emoticon-nav > li.active {
+  background-color: #ffffcc;
+  opacity: 1;
+}
+.compose-emoticon-chooser {
+  display: block;
+  height: 95px;
+  background-color: #ffffcc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+.compose-emoticon-chooser > li {
+  display: inline-block;
+  padding: 3px;
+}
+.compose-emoticon-chooser > li:hover {
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
 .grid {
   position: relative;
   margin-top: 20px;
@@ -1211,6 +1318,16 @@ img.emoji {
   margin-bottom: 10px;
   font-size: 1.4em;
   color: #555555;
+}
+/**********************************
+
+    Carousel styles
+
+***********************************/
+/* Removes the default 20px margin and creates some padding space for the indicators and controls */
+.carousel {
+  margin-bottom: 0;
+  padding: 0 40px 30px 40px;
 }
 /****************************************
     Photo Upload

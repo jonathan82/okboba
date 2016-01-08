@@ -81,7 +81,12 @@
         var NextQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.NextQuestions));
         var AnsweredQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.Questions));
 
-        $('.question-form').questionValidation();
-        $('.question-form').questionSubmit(true);
+        $(function () {
+            $('.question-form').questionValidation();
+            $('.question-form').questionSubmit(true);
+    
+            //messaging
+            messaging.initModule();
+        });        
     </script>
 }

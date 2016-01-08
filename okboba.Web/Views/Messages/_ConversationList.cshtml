@@ -11,7 +11,7 @@
 
             <div class="conv-row" data-link="/messages/conversation/@conv.LastMessage.ConversationId">
                 <div class="conv-row-1">
-                    @if (!conv.HasBeenRead)
+                    @if (!conv.Map.HasBeenRead)
                     {
                         <div class="conv-circle"></div>
                     }

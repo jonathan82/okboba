@@ -9,8 +9,11 @@ namespace okboba.Repository.Models
 {
     public class ConversationModel
     {
+        public ConversationMap Map { get; set; }
+        public Conversation Conversation { get; set; }
+
         public Profile OtherProfile { get; set; }
         public Message LastMessage { get; set; }
-        public bool HasBeenRead { get; set; }
+        //public bool HasBeenRead { get; set; }
     }
 }

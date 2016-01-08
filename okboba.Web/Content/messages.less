@@ -198,3 +198,121 @@
 .msg-header-details {
     color: @gray-light;
 }
+
+/*********************************************************
+
+    Styles for Compose new message popup
+
+**********************************************************/
+@compose-padding: 12px;
+
+.compose-wrapper {
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+    width: 400px;
+    border-radius: 5px 5px 0 0;
+    background-color: @bg-color;
+    .shadow-z-2;
+}
+
+.compose-header {
+    background: @primary-color-2;
+    border-radius: 5px 5px 0 0;
+    padding: 6px 10px;
+    color: #FFF;
+}
+
+.compose-subject {
+    padding: @compose-padding;
+}
+
+.compose-body {
+    padding: 0 @compose-padding @compose-padding @compose-padding;
+}
+
+.compose-body-edit {
+    height: 150px;
+    border: 1px solid @gray-light;
+    border-radius: 4px;
+    background-color: #FFF;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.compose-send-row {
+    padding: 0 @compose-padding @compose-padding @compose-padding;
+}
+
+.compose-close {
+    cursor: pointer;
+    float: right;
+    opacity: 0.7;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    color: #FFF;
+    margin-top: -2px;
+    margin-right: -2px;
+}
+
+.compose-close:hover {
+    background-color: lighten(@primary-color-2, 20%);
+}
+
+.compose-emoticon-btn {
+    cursor: pointer;
+    margin-left: 10px;
+    display:inline-block;
+}
+
+/*********************************************************
+
+    Styles for emoticon slider
+
+**********************************************************/
+.compose-emoticon-slider {
+    display: none;
+}
+
+.compose-emoticon-nav {
+    background-color: #e6e6e6;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-top: solid 1px @gray-light;
+}
+
+.compose-emoticon-nav > li {
+    display: inline-block;
+    opacity: 0.8;
+    padding: 3px 5px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.compose-emoticon-nav > li.active {
+    background-color: #ffffcc;
+    opacity: 1;
+}
+
+.compose-emoticon-chooser {
+    display: block;
+    height: 95px;
+    background-color: #ffffcc;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.compose-emoticon-chooser > li {
+    display: inline-block;
+    padding: 3px;
+}
+
+.compose-emoticon-chooser > li:hover {
+    .shadow-z-1-hover;
+    cursor: pointer;
+}

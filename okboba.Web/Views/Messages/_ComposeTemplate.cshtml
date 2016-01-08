@@ -1,0 +1,51 @@
+﻿@*
+    The passed in data context: {
+        emoticonUrl      - url of emoticons
+        emoticonUrlSmall - url of small emoticons
+        emoticons        - array of first page of emoticons
+        nickname         - nickname of person chatting with
+    }
+*@
+<script id="composeTemplate" type="text/x-jsrender">
+    <div class="compose-wrapper">
+        <div class="compose-header">
+            this is the header
+            <div class="compose-close"><span class="glyphicon glyphicon-remove"></span></div>
+        </div>
+        <div class="compose-subject">
+            <input type="text" class="form-control" />
+        </div>
+        <div class="compose-body">
+            <div class="compose-body-edit" contenteditable="true"></div>
+        </div>
+        <div class="compose-emoticon-row">
+
+            <div class="compose-emoticon-slider">
+                <ul class="compose-emoticon-nav">
+                    <li class="active" data-page="1">
+                        <img src="{{:emoticonUrlSmall}}1f600.png" alt="1f600" width="16" height="16" />
+                    </li>
+                    <li data-page="2">
+                        <img src="{{:emoticonUrlSmall}}1f349.png" alt="1f349" width="16" height="16" />
+                    </li>
+                    <li data-page="3">
+                        <img src="{{:emoticonUrlSmall}}1f495.png" alt="1f495" width="16" height="16" />
+                    </li>
+                    <li class="chat-emoticon-close"><span class="glyphicon glyphicon-remove"></span></li>
+                </ul>
+
+                <!-- Emoticons go here: Load the first page of emoticons -->
+                <ul class="compose-emoticon-chooser">
+                    {{for emoticons ~url=emoticonUrl}}
+                    <li data-id="{{:#data}}"><img src="{{:~url}}{{:#data}}.png" alt="{{:#data}}" width="25" height="25" /></li>
+                    {{/for}}
+                </ul>
+            </div>
+
+        </div>
+        <div class="compose-send-row">
+            <button class="btn btn-primary">Send</button>
+            <div class="compose-emoticon-btn"><img src="/Content/images/chat-smiley.png" width="22" height="22" alt="Smiley" /></div>
+        </div>
+    </div>
+</script>

@@ -9,6 +9,8 @@ using okboba.Repository.WebClient;
 using System.Configuration;
 using System.Net;
 using okboba.Resources;
+using okboba.Repository.RedisRepository;
+using okboba.Repository.EntityRepository;
 
 namespace okboba.Controllers
 {
@@ -117,6 +119,14 @@ namespace okboba.Controllers
         {
             if (category == OkbConstants.ActivityCategories.Joined) return; //no need to store join activity
             Session["Activity:" + category.ToString()] = DateTime.Now;
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            var msgRepo = EntityMessageRepository.Instance;
+            var me = GetProfileId();
+            ViewBag.UnreadCount = msgRepo.GetUnreadCount(me);
+            base.OnActionExecuted(filterContext);
         }
     }
 }

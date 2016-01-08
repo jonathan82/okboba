@@ -11,7 +11,7 @@ using okboba.Repository.EntityRepository;
 using System.Configuration;
 using okboba.Resources;
 
-namespace okboba.Chat
+namespace okboba.Instant
 {
     public class ChatInfo
     {

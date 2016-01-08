@@ -2,6 +2,12 @@
 @using okboba.Web.Helpers
 @using okboba.Resources
 
+@Html.Partial("/Views/Messages/_ComposeTemplate.cshtml")
+
+<script>
+
+</script>
+
 <!-- Row 1: Match Percent, Name, Message button -->
 <div class="row">
     <!--User Details & Percentages -->
@@ -28,8 +34,8 @@
     <div class="col-sm-3 col-md-2">
         @if (!Model.IsMe)
         {
-            <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="chat">Message User</button>
-            <button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
+            <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="compose">Message User</button>
+            @*<button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>*@
         }        
     </div>
 </div>

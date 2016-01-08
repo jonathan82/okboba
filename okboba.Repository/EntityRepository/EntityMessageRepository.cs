@@ -1,27 +1,36 @@
 ﻿using okboba.Entities;
 using okboba.Repository.Models;
+using okboba.Repository.RedisRepository;
 using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 
 namespace okboba.Repository.EntityRepository
 {
     public class EntityMessageRepository : IMessageRepository
     {
+        private SXGenericRepository _redis;
+
         #region Singelton
         private static EntityMessageRepository instance;
-        private EntityMessageRepository() { }
+
+        private EntityMessageRepository(SXGenericRepository redis)
+        {
+            _redis = redis;
+        }
+
         public static EntityMessageRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new EntityMessageRepository();
+                    instance = new EntityMessageRepository(SXGenericRepository.Instance);
                 }
                 return instance;
             }
@@ -140,9 +149,11 @@ namespace okboba.Repository.EntityRepository
                         orderby map.LastMessage.Timestamp descending
                         select new ConversationModel
                         {
+                            Map = map,
+                            Conversation = map.Conversation,
                             OtherProfile = map.OtherProfile,
-                            LastMessage = map.LastMessage,
-                            HasBeenRead = map.HasBeenRead
+                            LastMessage = map.LastMessage
+                            //HasBeenRead = map.HasBeenRead
                         };
 
             var skip = (page - 1) * numPerPage;
@@ -200,9 +211,11 @@ namespace okboba.Repository.EntityRepository
                         orderby map.LastMessage.Timestamp descending
                         select new ConversationModel
                         {
+                            Map = map,
+                            Conversation = map.Conversation,
                             OtherProfile = map.OtherProfile,
-                            LastMessage = map.LastMessage,
-                            HasBeenRead = map.HasBeenRead
+                            LastMessage = map.LastMessage
+                            //HasBeenRead = map.HasBeenRead
                         };
 
             return query.Skip(low).Take(numPerPage);                        
@@ -210,15 +223,50 @@ namespace okboba.Repository.EntityRepository
 
 
         /// <summary>
-        /// 
-        /// Get the total number of messages (sent + received) for a user
-        /// 
+        /// Gets the number of unread messages for a user. Looks in the cache first and if not there
+        /// get from database and save in cache, with an expiration time
         /// </summary>
-        public int GetMessageCount(int id)
+        public int GetUnreadCount(int profileId)
         {
-            throw new NotImplementedException();
+            var key = "unreadcount:" + profileId;
+
+            var cache = _redis.GetDatabase();
+
+            var val = cache.StringGet(key);
+
+            if(!val.IsNull)
+            {
+                //cache hit
+                return (int)val;
+            }
+            
+            // cache miss
+            var db = new OkbDbContext();
+
+            var query = from cm in db.ConversationMap.AsNoTracking()
+                        where cm.HasBeenRead == false && cm.ProfileId == profileId
+                        select cm;
+
+            int count = query.Count();
+
+            cache.StringSet(key, count, new TimeSpan(0, OkbConstants.CACHE_DEFAULT_EXPIRATION, 0));
+
+            return count;
         }
 
+        /// <summary>
+        /// Decrement the unread count in the cache for the given user,
+        /// if it exists in the cache
+        /// </summary>
+        public void DecrementUnreadCount(int profileId)
+        {
+            var key = "unreadcount:" + profileId;
+            var db = _redis.GetDatabase();
+            if(db.KeyExists(key))
+            {
+                db.StringDecrement(key);
+            }
+        }
 
         /// <summary>
         /// 
@@ -247,6 +295,7 @@ namespace okboba.Repository.EntityRepository
             await db.SaveChangesAsync();
         }
 
+
         public ConversationMap GetConversationMap(int profileId, int convId)
         {
             var db = new OkbDbContext();
@@ -254,23 +303,27 @@ namespace okboba.Repository.EntityRepository
             return map;
         }
 
+        /// <summary>
+        /// Marks a conversation as read. If the message was unread previoulsy then we
+        /// decrement the unread count in the cache
+        /// </summary>
         public void MarkAsRead(int profileId, int convId)
         {
             var db = new OkbDbContext();
+
             var map = db.ConversationMap.Find(profileId, convId);
-            if(map != null)
+
+            //Error check - make sure we're marking an existing conversation
+            if (map != null)
             {
-                map.HasBeenRead = true;
-                db.SaveChanges();
-            }            
-            //var map = new ConversationMap
-            //{
-            //    ProfileId = profileId,
-            //    ConversationId = convId,
-            //    HasBeenRead = true
-            //};
-            //db.ConversationMap.Attach(map);
-            //db.Entry(map).State = System.Data.Entity.EntityState.Modified;            
-        }
+                //Decrement count and mark only if message was previously unread
+                if (!map.HasBeenRead)
+                {
+                    DecrementUnreadCount(profileId);
+                    map.HasBeenRead = true;
+                    db.SaveChanges();
+                }                
+            }
+        }        
     }
 }

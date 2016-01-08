@@ -18,18 +18,24 @@
 @section Scripts {
 
     <script>
-        //setup button handlers
-        $('[data-toggle="photoupload"]').photoUpload();
-        $('[data-toggle="editthumbnail"]').editthumbnail();
-        $('[data-toggle="deletephoto"').deletephoto();
+        $(function () {
+            //setup button handlers
+            $('[data-toggle="photoupload"]').photoUpload();
+            $('[data-toggle="editthumbnail"]').editthumbnail();
+            $('[data-toggle="deletephoto"').deletephoto();
 
-        //setup hover
-        $('.grid-item').hover(function () {
-            $(this).children('.photo-edit-overlay').slideToggle();
-        });
+            //setup hover
+            $('.grid-item').hover(function () {
+                $(this).children('.photo-edit-overlay').slideToggle();
+            });
 
-        //setup photo gallery
-        $('.photo-thumbnail-full').photoswipe();
+            //setup photo gallery
+            $('.photo-thumbnail-full').photoswipe();
+
+            //messaging
+            messaging.initModule();
+        }
+        
 
     </script>
 }

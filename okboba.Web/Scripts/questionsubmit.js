@@ -117,6 +117,9 @@
      */
     $.fn.questionSubmit = function (initFlag) {
 
+        //check if we actually have a question form
+        if (this.length == 0) return;
+
         $questionForm = this;        
         
         //setup the submit and skip event handlers

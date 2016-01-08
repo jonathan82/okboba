@@ -61,6 +61,8 @@ namespace okboba.Controllers
 
         /// <summary>
         /// Returns the "Conversation" view - a conversation with another user where you can reply
+        ///     - Marks the conversation as read
+        ///     - Decrement the uread count
         /// </summary>
         public ActionResult Conversation(int id)
         {
@@ -85,8 +87,8 @@ namespace okboba.Controllers
 
             vm.Other.LocationSring = _locRepo.GetLocationString(profile.LocationId1, profile.LocationId2);
 
-            //Mark conversation as read
-            _msgRepo.MarkAsRead(me, id);
+            //Mark conversation as read which also will decrement the count
+            _msgRepo.MarkAsRead(me, id);            
 
             return View(vm);
         }

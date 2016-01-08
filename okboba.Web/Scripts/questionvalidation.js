@@ -123,6 +123,9 @@
     //// Public Functions (exposed thru jQuery)
     $.fn.questionValidation = function () {
 
+        //check if we actually have a question form
+        if (this.length == 0) return;
+
         $questionForm = this;
 
         setupImportanceBars();
