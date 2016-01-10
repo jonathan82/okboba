@@ -55,6 +55,21 @@ namespace okboba.MatchApi.Controllers
         }
 
         /// <summary>
+        /// Calculates a user's matches and save it in the cache
+        /// </summary>
+        [System.Web.Http.HttpGet]
+        public bool CalculateAndSaveMatches([FromUri]MatchCriteriaModel criteria)
+        {
+            var me = GetProfileId();
+
+            var matches = _matchRepo.Search(me, criteria);
+
+            _redisRepo.Save(me, matches, criteria);
+
+            return true;
+        }
+
+        /// <summary>
         /// Gets the matches for the logged in user for a given page.  Looks in cache first and if not there
         /// calculate the matches and store in cache.  Returns a JSON array.
         /// </summary>        
@@ -91,6 +106,35 @@ namespace okboba.MatchApi.Controllers
             response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             return response;
         }  
+
+        /// <summary>
+        /// Gets a list of recommended matches for the given user. "Recommended" at this point
+        /// just means a random subset of the the top N matches where N is a constant. Looks in
+        /// cache first and if not there calculate matches and save in cache.
+        /// </summary>
+        [System.Web.Http.HttpGet]
+        public IList<MatchModel> Recommended([FromUri]MatchCriteriaModel criteria)
+        {
+            var me = GetProfileId();
+
+            var recommended = _redisRepo.Recommended(me, criteria, OkbConstants.MATCHES_RECOMMENDED_RETURN, OkbConstants.MATCHES_RECOMMENDED_CONSIDERED);
+
+            if (recommended != null)
+            {
+                //cache hit
+                return recommended;
+            }
+
+            //cache miss - calcuate and save
+            var matches = _matchRepo.Search(me, criteria);
+
+            _redisRepo.Save(me, matches, criteria);
+
+            //get from cache - 2nd try
+            recommended = _redisRepo.Recommended(me, criteria, OkbConstants.MATCHES_RECOMMENDED_RETURN, OkbConstants.MATCHES_RECOMMENDED_CONSIDERED);
+
+            return recommended;
+        }
 
 
         //////////////////////// Private Methods ////////////////////////////////////////

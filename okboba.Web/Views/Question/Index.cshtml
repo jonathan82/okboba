@@ -75,19 +75,11 @@
                             @ques.Question.Text
                         </div>
                         <div class="question-unanswered-button">
-                            <button type="button" class="btn btn-primary">Answer</button>
+                            <button type="button" class="btn btn-primary" data-toggle="answerother" data-quesid="@ques.Question.Id">Answer</button>
                         </div>
                     </div>
                 }
 
-
-                @*<ul>
-                        @Html.Choice(ques, Model.CompareQuestions)
-                    </ul>
-                    <p>@i18n.Question_Prompt_Acceptable</p>
-                    <ul>
-                        @Html.ChoiceAcceptable(ques, Model.CompareQuestions)
-                    </ul>*@
             </div>
           }
     </div>
@@ -118,8 +110,8 @@
 @section Scripts {
 
     <script>
-        var NextQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.NextQuestions));
-        var AnsweredQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.Questions));
+        var NextQuestions = @Html.JsonArray(JsonConvert.SerializeObject(Model.NextQuestions));
+        var AnsweredQuestions = @Html.JsonArray(JsonConvert.SerializeObject(Model.Questions));
 
         $(function () {            
             $('.question-form').questionValidation();

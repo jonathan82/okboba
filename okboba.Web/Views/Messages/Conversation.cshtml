@@ -48,8 +48,8 @@
                     </div>
                     <div class="msg-row-right">
                         <div class="@(isMe ? "msg-dialog-me" : "msg-dialog-them")">
-                            @msg.MessageText
-                            <div class="msg-time">Sent @msg.Timestamp</div>
+                            @Html.Raw(msg.MessageText)
+                            <div class="msg-time">发送@(FriendlyTime.Format(msg.Timestamp))</div>
                             <div class="@(isMe ? "msg-triangle-me" : "msg-triangle-them")"></div>
                         </div>
                     </div>

@@ -250,6 +250,42 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 把它们写一个可爱的消息.
+        /// </summary>
+        public static string Message_Body_Placeholder {
+            get {
+                return ResourceManager.GetString("Message_Body_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 消息发送！.
+        /// </summary>
+        public static string Message_Sent_Confirmation {
+            get {
+                return ResourceManager.GetString("Message_Sent_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 开始交谈.
+        /// </summary>
+        public static string Message_Start_Conversation {
+            get {
+                return ResourceManager.GetString("Message_Start_Conversation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 信息主题.
+        /// </summary>
+        public static string Message_Subject_Placeholder {
+            get {
+                return ResourceManager.GetString("Message_Subject_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 他.
         /// </summary>
         public static string Messages_Them {

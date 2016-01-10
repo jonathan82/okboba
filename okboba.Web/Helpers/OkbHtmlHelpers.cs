@@ -245,5 +245,26 @@ namespace okboba.Web.Helpers
             tag.InnerHtml = val;
             return new HtmlString(tag.ToString());
         }
+
+        public static HtmlString UnreadCount(this HtmlHelper htmlHelper, int count)
+        {
+            if (count == 0) return new HtmlString("");
+            var html = "<div class=\"unread-conv-count\">"+count+"</div>";
+            return new HtmlString(html);
+        }
+
+        /// <summary>
+        /// Normalizes a json string to be an empty array [] if it is null or empty
+        /// </summary>      
+        public static HtmlString JsonArray(this HtmlHelper htmlHelper, string json)
+        {
+            var html = String.IsNullOrEmpty(json) ? "[]" : json;
+            return new HtmlString(html);
+        }
+
+        public static HtmlString JsonObject(this HtmlHelper htmlHelper, string json)
+        {
+            return new HtmlString(json == "" ? null : json);
+        }
     }
 }

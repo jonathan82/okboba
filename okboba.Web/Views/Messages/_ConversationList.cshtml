@@ -25,7 +25,7 @@
                 </div>
                 <div class="conv-row-3">
                     <div class="conv-name">@conv.OtherProfile.Nickname</div>
-                    <div class="conv-blurb truncate">@conv.LastMessage.MessageText</div>
+                    <div class="conv-blurb truncate">@Html.Raw(conv.LastMessage.MessageText)</div>
                 </div>
                 <div class="conv-row-4">
                     <div class="conv-time">@FriendlyTime.Format(conv.LastMessage.Timestamp)</div>

@@ -32,6 +32,7 @@ var messaging = (function ($) {
         composeTemplateSel: '#composeTemplate',
         getPreviousApi: '/messages/previous',
         replyApi: '/messages/reply',
+        startConvApi: '/messages/startconversation',
         deleteApi: '/messages/delete',
         fadeInTime: 1500, //ms to fade in new messages
         emoticonSmilies: ['1f600', '1f601', '1f602', '1f603', '1f604', '1f605', '1f606', '1f607', '1f608', '1f609', '1f60a', '1f60b', '1f60c', '1f60d', '1f60e', '1f60f', '1f610', '1f611', '1f612', '1f613', '1f614', '1f615', '1f616', '1f617', '1f618', '1f619', '1f61a', '1f61b', '1f61c', '1f61d', '1f61e', '1f61f', '1f620', '1f621', '1f622', '1f623', '1f624', '1f625', '1f626', '1f627', '1f628', '1f629', '1f62a', '1f62b', '1f62c', '1f62d', '1f62e', '1f62f', '1f630', '1f631', '1f632', '1f633', '1f634', '1f635', '1f636', '1f637', '1f638', '1f639', '1f63a', '1f63b', '1f63c', '1f63d', '1f63e', '1f63f', '1f640'],
@@ -48,21 +49,54 @@ var messaging = (function ($) {
 
     /////// Private Methods ////////////////
     function composeHandler() {
-        var html, composeWindow;
+        var html, win;
 
         html = _composeTemplate.render({
-            emoticonUrl: configMap.emoticonUrl,
-            emoticonUrlSmall: configMap.emoticonUrlSmall,
-            emoticons: configMap.emoticonSmilies
+            nickname: $(this).data('name'),
+            id: $(this).data('id') //profile Id of the "to" user
         });
-        composeWindow = $(html);
 
         //add to body element
-        $('body').append(composeWindow);
+        win = $(html);        
+        $('body').append(win);
 
-        //emoticon slider
-        composeWindow.find('.compose-emoticon-btn').click(function () {
-            composeWindow.find('.compose-emoticon-slider').slideToggle('fast');
+        //close
+        win.find('.compose-close').click(function () {
+            win.remove();
+        });
+
+        //send
+        win.find('.send-button').click(function (e) {
+            var subj, msg, postData, sendBtn;
+
+            e.preventDefault();
+
+            sendBtn = $(this);
+
+            subj = win.find('#subject').val().trim();
+            msg = win.find('#message').val().trim();
+
+            if (subj == '' || msg == '') {
+                // don't submit empty form
+                return false;
+            }
+
+            //set button loading state
+            sendBtn.ladda().ladda('start');
+
+            //ajax post
+            postData = win.find('#compose-form').serialize();
+
+            $.post(configMap.startConvApi, postData, function () {
+                //show confirmation message
+                win.find('#compose-form').fadeTo('slow', 0, function () {
+                    win.find('.compose-confirmation-wrapper').fadeIn('slow');
+                });
+            }).fail(function () {
+                alert('failed');
+            }).always(function () {
+                sendBtn.ladda().ladda('stop');
+            });
         });
     }
 
@@ -85,7 +119,7 @@ var messaging = (function ($) {
                 avatarUrl: configMap.avatarMeUrl,
                 messageText: txt,
                 isMe: true,
-                friendlyTime: 'just now'
+                friendlyTime: '现在！'
             });
 
             //fade in new message
@@ -93,7 +127,7 @@ var messaging = (function ($) {
 
         }).fail(function (jqxhr, status, error) {
             alert('failed: ' + status + ' : ' + error);
-        }).done(function () {
+        }).always(function () {
             button.ladda().ladda('stop');
         });
     }
@@ -118,7 +152,7 @@ var messaging = (function ($) {
             });
 
             //optimistically remove
-            $(this).closest('.conv-row').fadeOut(configMap.fadeInTime, function () {
+            $(this).closest('.conv-row').fadeOut('fast', function () {
                 $(this).remove();
             });
         } 

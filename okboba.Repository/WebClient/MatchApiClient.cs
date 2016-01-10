@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace okboba.Repository.WebClient
 {
@@ -50,6 +51,27 @@ namespace okboba.Repository.WebClient
             var result = await CallMatchApiAsync<MatchModel>("/api/matches/calculatematch?otherProfileId=" + otherProfileId, false).ConfigureAwait(false);
             return result;
         }        
+
+        /// <summary>
+        /// Makes a call to the Web API to calculate and save the user's matches in the cache
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
+        public async Task CalculateAndSaveMatchesAsync(MatchCriteriaModel criteria)
+        {
+            var query = "/api/matches/calculateandsavematches?" + GetQueryString(criteria);
+            await CallMatchApiAsync<bool>(query, false).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets a list of recommended matches from the server
+        /// </summary>
+        public async Task<IList<MatchModel>> GetRecommendedAsync(MatchCriteriaModel criteria)
+        {
+            var query = "/api/matches/recommended?" + GetQueryString(criteria);
+            var matches = await CallMatchApiAsync<IList<MatchModel>>(query, false).ConfigureAwait(false);
+            return matches;
+        }
 
         /// <summary>
         /// Makes a web service call to retrieve a page of matches, and returns a List of MatchModels
@@ -111,6 +133,18 @@ namespace okboba.Repository.WebClient
 
                 return JsonConvert.DeserializeObject<T>(content);
             }
+        }
+
+        /// <summary>
+        /// Serializes the given object to an HTTP query string
+        /// </summary>
+        private string GetQueryString(object obj)
+        {
+            var properties = from p in obj.GetType().GetProperties()
+                             where p.GetValue(obj, null) != null
+                             select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(obj, null).ToString());
+
+            return String.Join("&", properties.ToArray());
         }
 
         private string FormatMatchQuery(int page, MatchCriteriaModel criteria)

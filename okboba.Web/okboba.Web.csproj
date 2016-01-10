@@ -472,6 +472,7 @@
     <Content Include="Scripts\messaging.js" />
     <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
+    <Content Include="Scripts\questionmanager.js" />
     <Content Include="Scripts\questionsubmit.js" />
     <Content Include="Scripts\questionvalidation.js" />
     <Content Include="Scripts\register.js" />

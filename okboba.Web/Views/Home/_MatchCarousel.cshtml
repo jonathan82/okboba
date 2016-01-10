@@ -1,45 +1,50 @@
-﻿<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+﻿@model IList<okboba.Repository.Models.MatchModel>
+@using okboba.Web.Helpers
+@using okboba.Resources
+
+<div id="carousel-matches" class="carousel slide" data-ride="carousel" data-interval="10000">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-matches" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-matches" data-slide-to="1"></li>
+        <li data-target="#carousel-matches" data-slide-to="2"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="row-fluid">
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
+        @for (int i = 0; i < 3; i++)
+        {
+            <div class="item @(i==0 ? "active" : "")">
+                <div class="row-fluid">
+                    @for (int j = i * 4; j < Model.Count && j < (i * 4) + 4; j++)
+                    {
+                        var m = Model[j];
+                        <div class="col-md-3">
+                            <div class="carousel-match-card">
+                                @Html.Avatar(m.Photo, m.Gender, m.UserId, "carousel-match-avatar")
+                                <div class="carousel-info-wrapper">
+                                    <div>@m.MatchPercent</div>
+                                    <div>@i18n.Common_Match</div>
+                                    <div>@m.EnemyPercent</div>
+                                    <div>@i18n.Common_Enemy</div>
+                                </div>
+                                <div>
+                                    @m.Nickname
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="row-fluid">
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="row-fluid">
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-                <div class="col-md-3"><a href="#x" class="thumbnail"><img src="http://placehold.it/200x200" alt="Image" style="max-width:100%;" /></a></div>
-            </div>
-        </div>
+        }
     </div>
 
     <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <a class="left carousel-control" href="#carousel-matches" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <a class="right carousel-control" href="#carousel-matches" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>

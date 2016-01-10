@@ -61,5 +61,7 @@ namespace okboba.Repository
         Task DeleteConversationAsync(int id, int convId);
         ConversationMap GetConversationMap(int profileId, int convId);
         void MarkAsRead(int profileId, int convId);
+        Task<int> StartConversation(int from, int to, string subject, string message);
+        Task Reply(int from, int convId, string message);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using okboba.Resources;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace okboba.Repository
         int GetProfileId(string userId);
         IDictionary<string, IList<ProfileDetailOption>> GetDetailOptions();
         void EditDetails(ProfileDetail details, OkbConstants.ProfileDetailSections section, int profileId);
+        MatchCriteriaModel GetMatchCriteria(int profileId);
     }
 }

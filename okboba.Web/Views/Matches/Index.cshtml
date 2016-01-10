@@ -43,7 +43,7 @@
             //document ready
             $('#matches-container').matchscroller( {
                 storageUrl: '@Model.StorageUrl',
-                matchUrl: '@Model.MatchApiUrl' + '/api/matches',
+                matchUrl: '/matches/get',
                 searchCriteria: @Html.Raw(JsonConvert.SerializeObject(Model.MatchCriteria))
             });
         });        

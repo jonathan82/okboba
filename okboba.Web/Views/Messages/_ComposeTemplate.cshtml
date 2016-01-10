@@ -1,4 +1,5 @@
-﻿@*
+﻿@using okboba.Resources
+@*
     The passed in data context: {
         emoticonUrl      - url of emoticons
         emoticonUrlSmall - url of small emoticons
@@ -7,45 +8,51 @@
     }
 *@
 <script id="composeTemplate" type="text/x-jsrender">
-    <div class="compose-wrapper">
+    <div class="compose-window">
         <div class="compose-header">
-            this is the header
+            {{:nickname}}
             <div class="compose-close"><span class="glyphicon glyphicon-remove"></span></div>
         </div>
-        <div class="compose-subject">
-            <input type="text" class="form-control" />
-        </div>
-        <div class="compose-body">
-            <div class="compose-body-edit" contenteditable="true"></div>
-        </div>
-        <div class="compose-emoticon-row">
-
-            <div class="compose-emoticon-slider">
-                <ul class="compose-emoticon-nav">
-                    <li class="active" data-page="1">
-                        <img src="{{:emoticonUrlSmall}}1f600.png" alt="1f600" width="16" height="16" />
-                    </li>
-                    <li data-page="2">
-                        <img src="{{:emoticonUrlSmall}}1f349.png" alt="1f349" width="16" height="16" />
-                    </li>
-                    <li data-page="3">
-                        <img src="{{:emoticonUrlSmall}}1f495.png" alt="1f495" width="16" height="16" />
-                    </li>
-                    <li class="chat-emoticon-close"><span class="glyphicon glyphicon-remove"></span></li>
-                </ul>
-
-                <!-- Emoticons go here: Load the first page of emoticons -->
-                <ul class="compose-emoticon-chooser">
-                    {{for emoticons ~url=emoticonUrl}}
-                    <li data-id="{{:#data}}"><img src="{{:~url}}{{:#data}}.png" alt="{{:#data}}" width="25" height="25" /></li>
-                    {{/for}}
-                </ul>
-            </div>
-
-        </div>
-        <div class="compose-send-row">
-            <button class="btn btn-primary">Send</button>
-            <div class="compose-emoticon-btn"><img src="/Content/images/chat-smiley.png" width="22" height="22" alt="Smiley" /></div>
-        </div>
+        <div class="compose-form-wrapper">
+            <form id="compose-form">
+                <input type="hidden" name="to" value="{{:id}}" />
+                <div class="compose-subject">
+                    <input type="text" class="form-control" placeholder="@i18n.Message_Subject_Placeholder" id="subject" name="subject" maxlength="@OkbConstants.MAX_SUBJECT_LENGTH" />
+                </div>
+                <div class="compose-body">
+                    @*<div class="compose-body-edit" contenteditable="true"></div>*@
+                    <textarea placeholder="@i18n.Message_Body_Placeholder" class="compose-body-edit" id="message" name="message" maxlength="@OkbConstants.MAX_MESSAGE_LENGTH"></textarea>
+                </div>
+                <div class="compose-send-row">
+                    <button class="btn btn-primary send-button ladda-button" data-style="expand-left"><span class="ladda-label">@i18n.Message_Start_Conversation</span></button>
+                    @*<div class="compose-emoticon-btn"><img src="/Content/images/chat-smiley.png" width="22" height="22" alt="Smiley" /></div>*@
+                </div>
+            </form>
+            <div class="compose-confirmation-wrapper">@i18n.Message_Sent_Confirmation</div>
+        </div>        
     </div>
 </script>
+
+@*<div class="compose-emoticon-row">
+        <div class="compose-emoticon-slider">
+            <ul class="compose-emoticon-nav">
+                <li class="active" data-page="1">
+                    <img src="{{:emoticonUrlSmall}}1f600.png" alt="1f600" width="16" height="16" />
+                </li>
+                <li data-page="2">
+                    <img src="{{:emoticonUrlSmall}}1f349.png" alt="1f349" width="16" height="16" />
+                </li>
+                <li data-page="3">
+                    <img src="{{:emoticonUrlSmall}}1f495.png" alt="1f495" width="16" height="16" />
+                </li>
+                <li class="chat-emoticon-close"><span class="glyphicon glyphicon-remove"></span></li>
+            </ul>
+
+            <!-- Emoticons go here: Load the first page of emoticons -->
+            <ul class="compose-emoticon-chooser">
+                {{for emoticons ~url=emoticonUrl}}
+                <li data-id="{{:#data}}"><img src="{{:~url}}{{:#data}}.png" alt="{{:#data}}" width="25" height="25" /></li>
+                {{/for}}
+            </ul>
+        </div>
+    </div>*@

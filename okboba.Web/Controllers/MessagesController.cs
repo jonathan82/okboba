@@ -131,7 +131,27 @@ namespace okboba.Controllers
             var map = _msgRepo.GetConversationMap(me, convId);
             if (map.ProfileId != me) throw new HttpException(404, "conversation not found");
 
-            await _msgRepo.AddMessageAsync(me, map.Other, message, convId);
+            await _msgRepo.Reply(me, convId, message);
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Starts a new conversation with the given user. Accepts dangerous input.
+        /// </summary>
+        [HttpPost]
+        [ValidateInput(false)]
+        public async Task<ActionResult> StartConversation(int to, string subject, string message)
+        {
+            var me = GetProfileId();
+
+            //sanitize the input
+            subject = Server.HtmlEncode(subject);
+            message = Server.HtmlEncode(message);
+            subject = Truncate(subject, OkbConstants.MAX_SUBJECT_LENGTH);            
+            message = Truncate(message, OkbConstants.MAX_MESSAGE_LENGTH);
+
+            await _msgRepo.StartConversation(me, to, subject, message);
 
             return Json(true, JsonRequestBehavior.AllowGet);
         }

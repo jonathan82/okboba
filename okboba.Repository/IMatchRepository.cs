@@ -10,6 +10,6 @@ namespace okboba.Repository
     public interface IMatchRepository
     {
         List<MatchModel> Search(int profileId, MatchCriteriaModel criteria);
-        MatchModel Calculate(int profileId1, int profileId2);
+        MatchModel Calculate(int profileId1, int profileId2);        
     }
 }

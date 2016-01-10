@@ -444,4 +444,16 @@
   <data name="Time_Yesterday" xml:space="preserve">
     <value>昨天</value>
   </data>
+  <data name="Message_Body_Placeholder" xml:space="preserve">
+    <value>把它们写一个可爱的消息</value>
+  </data>
+  <data name="Message_Sent_Confirmation" xml:space="preserve">
+    <value>消息发送！</value>
+  </data>
+  <data name="Message_Start_Conversation" xml:space="preserve">
+    <value>开始交谈</value>
+  </data>
+  <data name="Message_Subject_Placeholder" xml:space="preserve">
+    <value>信息主题</value>
+  </data>
 </root>

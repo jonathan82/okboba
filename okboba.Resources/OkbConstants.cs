@@ -13,9 +13,12 @@
         public const int MAX_MATCH_RESULTS = 4000;
         public const int MATCHES_PER_PAGE = 28;
         public const int EXPIRE_MATCHES = 5; //minutes that matches will exist in cache
+        public const int MATCHES_RECOMMENDED_CONSIDERED = 150; //top N matches to consider for recommending
+        public const int MATCHES_RECOMMENDED_RETURN = 12; //number of recommended matches to return
 
         //Messages
         public const int MAX_MESSAGE_LENGTH = 1000;
+        public const int MAX_SUBJECT_LENGTH = 100;
         public const int MESSAGES_PER_PAGE = 20; //number of messages to show per "load" request
         public const int INITIAL_NUM_MESSAGES = 4; //number of messages show initially
 

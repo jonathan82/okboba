@@ -206,7 +206,7 @@
 **********************************************************/
 @compose-padding: 12px;
 
-.compose-wrapper {
+.compose-window {
     position: fixed;
     bottom: 0;
     right: 40px;
@@ -231,7 +231,7 @@
     padding: 0 @compose-padding @compose-padding @compose-padding;
 }
 
-.compose-body-edit {
+/*.compose-body-edit {
     height: 150px;
     border: 1px solid @gray-light;
     border-radius: 4px;
@@ -239,6 +239,17 @@
     padding: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+}*/
+
+.compose-body-edit {
+    height: 150px;
+    border-radius: 4px;
+    background-color: #FFF;
+    width: 100%;
+    resize: none;
+    padding: 5px;
+    /*overflow-y: auto;
+    overflow-x: hidden;*/
 }
 
 .compose-send-row {
@@ -265,6 +276,24 @@
     cursor: pointer;
     margin-left: 10px;
     display:inline-block;
+}
+
+.compose-confirmation-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 2.5em;
+    padding-top: 70px;
+    color: #0C0;
+    display: none;
+    background-color: #FFF;
+}
+
+.compose-form-wrapper {
+    position: relative;
 }
 
 /*********************************************************

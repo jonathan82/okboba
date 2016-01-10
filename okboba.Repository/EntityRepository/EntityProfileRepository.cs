@@ -1,4 +1,5 @@
 ﻿using okboba.Entities;
+using okboba.Repository.Models;
 using okboba.Resources;
 using System;
 using System.Collections.Generic;
@@ -241,6 +242,25 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var user = db.Users.Find(userId);
             return db.Profiles.Find(user.ProfileId);
+        }
+
+        /// <summary>
+        /// Get the search preferences for the given. For now just keep it simple and use the 
+        /// "LookingForGender" field in the user's profile.
+        /// </summary>
+        public MatchCriteriaModel GetMatchCriteria(int profileId)
+        {
+            var db = new OkbDbContext();
+
+            var profile = db.Profiles.Find(profileId);
+
+            var criteria = new MatchCriteriaModel
+            {
+                Gender = profile.LookingForGender,
+                LocationId1 = 0 //we don't care about location now, show everyone
+            };
+
+            return criteria;
         }
     }
 }

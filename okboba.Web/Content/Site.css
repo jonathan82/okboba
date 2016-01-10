@@ -185,8 +185,13 @@ a.div-link {
   /*workaround to make clickable in IE */
 }
 .section-header {
-  font-size: 2em;
-  color: #9b9b9b;
+  font-size: 1.8em;
+  color: #D7CDD8;
+  line-height: 1;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #D7CDD8;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 .truncate {
   white-space: nowrap;
@@ -257,7 +262,7 @@ a.div-link {
   color: #FFF;
   font-size: 12px;
   font-weight: bold;
-  padding: 2px;
+  padding: 2px 3px;
   border-radius: 3px;
   line-height: 1;
   position: absolute;
@@ -867,7 +872,7 @@ a.div-link {
     Styles for Compose new message popup
 
 **********************************************************/
-.compose-wrapper {
+.compose-window {
   position: fixed;
   bottom: 0;
   right: 40px;
@@ -888,14 +893,24 @@ a.div-link {
 .compose-body {
   padding: 0 12px 12px 12px;
 }
+/*.compose-body-edit {
+    height: 150px;
+    border: 1px solid @gray-light;
+    border-radius: 4px;
+    background-color: #FFF;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}*/
 .compose-body-edit {
   height: 150px;
-  border: 1px solid #9b9b9b;
   border-radius: 4px;
   background-color: #FFF;
+  width: 100%;
+  resize: none;
   padding: 5px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  /*overflow-y: auto;
+    overflow-x: hidden;*/
 }
 .compose-send-row {
   padding: 0 12px 12px 12px;
@@ -918,6 +933,22 @@ a.div-link {
   cursor: pointer;
   margin-left: 10px;
   display: inline-block;
+}
+.compose-confirmation-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 2.5em;
+  padding-top: 70px;
+  color: #0C0;
+  display: none;
+  background-color: #FFF;
+}
+.compose-form-wrapper {
+  position: relative;
 }
 /*********************************************************
 
@@ -1327,7 +1358,37 @@ img.emoji {
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 .carousel {
   margin-bottom: 0;
-  padding: 0 40px 30px 40px;
+  padding: 10px 40px 10px 40px;
+  background-color: #cecece;
+  border-radius: 8px;
+}
+.carousel-control {
+  width: 40px;
+}
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+  text-align: center;
+}
+/*
+    Match card styles
+*/
+.carousel-match-card {
+  padding: 5px;
+  background-color: #FFF;
+  position: relative;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+}
+.carousel-match-avatar {
+  width: 140px;
+  height: 140px;
+}
+.carousel-info-wrapper {
+  display: inline-block;
+}
+.home-question-box {
+  height: 300px;
+  background-color: #9b9b9b;
 }
 /****************************************
     Photo Upload
