@@ -1,4 +1,5 @@
-﻿using okboba.Entities;
+﻿using Newtonsoft.Json;
+using okboba.Entities;
 using okboba.Repository;
 using okboba.Repository.Models;
 using okboba.Resources;
@@ -254,12 +255,13 @@ namespace okboba.Web.Helpers
         }
 
         /// <summary>
-        /// Normalizes a json string to be an empty array [] if it is null or empty
+        /// Given an object serializes it into a Json Array.  Normalizes the json string to 
+        /// be an empty array [] if it is null or empty.
         /// </summary>      
-        public static HtmlString JsonArray(this HtmlHelper htmlHelper, string json)
+        public static HtmlString JsonArray(this HtmlHelper htmlHelper, object obj)
         {
-            var html = String.IsNullOrEmpty(json) ? "[]" : json;
-            return new HtmlString(html);
+            var json = JsonConvert.SerializeObject(obj);
+            return new HtmlString(string.IsNullOrEmpty(json) ? "[]" : json);
         }
 
         public static HtmlString JsonObject(this HtmlHelper htmlHelper, string json)

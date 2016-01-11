@@ -78,15 +78,16 @@
 @section Scripts {
 
     <script>
-        var NextQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.NextQuestions));
-        var AnsweredQuestions = @Html.Raw(JsonConvert.SerializeObject(Model.Questions));
 
         $(function () {
-            $('.question-form').questionValidation();
-            $('.question-form').questionSubmit(true);
-    
+
+            QuestionManager.initModule({
+                answeredQuestions: @Html.JsonArray(Model.Questions),
+                nextQuestions: @Html.JsonArray(Model.NextQuestions)
+            });
+
             //messaging
             messaging.initModule();
-        });        
+        });
     </script>
 }

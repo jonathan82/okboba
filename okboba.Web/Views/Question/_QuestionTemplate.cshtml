@@ -4,7 +4,8 @@
     {
         Id: question Id
         Text: question Text
-        Choices: [Array of strings]            
+        Choices: [Array of strings]          
+        hideContainer: boolean (true: show cancel button, false: show "Skip" button)  
     }
 *@
 <script id="questionTemplate" type="text/x-jsrender">
@@ -57,7 +58,11 @@
         <input type="hidden" name="QuestionId" value="{{:Id}}" />
 
         <div class="text-right top-buffer-20">
+            {{if isCancelable}}
+            <button type="button" class="btn btn-default question-cancel">@i18n.Common_Cancel</button>
+            {{else}}
             <button type="button" class="btn btn-default question-skip">@i18n.Question_Skip</button>
+            {{/if}}
             <button type="button" class="btn btn-primary question-submit" disabled>@i18n.Question_Answer</button>
         </div>
     </form>

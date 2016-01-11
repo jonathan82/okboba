@@ -110,12 +110,14 @@
 @section Scripts {
 
     <script>
-        var NextQuestions = @Html.JsonArray(JsonConvert.SerializeObject(Model.NextQuestions));
-        var AnsweredQuestions = @Html.JsonArray(JsonConvert.SerializeObject(Model.Questions));
 
         $(function () {            
-            $('.question-form').questionValidation();
-            $('.question-form').questionSubmit(true);
+
+            QuestionManager.initModule({
+                avatarMeUrl: '@Html.AvatarUrl(Model.CompareProfile.GetFirstHeadshot(true), Model.CompareProfile.Gender, Model.CompareProfile.UserId)',
+                avatarThemUrl: '@Html.AvatarUrl(Model.Profile.GetFirstHeadshot(true), Model.Profile.Gender, Model.Profile.UserId)',
+                answeredQuestions: @Html.JsonArray(Model.Questions)
+            });
 
             //messaging
             messaging.initModule();

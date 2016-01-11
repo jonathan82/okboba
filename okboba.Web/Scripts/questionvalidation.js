@@ -9,83 +9,81 @@
  */
 
 (function ($) {
-    //// Private vars
-    var $questionForm;
 
     //// Private Funcions
-    function highlightImportanceBar(level) {
+    function highlightImportanceBar(level,form) {
 
         //clear highlights
-        $questionForm.find('.question-importance-bar').removeClass('active');
+        form.find('.question-importance-bar').removeClass('active');
 
         switch (level) {
             case 3:
-                $questionForm.find('[data-importance="3"]').addClass('active');
+                form.find('[data-importance="3"]').addClass('active');
             case 2:
-                $questionForm.find('[data-importance="2"]').addClass('active');
+                form.find('[data-importance="2"]').addClass('active');
             case 1:
-                $questionForm.find('[data-importance="1"]').addClass('active');
+                form.find('[data-importance="1"]').addClass('active');
                 break;
             default:
                 //do nothing.  highlights already cleared
         }
     }
 
-    function setupImportanceBars() {
+    function setupImportanceBars(form) {
 
         //Setup the mouse enter handler
-        $questionForm.find('.question-importance-bar').mouseenter(function () {
+        form.find('.question-importance-bar').mouseenter(function () {
             var level = $(this).data('importance');
-            highlightImportanceBar(level);
+            highlightImportanceBar(level,form);
         });
 
         //Setup the mouse leave handler
-        $questionForm.find('.question-importance-bar').mouseleave(function () {
+        form.find('.question-importance-bar').mouseleave(function () {
             //restore the saved importance value from the hidden input
-            var savedLevel = $questionForm.find('input[name="ChoiceImportance"]').val();
+            var savedLevel = form.find('input[name="ChoiceImportance"]').val();
             savedLevel = parseInt(savedLevel);
-            highlightImportanceBar(savedLevel);
+            highlightImportanceBar(savedLevel,form);
         });
 
         //Setup the click handler
-        $questionForm.find('.question-importance-bar').click(function () {
+        form.find('.question-importance-bar').click(function () {
             var level = $(this).data('importance');
-            $questionForm.find('input[name="ChoiceImportance"]').val(level);
-            validate();
+            form.find('input[name="ChoiceImportance"]').val(level);
+            validate(form);
         });
     }
 
-    function setupCheckboxes() {
+    function setupCheckboxes(form) {
 
         //Other checkboxes click
-        $questionForm.find('input[name="ChoiceAccept"]').change(function () {
+        form.find('input[name="ChoiceAccept"]').change(function () {
             var checked = true;
 
             //loop all the "other" checkboxes to set the irrelevant flag
-            $questionForm.find('input[name="ChoiceAccept"]').each(function () {
+            form.find('input[name="ChoiceAccept"]').each(function () {
                 checked = checked && $(this).prop('checked');
             });
 
-            $questionForm.find('input[name="ChoiceIrrelevant"]').prop('checked', checked);
+            form.find('input[name="ChoiceIrrelevant"]').prop('checked', checked);
 
-            validate();
+            validate(form);
         });
 
         //Irrelevant clicked
-        $questionForm.find('input[name="ChoiceIrrelevant"]').change(function () {
+        form.find('input[name="ChoiceIrrelevant"]').change(function () {
             var checked = $(this).prop('checked');
-            $questionForm.find('input[name="ChoiceAccept"]').prop('checked', checked);
-            validate();
+            form.find('input[name="ChoiceAccept"]').prop('checked', checked);
+            validate(form);
         });
     }
 
-    function setupRadios() {
-        $questionForm.find('input:radio').change(function () {
-            validate();
+    function setupRadios(form) {
+        form.find('input:radio').change(function () {
+            validate(form);
         });
     }
 
-    function validate() {
+    function validate(form) {
         var radioChecked,
             checkboxChecked,
             irrelevantFlag,
@@ -93,21 +91,21 @@
             isValid = true;
 
         //choice required - at least one radio checked
-        radioChecked = $questionForm.find('input:radio').is(':checked');
+        radioChecked = form.find('input:radio').is(':checked');
 
         //at least one checkbox required
-        checkboxChecked = $questionForm.find('input:checkbox').is(':checked');
+        checkboxChecked = form.find('input:checkbox').is(':checked');
 
         //show/hide importance bars depending irrelevant flag
-        irrelevantFlag = $questionForm.find('input[name="ChoiceIrrelevant"]').is(':checked');
+        irrelevantFlag = form.find('input[name="ChoiceIrrelevant"]').is(':checked');
         if (irrelevantFlag) {
-            $questionForm.find('.question-importance-box').hide();
+            form.find('.question-importance-box').hide();
         } else {
-            $questionForm.find('.question-importance-box').show();
+            form.find('.question-importance-box').show();
         }
 
         //get the importance value
-        importance = $questionForm.find('input[name="ChoiceImportance"]').val();
+        importance = form.find('input[name="ChoiceImportance"]').val();
         
         //Set Validation flag
         if (!radioChecked) isValid = false;
@@ -117,7 +115,7 @@
         }
 
         //Enable/disable answer button based on validation flag
-        $questionForm.find('button.btn-primary').prop('disabled', !isValid);
+        form.find('button.btn-primary').prop('disabled', !isValid);
     }
 
     //// Public Functions (exposed thru jQuery)
@@ -126,11 +124,11 @@
         //check if we actually have a question form
         if (this.length == 0) return;
 
-        $questionForm = this;
+        setupImportanceBars(this);
+        setupCheckboxes(this);
+        setupRadios(this);
 
-        setupImportanceBars();
-        setupCheckboxes();
-        setupRadios();
+        return this;
     }
 
 })(jQuery);
