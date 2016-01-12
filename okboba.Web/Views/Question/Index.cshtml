@@ -19,28 +19,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <!-- Question Box -->
-        @if (Model.IsMe)
-        {
-            if (Model.NextQuestions.Count() > 0)
-            {
-                @Html.Partial("_QuestionBox");
-            }
-            else
-            {
-                <p>You have answered all the questions!</p>
-            }
-        }
-
-        <hr id="question-separator" />
-
-        <!-- Drop down list of answered and skipped questions -->
-        <select class="form-control">
-            <option value="value">Questions I've Answered</option>
-            <option value="value">Questions I've Skipped</option>
-        </select>
-
-        <hr />
+        
 
         <!-- Question list -->
         @foreach (var ques in Model.Questions)
@@ -90,12 +69,17 @@
     <!-- Question stats -->
     <div class="col-md-4">
         <div class="question-stats">
-            <p>Highest Match Percentage possible:</p>
-            <p><h1>53%</h1></p>
-            <p>
-                You have answered: 32 Questions<br />
-                (The more you answer the higher the possible match percentage)
-            </p>
+            <p>You have answered XX of their XX questions.</p>
+            
+            <div class="progress">
+                <div class="progress-bar" style="width: 100%">5</div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" style="width: 50%">5</div>
+            </div>
+
+            <p>Answer More >></p>
+            <p>Submit Question Suggestion</p>
         </div>
     </div>
 

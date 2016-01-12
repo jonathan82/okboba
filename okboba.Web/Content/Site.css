@@ -558,11 +558,27 @@ a.div-link {
   background-color: #FFF;
   text-align: center;
   padding: 20px 10px;
+  font-size: 1.5em;
+  opacity: .87;
+  color: #000;
 }
-/*
+.question-answered-me > button {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: none;
+}
+.question-answered-me:hover > button {
+  display: inline-block;
+}
+.question-highest-match {
+  font-size: 2em;
+  margin: 15px 0;
+}
+/*************************************
     Custom input styles
     Reference: http://blog.karenmenezes.com/2014/nov/1/another-pure-css-checkbox-article/
-*/
+***************************************/
 .checkbox-custom > input,
 .radio-custom > input {
   display: none;
@@ -667,13 +683,6 @@ a.div-link {
   font-size: 18px;
 }
 .question-answered-me {
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  background-color: #FFF;
-  padding: 15px  20px;
-  color: #555555;
-  margin-bottom: 15px;
-  position: relative;
-  font-size: 18px;
   font-size: 16px;
 }
 .question-avatar {

@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace okboba.Entities
 {
@@ -47,9 +48,12 @@ namespace okboba.Entities
         public DateTime LastAnswered { get; set; }
 
         //References
-        [JsonIgnore]
+        [JsonIgnore] // Newtonsoft serializer
+        [ScriptIgnore] //JavaScriptSerializer used by MVC
         public virtual Profile Profile { get; set; }
+
         [JsonIgnore]
+        [ScriptIgnore]
         public virtual Question Question { get; set; }   
         
         //Helper functions

@@ -18,10 +18,7 @@ namespace okboba.Web.Models
         public IEnumerable<QuestionModel> NextQuestions { get; set; }
         public Profile Profile { get; set; }
         public Profile CompareProfile { get; set; }
-        //public string AvatarSmall { get; set; }
-        //public string AvatarCompareSmall { get; set; }
-        //public byte Gender { get; set; }
-        //public byte GenderCompare { get; set; }
-        //public string UserIdCompare { get; set; }
+        public int HighestMatchPercent { get; set; }
+        public int IntersectionCount { get; set; }
     }
 }

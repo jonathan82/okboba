@@ -988,6 +988,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 变化回答.
+        /// </summary>
+        public static string Question_UpdateAnswer {
+            get {
+                return ResourceManager.GetString("Question_UpdateAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 很重要.
         /// </summary>
         public static string Question_VeryImportant {

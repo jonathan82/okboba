@@ -456,4 +456,7 @@
   <data name="Message_Subject_Placeholder" xml:space="preserve">
     <value>信息主题</value>
   </data>
+  <data name="Question_UpdateAnswer" xml:space="preserve">
+    <value>变化回答</value>
+  </data>
 </root>

@@ -4,8 +4,8 @@
     {
         Id: question Id
         Text: question Text
-        Choices: [Array of strings]          
-        hideContainer: boolean (true: show cancel button, false: show "Skip" button)  
+        Choices: [Array of strings]
+        isCancelable: boolean (true: show cancel button, false: show "Skip" button)
     }
 *@
 <script id="questionTemplate" type="text/x-jsrender">
@@ -15,19 +15,19 @@
         <p>{{:Text}}</p>
 
         {{for Choices}}
-            <div class="radio-custom">
-                <input type="radio" name="ChoiceIndex" id="r{{:#index + 1 + '_' + ~root.Id}}" value="{{:#index + 1}}" />
-                <label for="r{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
-            </div>
+        <div class="radio-custom">
+            <input type="radio" name="ChoiceIndex" id="r{{:#index + 1 + '_' + ~root.Id}}" value="{{:#index + 1}}" />
+            <label for="r{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
+        </div>
         {{/for}}
 
         <p class="top-buffer-10">@i18n.Question_Prompt_Acceptable</p>
 
         {{for Choices}}
-            <div class="checkbox-custom">
-                <input type="checkbox" name="ChoiceAccept" value="{{:#index + 1}}" id="c{{:#index + 1 + '_' + ~root.Id}}" />
-                <label for="c{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
-            </div>
+        <div class="checkbox-custom">
+            <input type="checkbox" name="ChoiceAccept" value="{{:#index + 1}}" id="c{{:#index + 1 + '_' + ~root.Id}}" />
+            <label for="c{{:#index + 1 + '_' + ~root.Id}}">{{:#data}}</label>
+        </div>
         {{/for}}
 
         <div class="checkbox-custom">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        
+
         <input type="hidden" name="ChoiceImportance" value="0" />
         <input type="hidden" name="QuestionId" value="{{:Id}}" />
 
@@ -67,4 +67,52 @@
         </div>
     </form>
 
+</script>
+
+@*
+    Data Model: {
+        questionText: string
+        choices: [ { text: string
+                     isAccept: bool 
+                     isMyAnswer: bool }, ... ]
+    }
+*@
+<script id="answerMeTemplate" type="text/x-jsrender">
+    <div class="question-answered question-answered-me">
+        <p>{{:questionText}}</p>
+        <ul class="question-me-list">
+            {{for choices}}
+            <li class="{{:isAccept ? 'question-choice-green' : 'question-choice-strike'}} {{:isMyAnswer ? 'question-choice-check' : 'question-choice-bullet'}}">{{:text}}</li>
+            {{/for}}
+        </ul>
+    </div>
+</script>
+
+@*
+    Data Model: {
+        questionText: string - text of the question
+        avatarMeUrl: string
+        avatarThemUrl: string
+        myAnswer: string
+        theirAnswer: string
+        matchMe: boolean - true if their answer matches my acceptable
+        matchThem: boolean - true if my answer matches their acceptable
+    }
+*@
+<script id="answerOtherTemplate" type="text/x-jsrender">
+    <div class="question-answered">
+        <p>{{:questionText}}</p>
+
+        <!-- Answer -->
+        <div style="margin-bottom:5px;">
+            <img src="{{:avatarThemUrl}}" class="question-avatar" />
+            <span class="{{:matchMe ? 'question-choice-green' : 'question-choice-red'}}">{{:theirAnswer}}</span>
+        </div>
+        <!-- Comparison Answer -->
+        <div>
+            <img src="{{:avatarMeUrl}}" class="question-avatar" />
+            <span class="{{:matchThem ? 'question-choice-green' : 'question-choice-red'}}">{{:myAnswer}}</span>
+        </div>
+    </div>
+    
 </script>

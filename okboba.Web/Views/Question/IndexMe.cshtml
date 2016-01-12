@@ -26,28 +26,20 @@
         }
         else
         {
-            <p>You have answered all the questions!</p>
+            <h1>You have answered all the questions!</h1>
         }
-
-
-        <hr id="question-separator" />
-
-        <!-- Drop down list of answered and skipped questions -->
-        <select class="form-control">
-            <option value="value">Questions I've Answered</option>
-            <option value="value">Questions I've Skipped</option>
-        </select>
 
         <hr />
 
         <!-- Question list -->
         @foreach (var ques in Model.Questions)
         {
-            <div class="question-answered-me">
+            <div class="question-answered question-answered-me">
                 <p>@ques.Question.Text</p>
                 <ul class="question-me-list">
                     @Html.ShowAnswersMe(ques.Answer, ques.Question.Choices)
                 </ul>
+                <button class="btn btn-default btn-sm" data-toggle="updateanswer" data-quesid="@ques.Question.Id">@i18n.Question_UpdateAnswer</button>
             </div>
          }
     </div>
@@ -58,11 +50,11 @@
     <!-- Question stats -->
     <div class="col-md-4">
         <div class="question-stats">
-            <p>Highest Match Percentage possible:</p>
-            <p><h1>53%</h1></p>
+            <p>最高的匹配实现：</p>
+            <div class="question-highest-match">@Model.HighestMatchPercent%</div>
             <p>
-                You have answered: 32 Questions<br />
-                (The more you answer the higher the possible match percentage)
+                您回答： <b>@Model.Questions.TotalItemCount</b> 问题<br />
+                (如果你回答多问题，匹配更高)
             </p>
         </div>
     </div>

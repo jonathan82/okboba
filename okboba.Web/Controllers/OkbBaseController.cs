@@ -123,6 +123,12 @@ namespace okboba.Controllers
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
+            if (!Request.IsAuthenticated)
+            {
+                return;
+            }
+
+            //Get unread message count 
             var msgRepo = EntityMessageRepository.Instance;
             var me = GetProfileId();
             ViewBag.UnreadCount = msgRepo.GetUnreadCount(me);

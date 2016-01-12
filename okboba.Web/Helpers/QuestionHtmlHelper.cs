@@ -152,9 +152,12 @@ namespace okboba.Web.Helpers
         ///////////////////////////////////////////////////////////////////////////////////////
         public static HtmlString ShowAnswer(this HtmlHelper htmlHelper, Answer answer, Answer otherAnswer, IList<string> choices)
         {
-            if (answer.ChoiceIndex == null || otherAnswer.ChoiceIndex == null) return new HtmlString("INVALID ANSWER");
+            if (answer.ChoiceIndex == null || otherAnswer.ChoiceIndex == null)
+            {
+                return new HtmlString("INVALID ANSWER");
+            }
             var tag = new TagBuilder("span");
-            tag.AddCssClass(answer.IsMatch(otherAnswer) ? "question-choice-green" : "question-choice-red");
+            tag.AddCssClass(otherAnswer.IsMatch(answer) ? "question-choice-green" : "question-choice-red");
             tag.InnerHtml = choices[((int)answer.ChoiceIndex - 1) % choices.Count];
             return new HtmlString(tag.ToString());
         }
@@ -173,6 +176,18 @@ namespace okboba.Web.Helpers
                 html += tag.ToString();
             }
 
+            return new HtmlString(html);
+        }
+
+        public static HtmlString ProgressQuestions(this HtmlHelper htmlHelper, int part, int total)
+        {
+            int pct = 0;
+            if(total != 0)
+            {
+                pct = (int)((float)part / total * 100);
+            }            
+            pct = pct > 100 ? 100 : pct;
+            var html = "<div class=\"progress\"><div class=\"progress-bar\" style=\"width: "+pct+"%\">"+part+"</div></div>";
             return new HtmlString(html);
         }
     }

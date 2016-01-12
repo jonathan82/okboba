@@ -33,6 +33,12 @@ namespace okboba.Controllers
             _feedRepo = EntityActivityRepository.Instance;
         }
 
+        private int HighestMatchPercent(int count)
+        {
+            if (count == 0 || count == 1) return 0;
+            return (int)((1 - 1 / (float)count) * 100);
+        }
+
         // GET: Question
         public ActionResult Index(string userId, int page = 1)
         {
@@ -48,6 +54,7 @@ namespace okboba.Controllers
                 vm.IsMe = true;
                 vm.Questions = _quesRepo.GetQuestions(me, page, OkbConstants.NUM_QUES_PER_PAGE);
                 vm.NextQuestions = _quesRepo.Next2Questions(me);
+                vm.HighestMatchPercent = HighestMatchPercent(vm.Questions.TotalItemCount);
             }
             else
             {
@@ -96,10 +103,10 @@ namespace okboba.Controllers
         /// <summary>
         /// Add/Updates a user's answer in the database, and then calls MatchApiClient to
         /// update the cache. Responsible for keeping DB and cache in sync so wraps these
-        /// operations in a transaction. If getNextFlag = false we don't need to get the next
-        /// question, otherwise return the next two questions as a JSON object.  We have all
-        /// this logic in the controller instead of repository because the web client requires
-        /// an authentication cookie which is stored in the HttpContext object.
+        /// operations in a transaction. 
+        /// 
+        ///   - If getNextFlag = true get the next 2 questions and return them as JSON
+        ///   - Otherwise return the user's validated answer
         /// 
         /// More info about TransactionScope (limitations):
         /// https://msdn.microsoft.com/en-us/data/dn456843.aspx
@@ -173,9 +180,12 @@ namespace okboba.Controllers
             if (getNextFlag)
             {
                 nextQuestions = _quesRepo.Next2Questions(profileId);
+                return Json(nextQuestions);
             }
-
-            return Json(nextQuestions);
+            else
+            {
+                return Json(answer);
+            }            
         }
     }
 }

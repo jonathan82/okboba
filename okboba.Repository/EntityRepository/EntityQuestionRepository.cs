@@ -165,7 +165,7 @@ namespace okboba.Repository.EntityRepository
         }
 
         /// <summary>
-        /// Gets the users answers in a dictionary.  
+        /// Gets the users answers in a dictionary.  Doesn't return skipped questions.
         /// </summary>        
         public Dictionary<short, Answer> GetAnswers(int profileId)
         {
@@ -173,7 +173,7 @@ namespace okboba.Repository.EntityRepository
             var dict = new Dictionary<short, Answer>();
 
             var result = from ans in db.Answers.AsNoTracking()
-                         where ans.ProfileId == profileId
+                         where ans.ProfileId == profileId && ans.ChoiceIndex != null
                          select ans;
 
             foreach (var ans in result)
