@@ -315,8 +315,8 @@ namespace okboba.Seeder
                 {
                     Who = (rand.Next() % 1000) + 1,
                     CategoryId = (rand.Next() % 4) + 1,
-                    When = RandomTime(rand),
-                    What = "this is some test text for metadata field. lorum ipsum dolor blah blah blah"
+                    Timestamp = RandomTime(rand),
+                    Field1 = "this is some test text for metadata field. lorum ipsum dolor blah blah blah"
                 });
             }
 

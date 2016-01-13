@@ -21,6 +21,31 @@ namespace okboba.MatchApi.Controllers
             _matchCalc = MatchCalc.Instance;
         }
 
+        public IDictionary<short,Answer> GetIntersect(int p1, int p2)
+        {
+            var ansDict = _matchCalc.GetAnswerDict(p2);
+            var ansList = _matchCalc.GetAnswers(p1);
+            var dict = new Dictionary<short, Answer>();
+
+            foreach (var ans in ansList)
+            {
+                if (ansDict.ContainsKey(ans.QuestionId))
+                {
+                    dict.Add(ans.QuestionId, new Answer
+                    {
+                        QuestionId = ans.QuestionId,
+                        ProfileId = p1,
+                        ChoiceIndex = _matchCalc.ChoiceIndex(ans.ChoiceBit),
+                        ChoiceAccept = ans.ChoiceAccept,
+                        ChoiceWeight = ans.ChoiceWeight,
+                        LastAnswered = ans.LastAnswered
+                    });
+                }
+            }
+
+            return dict;
+        }
+
         // POST api/<controller>
         /// <summary>
         /// Updates/Adds the users answer in the answer cache.

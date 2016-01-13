@@ -29,6 +29,8 @@ namespace okboba.Entities
 
         public DateTime JoinDate { get; set; }
 
+        public DateTime? LastLoginDate { get; set; }
+
         [ForeignKey("Profile")]
         public int? ProfileId { get; set; }
 

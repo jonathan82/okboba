@@ -184,11 +184,36 @@ namespace okboba.Repository.EntityRepository
             return dict;
         }
 
-        public Question GetQuestionText(int id)
+        public QuestionModel GetQuestion(int id)
         {
             var db = new OkbDbContext();
-            var ques = db.Questions.Find(id);
-            return ques;
+
+            var query = from ques in db.Questions.AsNoTracking()
+                        where ques.Id == id
+                        join choice in db.QuestionChoices.AsNoTracking() on ques.Id equals choice.QuestionId
+                        orderby choice.Index ascending
+                        select new
+                        {
+                            Question = ques,
+                            Choice = choice
+                        };
+
+            var model = new QuestionModel();
+
+            foreach (var row in query)
+            {
+                if (model.Choices==null)
+                {
+                    model.Choices = new List<string>();
+                    model.Id = row.Question.Id;
+                    model.Text = row.Question.Text;
+                }
+
+                //add choice
+                model.Choices.Add(row.Choice.Text);
+            }
+            
+            return model;
         }
     }
 }

@@ -64,7 +64,7 @@ namespace okboba.Repository.EntityRepository
         /// 
         /// Returns the filename of the thumbnail generated. Used by the Activity Feed to show additional info.
         /// </summary>
-        public async Task<string> UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, int profileId, string userId)
+        public async Task<string> UploadAsync(Stream upload, int leftThumb, int topThumb, int widthThumb, int screenWidth, int profileId, string userId)
         {
             string filename = "";
 
@@ -77,6 +77,9 @@ namespace okboba.Repository.EntityRepository
                 var dir = GetPhotoDirectory(userId);
                 var unique = GenerateUniqueFilename(dir);
                 imgFactory.Load(upload);
+
+                //Calculate the scaled thumbnail dimensions
+                float scale = (float)imgFactory.Image.Width / screenWidth;
 
                 //Resize original image if necessary
                 if (imgFactory.Image.Height > MAX_IMAGE_HEIGHT)
@@ -98,13 +101,15 @@ namespace okboba.Repository.EntityRepository
 
                 //Crop and upload headshot
                 imgFactory.Reset();
-                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH);
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, screenWidth, 
+                    OkbConstants.AVATAR_WIDTH);
                 thumbBlob = dir.GetBlockBlobReference(filename + OkbConstants.HEADSHOT_SUFFIX);
                 var t1 = thumbBlob.UploadFromStreamAsync(thumbStream);
 
                 //Crop and upload small headshot
                 imgFactory.Reset();
-                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, OkbConstants.AVATAR_WIDTH_SMALL);
+                thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, screenWidth, 
+                    OkbConstants.AVATAR_WIDTH_SMALL);
                 thumbBlob = dir.GetBlockBlobReference(filename + OkbConstants.HEADSHOT_SMALL_SUFFIX);
                 var t2 = thumbBlob.UploadFromStreamAsync(thumbStream);
 
@@ -165,12 +170,15 @@ namespace okboba.Repository.EntityRepository
         /// <summary>
         /// Creates a thumbnail from the given image
         /// </summary>
-        private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width, int finalWidth)
+        private MemoryStream CreateThumbnail(ImageFactory imgFactory, int left, int top, int width, int screenWidth, int finalWidth)
         {
             var outStream = new MemoryStream();
 
+            //Calculate the scaled thumbnail dimensions
+            float scale = (float)imgFactory.Image.Width / screenWidth;
+
             imgFactory
-                .Crop(new Rectangle(left, top, width, width))
+                .Crop(new Rectangle((int)(left*scale), (int)(top*scale), (int)(width*scale), (int)(width *scale)))
                 .Resize(new Size(finalWidth, finalWidth))
                 .Save(outStream);
 
@@ -228,21 +236,16 @@ namespace okboba.Repository.EntityRepository
                 float scale = (float)imgFactory.Image.Width / screenWidth;
 
                 //Create and upload Headshot
-                var thumbStream = CreateThumbnail(imgFactory,
-                    (int)(leftThumb * scale),
-                    (int)(topThumb * scale),
-                    (int)(widthThumb * scale),
+                var thumbStream = CreateThumbnail(imgFactory, leftThumb, topThumb, widthThumb, screenWidth, 
                     OkbConstants.AVATAR_WIDTH);
 
                 blob = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SUFFIX);
+
                 await blob.UploadFromStreamAsync(thumbStream);
 
                 //Create and upload small headshot
                 imgFactory.Reset();
-                thumbStream = CreateThumbnail(imgFactory,
-                    (int)(leftThumb * scale),
-                    (int)(topThumb * scale),
-                    (int)(widthThumb * scale),
+                thumbStream = CreateThumbnail(imgFactory,leftThumb, topThumb, widthThumb, screenWidth,
                     OkbConstants.AVATAR_WIDTH_SMALL);
 
                 blob = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SMALL_SUFFIX);

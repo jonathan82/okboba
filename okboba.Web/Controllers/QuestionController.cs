@@ -6,6 +6,7 @@ using okboba.Repository.Models;
 using okboba.Repository.WebClient;
 using okboba.Resources;
 using okboba.Web.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +41,10 @@ namespace okboba.Controllers
         }
 
         // GET: Question
-        public ActionResult Index(string userId, int page = 1)
+        public async Task<ActionResult> Index(string userId, int page = 1)
         {
+            var webClient = GetMatchApiClient();
+
             var vm = new QuestionIndexViewModel();
 
             var me = GetProfileId();
@@ -68,8 +71,9 @@ namespace okboba.Controllers
                 vm.Profile = _profileRepo.GetProfile(id);
                 vm.CompareProfile = _profileRepo.GetProfile(me);
 
-                //Get my own questions for comparison - just need to get the answers from the match API cache
-                vm.CompareQuestions = _quesRepo.GetAnswers(me);
+                //Get my own questions for comparison - just need to get the answers from the match API cache                
+                //vm.CompareQuestions = _quesRepo.GetAnswers(me);
+                vm.CompareQuestions = await webClient.GetIntersectionAsync(me, vm.ProfileId);
             }
 
             return vm.IsMe ? View("IndexMe", vm) : View(vm);
@@ -169,8 +173,10 @@ namespace okboba.Controllers
             if(IsOkToAddActivity(OkbConstants.ActivityCategories.AnsweredQuestion))
             {
                 //Get the question text
-                var ques = _quesRepo.GetQuestionText(input.QuestionId);
-                _feedRepo.AnsweredQuestionActivity(profileId, ques.Text);
+                var ques = _quesRepo.GetQuestion(input.QuestionId);
+                var choiceText = "";                
+                choiceText = ques.Choices[((int)answer.ChoiceIndex - 1) % ques.Choices.Count];               
+                _feedRepo.AnsweredQuestionActivity(profileId, ques.Text, choiceText);
                 UpdateActivityLastAdded(OkbConstants.ActivityCategories.AnsweredQuestion);
             }
 

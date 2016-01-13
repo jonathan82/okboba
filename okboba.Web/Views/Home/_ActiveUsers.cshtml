@@ -1,0 +1,9 @@
+﻿@model IList<okboba.Entities.Profile>
+@using okboba.Web.Helpers
+
+<div class="active-users-box">
+    @foreach (var profile in Model)
+    {
+        <div>@Html.Avatar(profile.GetFirstHeadshot(true), profile.Gender, profile.UserId, "active-avatar")</div>
+    }
+</div>

@@ -12,7 +12,7 @@
 <!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
 
-@Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
+@Html.Partial("~/Views/Photo/_UploadPhotoTemplate.cshtml")
 
 @Html.Partial("_QuestionTemplate")
 @Html.Partial("_AnswerTemplate")
@@ -69,17 +69,14 @@
     <!-- Question stats -->
     <div class="col-md-4">
         <div class="question-stats">
-            <p>You have answered XX of their XX questions.</p>
+            <p>You have answered <b>@Model.CompareQuestions.Count</b> of their <b>@Model.Questions.TotalItemCount</b> questions.</p>
             
-            <div class="progress">
-                <div class="progress-bar" style="width: 100%">5</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" style="width: 50%">5</div>
-            </div>
+            @Html.ProgressQuestions(Model.CompareQuestions.Count, Model.Questions.TotalItemCount)
 
-            <p>Answer More >></p>
-            <p>Submit Question Suggestion</p>
+            @Html.ProgressQuestions(Model.Questions.TotalItemCount, Model.Questions.TotalItemCount)
+
+            <p><a href="~/question#questionBox">Answer More >></a></p>
+            <p><a href="~/question">Submit Question Suggestion</a></p>
         </div>
     </div>
 

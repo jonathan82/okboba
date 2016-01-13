@@ -2,7 +2,7 @@
 @using okboba.Web.Helpers
 @using okboba.Resources
 
-<div id="carousel-matches" class="carousel slide" data-ride="carousel" data-interval="10000">
+<div id="carousel-matches" class="carousel slide" data-ride="carousel" data-interval="0">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#carousel-matches" data-slide-to="0" class="active"></li>
@@ -15,26 +15,26 @@
         @for (int i = 0; i < 3; i++)
         {
             <div class="item @(i==0 ? "active" : "")">
-                <div class="row-fluid">
+                @*<div class="row-fluid">*@
                     @for (int j = i * 4; j < Model.Count && j < (i * 4) + 4; j++)
                     {
                         var m = Model[j];
-                        <div class="col-md-3">
+                        <div class="carousel-match-card-wrapper">
                             <div class="carousel-match-card">
                                 @Html.Avatar(m.Photo, m.Gender, m.UserId, "carousel-match-avatar")
                                 <div class="carousel-info-wrapper">
-                                    <div>@m.MatchPercent</div>
-                                    <div>@i18n.Common_Match</div>
-                                    <div>@m.EnemyPercent</div>
-                                    <div>@i18n.Common_Enemy</div>
+                                    <div class="carousel-info-percent carousel-info-match">@m.MatchPercent%</div>
+                                    <div class="carousel-info-match">@i18n.Common_Match</div>
+                                    <hr />
+                                    <div class="carousel-info-percent carousel-info-enemy">@m.EnemyPercent%</div>
+                                    <div class="carousel-info-enemy">@i18n.Common_Enemy</div>
                                 </div>
-                                <div>
-                                    @m.Nickname
-                                </div>
+                                <div class="carousel-info-name">@m.Nickname</div>
+                                <div class="carousel-info-details">@m.Age &#x2022; @m.Location</div>
                             </div>
                         </div>
                     }
-                </div>
+                @*</div>*@
             </div>
         }
     </div>

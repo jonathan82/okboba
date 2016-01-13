@@ -61,11 +61,11 @@ namespace okboba.Web.Helpers
                     break;
                 case OkbConstants.ActivityCategories.AnsweredQuestion:
                     str +=  i18n.Feed_AnsweredQuestion + "<br />";
-                    str += "“" + act.Activity.What + "”";
+                    str += "“" + act.Activity.Field1 + "”";
                     break;
                 case OkbConstants.ActivityCategories.EditedProfileText:
                     str += i18n.Feed_EditedProfileText + "<br />";
-                    str += "“" + act.Activity.What + "”";
+                    str += "“" + act.Activity.Field1 + "”";
                     break;
                 case OkbConstants.ActivityCategories.UploadedPhoto:
                     str += i18n.Feed_UploadedPhoto;

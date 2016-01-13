@@ -1,0 +1,55 @@
+﻿@using okboba.Resources
+@*
+    This template is shared by the edit thumbnail module. The passed in
+    data context determines its function.
+
+    Data Context:
+    {
+        title: string
+        action: string - url where to submit form
+        buttonText: string - text of the submit button
+        src: string - url of the image to load (editthumbnail)
+        photo: string - filename of photo to edit (editthumbnail)
+        isUpload: bool
+    }
+*@
+<!-- Photo Upload Modal -->
+<script id="uploadPhotoTemplate" type="text/x-jsrender">
+    <div class="modal fade" id="uploadPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <form method="post" action="{{:action}}" enctype="multipart/form-data">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{:title}}</h4>
+                    </div>
+                    <div class="modal-body photo-modal-body">
+                        {{if isUpload}}
+                        <!-- The upload button -->
+                        <label class="photo-upload-label">
+                            <input type="file" name="upload" id="fileInput" value="" />
+                            <span class="glyphicon glyphicon-upload"></span>
+                        </label>
+                        {{/if}}
+
+                        <!-- The photo and thumbnail -->
+                        <div class="photo-upload-container" style="display:none;">
+                            <div class="photo-thumbnail-bounds"><div class="photo-thumbnail-selector"></div></div>
+                            <img src="{{:src ? src : ''}}" alt="Your Photo" class="photo-on-screen" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Cancel</button>
+                        <button type="submit" class="btn btn-primary ladda-button" data-style="expand-right" data-submit="modal" disabled><span class="ladda-label">{{:buttonText}}</span></button>
+                        <input type="hidden" id="topThumb" name="topThumb" value="" />
+                        <input type="hidden" id="leftThumb" name="leftThumb" value="" />
+                        <input type="hidden" id="widthThumb" name="widthThumb" value="" />
+                        <input type="hidden" id="photoScreenWidth" name="photoScreenWidth" value="" />
+                        <input type="hidden" id="photo" name="photo" value="{{:photo ? photo : ''}}" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</script>

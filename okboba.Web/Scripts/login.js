@@ -10,7 +10,7 @@
         loginUrl: '/account/login',
         returnUrl: '/home',
         loginFormSel: '#loginForm',
-        loginErrMsg: ''
+        loginErrMsg: 'generic err message'
     }
 
     //Validation options for login form
@@ -18,32 +18,35 @@
         rules: {
             Email: "required",
             Password: "required"
-        },
-        submitHandler: Submit
+        }
     }
 
-    //// Pivate Methods
-    function Success() {
-        //load return url
-        window.location.replace(configMap.returnUrl);
-    }
+    var validator;
 
-    function Submit(form) {
+    function Login(e) {
+        var form, loginButton;
 
-        //this will be set to the validator object
-        var validator = this;
+        form = $(configMap.loginFormSel);
+        loginButton = $(this);
 
-        validator.resetForm();
+        e.preventDefault();
 
-        //disable submit to prevent double submit
-        $(form).find('button[type="submit"]').prop("disabled", true);
+        if (!form.valid()) return false;
 
-        $.post(configMap.loginUrl, $(form).serialize(), Success)
-            .fail(function () {
-                //show login error - show a generic message on both username and password for security reasons
-                validator.showErrors({ "Password": configMap.loginErrMsg });
-                $(form).find('button[type="submit"]').prop("disabled", false);
-            });
+        loginButton.ladda().ladda('start');
+       
+        $.post(configMap.loginUrl, form.serialize()).done(function () {
+
+            //success
+            window.location.replace(configMap.returnUrl);
+
+        }).fail(function () {
+
+            //error - show a generic message on both username and password for security reasons
+            validator.showErrors({ "Password": configMap.loginErrMsg, "Email" : configMap.loginErrMsg });
+
+            loginButton.ladda().ladda('stop');
+        });
     }
 
     //// Plugin initialization (exposed thru jQuery)
@@ -54,14 +57,14 @@
 
         //reset form when modal is hidden
         this.on('hidden.bs.modal', function () {
-
+            
         });
 
-        //prevent default form submission since we're doing ajax submit
-        this.find(configMap.loginFormSel).submit(function (e) {
-            e.preventDefault();
-        })
-            .validate(opt);
+        //login handler
+        this.find('.login-button').click(Login);
+
+        //setup validation
+        validator = this.find('form').validate(opt);
     }
 
 })(jQuery);

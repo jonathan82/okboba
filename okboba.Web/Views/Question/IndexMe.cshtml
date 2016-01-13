@@ -12,7 +12,7 @@
 <!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
 
-@Html.Partial("~/Views/Photo/_PhotoUpload.cshtml")
+@Html.Partial("~/Views/Photo/_UploadPhotoTemplate.cshtml")
 
 @Html.Partial("_QuestionTemplate")
 @Html.Partial("_AnswerTemplate")
@@ -49,7 +49,7 @@
 
     <!-- Question stats -->
     <div class="col-md-4">
-        <div class="question-stats">
+        <div class="question-stats question-stats-me">
             <p>最高的匹配实现：</p>
             <div class="question-highest-match">@Model.HighestMatchPercent%</div>
             <p>

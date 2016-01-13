@@ -27,27 +27,22 @@ namespace okboba.Repository.WebClient
             _matchBaseAddress = baseAddress;
             _authCookie = cookie;
         }
+
+        /// <summary>
+        /// Gets the intersection of p1's answers with p2's answers and returns a dictionary
+        /// </summary>
+        public async Task<IDictionary<short,Answer>> GetIntersectionAsync(int p1, int p2)
+        {
+            var query = "/api/answer/getintersect?p1=" + p1 + "&p2=" + p2;
+            var result = await CallMatchApiAsync<IDictionary<short, Answer>>(query, false).ConfigureAwait(false);
+            return result;
+        }
         
         /// <summary>
         /// Makes a web service call to calculate the match score between two users.
         /// </summary>
         public async Task<MatchModel> CalculateMatchAsync(int otherProfileId)
-        {
-            //we call ConfigureAwait(false) here and other library async methods since we don't need to resume on the
-            //original context. We can't use async all the way through because Child Actions can't be asynchronous. 
-            //This function is used by the ProfileHeader action which calls Task.Result, which would deadlock if
-            //ConfigureAwait(false) wasn't used.
-            //
-            //From: https://msdn.microsoft.com/en-us/magazine/jj991977.aspx
-            //"The root cause of this deadlock is due to the way await handles contexts. By default, 
-            // when an incomplete Task is awaited, the current “context” is captured and used to resume the 
-            // method when the Task completes. This “context” is the current SynchronizationContext unless 
-            // it’s null, in which case it’s the current TaskScheduler. GUI and ASP.NET applications have a 
-            // SynchronizationContext that permits only one chunk of code to run at a time. When the await 
-            // completes, it attempts to execute the remainder of the async method within the captured context. 
-            // But that context already has a thread in it, which is (synchronously) waiting for the async 
-            // method to complete. They’re each waiting for the other, causing a deadlock."
-                        
+        {                        
             var result = await CallMatchApiAsync<MatchModel>("/api/matches/calculatematch?otherProfileId=" + otherProfileId, false).ConfigureAwait(false);
             return result;
         }        
@@ -55,8 +50,6 @@ namespace okboba.Repository.WebClient
         /// <summary>
         /// Makes a call to the Web API to calculate and save the user's matches in the cache
         /// </summary>
-        /// <param name="profileId"></param>
-        /// <returns></returns>
         public async Task CalculateAndSaveMatchesAsync(MatchCriteriaModel criteria)
         {
             var query = "/api/matches/calculateandsavematches?" + GetQueryString(criteria);
@@ -64,28 +57,8 @@ namespace okboba.Repository.WebClient
         }
 
         /// <summary>
-        /// Gets a list of recommended matches from the server
-        /// </summary>
-        public async Task<IList<MatchModel>> GetRecommendedAsync(MatchCriteriaModel criteria)
-        {
-            var query = "/api/matches/recommended?" + GetQueryString(criteria);
-            var matches = await CallMatchApiAsync<IList<MatchModel>>(query, false).ConfigureAwait(false);
-            return matches;
-        }
-
-        /// <summary>
-        /// Makes a web service call to retrieve a page of matches, and returns a List of MatchModels
-        /// </summary>
-        public async Task<IList<MatchModel>> GetMatchesAsync(MatchCriteriaModel criteria, int page = 1)
-        {
-            var matches = await CallMatchApiAsync<IList<MatchModel>>(FormatMatchQuery(page, criteria), false).ConfigureAwait(false);
-            return matches;
-        }
-
-        /// <summary>
         /// Makes a web service call to add/update the answer in the memory cache
         /// </summary>
-        /// <param name="answer"></param>
         public async Task AnswerAsync(Answer answer)
         {
             await CallMatchApiAsync<string>("/api/answer", true, answer).ConfigureAwait(false);
@@ -101,6 +74,9 @@ namespace okboba.Repository.WebClient
         ///     query - this is the query string used to make the request
         ///     post - flag which if set to true will make a POST request, otherwise uses GET
         ///     data - this is the data to send with the POST request.
+        ///     
+        /// Note: use ConfigureAwait(false) to prevent deadlock when called from synchronous methods.
+        /// Reference: https://msdn.microsoft.com/en-us/magazine/jj991977.aspx
         /// </summary>
         private async Task<T> CallMatchApiAsync<T>(string query, bool post, object data = null)
         {
@@ -147,12 +123,5 @@ namespace okboba.Repository.WebClient
             return String.Join("&", properties.ToArray());
         }
 
-        private string FormatMatchQuery(int page, MatchCriteriaModel criteria)
-        {
-            var str = "/api/matches?page=" + page;
-            str += "&Gender=" + criteria.Gender;
-            str += "&LocationId1=" + criteria.LocationId1;
-            return str;
-        }
     }
 }

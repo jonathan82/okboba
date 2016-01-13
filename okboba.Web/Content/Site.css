@@ -54,6 +54,9 @@
 /**********************
     Bootstrap Overrides
 ***********************/
+.modal-body {
+  background-color: #F7F2F7;
+}
 .container {
   border-radius: 6px;
 }
@@ -185,13 +188,10 @@ a.div-link {
   /*workaround to make clickable in IE */
 }
 .section-header {
-  font-size: 1.8em;
+  font-size: 1.6em;
   color: #D7CDD8;
   line-height: 1;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #D7CDD8;
   margin-bottom: 15px;
-  margin-top: 15px;
 }
 .truncate {
   white-space: nowrap;
@@ -556,11 +556,14 @@ a.div-link {
 .question-stats {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
   background-color: #FFF;
-  text-align: center;
   padding: 20px 10px;
-  font-size: 1.5em;
+  font-size: 1.2em;
   opacity: .87;
   color: #000;
+}
+.question-stats-me {
+  text-align: center;
+  font-size: 1.5em;
 }
 .question-answered-me > button {
   position: absolute;
@@ -1016,6 +1019,9 @@ a.div-link {
 .grid-item:hover {
   cursor: pointer;
 }
+.grid-item:hover .photo-edit-overlay {
+  display: block;
+}
 .photo-edit-overlay {
   position: absolute;
   bottom: 0;
@@ -1367,7 +1373,7 @@ img.emoji {
 ***********************************/
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 .carousel {
-  margin-bottom: 0;
+  margin-bottom: 25px;
   padding: 10px 40px 10px 40px;
   background-color: #cecece;
   border-radius: 8px;
@@ -1380,11 +1386,22 @@ img.emoji {
   background-image: none;
   text-align: center;
 }
+.carousel-indicators li {
+  border: 1px solid #eeeeee;
+}
+.carousel-indicators .active {
+  background-color: #eeeeee;
+}
 /*
     Match card styles
 */
+.carousel-match-card-wrapper {
+  width: 25%;
+  float: left;
+  padding-right: 10px;
+}
 .carousel-match-card {
-  padding: 5px;
+  padding: 6px;
   background-color: #FFF;
   position: relative;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
@@ -1392,9 +1409,28 @@ img.emoji {
 .carousel-match-avatar {
   width: 140px;
   height: 140px;
+  vertical-align: top;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 .carousel-info-wrapper {
   display: inline-block;
+}
+.carousel-info-percent {
+  font-size: 1.8em;
+  line-height: 1;
+}
+.carousel-info-match {
+  color: #FF0066;
+}
+.carousel-info-enemy {
+  color: #9b9b9b;
+}
+.carousel-info-name {
+  font-size: 1.2em;
+}
+.carousel-info-details {
+  color: #9b9b9b;
 }
 .home-question-box {
   height: 300px;
@@ -1403,11 +1439,9 @@ img.emoji {
 /****************************************
     Photo Upload
 ****************************************/
-.photo-upload-background {
-  background-color: lightgray;
+.photo-modal-body {
   text-align: center;
-  padding-top: 150px;
-  height: 500px;
+  min-height: 400px;
 }
 label.photo-upload-label input[type="file"] {
   position: fixed;
@@ -1416,6 +1450,7 @@ label.photo-upload-label input[type="file"] {
 .photo-upload-label {
   font-size: 500%;
   opacity: 0.8;
+  margin-top: 160px;
 }
 .photo-upload-label:hover {
   cursor: pointer;
@@ -1440,10 +1475,6 @@ label.photo-upload-label input[type="file"] {
 .photo-upload-container {
   display: inline-block;
   position: relative;
-}
-.photo-modal-bg {
-  background-color: #9b9b9b;
-  text-align: center;
 }
 #listThumbnails > div {
   float: left;

@@ -141,6 +141,18 @@
     <Compile Include="Migrations\201601022120326_AddProfileIdToUsers.Designer.cs">
       <DependentUpon>201601022120326_AddProfileIdToUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601121857488_Feed.cs" />
+    <Compile Include="Migrations\201601121857488_Feed.Designer.cs">
+      <DependentUpon>201601121857488_Feed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121953205_Login.cs" />
+    <Compile Include="Migrations\201601121953205_Login.Designer.cs">
+      <DependentUpon>201601121953205_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601121959002_Login2.cs" />
+    <Compile Include="Migrations\201601121959002_Login2.Designer.cs">
+      <DependentUpon>201601121959002_Login2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySqlConfiguration.cs" />
     <Compile Include="OkbDbContext.cs" />
@@ -194,6 +206,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201601022120326_AddProfileIdToUsers.resx">
       <DependentUpon>201601022120326_AddProfileIdToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121857488_Feed.resx">
+      <DependentUpon>201601121857488_Feed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121953205_Login.resx">
+      <DependentUpon>201601121953205_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601121959002_Login2.resx">
+      <DependentUpon>201601121959002_Login2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -470,10 +470,10 @@
     <Content Include="lib\react\react.js" />
     <Content Include="lib\react\react.min.js" />
     <Content Include="Scripts\messaging.js" />
+    <Content Include="Scripts\photomanager.js" />
     <Content Include="Scripts\photoswipe.js" />
     <Content Include="Scripts\photoupload.js" />
     <Content Include="Scripts\questionmanager.js" />
-    <Content Include="Scripts\questionsubmit.js" />
     <Content Include="Scripts\questionvalidation.js" />
     <Content Include="Scripts\register.js" />
     <Content Include="Scripts\utilities.js" />
@@ -511,7 +511,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Views\Profile\_ProfileDetailAndText.cshtml" />
-    <Content Include="Views\Photo\_PhotoUpload.cshtml" />
+    <Content Include="Views\Photo\_UploadPhotoTemplate.cshtml" />
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
     <Content Include="Views\Photo\_EditThumbnail.cshtml" />
@@ -549,6 +549,8 @@
     <Content Include="Views\Messages\_ConversationList.cshtml" />
     <Content Include="Views\Home\_MatchCarousel.cshtml" />
     <Content Include="Views\Messages\_ComposeTemplate.cshtml" />
+    <Content Include="Views\Home\_ActiveUsers.cshtml" />
+    <Content Include="Views\Photo\_EditThumbnailModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

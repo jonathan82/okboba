@@ -3,11 +3,9 @@
 /****************************************
     Photo Upload
 ****************************************/
-.photo-upload-background {
-    background-color: lightgray;
+.photo-modal-body {
     text-align: center;
-    padding-top: 150px;
-    height: 500px;
+    min-height: 400px;
 }
 
 //hide the file input button
@@ -20,7 +18,9 @@ label.photo-upload-label input[type="file"] {
 .photo-upload-label { 
     font-size: 500%;
     opacity: 0.8;
+    margin-top: 160px;
 }
+
 .photo-upload-label:hover {
     cursor: pointer;
     color: darkblue;
@@ -50,11 +50,6 @@ label.photo-upload-label input[type="file"] {
 .photo-upload-container { 
     display: inline-block;
     position:relative;
-}
-
-.photo-modal-bg {
-    background-color: @gray-light;
-    text-align: center;
 }
 
 #listThumbnails > div {

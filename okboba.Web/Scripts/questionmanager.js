@@ -1,4 +1,9 @@
-﻿var QuestionManager = (function () {
+﻿/*
+ *  Author : Jonathan Lin
+ *  Date   : 1/10/2016
+ *  Notes  : Contains functions for answering and updating questions
+ */
+var QuestionManager = (function () {
 
     ///////////////// Module vars ///////////////////
     var configMap = {
@@ -314,6 +319,23 @@
         $('.question-form').on('question:skip', function () {
             skip($(this));
         });
+
+        //var savedTop = $('.question-stats').offset().top;
+
+        ////setup question stat sticky box
+        //$(window).scroll(function () {
+        //    var divTop, scrollTop;
+        //    divTop = $('.question-stats').offset().top;
+        //    scrollTop = $(window).scrollTop();
+        //    if (scrollTop < savedTop) {
+        //        $('.question-stats').css('position', 'static');
+        //        return;
+        //    }
+        //    if (divTop - scrollTop != 100) {
+        //        //set div to new position
+        //        $('.question-stats').offset({top: scrollTop + 100})
+        //    }
+        //});
     }
 
     //////////////// Public API ///////////////////////

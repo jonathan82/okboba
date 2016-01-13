@@ -9,9 +9,7 @@
 
 @Html.Action("ListPhotos", new {userId = Model.UserId, isMe = Model.IsMe })
 
-@Html.Partial("_PhotoUpload")
-
-@Html.Partial("_EditThumbnail")
+@Html.Partial("_UploadPhotoTemplate")
 
 @Html.Partial("_Photoswipe")
 
@@ -19,17 +17,8 @@
 
     <script>
         $(function () {
-            //setup button handlers
-            $('[data-toggle="photoupload"]').photoUpload();
-            $('[data-toggle="editthumbnail"]').editthumbnail();
-            $('[data-toggle="deletephoto"').deletephoto();
-
-            //setup hover
-            $('.grid-item').hover(function () {
-                $(this).children('.photo-edit-overlay').slideToggle();
-            });
-
-            //setup photo gallery
+            //Setup Photo modules
+            PhotoManager.initModule();
             $('.photo-thumbnail-full').photoswipe();
 
             //messaging

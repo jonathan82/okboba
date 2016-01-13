@@ -32,15 +32,16 @@ namespace okboba.Repository.EntityRepository
             return str.Length > max ? str.Substring(0, max) : str;
         }
 
-        public void AnsweredQuestionActivity(int who, string what)
+        public void AnsweredQuestionActivity(int who, string quesText, string choiceText)
         {
             var db = new OkbDbContext();
             db.ActivityFeed.Add(new Activity
             {
                 Who = who,
                 CategoryId = (int)OkbConstants.ActivityCategories.AnsweredQuestion,
-                What = Truncate(what, OkbConstants.FEED_BLURB_SIZE),
-                When = DateTime.Now
+                Field1 = Truncate(quesText, OkbConstants.FEED_BLURB_SIZE),
+                Field2 = Truncate(choiceText, OkbConstants.FEED_BLURB_SIZE),
+                Timestamp = DateTime.Now
             });
             db.SaveChanges();
         }
@@ -52,8 +53,8 @@ namespace okboba.Repository.EntityRepository
             {
                 Who = who,
                 CategoryId = (int)OkbConstants.ActivityCategories.EditedProfileText,
-                What = Truncate(what, OkbConstants.FEED_BLURB_SIZE),
-                When = DateTime.Now
+                Field1 = Truncate(what, OkbConstants.FEED_BLURB_SIZE),
+                Timestamp = DateTime.Now
             };
 
             db.ActivityFeed.Add(act);
@@ -69,7 +70,7 @@ namespace okboba.Repository.EntityRepository
                          join profile in db.Profiles.AsNoTracking()
                          on activity.Who equals profile.Id
                          where profile.Gender == gender
-                         orderby activity.When descending
+                         orderby activity.Timestamp descending
                          select new ActivityModel
                          {
                              Activity = activity,
@@ -93,8 +94,8 @@ namespace okboba.Repository.EntityRepository
             {
                 Who = who,
                 CategoryId = (int)OkbConstants.ActivityCategories.Joined,
-                What = "",
-                When = DateTime.Now
+                Field1 = "",
+                Timestamp = DateTime.Now
             });
             db.SaveChanges();
         }
@@ -106,10 +107,23 @@ namespace okboba.Repository.EntityRepository
             {
                 Who = who,
                 CategoryId = (int)OkbConstants.ActivityCategories.UploadedPhoto,
-                What = what,
-                When = DateTime.Now
+                Field1 = what,
+                Timestamp = DateTime.Now
             });
             db.SaveChanges();
+        }
+
+        public IList<Profile> GetActiveUsers()
+        {
+            var db = new OkbDbContext();
+            var loginThreshold = DateTime.Now.AddHours(-OkbConstants.ACTIVE_USER_INTERVAL);
+            var query = from user in db.Users
+                        where user.LastLoginDate > loginThreshold
+                        join profile in db.Profiles.AsNoTracking() on user.ProfileId equals profile.Id
+                        orderby user.LastLoginDate descending
+                        select profile;
+
+            return query.ToList();
         }
     }
 }

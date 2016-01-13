@@ -25,8 +25,13 @@ namespace okboba.Entities
         public int Id { get; set; }        
         public int CategoryId { get; set; }
         public int Who { get; set; }
+
         [StringLength(OkbConstants.FEED_BLURB_SIZE)]
-        public string What { get; set; }
-        public DateTime When { get; set; }
+        public string Field1 { get; set; }
+
+        [StringLength(OkbConstants.FEED_BLURB_SIZE)]
+        public string Field2 { get; set; }
+
+        public DateTime Timestamp { get; set; }
     }
 }

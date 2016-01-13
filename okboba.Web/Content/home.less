@@ -73,7 +73,7 @@
 ***********************************/
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 .carousel {
-    margin-bottom: 0;
+    margin-bottom: 25px;
 	padding: 10px 40px 10px 40px;
     background-color: lighten(@gray-light, 20%);
     border-radius: 8px;
@@ -89,11 +89,25 @@
     text-align: center;
 }
 
+.carousel-indicators li {
+    border: 1px solid @gray-lighter;
+}
+
+.carousel-indicators .active {
+    background-color: @gray-lighter;
+}
+
 /*
     Match card styles
 */
+.carousel-match-card-wrapper {
+    width: 25%;   
+    float: left;
+    padding-right: 10px; 
+}
+
 .carousel-match-card {
-    padding: 5px;
+    padding: 6px;
     background-color: #FFF;
     position: relative;
     .shadow-z-1;
@@ -102,10 +116,34 @@
 .carousel-match-avatar {
     width: 140px;
     height: 140px;
+    vertical-align: top;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 .carousel-info-wrapper {
     display: inline-block;
+}
+
+.carousel-info-percent {
+    font-size: 1.8em;
+    line-height: 1;
+}
+
+.carousel-info-match {
+    color: @match-color;
+}
+
+.carousel-info-enemy {
+    color: @gray-light;
+}
+
+.carousel-info-name{
+    font-size: 1.2em;
+}
+
+.carousel-info-details {
+    color: @gray-light;
 }
 
 .home-question-box {

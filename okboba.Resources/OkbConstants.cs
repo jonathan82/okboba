@@ -28,7 +28,8 @@
         public const int ACTIVITY_UPLOADEDPHOTO_INTERVAL = 5; // interval between photo uploads in minutes
         public const int ACTIVITY_EDITEDPROFILE_INTERVAL = 5; // interval between profile edits in minutes
         public const int ACTIVITY_ANSWEREDQUESTION_INTERVAL = 5; // interval between answering questions in minutes
-        public const int NUM_ACTIVITIES_TO_SHOW = 20; //# of activities to show on the Home page
+        public const int NUM_ACTIVITIES_TO_SHOW = 15; //# of activities to show on the Home page
+        public const int ACTIVE_USER_INTERVAL = 168; //timeframe used for a user to be considered active in hours
 
         //Photo
         public const int MAX_PHOTO_SIZE = 4000000; //MB

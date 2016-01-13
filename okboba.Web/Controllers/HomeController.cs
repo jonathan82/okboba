@@ -59,6 +59,14 @@ namespace okboba.Controllers
             return PartialView("_ActivityFeed",vm);
         }
 
+        [ChildActionOnly]
+        public ActionResult ActiveUsers()
+        {
+            var activeUsers = _activityRepo.GetActiveUsers();
+
+            return PartialView("_ActiveUsers", activeUsers);
+        }
+
         public ActionResult Index()
         {
             return View();

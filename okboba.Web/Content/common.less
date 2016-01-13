@@ -84,9 +84,8 @@
     Bootstrap Overrides
 ***********************/
 
-.modal-open {
-    //prevent scrollbar from disappearing when modal is open
-    //overflow: scroll;
+.modal-body {
+    background-color: @bg-color;
 }
 
 .container {
@@ -253,13 +252,11 @@ a.div-link {
 }
 
 .section-header {
-    font-size: 1.8em;
+    font-size: 1.6em;
     color: #D7CDD8;
+    //color: darken(@bg-color, 18%);
     line-height: 1;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #D7CDD8;
     margin-bottom: 15px;
-    margin-top: 15px;
 }
 
 .truncate {

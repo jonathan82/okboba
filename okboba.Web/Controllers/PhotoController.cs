@@ -65,7 +65,7 @@ namespace okboba.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb)
+        public async Task<ActionResult> Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb, int photoScreenWidth)
         {
             var me = GetProfileId();
             var userId = User.Identity.GetUserId();
@@ -85,7 +85,7 @@ namespace okboba.Controllers
             string photo = "";
             try
             {
-                photo = await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, me, userId);
+                photo = await _photoRepo.UploadAsync(upload.InputStream, leftThumb, topThumb, widthThumb, photoScreenWidth, me, userId);
             }
             catch (Exception ex)
             {

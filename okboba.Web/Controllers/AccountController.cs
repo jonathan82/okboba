@@ -102,6 +102,7 @@ namespace okboba.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    RememberLastLogin(model.Email);              
                     return Content("success");
 
                 case SignInStatus.Failure:
@@ -157,7 +158,8 @@ namespace okboba.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    JoinDate = DateTime.Now
+                    JoinDate = DateTime.Now,
+                    LastLoginDate = DateTime.Now
                 };
 
                 var profile = new Profile
@@ -216,6 +218,12 @@ namespace okboba.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private void RememberLastLogin(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+            user.LastLoginDate = DateTime.Now;
+            UserManager.Update(user);
+        }
         
         #endregion
     }

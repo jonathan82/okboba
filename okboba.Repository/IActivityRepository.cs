@@ -1,4 +1,5 @@
-﻿using okboba.Repository.Models;
+﻿using okboba.Entities;
+using okboba.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace okboba.Repository
         void EditProfileTextActivity(int who, string what);
         void UploadPhotoActivity(int who, string what);
         void JoinedActivity(int who);
-        void AnsweredQuestionActivity(int who, string what);
+        void AnsweredQuestionActivity(int who, string quesText, string choiceText);
         IEnumerable<ActivityModel> GetActivities(byte gender, int numOfActivities);
+        IList<Profile> GetActiveUsers();
     }
 }

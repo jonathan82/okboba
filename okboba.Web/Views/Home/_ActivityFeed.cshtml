@@ -29,7 +29,7 @@
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_EditedProfileText</p>
-                <div class="activity-profiletext">@activity.Activity.What</div>
+                <div class="activity-profiletext">@activity.Activity.Field1</div>
             </div>
             <a href="/profile/@activity.Profile.UserId" class="div-link"></a>
         </div>
@@ -43,7 +43,7 @@
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_UploadedPhoto</p>
-                <img src="@Html.PhotoUrl(activity.Activity.What, activity.Profile.UserId)" alt="@activity.Profile.Nickname" class="activity-thumbnail" />
+                <img src="@Html.PhotoUrl(activity.Activity.Field1, activity.Profile.UserId)" alt="@activity.Profile.Nickname" class="activity-thumbnail" />
             </div>
             <a href="/photo/@activity.Profile.UserId" class="div-link"></a>
         </div>
@@ -57,7 +57,12 @@
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_AnsweredQuestion</p>
-                <div class="activity-question">@activity.Activity.What</div>
+                <div class="activity-question">
+                    @activity.Activity.Field1
+                    <ul>
+                        <li>@activity.Activity.Field2</li>
+                    </ul>
+                </div>
             </div>
             <a href="/question/@activity.Profile.UserId" class="div-link"></a>
         </div>

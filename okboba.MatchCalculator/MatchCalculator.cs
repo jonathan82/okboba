@@ -259,5 +259,17 @@ namespace okboba.MatchCalculator
         {
             return _answerCache[profileId];
         }
+
+        /// <summary>
+        /// Turns the bit array into a byte representing the set bit
+        /// </summary>
+        public byte ChoiceIndex(int bits)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                if ((1 << i & bits) != 0) return (byte)(i + 1);
+            }
+            return 0;
+        }
     }
 }

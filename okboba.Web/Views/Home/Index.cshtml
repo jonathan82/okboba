@@ -2,27 +2,36 @@
     ViewBag.Title = "Home Page";
 }
 
+<!-- Recommended Matches Carousel -->
 <div class="section-header">Your Recommended Matches</div>
 
 @Html.Action("RecommendedMatches")
 
 <div class="row">
     <div class="col-md-7">
+
+        <!-- Activity Feed -->
         <div class="section-header">What's Going On</div>
         @Html.Action("ActivityFeed")
+
     </div>
+
     <div class="col-md-1"></div>
-    <div class="col-md-4">        
+
+    <div class="col-md-4">
+
+        <!-- Active Users -->
+        <div class="section-header">Active Users</div>
+        @Html.Action("ActiveUsers")
+
+        <!-- Question Box -->
         <div class="home-question-box">
             this is a box where user can answer questions
         </div>
-        <div class="section-header">Online Users</div>
-        <div>
-            this is a box showing all the online users
-        </div>
+
     </div>
 </div>
 
 @section Scripts {
-    
+
 }
