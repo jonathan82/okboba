@@ -14,7 +14,7 @@ using okboba.Repository.WebClient;
 using System.Threading.Tasks;
 using okboba.Resources;
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
 
     [Authorize]
@@ -23,6 +23,7 @@ namespace okboba.Controllers
         private IProfileRepository _profileRepo;
         private ILocationRepository _locationRepo;
         private IActivityRepository _feedRepo;
+        private IFavoriteRepository _favRepo;
         private MatchApiClient _webClient;
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -36,6 +37,7 @@ namespace okboba.Controllers
             _profileRepo = EntityProfileRepository.Instance;
             _locationRepo = EntityLocationRepository.Instance;
             _feedRepo = EntityActivityRepository.Instance;
+            _favRepo = EntityFavoriteRepository.Instance;
         }
 
         [ChildActionOnly]
@@ -63,6 +65,8 @@ namespace okboba.Controllers
         [ChildActionOnly]
         public ActionResult ProfileHeader(int profileId, bool isMe, string section)
         {
+            var me = GetProfileId();
+
             // Get profile info
             var profile = _profileRepo.GetProfile(profileId);
 
@@ -77,6 +81,12 @@ namespace okboba.Controllers
                 Location = _locationRepo.GetLocationString(profile.LocationId1, profile.LocationId2),
                 Section = section
             };
+
+            if (!isMe)
+            {
+                //see if this user was favorited
+                vm.IsFavorite = _favRepo.IsFavorite(me, profileId);
+            }
 
             return PartialView("_ProfileHeader", vm);
         }

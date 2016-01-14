@@ -112,6 +112,7 @@ body {
 .container-anon {
   background-color: #F7F2F7;
   padding: 30px 40px;
+  min-height: 400px;
 }
 .splash-buffer {
   position: relative;
@@ -270,99 +271,6 @@ a.div-link {
   right: 10px;
   min-width: 12px;
 }
-.profile-header-photo {
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
-  display: inline-block;
-  margin-right: 15px;
-  position: relative;
-}
-.profile-header-addphoto {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-.profile-text {
-  min-height: 100px;
-  position: relative;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
-  font-size: 1.2em;
-  opacity: .87;
-  color: #000;
-}
-.profile-text-edit {
-  width: 100%;
-  min-height: 200px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-.profile-thumbnail {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 200px;
-  margin: 15px;
-}
-.profile-thumbnail-blurb {
-  padding: 10px;
-  opacity: .54;
-  color: #000;
-}
-/*****************************************
-
-    Profile Detail Styles
-
-******************************************/
-.profile-detail-category {
-  color: #880E4F;
-  font-size: 1.2em;
-  text-align: center;
-  margin-bottom: 5px;
-}
-.profile-detail-row {
-  color: #9b9b9b;
-  position: relative;
-}
-.profile-detail-overlay {
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 100%;
-  color: #D81B60;
-}
-.profile-detail-overlay:empty::after {
-  content: '--';
-}
-.profile-detail {
-  color: #D81B60;
-}
-.profile-detail:empty::after {
-  content: '--';
-}
-.profile-details {
-  background-color: #FCE4EC;
-  padding: 6px 10px 8px;
-  position: relative;
-  margin-bottom: 10px;
-}
-.profile-details-me {
-  background-color: #FCE4EC;
-  padding: 6px 10px 8px;
-  position: relative;
-  margin-bottom: 10px;
-}
-.profile-details-me:hover {
-  cursor: pointer;
-  background-color: #fef2f6;
-}
-.pd-form-inline .form-group {
-  margin-left: 0;
-  margin-right: 0;
-}
 /***********************************
 
     Profile Header styles
@@ -429,6 +337,52 @@ a.div-link {
   top: -4px;
   position: relative;
 }
+/***********************************
+
+    Profile Headshots styles
+
+************************************/
+.profile-avatar {
+  width: 180px;
+  height: 180px;
+}
+.profile-header-photo {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  display: inline-block;
+  margin-right: 15px;
+  position: relative;
+}
+.profile-header-addphoto {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+/*****************************************
+
+    Profile Text Styles
+
+******************************************/
+.profile-text {
+  min-height: 100px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
+  font-size: 1.2em;
+  opacity: .87;
+  color: #000;
+}
+.profile-text-edit {
+  width: 100%;
+  min-height: 200px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
 .profile-text-question {
   font-size: 1.7em;
   color: #880E4F;
@@ -438,48 +392,63 @@ a.div-link {
   font-size: 1.2em;
   font-family: SimSun;
 }
+/*****************************************
+
+    Profile Detail Styles
+
+******************************************/
 .profile-detail-editicon {
   position: absolute;
   top: 10px;
   right: 10px;
   opacity: 0.7;
 }
-.profile-avatar {
-  width: 180px;
-  height: 180px;
+.profile-detail-category {
+  color: #880E4F;
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 5px;
 }
-/*
-    Edit Profile Detail Sytles
-*/
-/*.pd-modal-row {
-
+.profile-detail-row {
+  color: #9b9b9b;
+  position: relative;
 }
-
-.pd-modal-label {
-    text-align: right;
-    width: 70px;
-    font-weight: normal;
+.profile-detail-overlay {
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  color: #D81B60;
 }
-
-.pd-modal-select {
-
+.profile-detail-overlay:empty::after {
+  content: '--';
 }
-
-.pd-modal-section-header {
-    border-bottom: 1px solid darken(@primary-color-1,10%);
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    color: @primary-color-3;
+.profile-detail {
+  color: #D81B60;
 }
-
-.pd-modal-form .form-group-sm {
-    margin-bottom: 8px;
+.profile-detail:empty::after {
+  content: '--';
 }
-
-.pd-modal-form select.form-control {
-    height: 25px;
-}*/
+.profile-details {
+  background-color: #FCE4EC;
+  padding: 6px 10px 8px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.profile-details-me {
+  background-color: #FCE4EC;
+  padding: 6px 10px 8px;
+  position: relative;
+  margin-bottom: 10px;
+}
+.profile-details-me:hover {
+  cursor: pointer;
+  background-color: #fef2f6;
+}
+.pd-form-inline .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
 .matches-container {
   text-align: center;
 }
@@ -1532,3 +1501,6 @@ footer a:hover {
 footer a:active {
     color: #FFF;
 }*/
+.is-favorited {
+  color: #FFC107 !important;
+}

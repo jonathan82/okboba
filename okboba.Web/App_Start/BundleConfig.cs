@@ -47,7 +47,8 @@ namespace okboba
                 "~/Scripts/chatmanager.js",
                 "~/Scripts/login.js",
                 "~/Scripts/register.js",
-                "~/Scripts/messaging.js"));
+                "~/Scripts/messaging.js",
+                "~/Scripts/favorite.js"));
 
             bundles.Add(new StyleBundle("~/bundles/css/all").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

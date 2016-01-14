@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 //     View conversation and reply 
 //     
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     [Authorize]
     public class MessagesController : OkbBaseController

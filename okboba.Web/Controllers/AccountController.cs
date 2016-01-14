@@ -19,7 +19,7 @@ using okboba.Resources;
 
 //some comments
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     [Authorize]
     public class AccountController : OkbBaseController
@@ -67,7 +67,7 @@ namespace okboba.Controllers
             if (user != null)
             {
                 //email already taken
-                return Json(i18n.Register_EmailTaken, JsonRequestBehavior.AllowGet);
+                return Json(i18n.Error_EmailTaken, JsonRequestBehavior.AllowGet);
             }
 
             //email OK

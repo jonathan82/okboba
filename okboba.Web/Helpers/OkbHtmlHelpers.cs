@@ -150,7 +150,7 @@ namespace okboba.Web.Helpers
             {
                 //use placeholder text
                 qDiv.AddCssClass("profile-text-placeholder");
-                qDiv.InnerHtml = isMe ? i18n.Profile_Text_Prompt : i18n.Profile_Text_None;
+                qDiv.InnerHtml = isMe ? i18n.Profile_Question_Placeholder : i18n.Profile_Question_Empty;
                 //var span = new TagBuilder("span");
                 //span.AddCssClass("profile-text-placeholder");
                 //span.InnerHtml = isMe ? i18n.Profile_Text_Prompt : i18n.Profile_Text_None;

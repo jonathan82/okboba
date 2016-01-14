@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Web", "okboba.Web\okboba.Web.csproj", "{E94F965A-3C50-443E-913F-40692BBDCA52}"
 EndProject
@@ -25,6 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "okboba.Instant", "okboba.In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Requirements", "Requirements", "{97DDAABB-1039-428A-8505-3B0306502602}"
 	ProjectSection(SolutionItems) = preProject
+		Requirements\Localization.txt = Requirements\Localization.txt
 		Requirements\Profile Page.txt = Requirements\Profile Page.txt
 	EndProjectSection
 EndProject

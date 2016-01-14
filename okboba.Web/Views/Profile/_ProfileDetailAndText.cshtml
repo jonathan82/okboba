@@ -61,51 +61,51 @@
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
             <div class="profile-detail-category">
-                @i18n.ProfileDetail_Section_Basic
+                @i18n.Detail_Section_Basic
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_LookingFor <b>:</b>
+                @i18n.Detail_Label_LookingFor <b>:</b>
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_LOOKINGFOR, Model.ProfileDetail.LookingFor))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Height:
+                @i18n.Detail_Label_Height:
                 <div class="profile-detail-overlay">@(Model.ProfileDetail.Height == 0 ? "--" : Model.ProfileDetail.Height + " CM")</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Education <b>:</b>
+                @i18n.Detail_Label_Education <b>:</b>
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_EDUCATION, Model.ProfileDetail.Education))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_RelationshipStatus:
+                @i18n.Detail_Label_RelationshipStatus:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_RELATIONSHIPSTATUS, Model.ProfileDetail.RelationshipStatus))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_HaveChildren:
+                @i18n.Detail_Label_HaveChildren:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_HAVECHILDREN, Model.ProfileDetail.HaveChildren))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_WantChildren:
+                @i18n.Detail_Label_WantChildren:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_WANTCHILDREN, Model.ProfileDetail.WantChildren))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Nationality:
+                @i18n.Detail_Label_Nationality:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_NATIONALITY, Model.ProfileDetail.Nationality))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_MonthlyIncome:
+                @i18n.Detail_Label_MonthlyIncome:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_MONTHLYINCOME, Model.ProfileDetail.MonthlyIncome))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_LivingSituation:
+                @i18n.Detail_Label_LivingSituation:
                 @Html.DetailValue(Model.GetOptionValue(OkbConstants.DETAIL_LIVINGSITUATION, Model.ProfileDetail.LivingSituation))
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_CarSituation:
+                @i18n.Detail_Label_CarSituation:
                 @*<span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_CARSITUATION, Model.ProfileDetail.CarSituation)</span>*@
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_CARSITUATION, Model.ProfileDetail.CarSituation)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_EconomicConcept:
+                @i18n.Detail_Label_EconomicConcept:
                 <span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_ECONOMICCONCEPT, Model.ProfileDetail.EconomicConcept)</span>
             </div>
         </div>
@@ -117,54 +117,54 @@
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
             <div class="profile-detail-category">
-                @i18n.ProfileDetail_Section_Lifestyle
+                @i18n.Detail_Section_Lifestyle
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Smoke:
+                @i18n.Detail_Label_Smoke:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_SMOKE, Model.ProfileDetail.Smoke)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Drink:
+                @i18n.Detail_Label_Drink:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_DRINK, Model.ProfileDetail.Drink)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Exercise:
+                @i18n.Detail_Label_Exercise:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_EXERCISE, Model.ProfileDetail.Exercise)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Eating:
+                @i18n.Detail_Label_Eating:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_EATING, Model.ProfileDetail.Eating)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Shopping:
+                @i18n.Detail_Label_Shopping:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_SHOPPING, Model.ProfileDetail.Shopping)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Religion:
+                @i18n.Detail_Label_Religion:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_RELIGION, Model.ProfileDetail.Religion)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_SleepSchedule:
+                @i18n.Detail_Label_SleepSchedule:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_SLEEPSCHEDULE, Model.ProfileDetail.SleepSchedule)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_SocialCircle:
+                @i18n.Detail_Label_SocialCircle:
                 <span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_SOCIALCIRCLE, Model.ProfileDetail.SocialCircle)</span>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_MostMoney:
+                @i18n.Detail_Label_MostMoney:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_MOSTMONEY, Model.ProfileDetail.MostMoney)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Housework:
+                @i18n.Detail_Label_Housework:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_HOUSEWORK, Model.ProfileDetail.Housework)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_LovePets:
+                @i18n.Detail_Label_LovePets:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_LOVEPETS, Model.ProfileDetail.LovePets)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_HavePets:
+                @i18n.Detail_Label_HavePets:
                 <span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_HAVEPETS, Model.ProfileDetail.HavePets)</span>
             </div>
         </div>
@@ -176,23 +176,23 @@
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
             <div class="profile-detail-category">
-                @i18n.ProfileDetail_Section_Job
+                @i18n.Detail_Section_Job
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Job:
+                @i18n.Detail_Label_Job:
                 @*<span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_JOB, Model.ProfileDetail.Job)</span>*@
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_JOB, Model.ProfileDetail.Job)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Industry:
+                @i18n.Detail_Label_Industry:
                 <span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_INDUSTRY, Model.ProfileDetail.Industry)</span>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_WorkHours:
+                @i18n.Detail_Label_WorkHours:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_WORKHOURS, Model.ProfileDetail.WorkHours)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_CareerAndFamily:
+                @i18n.Detail_Label_CareerAndFamily:
                 @*<span class="profile-detail">@Model.GetOptionValue(OkbConstants.DETAIL_CAREERANDFAMILY, Model.ProfileDetail.CareerAndFamily)</span>*@
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_CAREERANDFAMILY, Model.ProfileDetail.CareerAndFamily)</div>
             </div>
@@ -205,25 +205,25 @@
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
             <div class="profile-detail-category">
-                @i18n.ProfileDetail_Section_Appearance
+                @i18n.Detail_Section_Appearance
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_BodyType:
+                @i18n.Detail_Label_BodyType:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_BODYTYPE, Model.ProfileDetail.BodyType)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_FaceType:
+                @i18n.Detail_Label_FaceType:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_FACETYPE, Model.ProfileDetail.FaceType)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Eye:
+                @i18n.Detail_Label_Eye:
                 <div class="profile-detail-overlay">
                     @Model.GetOptionValue(OkbConstants.DETAIL_EYECOLOR, Model.ProfileDetail.EyeColor),
                     @Model.GetOptionValue(OkbConstants.DETAIL_EYESHAPE, Model.ProfileDetail.EyeShape)
                 </div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Hair:
+                @i18n.Detail_Label_Hair:
                 <div class="profile-detail-overlay">
                     @Model.GetOptionValue(OkbConstants.DETAIL_HAIRCOLOR, Model.ProfileDetail.HairColor),
                     @Model.GetOptionValue(OkbConstants.DETAIL_HAIRTYPE, Model.ProfileDetail.HairType),
@@ -231,19 +231,19 @@
                 </div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_SkinType:
+                @i18n.Detail_Label_SkinType:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_SKINTYPE, Model.ProfileDetail.SkinType)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Muscle:
+                @i18n.Detail_Label_Muscle:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_MUSCLE, Model.ProfileDetail.Muscle)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_HealthCondition:
+                @i18n.Detail_Label_HealthCondition:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_HEALTHCONDITION, Model.ProfileDetail.HealthCondition)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_DressStyle:
+                @i18n.Detail_Label_DressStyle:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_DRESSSTYLE, Model.ProfileDetail.DressStyle)</div>
             </div>
         </div>
@@ -255,22 +255,22 @@
                 <div class="profile-detail-editicon"><span class="glyphicon glyphicon-pencil"></span></div>
             }
             <div class="profile-detail-category">
-                @i18n.ProfileDetail_Section_Personality
+                @i18n.Detail_Section_Personality
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Sociability:
+                @i18n.Detail_Label_Sociability:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_SOCIABILITY, Model.ProfileDetail.Sociability)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Humour:
+                @i18n.Detail_Label_Humour:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_HUMOUR, Model.ProfileDetail.Humour)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Temper:
+                @i18n.Detail_Label_Temper:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_TEMPER, Model.ProfileDetail.Temper)</div>
             </div>
             <div class="profile-detail-row">
-                @i18n.ProfileDetail_Feelings:
+                @i18n.Detail_Label_Feelings:
                 <div class="profile-detail-overlay">@Model.GetOptionValue(OkbConstants.DETAIL_FEELINGS, Model.ProfileDetail.Feelings)</div>
             </div>
 

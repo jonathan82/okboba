@@ -8,7 +8,7 @@ using PagedList;
 using okboba.Repository.Models;
 using okboba.Repository.EntityRepository;
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     public class AdminController : OkbBaseController
     {

@@ -30,6 +30,7 @@ namespace okboba.Repository.WebClient
 
         /// <summary>
         /// Gets the intersection of p1's answers with p2's answers and returns a dictionary
+        /// of p1's answers.
         /// </summary>
         public async Task<IDictionary<short,Answer>> GetIntersectionAsync(int p1, int p2)
         {

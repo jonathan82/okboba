@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using okboba;
 using okboba.Controllers;
+using okboba.Web.Controllers;
 
 namespace okboba.Tests.Controllers
 {

@@ -12,7 +12,7 @@ using okboba.Resources;
 using okboba.Repository.RedisRepository;
 using okboba.Repository.EntityRepository;
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     public class OkbBaseController : Controller
     {

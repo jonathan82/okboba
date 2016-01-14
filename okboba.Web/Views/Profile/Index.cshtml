@@ -17,9 +17,10 @@
 
     <script>
         $(function () {
-            //document ready
+            //Profile text edit
             $('.js-editinplace-editicon').editinplace();
-            $('[data-toggle="photoupload"]').photoUpload();
+
+            //Profile detail modals
             $('#detailBasicSection.profile-details-me').click(function () {
                 $('#detailBasicModal').modal('show');
             });
@@ -38,6 +39,12 @@
 
             //messaging
             messaging.initModule();
+
+            //photos
+            PhotoManager.initModule();
+
+            //favorites
+            $('[data-toggle="favorite"]').favorite();
         });        
     </script>
 }

@@ -39,7 +39,7 @@
 
             <!-- Nickname -->
             <div class="form-group">
-                <label for="Nickname" class="col-sm-3 control-label">@i18n.Register_Nickname:</label>
+                <label for="Nickname" class="col-sm-3 control-label">@i18n.Account_Nickname:</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
@@ -49,7 +49,7 @@
 
             <!-- Birthdate -->
             <div class="form-group">
-                <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Register_Birthdate:</label>
+                <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Account_Birthdate:</label>
                 <div class="col-sm-9">
                     <input type="text" name="BirthdateText" value="" class="form-control" id="BirthdateText" required readonly />
                     <input type="hidden" name="Birthdate" value="" id="Birthdate" />
@@ -58,7 +58,7 @@
 
             <!-- City -->
             <div class="form-group">
-                <label for="locationText" class="col-sm-3 control-label">@i18n.Register_Location:</label>
+                <label for="locationText" class="col-sm-3 control-label">@i18n.Account_Location:</label>
                 <div class="col-sm-9">
                     <input id="locationText" type="text" name="locationText" value="" class="form-control" required readonly />
                     <input type="hidden" name="locationId1" value="" id="locationId1" />

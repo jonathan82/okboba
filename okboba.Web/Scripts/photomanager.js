@@ -1,8 +1,10 @@
 ﻿/*
  *  Author : Jonathan Lin
  *  Date   : 1/12/2016
- *  Notes  : Contains functions for editing thumbnail, deleting photos, and 
- *           re-arranging photos.
+ *  Notes  : Contains functions for editing thumbnail, deleting photos, uploading, and 
+ *           re-arranging photos. Uses FileReaderJS plugin.
+ * 
+ *           Probably should use imagesLoaded plugin for more robust code.
  */
 var PhotoManager = (function ($) {
 
@@ -129,13 +131,12 @@ var PhotoManager = (function ($) {
         if (!response) return;
 
         //Delete the photo
-        $.post(configMap.deletePhotoApi, { photo: photo }).done(function () {
-            //remove from DOM
-            thumb.remove();
-
-        }).fail(function () {
+        $.post(configMap.deletePhotoApi, { photo: photo }).fail(function () {
             alert('failed');
         });
+
+        //optimistically remove photo
+        thumb.remove();
     }
 
     function showEditThumbnail() {

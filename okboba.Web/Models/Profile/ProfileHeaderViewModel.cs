@@ -14,5 +14,6 @@ namespace okboba.Web.Models
         public bool IsMe { get; set; }
         public string Section { get; set; }
         public string Location { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }

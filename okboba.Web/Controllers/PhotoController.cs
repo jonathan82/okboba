@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     [Authorize]
     public class PhotoController : OkbBaseController

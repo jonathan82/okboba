@@ -10,32 +10,32 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">@i18n.ProfileDetail_Section_Job</h4>
+                <h4 class="modal-title" id="myModalLabel">@i18n.Detail_Section_Job</h4>
             </div>
 
             <div class="modal-body">
 
                 <!--------------------- Job ----------------------------->
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_JOB" class="col-sm-3 control-label">@i18n.ProfileDetail_Job:</label>
+                    <label for="@OkbConstants.DETAIL_JOB" class="col-sm-3 control-label">@i18n.Detail_Label_Job:</label>
                     <div class="col-sm-6">
                         @Html.DetailDropdown(OkbConstants.DETAIL_JOB, Model.GetOptions(OkbConstants.DETAIL_JOB), Model.ProfileDetail.Job)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_INDUSTRY" class="col-sm-3 control-label">@i18n.ProfileDetail_Industry:</label>
+                    <label for="@OkbConstants.DETAIL_INDUSTRY" class="col-sm-3 control-label">@i18n.Detail_Label_Industry:</label>
                     <div class="col-sm-7">
                         @Html.DetailDropdown(OkbConstants.DETAIL_INDUSTRY, Model.GetOptions(OkbConstants.DETAIL_INDUSTRY), Model.ProfileDetail.Industry)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_WORKHOURS" class="col-sm-3 control-label">@i18n.ProfileDetail_WorkHours:</label>
+                    <label for="@OkbConstants.DETAIL_WORKHOURS" class="col-sm-3 control-label">@i18n.Detail_Label_WorkHours:</label>
                     <div class="col-sm-6">
                         @Html.DetailDropdown(OkbConstants.DETAIL_WORKHOURS, Model.GetOptions(OkbConstants.DETAIL_WORKHOURS), Model.ProfileDetail.WorkHours)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_CAREERANDFAMILY" class="col-sm-3 control-label">@i18n.ProfileDetail_CareerAndFamily:</label>
+                    <label for="@OkbConstants.DETAIL_CAREERANDFAMILY" class="col-sm-3 control-label">@i18n.Detail_Label_CareerAndFamily:</label>
                     <div class="col-sm-6">
                         @Html.DetailDropdown(OkbConstants.DETAIL_CAREERANDFAMILY, Model.GetOptions(OkbConstants.DETAIL_CAREERANDFAMILY), Model.ProfileDetail.CareerAndFamily)
                     </div>
@@ -43,8 +43,8 @@
             </div> <!--End modal body-->
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Close</button>
-                <button type="submit" class="btn btn-primary">@i18n.Common_Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Button_Cancel</button>
+                <button type="submit" class="btn btn-primary">@i18n.Button_Save</button>
             </div>
 
         </form>

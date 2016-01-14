@@ -61,6 +61,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 生日.
+        /// </summary>
+        public static string Account_Birthdate {
+            get {
+                return ResourceManager.GetString("Account_Birthdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 电子邮件.
         /// </summary>
         public static string Account_Email {
@@ -70,11 +79,29 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 忘记你的密码？.
+        /// </summary>
+        public static string Account_ForgotPassword {
+            get {
+                return ResourceManager.GetString("Account_ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 城市.
+        /// </summary>
+        public static string Account_Location {
+            get {
+                return ResourceManager.GetString("Account_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 绰号.
         /// </summary>
-        public static string Account_Name {
+        public static string Account_Nickname {
             get {
-                return ResourceManager.GetString("Account_Name", resourceCulture);
+                return ResourceManager.GetString("Account_Nickname", resourceCulture);
             }
         }
         
@@ -88,92 +115,614 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 你的电子邮件.
+        /// </summary>
+        public static string Account_Placeholder_Email {
+            get {
+                return ResourceManager.GetString("Account_Placeholder_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你的密码.
+        /// </summary>
+        public static string Account_Placeholder_Password {
+            get {
+                return ResourceManager.GetString("Account_Placeholder_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我是.
+        /// </summary>
+        public static string Account_Register_IAm {
+            get {
+                return ResourceManager.GetString("Account_Register_IAm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我找.
+        /// </summary>
+        public static string Account_Register_LookingFor {
+            get {
+                return ResourceManager.GetString("Account_Register_LookingFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 加照片.
+        /// </summary>
+        public static string Button_AddPhoto {
+            get {
+                return ResourceManager.GetString("Button_AddPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 回答问题.
+        /// </summary>
+        public static string Button_AnswerQuestion {
+            get {
+                return ResourceManager.GetString("Button_AnswerQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 取消.
         /// </summary>
-        public static string Common_Cancel {
+        public static string Button_Cancel {
             get {
-                return ResourceManager.GetString("Common_Cancel", resourceCulture);
+                return ResourceManager.GetString("Button_Cancel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 关闭.
         /// </summary>
-        public static string Common_Close {
+        public static string Button_Close {
             get {
-                return ResourceManager.GetString("Common_Close", resourceCulture);
+                return ResourceManager.GetString("Button_Close", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 敌对.
+        ///   Looks up a localized string similar to 删除.
         /// </summary>
-        public static string Common_Enemy {
+        public static string Button_Delete {
             get {
-                return ResourceManager.GetString("Common_Enemy", resourceCulture);
+                return ResourceManager.GetString("Button_Delete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 女.
+        ///   Looks up a localized string similar to 编辑缩略图.
         /// </summary>
-        public static string Common_Female {
+        public static string Button_EditThumbnail {
             get {
-                return ResourceManager.GetString("Common_Female", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 朋友.
-        /// </summary>
-        public static string Common_Friend {
-            get {
-                return ResourceManager.GetString("Common_Friend", resourceCulture);
+                return ResourceManager.GetString("Button_EditThumbnail", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 登录.
         /// </summary>
-        public static string Common_Login {
+        public static string Button_Login {
             get {
-                return ResourceManager.GetString("Common_Login", resourceCulture);
+                return ResourceManager.GetString("Button_Login", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 男.
+        ///   Looks up a localized string similar to 下一个.
         /// </summary>
-        public static string Common_Male {
+        public static string Button_Next {
             get {
-                return ResourceManager.GetString("Common_Male", resourceCulture);
+                return ResourceManager.GetString("Button_Next", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 匹配.
+        ///   Looks up a localized string similar to 重新排列照片.
         /// </summary>
-        public static string Common_Match {
+        public static string Button_RearrangePhotos {
             get {
-                return ResourceManager.GetString("Common_Match", resourceCulture);
+                return ResourceManager.GetString("Button_RearrangePhotos", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 保存.
         /// </summary>
-        public static string Common_Save {
+        public static string Button_Save {
             get {
-                return ResourceManager.GetString("Common_Save", resourceCulture);
+                return ResourceManager.GetString("Button_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 跳过问题.
+        /// </summary>
+        public static string Button_SkipQuestion {
+            get {
+                return ResourceManager.GetString("Button_SkipQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 开始交谈.
+        /// </summary>
+        public static string Button_StartConversation {
+            get {
+                return ResourceManager.GetString("Button_StartConversation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 提交.
         /// </summary>
-        public static string Common_Submit {
+        public static string Button_Submit {
             get {
-                return ResourceManager.GetString("Common_Submit", resourceCulture);
+                return ResourceManager.GetString("Button_Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 变化回答.
+        /// </summary>
+        public static string Button_UpdateAnswer {
+            get {
+                return ResourceManager.GetString("Button_UpdateAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 体型.
+        /// </summary>
+        public static string Detail_Label_BodyType {
+            get {
+                return ResourceManager.GetString("Detail_Label_BodyType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 事业与家庭.
+        /// </summary>
+        public static string Detail_Label_CareerAndFamily {
+            get {
+                return ResourceManager.GetString("Detail_Label_CareerAndFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 购车情况.
+        /// </summary>
+        public static string Detail_Label_CarSituation {
+            get {
+                return ResourceManager.GetString("Detail_Label_CarSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 颜色.
+        /// </summary>
+        public static string Detail_Label_Color {
+            get {
+                return ResourceManager.GetString("Detail_Label_Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 穿着风格.
+        /// </summary>
+        public static string Detail_Label_DressStyle {
+            get {
+                return ResourceManager.GetString("Detail_Label_DressStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 饮酒.
+        /// </summary>
+        public static string Detail_Label_Drink {
+            get {
+                return ResourceManager.GetString("Detail_Label_Drink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 饮食习惯.
+        /// </summary>
+        public static string Detail_Label_Eating {
+            get {
+                return ResourceManager.GetString("Detail_Label_Eating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 经济观念.
+        /// </summary>
+        public static string Detail_Label_EconomicConcept {
+            get {
+                return ResourceManager.GetString("Detail_Label_EconomicConcept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 学历.
+        /// </summary>
+        public static string Detail_Label_Education {
+            get {
+                return ResourceManager.GetString("Detail_Label_Education", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 锻炼习惯.
+        /// </summary>
+        public static string Detail_Label_Exercise {
+            get {
+                return ResourceManager.GetString("Detail_Label_Exercise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 眼睛.
+        /// </summary>
+        public static string Detail_Label_Eye {
+            get {
+                return ResourceManager.GetString("Detail_Label_Eye", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 脸型.
+        /// </summary>
+        public static string Detail_Label_FaceType {
+            get {
+                return ResourceManager.GetString("Detail_Label_FaceType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 对待感情.
+        /// </summary>
+        public static string Detail_Label_Feelings {
+            get {
+                return ResourceManager.GetString("Detail_Label_Feelings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 头发.
+        /// </summary>
+        public static string Detail_Label_Hair {
+            get {
+                return ResourceManager.GetString("Detail_Label_Hair", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 有无子女.
+        /// </summary>
+        public static string Detail_Label_HaveChildren {
+            get {
+                return ResourceManager.GetString("Detail_Label_HaveChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 关于宠物.
+        /// </summary>
+        public static string Detail_Label_HavePets {
+            get {
+                return ResourceManager.GetString("Detail_Label_HavePets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 健康情况.
+        /// </summary>
+        public static string Detail_Label_HealthCondition {
+            get {
+                return ResourceManager.GetString("Detail_Label_HealthCondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 身高.
+        /// </summary>
+        public static string Detail_Label_Height {
+            get {
+                return ResourceManager.GetString("Detail_Label_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 家务水平等级.
+        /// </summary>
+        public static string Detail_Label_Housework {
+            get {
+                return ResourceManager.GetString("Detail_Label_Housework", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 幽默感.
+        /// </summary>
+        public static string Detail_Label_Humour {
+            get {
+                return ResourceManager.GetString("Detail_Label_Humour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 公司行业.
+        /// </summary>
+        public static string Detail_Label_Industry {
+            get {
+                return ResourceManager.GetString("Detail_Label_Industry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 职业职位.
+        /// </summary>
+        public static string Detail_Label_Job {
+            get {
+                return ResourceManager.GetString("Detail_Label_Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 长度.
+        /// </summary>
+        public static string Detail_Label_Length {
+            get {
+                return ResourceManager.GetString("Detail_Label_Length", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 居住情况.
+        /// </summary>
+        public static string Detail_Label_LivingSituation {
+            get {
+                return ResourceManager.GetString("Detail_Label_LivingSituation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 寻找.
+        /// </summary>
+        public static string Detail_Label_LookingFor {
+            get {
+                return ResourceManager.GetString("Detail_Label_LookingFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 宠物喜欢程度.
+        /// </summary>
+        public static string Detail_Label_LovePets {
+            get {
+                return ResourceManager.GetString("Detail_Label_LovePets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 月薪.
+        /// </summary>
+        public static string Detail_Label_MonthlyIncome {
+            get {
+                return ResourceManager.GetString("Detail_Label_MonthlyIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 最大消费.
+        /// </summary>
+        public static string Detail_Label_MostMoney {
+            get {
+                return ResourceManager.GetString("Detail_Label_MostMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 肌肉.
+        /// </summary>
+        public static string Detail_Label_Muscle {
+            get {
+                return ResourceManager.GetString("Detail_Label_Muscle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 民族.
+        /// </summary>
+        public static string Detail_Label_Nationality {
+            get {
+                return ResourceManager.GetString("Detail_Label_Nationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 婚姻状况.
+        /// </summary>
+        public static string Detail_Label_RelationshipStatus {
+            get {
+                return ResourceManager.GetString("Detail_Label_RelationshipStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 宗教信仰.
+        /// </summary>
+        public static string Detail_Label_Religion {
+            get {
+                return ResourceManager.GetString("Detail_Label_Religion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 形状.
+        /// </summary>
+        public static string Detail_Label_Shape {
+            get {
+                return ResourceManager.GetString("Detail_Label_Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 逛街购物.
+        /// </summary>
+        public static string Detail_Label_Shopping {
+            get {
+                return ResourceManager.GetString("Detail_Label_Shopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 皮肤.
+        /// </summary>
+        public static string Detail_Label_SkinType {
+            get {
+                return ResourceManager.GetString("Detail_Label_SkinType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 作息时间.
+        /// </summary>
+        public static string Detail_Label_SleepSchedule {
+            get {
+                return ResourceManager.GetString("Detail_Label_SleepSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 吸烟.
+        /// </summary>
+        public static string Detail_Label_Smoke {
+            get {
+                return ResourceManager.GetString("Detail_Label_Smoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 个性特征.
+        /// </summary>
+        public static string Detail_Label_Sociability {
+            get {
+                return ResourceManager.GetString("Detail_Label_Sociability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 交际圈子.
+        /// </summary>
+        public static string Detail_Label_SocialCircle {
+            get {
+                return ResourceManager.GetString("Detail_Label_SocialCircle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发型.
+        /// </summary>
+        public static string Detail_Label_Style {
+            get {
+                return ResourceManager.GetString("Detail_Label_Style", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 脾气.
+        /// </summary>
+        public static string Detail_Label_Temper {
+            get {
+                return ResourceManager.GetString("Detail_Label_Temper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 是否要小孩.
+        /// </summary>
+        public static string Detail_Label_WantChildren {
+            get {
+                return ResourceManager.GetString("Detail_Label_WantChildren", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工作状态.
+        /// </summary>
+        public static string Detail_Label_WorkHours {
+            get {
+                return ResourceManager.GetString("Detail_Label_WorkHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 外貌.
+        /// </summary>
+        public static string Detail_Section_Appearance {
+            get {
+                return ResourceManager.GetString("Detail_Section_Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我的信息.
+        /// </summary>
+        public static string Detail_Section_Basic {
+            get {
+                return ResourceManager.GetString("Detail_Section_Basic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 工作.
+        /// </summary>
+        public static string Detail_Section_Job {
+            get {
+                return ResourceManager.GetString("Detail_Section_Job", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 生活方式.
+        /// </summary>
+        public static string Detail_Section_Lifestyle {
+            get {
+                return ResourceManager.GetString("Detail_Section_Lifestyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 个性.
+        /// </summary>
+        public static string Detail_Section_Personality {
+            get {
+                return ResourceManager.GetString("Detail_Section_Personality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 电子邮件已经注册.
+        /// </summary>
+        public static string Error_EmailTaken {
+            get {
+                return ResourceManager.GetString("Error_EmailTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 无效的电子邮件或密码.
+        /// </summary>
+        public static string Error_GenericLoginError {
+            get {
+                return ResourceManager.GetString("Error_GenericLoginError", resourceCulture);
             }
         }
         
@@ -214,92 +763,74 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 无效的电子邮件或密码.
+        ///   Looks up a localized string similar to 敌对.
         /// </summary>
-        public static string Login_BadPassword {
+        public static string Match_Enemy {
             get {
-                return ResourceManager.GetString("Login_BadPassword", resourceCulture);
+                return ResourceManager.GetString("Match_Enemy", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 忘记你的密码？.
+        ///   Looks up a localized string similar to 朋友.
         /// </summary>
-        public static string Login_ForgotPassword {
+        public static string Match_Friend {
             get {
-                return ResourceManager.GetString("Login_ForgotPassword", resourceCulture);
+                return ResourceManager.GetString("Match_Friend", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 你的电子邮件.
+        ///   Looks up a localized string similar to 匹配.
         /// </summary>
-        public static string Login_YourEmail {
+        public static string Match_Match {
             get {
-                return ResourceManager.GetString("Login_YourEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 你的密码.
-        /// </summary>
-        public static string Login_YourPasswod {
-            get {
-                return ResourceManager.GetString("Login_YourPasswod", resourceCulture);
+                return ResourceManager.GetString("Match_Match", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 把它们写一个可爱的消息.
         /// </summary>
-        public static string Message_Body_Placeholder {
+        public static string Messaging_Compose_Placeholder {
             get {
-                return ResourceManager.GetString("Message_Body_Placeholder", resourceCulture);
+                return ResourceManager.GetString("Messaging_Compose_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 消息发送！.
         /// </summary>
-        public static string Message_Sent_Confirmation {
+        public static string Messaging_Sent_Confirmation {
             get {
-                return ResourceManager.GetString("Message_Sent_Confirmation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 开始交谈.
-        /// </summary>
-        public static string Message_Start_Conversation {
-            get {
-                return ResourceManager.GetString("Message_Start_Conversation", resourceCulture);
+                return ResourceManager.GetString("Messaging_Sent_Confirmation", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 信息主题.
         /// </summary>
-        public static string Message_Subject_Placeholder {
+        public static string Messaging_Subject_Placeholder {
             get {
-                return ResourceManager.GetString("Message_Subject_Placeholder", resourceCulture);
+                return ResourceManager.GetString("Messaging_Subject_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 他.
         /// </summary>
-        public static string Messages_Them {
+        public static string Messaging_Them {
             get {
-                return ResourceManager.GetString("Messages_Them", resourceCulture);
+                return ResourceManager.GetString("Messaging_Them", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 你.
         /// </summary>
-        public static string Messages_You {
+        public static string Messaging_You {
             get {
-                return ResourceManager.GetString("Messages_You", resourceCulture);
+                return ResourceManager.GetString("Messaging_You", resourceCulture);
             }
         }
         
@@ -331,11 +862,11 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 性格.
+        ///   Looks up a localized string similar to 我保存的.
         /// </summary>
-        public static string Nav_Personality {
+        public static string Nav_MyFavorites {
             get {
-                return ResourceManager.GetString("Nav_Personality", resourceCulture);
+                return ResourceManager.GetString("Nav_MyFavorites", resourceCulture);
             }
         }
         
@@ -367,56 +898,65 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加照片.
+        ///   Looks up a localized string similar to 选择你的笑脸.
         /// </summary>
-        public static string Photo_AddPhoto {
+        public static string Photo_EditThumbnail_Title {
             get {
-                return ResourceManager.GetString("Photo_AddPhoto", resourceCulture);
+                return ResourceManager.GetString("Photo_EditThumbnail_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to 重新排列照片.
         /// </summary>
-        public static string Photo_Delete {
+        public static string Photo_RearrangeModal_Title {
             get {
-                return ResourceManager.GetString("Photo_Delete", resourceCulture);
+                return ResourceManager.GetString("Photo_RearrangeModal_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit Thumbnail.
+        ///   Looks up a localized string similar to 上传您的照片.
         /// </summary>
-        public static string Photo_EditThumbnail {
+        public static string Photo_UploadModal_Title {
             get {
-                return ResourceManager.GetString("Photo_EditThumbnail", resourceCulture);
+                return ResourceManager.GetString("Photo_UploadModal_Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose your smiling face.
+        ///   Looks up a localized string similar to 女.
         /// </summary>
-        public static string Photo_EditThumbnail_Caption {
+        public static string Profile_Female {
             get {
-                return ResourceManager.GetString("Photo_EditThumbnail_Caption", resourceCulture);
+                return ResourceManager.GetString("Profile_Female", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rearrange Photos.
+        ///   Looks up a localized string similar to 男.
         /// </summary>
-        public static string Photo_Rearrange {
+        public static string Profile_Male {
             get {
-                return ResourceManager.GetString("Photo_Rearrange", resourceCulture);
+                return ResourceManager.GetString("Profile_Male", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload Your Photo.
+        ///   Looks up a localized string similar to 没有写.
         /// </summary>
-        public static string Photo_UploadYourPhoto {
+        public static string Profile_Question_Empty {
             get {
-                return ResourceManager.GetString("Photo_UploadYourPhoto", resourceCulture);
+                return ResourceManager.GetString("Profile_Question_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 请写一些关于自己在这里.
+        /// </summary>
+        public static string Profile_Question_Placeholder {
+            get {
+                return ResourceManager.GetString("Profile_Question_Placeholder", resourceCulture);
             }
         }
         
@@ -466,456 +1006,6 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 没有写.
-        /// </summary>
-        public static string Profile_Text_None {
-            get {
-                return ResourceManager.GetString("Profile_Text_None", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 请写一些关于自己在这里.
-        /// </summary>
-        public static string Profile_Text_Prompt {
-            get {
-                return ResourceManager.GetString("Profile_Text_Prompt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 体型.
-        /// </summary>
-        public static string ProfileDetail_BodyType {
-            get {
-                return ResourceManager.GetString("ProfileDetail_BodyType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 事业与家庭.
-        /// </summary>
-        public static string ProfileDetail_CareerAndFamily {
-            get {
-                return ResourceManager.GetString("ProfileDetail_CareerAndFamily", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 购车情况.
-        /// </summary>
-        public static string ProfileDetail_CarSituation {
-            get {
-                return ResourceManager.GetString("ProfileDetail_CarSituation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 颜色.
-        /// </summary>
-        public static string ProfileDetail_Color {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Color", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 穿着风格.
-        /// </summary>
-        public static string ProfileDetail_DressStyle {
-            get {
-                return ResourceManager.GetString("ProfileDetail_DressStyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 饮酒.
-        /// </summary>
-        public static string ProfileDetail_Drink {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Drink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 饮食习惯.
-        /// </summary>
-        public static string ProfileDetail_Eating {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Eating", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 经济观念.
-        /// </summary>
-        public static string ProfileDetail_EconomicConcept {
-            get {
-                return ResourceManager.GetString("ProfileDetail_EconomicConcept", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 学历.
-        /// </summary>
-        public static string ProfileDetail_Education {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Education", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 锻炼习惯.
-        /// </summary>
-        public static string ProfileDetail_Exercise {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Exercise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 眼睛.
-        /// </summary>
-        public static string ProfileDetail_Eye {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Eye", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 脸型.
-        /// </summary>
-        public static string ProfileDetail_FaceType {
-            get {
-                return ResourceManager.GetString("ProfileDetail_FaceType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 对待感情.
-        /// </summary>
-        public static string ProfileDetail_Feelings {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Feelings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 头发.
-        /// </summary>
-        public static string ProfileDetail_Hair {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Hair", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 有无子女.
-        /// </summary>
-        public static string ProfileDetail_HaveChildren {
-            get {
-                return ResourceManager.GetString("ProfileDetail_HaveChildren", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 关于宠物.
-        /// </summary>
-        public static string ProfileDetail_HavePets {
-            get {
-                return ResourceManager.GetString("ProfileDetail_HavePets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 健康情况.
-        /// </summary>
-        public static string ProfileDetail_HealthCondition {
-            get {
-                return ResourceManager.GetString("ProfileDetail_HealthCondition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 身高.
-        /// </summary>
-        public static string ProfileDetail_Height {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Height", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 家务水平等级.
-        /// </summary>
-        public static string ProfileDetail_Housework {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Housework", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 幽默感.
-        /// </summary>
-        public static string ProfileDetail_Humour {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Humour", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 公司行业.
-        /// </summary>
-        public static string ProfileDetail_Industry {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Industry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 职业职位.
-        /// </summary>
-        public static string ProfileDetail_Job {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Job", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 长度.
-        /// </summary>
-        public static string ProfileDetail_Length {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Length", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 居住情况.
-        /// </summary>
-        public static string ProfileDetail_LivingSituation {
-            get {
-                return ResourceManager.GetString("ProfileDetail_LivingSituation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 寻找.
-        /// </summary>
-        public static string ProfileDetail_LookingFor {
-            get {
-                return ResourceManager.GetString("ProfileDetail_LookingFor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 宠物喜欢程度.
-        /// </summary>
-        public static string ProfileDetail_LovePets {
-            get {
-                return ResourceManager.GetString("ProfileDetail_LovePets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 月薪.
-        /// </summary>
-        public static string ProfileDetail_MonthlyIncome {
-            get {
-                return ResourceManager.GetString("ProfileDetail_MonthlyIncome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 最大消费.
-        /// </summary>
-        public static string ProfileDetail_MostMoney {
-            get {
-                return ResourceManager.GetString("ProfileDetail_MostMoney", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 肌肉.
-        /// </summary>
-        public static string ProfileDetail_Muscle {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Muscle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 民族.
-        /// </summary>
-        public static string ProfileDetail_Nationality {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Nationality", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 婚姻状况.
-        /// </summary>
-        public static string ProfileDetail_RelationshipStatus {
-            get {
-                return ResourceManager.GetString("ProfileDetail_RelationshipStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 宗教信仰.
-        /// </summary>
-        public static string ProfileDetail_Religion {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Religion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 外貌.
-        /// </summary>
-        public static string ProfileDetail_Section_Appearance {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Section_Appearance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 我的信息.
-        /// </summary>
-        public static string ProfileDetail_Section_Basic {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Section_Basic", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 工作.
-        /// </summary>
-        public static string ProfileDetail_Section_Job {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Section_Job", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 生活方式.
-        /// </summary>
-        public static string ProfileDetail_Section_Lifestyle {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Section_Lifestyle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 个性.
-        /// </summary>
-        public static string ProfileDetail_Section_Personality {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Section_Personality", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 形状.
-        /// </summary>
-        public static string ProfileDetail_Shape {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Shape", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 逛街购物.
-        /// </summary>
-        public static string ProfileDetail_Shopping {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Shopping", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 皮肤.
-        /// </summary>
-        public static string ProfileDetail_SkinType {
-            get {
-                return ResourceManager.GetString("ProfileDetail_SkinType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 作息时间.
-        /// </summary>
-        public static string ProfileDetail_SleepSchedule {
-            get {
-                return ResourceManager.GetString("ProfileDetail_SleepSchedule", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 吸烟.
-        /// </summary>
-        public static string ProfileDetail_Smoke {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Smoke", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 个性特征.
-        /// </summary>
-        public static string ProfileDetail_Sociability {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Sociability", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 交际圈子.
-        /// </summary>
-        public static string ProfileDetail_SocialCircle {
-            get {
-                return ResourceManager.GetString("ProfileDetail_SocialCircle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 发型.
-        /// </summary>
-        public static string ProfileDetail_Style {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Style", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 脾气.
-        /// </summary>
-        public static string ProfileDetail_Temper {
-            get {
-                return ResourceManager.GetString("ProfileDetail_Temper", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 是否要小孩.
-        /// </summary>
-        public static string ProfileDetail_WantChildren {
-            get {
-                return ResourceManager.GetString("ProfileDetail_WantChildren", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 工作状态.
-        /// </summary>
-        public static string ProfileDetail_WorkHours {
-            get {
-                return ResourceManager.GetString("ProfileDetail_WorkHours", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 有点重要.
         /// </summary>
         public static string Question_ALittleImportant {
@@ -925,20 +1015,11 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 回答问题.
-        /// </summary>
-        public static string Question_Answer {
-            get {
-                return ResourceManager.GetString("Question_Answer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 上述任何.
         /// </summary>
-        public static string Question_Any {
+        public static string Question_AnyAbove {
             get {
-                return ResourceManager.GetString("Question_Any", resourceCulture);
+                return ResourceManager.GetString("Question_AnyAbove", resourceCulture);
             }
         }
         
@@ -970,29 +1051,11 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 跳过问题.
-        /// </summary>
-        public static string Question_Skip {
-            get {
-                return ResourceManager.GetString("Question_Skip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 重要.
         /// </summary>
         public static string Question_SomewhatImportant {
             get {
                 return ResourceManager.GetString("Question_SomewhatImportant", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 变化回答.
-        /// </summary>
-        public static string Question_UpdateAnswer {
-            get {
-                return ResourceManager.GetString("Question_UpdateAnswer", resourceCulture);
             }
         }
         
@@ -1006,56 +1069,56 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 生日.
+        ///   Looks up a localized string similar to 活跃用户.
         /// </summary>
-        public static string Register_Birthdate {
+        public static string Section_ActiveUsers {
             get {
-                return ResourceManager.GetString("Register_Birthdate", resourceCulture);
+                return ResourceManager.GetString("Section_ActiveUsers", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 电子邮件已经注册.
+        ///   Looks up a localized string similar to 近期活动.
         /// </summary>
-        public static string Register_EmailTaken {
+        public static string Section_ActivityFeed {
             get {
-                return ResourceManager.GetString("Register_EmailTaken", resourceCulture);
+                return ResourceManager.GetString("Section_ActivityFeed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 我是.
+        ///   Looks up a localized string similar to 保存的用户.
         /// </summary>
-        public static string Register_IAm {
+        public static string Section_Favorites {
             get {
-                return ResourceManager.GetString("Register_IAm", resourceCulture);
+                return ResourceManager.GetString("Section_Favorites", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 城市.
+        ///   Looks up a localized string similar to 匹配问题.
         /// </summary>
-        public static string Register_Location {
+        public static string Section_MatchQuestions {
             get {
-                return ResourceManager.GetString("Register_Location", resourceCulture);
+                return ResourceManager.GetString("Section_MatchQuestions", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 我找.
+        ///   Looks up a localized string similar to 信息.
         /// </summary>
-        public static string Register_LookingFor {
+        public static string Section_Messages {
             get {
-                return ResourceManager.GetString("Register_LookingFor", resourceCulture);
+                return ResourceManager.GetString("Section_Messages", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 名字.
+        ///   Looks up a localized string similar to 推荐匹配.
         /// </summary>
-        public static string Register_Nickname {
+        public static string Section_RecommendeMatches {
             get {
-                return ResourceManager.GetString("Register_Nickname", resourceCulture);
+                return ResourceManager.GetString("Section_RecommendeMatches", resourceCulture);
             }
         }
         

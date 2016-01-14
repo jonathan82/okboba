@@ -120,38 +120,35 @@
   <data name="Account_Email" xml:space="preserve">
     <value>电子邮件</value>
   </data>
-  <data name="Account_Name" xml:space="preserve">
+  <data name="Account_Nickname" xml:space="preserve">
     <value>绰号</value>
   </data>
   <data name="Account_Password" xml:space="preserve">
     <value>密码</value>
   </data>
-  <data name="Common_Cancel" xml:space="preserve">
+  <data name="Button_Cancel" xml:space="preserve">
     <value>取消</value>
   </data>
-  <data name="Common_Close" xml:space="preserve">
+  <data name="Button_Close" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="Common_Enemy" xml:space="preserve">
+  <data name="Match_Enemy" xml:space="preserve">
     <value>敌对</value>
   </data>
-  <data name="Common_Friend" xml:space="preserve">
+  <data name="Match_Friend" xml:space="preserve">
     <value>朋友</value>
   </data>
-  <data name="Common_Login" xml:space="preserve">
+  <data name="Button_Login" xml:space="preserve">
     <value>登录</value>
   </data>
-  <data name="Common_Match" xml:space="preserve">
+  <data name="Match_Match" xml:space="preserve">
     <value>匹配</value>
   </data>
-  <data name="Common_Save" xml:space="preserve">
+  <data name="Button_Save" xml:space="preserve">
     <value>保存</value>
   </data>
-  <data name="Common_Submit" xml:space="preserve">
+  <data name="Button_Submit" xml:space="preserve">
     <value>提交</value>
-  </data>
-  <data name="Nav_Personality" xml:space="preserve">
-    <value>性格</value>
   </data>
   <data name="Nav_Photos" xml:space="preserve">
     <value>照片</value>
@@ -162,121 +159,121 @@
   <data name="Nav_Questions" xml:space="preserve">
     <value>问题</value>
   </data>
-  <data name="ProfileDetail_BodyType" xml:space="preserve">
+  <data name="Detail_Label_BodyType" xml:space="preserve">
     <value>体型</value>
   </data>
-  <data name="ProfileDetail_CareerAndFamily" xml:space="preserve">
+  <data name="Detail_Label_CareerAndFamily" xml:space="preserve">
     <value>事业与家庭</value>
   </data>
-  <data name="ProfileDetail_CarSituation" xml:space="preserve">
+  <data name="Detail_Label_CarSituation" xml:space="preserve">
     <value>购车情况</value>
   </data>
-  <data name="ProfileDetail_DressStyle" xml:space="preserve">
+  <data name="Detail_Label_DressStyle" xml:space="preserve">
     <value>穿着风格</value>
   </data>
-  <data name="ProfileDetail_Drink" xml:space="preserve">
+  <data name="Detail_Label_Drink" xml:space="preserve">
     <value>饮酒</value>
   </data>
-  <data name="ProfileDetail_Eating" xml:space="preserve">
+  <data name="Detail_Label_Eating" xml:space="preserve">
     <value>饮食习惯</value>
   </data>
-  <data name="ProfileDetail_EconomicConcept" xml:space="preserve">
+  <data name="Detail_Label_EconomicConcept" xml:space="preserve">
     <value>经济观念</value>
   </data>
-  <data name="ProfileDetail_Education" xml:space="preserve">
+  <data name="Detail_Label_Education" xml:space="preserve">
     <value>学历</value>
   </data>
-  <data name="ProfileDetail_Exercise" xml:space="preserve">
+  <data name="Detail_Label_Exercise" xml:space="preserve">
     <value>锻炼习惯</value>
   </data>
-  <data name="ProfileDetail_Eye" xml:space="preserve">
+  <data name="Detail_Label_Eye" xml:space="preserve">
     <value>眼睛</value>
   </data>
-  <data name="ProfileDetail_FaceType" xml:space="preserve">
+  <data name="Detail_Label_FaceType" xml:space="preserve">
     <value>脸型</value>
   </data>
-  <data name="ProfileDetail_Feelings" xml:space="preserve">
+  <data name="Detail_Label_Feelings" xml:space="preserve">
     <value>对待感情</value>
   </data>
-  <data name="ProfileDetail_Hair" xml:space="preserve">
+  <data name="Detail_Label_Hair" xml:space="preserve">
     <value>头发</value>
   </data>
-  <data name="ProfileDetail_HaveChildren" xml:space="preserve">
+  <data name="Detail_Label_HaveChildren" xml:space="preserve">
     <value>有无子女</value>
   </data>
-  <data name="ProfileDetail_HavePets" xml:space="preserve">
+  <data name="Detail_Label_HavePets" xml:space="preserve">
     <value>关于宠物</value>
   </data>
-  <data name="ProfileDetail_HealthCondition" xml:space="preserve">
+  <data name="Detail_Label_HealthCondition" xml:space="preserve">
     <value>健康情况</value>
   </data>
-  <data name="ProfileDetail_Height" xml:space="preserve">
+  <data name="Detail_Label_Height" xml:space="preserve">
     <value>身高</value>
   </data>
-  <data name="ProfileDetail_Housework" xml:space="preserve">
+  <data name="Detail_Label_Housework" xml:space="preserve">
     <value>家务水平等级</value>
   </data>
-  <data name="ProfileDetail_Humour" xml:space="preserve">
+  <data name="Detail_Label_Humour" xml:space="preserve">
     <value>幽默感</value>
   </data>
-  <data name="ProfileDetail_Industry" xml:space="preserve">
+  <data name="Detail_Label_Industry" xml:space="preserve">
     <value>公司行业</value>
   </data>
-  <data name="ProfileDetail_Job" xml:space="preserve">
+  <data name="Detail_Label_Job" xml:space="preserve">
     <value>职业职位</value>
   </data>
-  <data name="ProfileDetail_LivingSituation" xml:space="preserve">
+  <data name="Detail_Label_LivingSituation" xml:space="preserve">
     <value>居住情况</value>
   </data>
-  <data name="ProfileDetail_LookingFor" xml:space="preserve">
+  <data name="Detail_Label_LookingFor" xml:space="preserve">
     <value>寻找</value>
   </data>
-  <data name="ProfileDetail_LovePets" xml:space="preserve">
+  <data name="Detail_Label_LovePets" xml:space="preserve">
     <value>宠物喜欢程度</value>
   </data>
-  <data name="ProfileDetail_MonthlyIncome" xml:space="preserve">
+  <data name="Detail_Label_MonthlyIncome" xml:space="preserve">
     <value>月薪</value>
   </data>
-  <data name="ProfileDetail_MostMoney" xml:space="preserve">
+  <data name="Detail_Label_MostMoney" xml:space="preserve">
     <value>最大消费</value>
   </data>
-  <data name="ProfileDetail_Muscle" xml:space="preserve">
+  <data name="Detail_Label_Muscle" xml:space="preserve">
     <value>肌肉</value>
   </data>
-  <data name="ProfileDetail_Nationality" xml:space="preserve">
+  <data name="Detail_Label_Nationality" xml:space="preserve">
     <value>民族</value>
   </data>
-  <data name="ProfileDetail_RelationshipStatus" xml:space="preserve">
+  <data name="Detail_Label_RelationshipStatus" xml:space="preserve">
     <value>婚姻状况</value>
   </data>
-  <data name="ProfileDetail_Religion" xml:space="preserve">
+  <data name="Detail_Label_Religion" xml:space="preserve">
     <value>宗教信仰</value>
   </data>
-  <data name="ProfileDetail_Shopping" xml:space="preserve">
+  <data name="Detail_Label_Shopping" xml:space="preserve">
     <value>逛街购物</value>
   </data>
-  <data name="ProfileDetail_SkinType" xml:space="preserve">
+  <data name="Detail_Label_SkinType" xml:space="preserve">
     <value>皮肤</value>
   </data>
-  <data name="ProfileDetail_SleepSchedule" xml:space="preserve">
+  <data name="Detail_Label_SleepSchedule" xml:space="preserve">
     <value>作息时间</value>
   </data>
-  <data name="ProfileDetail_Smoke" xml:space="preserve">
+  <data name="Detail_Label_Smoke" xml:space="preserve">
     <value>吸烟</value>
   </data>
-  <data name="ProfileDetail_Sociability" xml:space="preserve">
+  <data name="Detail_Label_Sociability" xml:space="preserve">
     <value>个性特征</value>
   </data>
-  <data name="ProfileDetail_SocialCircle" xml:space="preserve">
+  <data name="Detail_Label_SocialCircle" xml:space="preserve">
     <value>交际圈子</value>
   </data>
-  <data name="ProfileDetail_Temper" xml:space="preserve">
+  <data name="Detail_Label_Temper" xml:space="preserve">
     <value>脾气</value>
   </data>
-  <data name="ProfileDetail_WantChildren" xml:space="preserve">
+  <data name="Detail_Label_WantChildren" xml:space="preserve">
     <value>是否要小孩</value>
   </data>
-  <data name="ProfileDetail_WorkHours" xml:space="preserve">
+  <data name="Detail_Label_WorkHours" xml:space="preserve">
     <value>工作状态</value>
   </data>
   <data name="Profile_Question1" xml:space="preserve">
@@ -297,7 +294,7 @@
   <data name="Question_ALittleImportant" xml:space="preserve">
     <value>有点重要</value>
   </data>
-  <data name="Question_Any" xml:space="preserve">
+  <data name="Question_AnyAbove" xml:space="preserve">
     <value>上述任何</value>
   </data>
   <data name="Question_Irrelevant" xml:space="preserve">
@@ -309,29 +306,29 @@
   <data name="Question_VeryImportant" xml:space="preserve">
     <value>很重要</value>
   </data>
-  <data name="Profile_Text_Prompt" xml:space="preserve">
+  <data name="Profile_Question_Placeholder" xml:space="preserve">
     <value>请写一些关于自己在这里</value>
   </data>
-  <data name="Profile_Text_None" xml:space="preserve">
+  <data name="Profile_Question_Empty" xml:space="preserve">
     <value>没有写</value>
   </data>
-  <data name="Photo_AddPhoto" xml:space="preserve">
+  <data name="Button_AddPhoto" xml:space="preserve">
     <value>加照片</value>
   </data>
-  <data name="Photo_Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Button_Delete" xml:space="preserve">
+    <value>删除</value>
   </data>
-  <data name="Photo_EditThumbnail" xml:space="preserve">
-    <value>Edit Thumbnail</value>
+  <data name="Button_EditThumbnail" xml:space="preserve">
+    <value>编辑缩略图</value>
   </data>
-  <data name="Photo_UploadYourPhoto" xml:space="preserve">
-    <value>Upload Your Photo</value>
+  <data name="Photo_UploadModal_Title" xml:space="preserve">
+    <value>上传您的照片</value>
   </data>
-  <data name="Photo_Rearrange" xml:space="preserve">
-    <value>Rearrange Photos</value>
+  <data name="Photo_RearrangeModal_Title" xml:space="preserve">
+    <value>重新排列照片</value>
   </data>
-  <data name="Photo_EditThumbnail_Caption" xml:space="preserve">
-    <value>Choose your smiling face</value>
+  <data name="Photo_EditThumbnail_Title" xml:space="preserve">
+    <value>选择你的笑脸</value>
   </data>
   <data name="Question_Prompt_Acceptable" xml:space="preserve">
     <value>How would you like your match to answer?</value>
@@ -339,26 +336,23 @@
   <data name="Question_Prompt_Importance" xml:space="preserve">
     <value>How important are your matches answers?</value>
   </data>
-  <data name="Common_Female" xml:space="preserve">
+  <data name="Profile_Female" xml:space="preserve">
     <value>女</value>
   </data>
-  <data name="Common_Male" xml:space="preserve">
+  <data name="Profile_Male" xml:space="preserve">
     <value>男</value>
   </data>
-  <data name="Register_Birthdate" xml:space="preserve">
+  <data name="Account_Birthdate" xml:space="preserve">
     <value>生日</value>
   </data>
-  <data name="Register_IAm" xml:space="preserve">
+  <data name="Account_Register_IAm" xml:space="preserve">
     <value>我是</value>
   </data>
-  <data name="Register_Location" xml:space="preserve">
+  <data name="Account_Location" xml:space="preserve">
     <value>城市</value>
   </data>
-  <data name="Register_LookingFor" xml:space="preserve">
+  <data name="Account_Register_LookingFor" xml:space="preserve">
     <value>我找</value>
-  </data>
-  <data name="Register_Nickname" xml:space="preserve">
-    <value>名字</value>
   </data>
   <data name="Feed_AnsweredQuestion" xml:space="preserve">
     <value>answered a question.</value>
@@ -372,52 +366,52 @@
   <data name="Feed_UploadedPhoto" xml:space="preserve">
     <value>uploaded a photo.</value>
   </data>
-  <data name="Login_BadPassword" xml:space="preserve">
+  <data name="Error_GenericLoginError" xml:space="preserve">
     <value>无效的电子邮件或密码</value>
   </data>
-  <data name="Login_ForgotPassword" xml:space="preserve">
+  <data name="Account_ForgotPassword" xml:space="preserve">
     <value>忘记你的密码？</value>
   </data>
-  <data name="Login_YourEmail" xml:space="preserve">
+  <data name="Account_Placeholder_Email" xml:space="preserve">
     <value>你的电子邮件</value>
   </data>
-  <data name="Login_YourPasswod" xml:space="preserve">
+  <data name="Account_Placeholder_Password" xml:space="preserve">
     <value>你的密码</value>
   </data>
-  <data name="Question_Answer" xml:space="preserve">
+  <data name="Button_AnswerQuestion" xml:space="preserve">
     <value>回答问题</value>
   </data>
-  <data name="Question_Skip" xml:space="preserve">
+  <data name="Button_SkipQuestion" xml:space="preserve">
     <value>跳过问题</value>
   </data>
-  <data name="ProfileDetail_Section_Appearance" xml:space="preserve">
+  <data name="Detail_Section_Appearance" xml:space="preserve">
     <value>外貌</value>
   </data>
-  <data name="ProfileDetail_Section_Basic" xml:space="preserve">
+  <data name="Detail_Section_Basic" xml:space="preserve">
     <value>我的信息</value>
   </data>
-  <data name="ProfileDetail_Section_Job" xml:space="preserve">
+  <data name="Detail_Section_Job" xml:space="preserve">
     <value>工作</value>
   </data>
-  <data name="ProfileDetail_Section_Lifestyle" xml:space="preserve">
+  <data name="Detail_Section_Lifestyle" xml:space="preserve">
     <value>生活方式</value>
   </data>
-  <data name="ProfileDetail_Section_Personality" xml:space="preserve">
+  <data name="Detail_Section_Personality" xml:space="preserve">
     <value>个性</value>
   </data>
-  <data name="ProfileDetail_Color" xml:space="preserve">
+  <data name="Detail_Label_Color" xml:space="preserve">
     <value>颜色</value>
   </data>
-  <data name="ProfileDetail_Shape" xml:space="preserve">
+  <data name="Detail_Label_Shape" xml:space="preserve">
     <value>形状</value>
   </data>
-  <data name="ProfileDetail_Length" xml:space="preserve">
+  <data name="Detail_Label_Length" xml:space="preserve">
     <value>长度</value>
   </data>
-  <data name="ProfileDetail_Style" xml:space="preserve">
+  <data name="Detail_Label_Style" xml:space="preserve">
     <value>发型</value>
   </data>
-  <data name="Register_EmailTaken" xml:space="preserve">
+  <data name="Error_EmailTaken" xml:space="preserve">
     <value>电子邮件已经注册</value>
   </data>
   <data name="Nav_Messages_Received" xml:space="preserve">
@@ -429,10 +423,10 @@
   <data name="Nav_Messages_Reply" xml:space="preserve">
     <value>回复</value>
   </data>
-  <data name="Messages_Them" xml:space="preserve">
+  <data name="Messaging_Them" xml:space="preserve">
     <value>他</value>
   </data>
-  <data name="Messages_You" xml:space="preserve">
+  <data name="Messaging_You" xml:space="preserve">
     <value>你</value>
   </data>
   <data name="Time_DaysAgo" xml:space="preserve">
@@ -444,19 +438,46 @@
   <data name="Time_Yesterday" xml:space="preserve">
     <value>昨天</value>
   </data>
-  <data name="Message_Body_Placeholder" xml:space="preserve">
+  <data name="Messaging_Compose_Placeholder" xml:space="preserve">
     <value>把它们写一个可爱的消息</value>
   </data>
-  <data name="Message_Sent_Confirmation" xml:space="preserve">
+  <data name="Messaging_Sent_Confirmation" xml:space="preserve">
     <value>消息发送！</value>
   </data>
-  <data name="Message_Start_Conversation" xml:space="preserve">
+  <data name="Button_StartConversation" xml:space="preserve">
     <value>开始交谈</value>
   </data>
-  <data name="Message_Subject_Placeholder" xml:space="preserve">
+  <data name="Messaging_Subject_Placeholder" xml:space="preserve">
     <value>信息主题</value>
   </data>
-  <data name="Question_UpdateAnswer" xml:space="preserve">
+  <data name="Button_UpdateAnswer" xml:space="preserve">
     <value>变化回答</value>
+  </data>
+  <data name="Button_RearrangePhotos" xml:space="preserve">
+    <value>重新排列照片</value>
+  </data>
+  <data name="Button_Next" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="Nav_MyFavorites" xml:space="preserve">
+    <value>我保存的</value>
+  </data>
+  <data name="Section_ActiveUsers" xml:space="preserve">
+    <value>活跃用户</value>
+  </data>
+  <data name="Section_ActivityFeed" xml:space="preserve">
+    <value>近期活动</value>
+  </data>
+  <data name="Section_Favorites" xml:space="preserve">
+    <value>保存的用户</value>
+  </data>
+  <data name="Section_MatchQuestions" xml:space="preserve">
+    <value>匹配问题</value>
+  </data>
+  <data name="Section_Messages" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Section_RecommendeMatches" xml:space="preserve">
+    <value>推荐匹配</value>
   </data>
 </root>

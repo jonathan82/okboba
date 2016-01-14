@@ -17,18 +17,18 @@
             <form id="compose-form">
                 <input type="hidden" name="to" value="{{:id}}" />
                 <div class="compose-subject">
-                    <input type="text" class="form-control" placeholder="@i18n.Message_Subject_Placeholder" id="subject" name="subject" maxlength="@OkbConstants.MAX_SUBJECT_LENGTH" />
+                    <input type="text" class="form-control" placeholder="@i18n.Messaging_Subject_Placeholder" id="subject" name="subject" maxlength="@OkbConstants.MAX_SUBJECT_LENGTH" />
                 </div>
                 <div class="compose-body">
                     @*<div class="compose-body-edit" contenteditable="true"></div>*@
-                    <textarea placeholder="@i18n.Message_Body_Placeholder" class="compose-body-edit" id="message" name="message" maxlength="@OkbConstants.MAX_MESSAGE_LENGTH"></textarea>
+                    <textarea placeholder="@i18n.Messaging_Compose_Placeholder" class="compose-body-edit" id="message" name="message" maxlength="@OkbConstants.MAX_MESSAGE_LENGTH"></textarea>
                 </div>
                 <div class="compose-send-row">
-                    <button class="btn btn-primary send-button ladda-button" data-style="expand-left"><span class="ladda-label">@i18n.Message_Start_Conversation</span></button>
+                    <button class="btn btn-primary send-button ladda-button" data-style="expand-left"><span class="ladda-label">@i18n.Button_StartConversation</span></button>
                     @*<div class="compose-emoticon-btn"><img src="/Content/images/chat-smiley.png" width="22" height="22" alt="Smiley" /></div>*@
                 </div>
             </form>
-            <div class="compose-confirmation-wrapper">@i18n.Message_Sent_Confirmation</div>
+            <div class="compose-confirmation-wrapper">@i18n.Messaging_Sent_Confirmation</div>
         </div>        
     </div>
 </script>

@@ -4,8 +4,8 @@
 
 @if (Model.IsMe)
 {
-    <button type="button" class="btn btn-info" data-toggle="photoupload" data-target="#photoUploadModal">@i18n.Photo_AddPhoto</button>
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoArrangeModal">@i18n.Photo_Rearrange</button>
+    <button type="button" class="btn btn-info" data-toggle="photoupload" data-target="#photoUploadModal">@i18n.Button_AddPhoto</button>
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#photoArrangeModal">@i18n.Button_RearrangePhotos</button>
 }
 
 <div class="grid clearfix">
@@ -17,8 +17,8 @@
             @if (Model.IsMe)
             {
                 <div class="photo-edit-overlay">
-                    <button class="btn btn-default btn-sm" data-src="@Html.PhotoUrl(photo.Original, Model.UserId)" data-photo="@photo.Original" data-toggle="editthumbnail">@i18n.Photo_EditThumbnail</button>
-                    <button class="btn btn-default btn-sm" data-photo="@photo.Original" data-toggle="deletephoto">@i18n.Photo_Delete</button>
+                    <button class="btn btn-default btn-sm" data-src="@Html.PhotoUrl(photo.Original, Model.UserId)" data-photo="@photo.Original" data-toggle="editthumbnail">@i18n.Button_EditThumbnail</button>
+                    <button class="btn btn-default btn-sm" data-photo="@photo.Original" data-toggle="deletephoto">@i18n.Button_Delete</button>
                 </div>
             }            
         </div>

@@ -10,74 +10,74 @@
 
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">@i18n.ProfileDetail_Section_Basic</h4>
+                <h4 class="modal-title" id="myModalLabel">@i18n.Detail_Section_Basic</h4>
             </div>
 
             <div class="modal-body">
 
                 <!--------------------- Basic Information ----------------------------->
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_LOOKINGFOR" class="col-sm-3 control-label">@i18n.ProfileDetail_LookingFor:</label>
+                    <label for="@OkbConstants.DETAIL_LOOKINGFOR" class="col-sm-3 control-label">@i18n.Detail_Label_LookingFor:</label>
                     <div class="col-sm-6">
                         @Html.DetailDropdown(OkbConstants.DETAIL_LOOKINGFOR, Model.GetOptions(OkbConstants.DETAIL_LOOKINGFOR), Model.ProfileDetail.LookingFor)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_HEIGHT" class="col-sm-3 control-label">@i18n.ProfileDetail_Height:</label>
+                    <label for="@OkbConstants.DETAIL_HEIGHT" class="col-sm-3 control-label">@i18n.Detail_Label_Height:</label>
                     <div class="col-sm-4">
                         @Html.HeightDropdown(Model.ProfileDetail.Height)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_EDUCATION" class="col-sm-3 control-label">@i18n.ProfileDetail_Education:</label>
+                    <label for="@OkbConstants.DETAIL_EDUCATION" class="col-sm-3 control-label">@i18n.Detail_Label_Education:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_EDUCATION, Model.GetOptions(OkbConstants.DETAIL_EDUCATION),Model.ProfileDetail.Education)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_RELATIONSHIPSTATUS" class="col-sm-3 control-label">@i18n.ProfileDetail_RelationshipStatus:</label>
+                    <label for="@OkbConstants.DETAIL_RELATIONSHIPSTATUS" class="col-sm-3 control-label">@i18n.Detail_Label_RelationshipStatus:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_RELATIONSHIPSTATUS, Model.GetOptions(OkbConstants.DETAIL_RELATIONSHIPSTATUS), Model.ProfileDetail.RelationshipStatus)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_HAVECHILDREN" class="col-sm-3 control-label">@i18n.ProfileDetail_HaveChildren:</label>
+                    <label for="@OkbConstants.DETAIL_HAVECHILDREN" class="col-sm-3 control-label">@i18n.Detail_Label_HaveChildren:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_HAVECHILDREN, Model.GetOptions(OkbConstants.DETAIL_HAVECHILDREN), Model.ProfileDetail.HaveChildren)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_WANTCHILDREN" class="col-sm-3 control-label">@i18n.ProfileDetail_WantChildren:</label>
+                    <label for="@OkbConstants.DETAIL_WANTCHILDREN" class="col-sm-3 control-label">@i18n.Detail_Label_WantChildren:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_WANTCHILDREN, Model.GetOptions(OkbConstants.DETAIL_WANTCHILDREN), Model.ProfileDetail.WantChildren)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_NATIONALITY" class="col-sm-3 control-label">@i18n.ProfileDetail_Nationality:</label>
+                    <label for="@OkbConstants.DETAIL_NATIONALITY" class="col-sm-3 control-label">@i18n.Detail_Label_Nationality:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_NATIONALITY, Model.GetOptions(OkbConstants.DETAIL_NATIONALITY), Model.ProfileDetail.Nationality)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_MONTHLYINCOME" class="col-sm-3 control-label">@i18n.ProfileDetail_MonthlyIncome:</label>
+                    <label for="@OkbConstants.DETAIL_MONTHLYINCOME" class="col-sm-3 control-label">@i18n.Detail_Label_MonthlyIncome:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_MONTHLYINCOME, Model.GetOptions(OkbConstants.DETAIL_MONTHLYINCOME), Model.ProfileDetail.MonthlyIncome)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_LIVINGSITUATION" class="col-sm-3 control-label">@i18n.ProfileDetail_LivingSituation:</label>
+                    <label for="@OkbConstants.DETAIL_LIVINGSITUATION" class="col-sm-3 control-label">@i18n.Detail_Label_LivingSituation:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_LIVINGSITUATION, Model.GetOptions(OkbConstants.DETAIL_LIVINGSITUATION), Model.ProfileDetail.LivingSituation)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_CARSITUATION" class="col-sm-3 control-label">@i18n.ProfileDetail_CarSituation:</label>
+                    <label for="@OkbConstants.DETAIL_CARSITUATION" class="col-sm-3 control-label">@i18n.Detail_Label_CarSituation:</label>
                     <div class="col-sm-4">
                         @Html.DetailDropdown(OkbConstants.DETAIL_CARSITUATION, Model.GetOptions(OkbConstants.DETAIL_CARSITUATION), Model.ProfileDetail.CarSituation)
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="@OkbConstants.DETAIL_ECONOMICCONCEPT" class="col-sm-3 control-label">@i18n.ProfileDetail_EconomicConcept:</label>
+                    <label for="@OkbConstants.DETAIL_ECONOMICCONCEPT" class="col-sm-3 control-label">@i18n.Detail_Label_EconomicConcept:</label>
                     <div class="col-sm-6">
                         @Html.DetailDropdown(OkbConstants.DETAIL_ECONOMICCONCEPT, Model.GetOptions(OkbConstants.DETAIL_ECONOMICCONCEPT), Model.ProfileDetail.EconomicConcept)
                     </div>
@@ -85,8 +85,8 @@
             </div> <!--End modal body-->
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Common_Close</button>
-                <button type="submit" class="btn btn-primary">@i18n.Common_Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@i18n.Button_Cancel</button>
+                <button type="submit" class="btn btn-primary">@i18n.Button_Save</button>
             </div>
 
         </form>

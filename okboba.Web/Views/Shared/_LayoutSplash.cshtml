@@ -36,7 +36,7 @@
 
         <!-- Login Button Navbar -->
         <div class="splash-navbar">
-            <button class="btn btn-primary login-button" data-toggle="modal" data-target="#loginModal">@i18n.Common_Login</button>
+            <button class="btn btn-primary login-button" data-toggle="modal" data-target="#loginModal">@i18n.Button_Login</button>
         </div>
 
         <!-- Registration form -->
@@ -60,7 +60,7 @@
         $(function () {
             //document ready
             $('#loginModal').login({
-                loginErrMsg: '@i18n.Login_BadPassword'
+                loginErrMsg: '@i18n.Error_GenericLoginError'
             });
         });
     </script>

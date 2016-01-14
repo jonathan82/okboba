@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using okboba.Repository.EntityRepository;
 using okboba.Repository.RedisRepository;
 
-namespace okboba.Controllers
+namespace okboba.Web.Controllers
 {
     
     [Authorize]

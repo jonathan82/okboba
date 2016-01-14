@@ -1,0 +1,16 @@
+This is how the i18n Localization strings are organized:
+
+Button_xxxxx: strings related to buttons
+Nav_xxxxxxxx: strings related to navigation tabs
+Section_xxxx: section header strings
+Account_xxxx: strings related to Account like email, password, nickname, etc
+Feed_xxxxxxx: strings related to the activity feed
+Messaging_xx: strings related to the messaging module
+Photo_xxxxxx: strings related to photo functions
+Profile_xxxx: strings related to profile functions like questions, etc
+Detail_xxxxx: strings related to the profile details
+QAndA_xxxxxx: strings related to the the question and answering functions
+Match_xxxxxx: strings related to matching functions
+Time_xxxxxxx: strings related to time
+Error_xxxxxx: error message strings
+

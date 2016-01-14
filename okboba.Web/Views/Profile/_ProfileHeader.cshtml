@@ -13,15 +13,15 @@
     <!--User Details & Percentages -->
     <div class="col-sm-9 col-md-10">
         <div class="profile-header-match">@Model.Match.MatchPercent%</div>
-        <div class="profile-header-match-label">@i18n.Common_Match</div>
+        <div class="profile-header-match-label">@i18n.Match_Match</div>
         <div class="profile-header-friendenemy-container">
             <div class="profile-header-friend-container">
                 <span class="profile-header-friend">@Model.Match.FriendPercent%</span>
-                <div class="profile-header-friend-label">@i18n.Common_Friend</div>
+                <div class="profile-header-friend-label">@i18n.Match_Friend</div>
             </div>
             <div>
                 <span class="profile-header-enemy">@Model.Match.EnemyPercent%</span>
-                <div class="profile-header-enemy-label">@i18n.Common_Enemy</div>
+                <div class="profile-header-enemy-label">@i18n.Match_Enemy</div>
             </div>           
         </div>
         <div class="profile-header-info">
@@ -35,7 +35,7 @@
         @if (!Model.IsMe)
         {
             <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="compose">Message User</button>
-            @*<button class="btn btn-default btn-block"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>*@
+            <button class="btn btn-default btn-block @(Model.IsFavorite ? "is-favorited" : "")" data-toggle="favorite" data-id="@Model.Profile.Id"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
         }        
     </div>
 </div>
@@ -58,7 +58,7 @@
     <div class="profile-header-photo">
         <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>
         @*<button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>*@
-        <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Photo_AddPhoto</button>
+        <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Button_AddPhoto</button>
     </div>
 }
 else if (photos.Count() == 0)

@@ -1,0 +1,25 @@
+﻿@using okboba.Web.Helpers
+@using okboba.Resources
+@model IList<okboba.Web.Models.FavoriteViewModel>
+
+@{
+    ViewBag.Title = "Favorites";
+}
+
+<div class="section-header">@i18n.Section_Favorites</div>
+
+<ul class="nav nav-tabs">
+    @Html.NavTab(i18n.Nav_MyFavorites, i18n.Nav_MyFavorites, "/favorites")
+</ul>
+
+<!-- Show a list of the favorites -->
+@foreach (var fav in Model)
+{
+    <div>@fav.FavoriteProfile.Nickname</div>
+}
+
+    @section Scripts {
+        <script>
+
+        </script>
+    }

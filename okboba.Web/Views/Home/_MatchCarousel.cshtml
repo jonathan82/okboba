@@ -24,13 +24,14 @@
                                 @Html.Avatar(m.Photo, m.Gender, m.UserId, "carousel-match-avatar")
                                 <div class="carousel-info-wrapper">
                                     <div class="carousel-info-percent carousel-info-match">@m.MatchPercent%</div>
-                                    <div class="carousel-info-match">@i18n.Common_Match</div>
+                                    <div class="carousel-info-match">@i18n.Match_Match</div>
                                     <hr />
                                     <div class="carousel-info-percent carousel-info-enemy">@m.EnemyPercent%</div>
-                                    <div class="carousel-info-enemy">@i18n.Common_Enemy</div>
+                                    <div class="carousel-info-enemy">@i18n.Match_Enemy</div>
                                 </div>
                                 <div class="carousel-info-name">@m.Nickname</div>
                                 <div class="carousel-info-details">@m.Age &#x2022; @m.Location</div>
+                                <a href="/profile/@m.UserId" class="div-link"></a>
                             </div>
                         </div>
                     }

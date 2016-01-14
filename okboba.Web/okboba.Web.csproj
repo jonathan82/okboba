@@ -259,16 +259,15 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\OkbBaseController.cs" />
-    <Compile Include="Controllers\PlaygroundController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
-    <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -276,6 +275,7 @@
     <Compile Include="Helpers\OkbHtmlHelpers.cs" />
     <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Favorites\FavoritesViewModel.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
     <Compile Include="Models\Messages\MessagesHeaderViewModel.cs" />
     <Compile Include="Models\Messages\ReplyViewModel.cs" />
@@ -351,6 +351,7 @@
     <Content Include="Content\chat.less" />
     <Content Include="Content\home.less" />
     <Content Include="Content\footer.less" />
+    <Content Include="Content\favorite.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -461,7 +462,7 @@
     <Content Include="Scripts\chatmanager.js" />
     <Content Include="Scripts\chatslider.js" />
     <Content Include="Scripts\editinplace.js" />
-    <Content Include="Scripts\editthumbnail.js" />
+    <Content Include="Scripts\favorite.js" />
     <Content Include="Scripts\locationpicker.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\matchscroller.js" />
@@ -472,7 +473,6 @@
     <Content Include="Scripts\messaging.js" />
     <Content Include="Scripts\photomanager.js" />
     <Content Include="Scripts\photoswipe.js" />
-    <Content Include="Scripts\photoupload.js" />
     <Content Include="Scripts\questionmanager.js" />
     <Content Include="Scripts\questionvalidation.js" />
     <Content Include="Scripts\register.js" />
@@ -514,7 +514,6 @@
     <Content Include="Views\Photo\_UploadPhotoTemplate.cshtml" />
     <Content Include="Views\Photo\_ListPhotos.cshtml" />
     <Content Include="Views\Photo\_PhotoRearrangeModal.cshtml" />
-    <Content Include="Views\Photo\_EditThumbnail.cshtml" />
     <Content Include="Views\Photo\_Photoswipe.cshtml" />
     <Content Include="Views\Question\_QuestionBox.cshtml" />
     <Content Include="Views\Question\_QuestionTemplate.cshtml" />
@@ -533,9 +532,7 @@
     <Content Include="Views\Question\_AnswerTemplate.cshtml" />
     <Content Include="Views\Question\_Pagination.cshtml" />
     <Content Include="Views\Messages\Sent.cshtml" />
-    <Content Include="Views\Messages\_Navtab.cshtml" />
     <Content Include="Views\Matches\_MatchesTemplate.cshtml" />
-    <Content Include="Views\Profile\_ProfileDetailModal.cshtml" />
     <Content Include="Views\Profile\_EditTextTemplate.cshtml" />
     <Content Include="Views\Profile\_DetailBasicModal.cshtml" />
     <Content Include="Views\Profile\_DetailLifestyleModal.cshtml" />
@@ -544,13 +541,12 @@
     <Content Include="Views\Profile\_DetailPersonalityModal.cshtml" />
     <Content Include="Views\Question\IndexMe.cshtml" />
     <Content Include="Views\Messages\_MessagesHeader.cshtml" />
-    <Content Include="Views\Messages\Index_backup.cshtml" />
     <Content Include="Views\Messages\_MessageRowTemplate.cshtml" />
     <Content Include="Views\Messages\_ConversationList.cshtml" />
     <Content Include="Views\Home\_MatchCarousel.cshtml" />
     <Content Include="Views\Messages\_ComposeTemplate.cshtml" />
     <Content Include="Views\Home\_ActiveUsers.cshtml" />
-    <Content Include="Views\Photo\_EditThumbnailModal.cshtml" />
+    <Content Include="Views\Favorites\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
