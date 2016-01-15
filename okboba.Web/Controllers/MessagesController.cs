@@ -68,6 +68,8 @@ namespace okboba.Web.Controllers
         {
             var me = GetProfileId();
 
+            var matchClient = GetMatchApiClient();
+
             //make sure we're getting our own conversation
             var map = _msgRepo.GetConversationMap(me, id);
             if (map == null) return HttpNotFound();
@@ -77,12 +79,16 @@ namespace okboba.Web.Controllers
             var profile = _profileRepo.GetProfile(map.Other);
             var myProfile = _profileRepo.GetProfile(me);
 
+            //Calculate the match score
+            var matchInfo = matchClient.CalculateMatchAsync(map.Other).Result;
+
             var vm = new ReplyViewModel
             {
                 ConversationId = id,
                 Me = myProfile,
                 Messages = messages,
-                Other = profile
+                Other = profile,
+                MatchInfo = matchInfo
             };
 
             vm.Other.LocationSring = _locRepo.GetLocationString(profile.LocationId1, profile.LocationId2);

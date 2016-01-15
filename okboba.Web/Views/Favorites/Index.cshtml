@@ -12,14 +12,37 @@
     @Html.NavTab(i18n.Nav_MyFavorites, i18n.Nav_MyFavorites, "/favorites")
 </ul>
 
-<!-- Show a list of the favorites -->
-@foreach (var fav in Model)
-{
-    <div>@fav.FavoriteProfile.Nickname</div>
+<div class="row">
+    <div class="col-md-8">
+        <!-- Show a list of the favorites -->
+        @foreach (var fav in Model)
+        {
+            <div class="favorite-row">
+
+                <div class="favorite-star is-favorited"><span class="glyphicon glyphicon-star"></span></div>
+
+                @Html.Avatar(fav.FavoriteProfile, "favorite-avatar", true)
+                <div class="inline-block center-block">
+                    <div class="text-info favorite-name">@fav.FavoriteProfile.Nickname</div>
+                    <div class="text-muted favorite-location">@fav.FavoriteProfile.LocationSring</div>
+                </div>
+
+                @Html.Partial("~/Views/Matches/_MatchScoreBlock.cshtml", fav.MatchInfo)
+
+                <a href="/profile/@fav.FavoriteProfile.UserId" class="div-link"></a>
+            </div>
+        }
+
+        @if (Model.Count() == 0)
+        {
+            <div class="nothing-to-show">@i18n.Error_NothingHere</div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+    </script>
 }
-
-    @section Scripts {
-        <script>
-
-        </script>
-    }

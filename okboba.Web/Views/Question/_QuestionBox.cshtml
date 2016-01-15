@@ -1,20 +1,19 @@
-﻿@model okboba.Web.Models.QuestionIndexViewModel
+﻿@model okboba.Repository.Models.QuestionModel
 @using okboba.Resources
 
 <!-- Question box -->
 <form class="question-form">
 
-    <p>@Model.NextQuestions.First().Text</p>
+    <p>@Model.Text</p>
 
     @{
         int index = 1;
-        var question = Model.NextQuestions.First();
 
-        foreach (var choiceText in question.Choices)
+        foreach (var choiceText in Model.Choices)
         {
             <div class="radio-custom">
-                <input type="radio" name="ChoiceIndex" value="@index" id="r@(index)_@question.Id" />
-                <label for="r@(index)_@question.Id">@choiceText</label>
+                <input type="radio" name="ChoiceIndex" value="@index" id="r@(index)_@Model.Id" />
+                <label for="r@(index)_@Model.Id">@choiceText</label>
             </div>
 
             index++;
@@ -26,11 +25,11 @@
     @{
         index = 1;
 
-        foreach (var choiceText in question.Choices)
+        foreach (var choiceText in Model.Choices)
         {
             <div class="checkbox-custom">
-                <input type="checkbox" name="ChoiceAccept" value="@index" id="c@(index)_@question.Id" />
-                <label for="c@(index)_@question.Id">@choiceText</label>
+                <input type="checkbox" name="ChoiceAccept" value="@index" id="c@(index)_@Model.Id" />
+                <label for="c@(index)_@Model.Id">@choiceText</label>
             </div>
 
             index++;
@@ -38,31 +37,31 @@
     }
 
     <div class="checkbox-custom">
-        <input type="checkbox" name="ChoiceIrrelevant" value="true" id="ChoiceIrrelevant@(question.Id)" />
-        <label for="ChoiceIrrelevant@(question.Id)">@i18n.Question_Irrelevant</label>
+        <input type="checkbox" name="ChoiceIrrelevant" value="true" id="ChoiceIrrelevant@(Model.Id)" />
+        <label for="ChoiceIrrelevant@(Model.Id)">@i18n.Question_Irrelevant</label>
     </div>
 
     <div class="question-importance-box">
         <p class="top-buffer-10">@i18n.Question_Prompt_Importance</p>
 
         <div class="question-importance-bars">
-            <div class="inline-block">
+            <div class="question-importance-bar-wrapper">
                 <div class="text-center">@i18n.Question_ALittleImportant</div>
                 <div class="question-importance-bar" data-importance="1"></div>
             </div>
-            <div class="inline-block">
+            <div class="question-importance-bar-wrapper">
                 <div class="text-center">@i18n.Question_SomewhatImportant</div>
                 <div class="question-importance-bar" data-importance="2"></div>
             </div>
-            <div class="inline-block">
+            <div class="question-importance-bar-wrapper">
                 <div class="text-center">@i18n.Question_VeryImportant</div>
                 <div class="question-importance-bar" data-importance="3"></div>
             </div>
         </div>
     </div>
    
-    <input type="hidden" name="ChoiceImportance" id="ChoiceImportance@(question.Id)" value="0" />
-    <input type="hidden" name="QuestionId" value="@question.Id" />
+    <input type="hidden" name="ChoiceImportance" id="ChoiceImportance@(Model.Id)" value="0" />
+    <input type="hidden" name="QuestionId" value="@Model.Id" />
 
     <div class="text-right top-buffer-20">
         <button class="btn btn-default question-skip">@i18n.Button_SkipQuestion</button>

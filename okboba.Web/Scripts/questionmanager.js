@@ -215,15 +215,6 @@ var QuestionManager = (function () {
             nextQues = configMap.nextQuestions[1];
 
             showNextQuestion(nextQues, form);
-            //nextQuesForm = showQuestion(nextQues, form, false);
-            //setupQuestionForm(nextQuesForm);
-
-            //nextQuesForm.on('question:submit', function () {
-            //    answer(nextQuesForm);
-            //});
-            //nextQuesForm.on('question:skip', function () {
-            //    skip(nextQuesForm);
-            //});
 
         } else {
             //no more questions to show

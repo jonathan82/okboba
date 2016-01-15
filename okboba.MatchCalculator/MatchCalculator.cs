@@ -230,10 +230,8 @@ namespace okboba.MatchCalculator
         }
 
         /// <summary>
-        /// 
         /// Gets a user's answer in a dictionary. If it doesn't exist returns an empty 
         /// Dictionary.
-        /// 
         /// </summary>
         public Dictionary<int, CacheAnswer> GetAnswerDict(int profileId)
         {
@@ -253,11 +251,15 @@ namespace okboba.MatchCalculator
         }
 
         /// <summary>
-        /// Gets a list of the users answers from the answer cache.
+        /// Gets a list of the users answers from the answer cache. return null if doesn't exit.
         /// </summary>
         public IEnumerable<CacheAnswer> GetAnswers(int profileId)
         {
-            return _answerCache[profileId];
+            if (_answerCache.ContainsKey(profileId))
+            {
+                return _answerCache[profileId];
+            }
+            return null;
         }
 
         /// <summary>

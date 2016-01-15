@@ -14,3 +14,10 @@ Match_xxxxxx: strings related to matching functions
 Time_xxxxxxx: strings related to time
 Error_xxxxxx: error message strings
 
+TODO
+============================================
+If user answered less than 10 questions force re-calculation of matches
+Add Photo button in navbar
+localization - english version
+Settings controller
+static pages

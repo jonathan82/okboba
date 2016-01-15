@@ -20,7 +20,6 @@
 <div class="row">
     <div class="col-md-6">
         
-
         <!-- Question list -->
         @foreach (var ques in Model.Questions)
         {
@@ -37,12 +36,12 @@
                     //show both answers
                     <!-- Answer -->
                     <div style="margin-bottom:5px;">
-                        @Html.Avatar(Model.Profile.GetFirstHeadshot(true), Model.Profile.Gender, Model.UserId, "question-avatar")
+                        @Html.Avatar(Model.Profile, "question-avatar", true)
                         @Html.ShowAnswer(ques.Answer, compareAnswer, ques.Question.Choices)
                     </div>
                     <!-- Comparison Answer -->
                     <div>
-                        @Html.Avatar(Model.CompareProfile.GetFirstHeadshot(true), Model.CompareProfile.Gender, Model.CompareProfile.UserId, "question-avatar")
+                        @Html.Avatar(Model.CompareProfile, "question-avatar", true)
                         @Html.ShowAnswer(compareAnswer, ques.Answer, ques.Question.Choices)
                     </div>
                 }
@@ -61,6 +60,12 @@
 
             </div>
           }
+
+        @if (Model.Questions.Count == 0)
+        {
+            <div class="nothing-to-show">@i18n.Error_NothingHere</div>
+        }
+
     </div>
 
     <!-- Filler -->
@@ -93,7 +98,7 @@
     <script>
 
         $(function () {            
-
+            //questions
             QuestionManager.initModule({
                 avatarMeUrl: '@Html.AvatarUrl(Model.CompareProfile.GetFirstHeadshot(true), Model.CompareProfile.Gender, Model.CompareProfile.UserId)',
                 avatarThemUrl: '@Html.AvatarUrl(Model.Profile.GetFirstHeadshot(true), Model.Profile.Gender, Model.Profile.UserId)',
@@ -102,6 +107,9 @@
 
             //messaging
             messaging.initModule();
+
+            //photos
+            PhotoManager.initModule();
         });
         
     </script>

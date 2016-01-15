@@ -205,11 +205,38 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 喜爱用户.
+        /// </summary>
+        public static string Button_FavoriteUser {
+            get {
+                return ResourceManager.GetString("Button_FavoriteUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 加载以前的消息.
+        /// </summary>
+        public static string Button_LoadMessages {
+            get {
+                return ResourceManager.GetString("Button_LoadMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 登录.
         /// </summary>
         public static string Button_Login {
             get {
                 return ResourceManager.GetString("Button_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 发信息.
+        /// </summary>
+        public static string Button_MessageUser {
+            get {
+                return ResourceManager.GetString("Button_MessageUser", resourceCulture);
             }
         }
         
@@ -727,6 +754,51 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 你没有照片, &lt;a href=&quot;{0}&quot;&gt;上载一长&lt;/a&gt;!.
+        /// </summary>
+        public static string Error_NoPhotos {
+            get {
+                return ResourceManager.GetString("Error_NoPhotos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 信息你没有写你的信息，&lt;a href=&quot;{0}&quot;&gt;现在写&lt;/a&gt;！.
+        /// </summary>
+        public static string Error_NoProfileText {
+            get {
+                return ResourceManager.GetString("Error_NoProfileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 你只回答了 {0} 个问题，&lt;a href=&quot;{1}&quot;&gt;回答多一点&lt;/a&gt;！.
+        /// </summary>
+        public static string Error_NoQuestionsAnswered {
+            get {
+                return ResourceManager.GetString("Error_NoQuestionsAnswered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 没什么可看这里.
+        /// </summary>
+        public static string Error_NothingHere {
+            get {
+                return ResourceManager.GetString("Error_NothingHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 欢迎OK波霸！.
+        /// </summary>
+        public static string Error_Welcome {
+            get {
+                return ResourceManager.GetString("Error_Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to answered a question..
         /// </summary>
         public static string Feed_AnsweredQuestion {
@@ -835,6 +907,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 登出.
+        /// </summary>
+        public static string Nav_Logoff {
+            get {
+                return ResourceManager.GetString("Nav_Logoff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 接受.
         /// </summary>
         public static string Nav_Messages_Received {
@@ -871,6 +952,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 我的简历.
+        /// </summary>
+        public static string Nav_MyProfile {
+            get {
+                return ResourceManager.GetString("Nav_MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 照片.
         /// </summary>
         public static string Nav_Photos {
@@ -894,6 +984,15 @@ namespace okboba.Resources {
         public static string Nav_Questions {
             get {
                 return ResourceManager.GetString("Nav_Questions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 设置.
+        /// </summary>
+        public static string Nav_Settings {
+            get {
+                return ResourceManager.GetString("Nav_Settings", resourceCulture);
             }
         }
         

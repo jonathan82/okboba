@@ -261,6 +261,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FavoritesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\MatchesController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\OkbHtmlHelpers.cs" />
     <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
@@ -287,6 +289,7 @@
     <Compile Include="Models\Question\AnswerViewModel.cs" />
     <Compile Include="Models\Question\QuestionIndexViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\Shared\NavbarViewModel.cs" />
     <Compile Include="Models\Validation\Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -547,9 +550,11 @@
     <Content Include="Views\Messages\_ComposeTemplate.cshtml" />
     <Content Include="Views\Home\_ActiveUsers.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
+    <Content Include="Views\Matches\_MatchScoreBlock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

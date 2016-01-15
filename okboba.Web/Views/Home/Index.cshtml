@@ -1,9 +1,13 @@
-﻿@{
+﻿@using okboba.Resources
+@using okboba.Web.Helpers
+@model IList<okboba.Repository.Models.QuestionModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <!-- Recommended Matches Carousel -->
-<div class="section-header">Your Recommended Matches</div>
+<div class="section-header">@i18n.Section_RecommendeMatches</div>
 
 @Html.Action("RecommendedMatches")
 
@@ -11,7 +15,7 @@
     <div class="col-md-7">
 
         <!-- Activity Feed -->
-        <div class="section-header">What's Going On</div>
+        <div class="section-header">@i18n.Section_ActivityFeed</div>
         @Html.Action("ActivityFeed")
 
     </div>
@@ -21,17 +25,28 @@
     <div class="col-md-4">
 
         <!-- Active Users -->
-        <div class="section-header">Active Users</div>
+        <div class="section-header">@i18n.Section_ActiveUsers</div>
         @Html.Action("ActiveUsers")
 
         <!-- Question Box -->
-        <div class="home-question-box">
-            this is a box where user can answer questions
-        </div>
+        <div class="section-header">@i18n.Section_MatchQuestions</div>
+        @if (Model.Count > 0)
+        {
+            Html.RenderPartial("~/Views/Question/_QuestionBox.cshtml", Model.First());
+        }        
 
     </div>
 </div>
 
 @section Scripts {
 
+    @Html.Partial("~/Views/Question/_QuestionTemplate.cshtml")
+
+    <script>
+        $(function () {
+            QuestionManager.initModule({
+                nextQuestions: @Html.JsonArray(Model)
+            });
+        });
+    </script>
 }

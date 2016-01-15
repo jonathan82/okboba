@@ -267,15 +267,15 @@ namespace okboba.Repository.EntityRepository
 
             var t1 = db.SaveChangesAsync();
 
-            //delete from storage
+            //delete from storage - just delete the original. keep the thumbnails
             var dir = GetPhotoDirectory(userId);
             var t2 = dir.GetBlockBlobReference(photo).DeleteAsync();
-            var t3 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SUFFIX).DeleteAsync();
-            var t4 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SMALL_SUFFIX).DeleteAsync();
-            var t5 = dir.GetBlockBlobReference(photo + OkbConstants.THUMBNAIL_SUFFIX).DeleteAsync();
+            //var t3 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SUFFIX).DeleteAsync();
+            //var t4 = dir.GetBlockBlobReference(photo + OkbConstants.HEADSHOT_SMALL_SUFFIX).DeleteAsync();
+            //var t5 = dir.GetBlockBlobReference(photo + OkbConstants.THUMBNAIL_SUFFIX).DeleteAsync();
 
             //await t1; await t2; await t3; await t4; await t5;
-            await Task.WhenAll(t1, t2, t3, t4, t5);
+            await Task.WhenAll(t1, t2);
         }
     }
 }

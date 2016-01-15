@@ -98,6 +98,16 @@ namespace okboba.Web.Helpers
             return url;
         }
 
+        public static HtmlString Avatar(this HtmlHelper htmlHelper, Profile profile, string className, bool isSmall = false)
+        {
+            return htmlHelper.Avatar(
+                profile.GetFirstHeadshot(isSmall),
+                profile.Gender,
+                profile.UserId,
+                profile.Nickname,
+                className);
+        }
+
         /// <summary>
         /// Generates an Avatar by buidling an img tag with the given parameters. If no photo is 
         /// specified it will use the "no avatar" default photo. The image is styled with the given className.
@@ -106,13 +116,15 @@ namespace okboba.Web.Helpers
         public static HtmlString Avatar(this HtmlHelper htmlHelper, 
             string photo, 
             byte gender, 
-            string userId, 
+            string userId,
+            string name, 
             string className)
         {            
             var src = htmlHelper.AvatarUrl(photo, gender, userId);
 
             var builder = new TagBuilder("img");
             builder.MergeAttribute("src", src);
+            builder.MergeAttribute("alt", name);
             builder.AddCssClass(className);
 
             return new HtmlString(builder.ToString(TagRenderMode.SelfClosing));
@@ -267,6 +279,21 @@ namespace okboba.Web.Helpers
         public static HtmlString JsonObject(this HtmlHelper htmlHelper, string json)
         {
             return new HtmlString(json == "" ? null : json);
+        }
+
+        public static HtmlString ChooseLanguage(this HtmlHelper htmlHelper, string culture, string label)
+        {            
+            if(CultureHelper.GetCurrentCulture() == culture)
+            {
+                //no link
+                return new HtmlString(label);
+            }
+
+            // return link
+            var tag = new TagBuilder("a");
+            tag.MergeAttribute("href", "/language/set?culture=" + culture);
+            tag.InnerHtml = label;
+            return new HtmlString(tag.ToString());
         }
     }
 }

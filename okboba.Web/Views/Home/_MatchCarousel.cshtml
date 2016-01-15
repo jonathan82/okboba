@@ -21,7 +21,7 @@
                         var m = Model[j];
                         <div class="carousel-match-card-wrapper">
                             <div class="carousel-match-card">
-                                @Html.Avatar(m.Photo, m.Gender, m.UserId, "carousel-match-avatar")
+                                @Html.Avatar(m.Photo, m.Gender, m.UserId, m.Nickname, "carousel-match-avatar")
                                 <div class="carousel-info-wrapper">
                                     <div class="carousel-info-percent carousel-info-match">@m.MatchPercent%</div>
                                     <div class="carousel-info-match">@i18n.Match_Match</div>

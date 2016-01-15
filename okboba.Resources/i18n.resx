@@ -480,4 +480,37 @@
   <data name="Section_RecommendeMatches" xml:space="preserve">
     <value>推荐匹配</value>
   </data>
+  <data name="Error_NoPhotos" xml:space="preserve">
+    <value>你没有照片, &lt;a href="{0}"&gt;上载一长&lt;/a&gt;!</value>
+  </data>
+  <data name="Error_NoProfileText" xml:space="preserve">
+    <value>信息你没有写你的信息，&lt;a href="{0}"&gt;现在写&lt;/a&gt;！</value>
+  </data>
+  <data name="Error_NoQuestionsAnswered" xml:space="preserve">
+    <value>你只回答了 {0} 个问题，&lt;a href="{1}"&gt;回答多一点&lt;/a&gt;！</value>
+  </data>
+  <data name="Error_NothingHere" xml:space="preserve">
+    <value>没什么可看这里</value>
+  </data>
+  <data name="Error_Welcome" xml:space="preserve">
+    <value>欢迎OK波霸！</value>
+  </data>
+  <data name="Nav_Logoff" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="Nav_MyProfile" xml:space="preserve">
+    <value>我的简历</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Button_FavoriteUser" xml:space="preserve">
+    <value>喜爱用户</value>
+  </data>
+  <data name="Button_LoadMessages" xml:space="preserve">
+    <value>加载以前的消息</value>
+  </data>
+  <data name="Button_MessageUser" xml:space="preserve">
+    <value>发信息</value>
+  </data>
 </root>

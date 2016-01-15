@@ -21,11 +21,33 @@ namespace okboba.MatchApi.Controllers
             _matchCalc = MatchCalc.Instance;
         }
 
-        public IDictionary<short,Answer> GetIntersect(int p1, int p2)
+        /// <summary>
+        /// GET: /api/answer/count
+        /// get the number of questions answered for the given user
+        /// </summary>
+        [HttpGet]
+        public int Count(int id)
+        {
+            var answers = _matchCalc.GetAnswers(id);
+            if (answers != null)
+            {
+                return answers.Count();
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// GET: /api/answer/intersection
+        /// Get all of P1's answers that is an intersection with p2's answers.
+        /// </summary>
+        [HttpGet]
+        public IDictionary<short,Answer> Intersection(int p1, int p2)
         {
             var ansDict = _matchCalc.GetAnswerDict(p2);
             var ansList = _matchCalc.GetAnswers(p1);
             var dict = new Dictionary<short, Answer>();
+
+            if (ansList == null) return dict;
 
             foreach (var ans in ansList)
             {
@@ -46,7 +68,7 @@ namespace okboba.MatchApi.Controllers
             return dict;
         }
 
-        // POST api/<controller>
+        // POST api/answer
         /// <summary>
         /// Updates/Adds the users answer in the answer cache.
         /// </summary>

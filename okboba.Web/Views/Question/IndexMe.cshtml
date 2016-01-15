@@ -22,7 +22,7 @@
         <!-- Question Box -->
         @if (Model.NextQuestions.Count() > 0)
         {
-            @Html.Partial("_QuestionBox");
+            @Html.Partial("_QuestionBox", Model.NextQuestions.First());
         }
         else
         {
@@ -42,6 +42,11 @@
                 <button class="btn btn-default btn-sm" data-toggle="updateanswer" data-quesid="@ques.Question.Id">@i18n.Button_UpdateAnswer</button>
             </div>
          }
+
+        @if (Model.Questions.Count == 0)
+        {
+            <div class="nothing-to-show">@i18n.Error_NothingHere</div>
+        }
     </div>
 
     <!-- Filler -->
@@ -80,6 +85,9 @@
 
             //messaging
             messaging.initModule();
+
+            //photos
+            PhotoManager.initModule();
         });
     </script>
 }

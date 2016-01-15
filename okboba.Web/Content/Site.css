@@ -114,6 +114,10 @@ body {
   padding: 30px 40px;
   min-height: 400px;
 }
+.container-alert {
+  padding: 0;
+  font-size: 1.2em;
+}
 .splash-buffer {
   position: relative;
   padding-top: 48%;
@@ -125,8 +129,9 @@ body {
   width: 100%;
 }
 .splash-navbar {
-  padding: 10px;
+  padding: 20px 20px 0 0;
   text-align: right;
+  font-size: 16px;
 }
 .splash-container .container {
   padding-top: 8%;
@@ -190,7 +195,7 @@ a.div-link {
 }
 .section-header {
   font-size: 1.6em;
-  color: #D7CDD8;
+  color: #B0BEC5;
   line-height: 1;
   margin-bottom: 15px;
 }
@@ -200,6 +205,14 @@ a.div-link {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
+}
+.nothing-to-show {
+  font-size: 1.5em;
+  color: #9b9b9b;
+}
+/*Get rid of annoying blue outline around buttons in chrome*/
+button:focus {
+  outline: 0 !important;
 }
 /********************************************
     Bootstrap override - Navigation tab
@@ -213,10 +226,22 @@ a.div-link {
   color: #9b9b9b;
   margin: 0;
 }
-.nav-tabs > li > a:hover {
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus,
+.nav-tabs > li > a:active {
   background-color: inherit;
+  background-image: none;
   border: none;
   color: #333333;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: inherit;
+  background-image: none;
+  -moz-box-shadow: inherit;
+  -webkit-box-shadow: inherit;
+  box-shadow: inherit;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
@@ -270,6 +295,17 @@ a.div-link {
   top: 10px;
   right: 10px;
   min-width: 12px;
+}
+.navbar-avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+.navbar-nav > li > a.navbar-avatar-link {
+  padding: 5px;
+}
+.navbar-container {
+  padding-right: 50px;
 }
 /***********************************
 
@@ -514,6 +550,10 @@ a.div-link {
   font-size: 1.5em;
   margin: 10px 0;
 }
+.match-score-block {
+  font-size: 1.8em;
+  line-height: 1em;
+}
 .question-form {
   background-color: #FFF;
   padding: 15px;
@@ -595,7 +635,6 @@ a.div-link {
   margin-top: 5px;
 }
 .question-importance-bar {
-  width: 130px;
   height: 16px;
   border-radius: 4px;
   background-color: #c1c1c1;
@@ -605,6 +644,10 @@ a.div-link {
 }
 .question-importance-bar.active {
   background-color: #D81B60;
+}
+.question-importance-bar-wrapper {
+  display: inline-block;
+  width: 31%;
 }
 /*******************************
     Styles for the comparing Answers
@@ -832,10 +875,13 @@ a.div-link {
 }
 .msg-header-center {
   display: table-cell;
+  vertical-align: top;
 }
 .msg-header-right {
   display: table-cell;
-  width: 100px;
+  width: 150px;
+  padding-right: 20px;
+  vertical-align: middle;
 }
 .msg-load-previous {
   text-align: center;
@@ -1053,6 +1099,10 @@ a.div-link {
 }
 .marketing-section {
   padding-bottom: 50px;
+}
+.language-chooser-container {
+  display: inline-block;
+  margin-right: 20px;
 }
 .chat-slider {
   position: fixed;
@@ -1332,8 +1382,7 @@ img.emoji {
 .activity-question {
   margin-left: 20px;
   margin-bottom: 10px;
-  font-size: 1.4em;
-  color: #555555;
+  font-size: 1.3em;
 }
 /**********************************
 
@@ -1342,7 +1391,7 @@ img.emoji {
 ***********************************/
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 .carousel {
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   padding: 10px 40px 10px 40px;
   background-color: #cecece;
   border-radius: 8px;
@@ -1370,7 +1419,7 @@ img.emoji {
   padding-right: 10px;
 }
 .carousel-match-card {
-  padding: 6px;
+  padding: 6px 10px;
   background-color: #FFF;
   position: relative;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
@@ -1400,6 +1449,21 @@ img.emoji {
 }
 .carousel-info-details {
   color: #9b9b9b;
+}
+/**********************************
+
+    Active user styles
+
+***********************************/
+.active-avatar {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin: 3px;
+  display: inline-block;
+}
+.active-users-box {
+  margin-bottom: 40px;
 }
 .home-question-box {
   height: 300px;
@@ -1503,4 +1567,34 @@ footer a:active {
 }*/
 .is-favorited {
   color: #FFC107 !important;
+}
+.favorite-row {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #FFF;
+  padding: 10px 15px 10px 20px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.favorite-row:hover {
+  background-color: #f7f7f7;
+}
+.favorite-avatar {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+.favorite-star {
+  font-size: 22px;
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 10px;
+}
+.favorite-name {
+  font-size: 20px;
+}
+.favorite-location {
+  font-size: 16px;
 }

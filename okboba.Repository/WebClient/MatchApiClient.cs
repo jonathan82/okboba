@@ -29,12 +29,22 @@ namespace okboba.Repository.WebClient
         }
 
         /// <summary>
+        /// Gets the number of questions answered for a user
+        /// </summary>
+        public async Task<int> GetAnswerCountAsync(int profileId)
+        {
+            var query = "/api/answer/count?id=" + profileId;
+            var result = await CallMatchApiAsync<int>(query, false).ConfigureAwait(false);
+            return result;
+        }
+
+        /// <summary>
         /// Gets the intersection of p1's answers with p2's answers and returns a dictionary
         /// of p1's answers.
         /// </summary>
         public async Task<IDictionary<short,Answer>> GetIntersectionAsync(int p1, int p2)
         {
-            var query = "/api/answer/getintersect?p1=" + p1 + "&p2=" + p2;
+            var query = "/api/answer/intersection?p1=" + p1 + "&p2=" + p2;
             var result = await CallMatchApiAsync<IDictionary<short, Answer>>(query, false).ConfigureAwait(false);
             return result;
         }

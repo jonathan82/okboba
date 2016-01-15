@@ -34,8 +34,8 @@
     <div class="col-sm-3 col-md-2">
         @if (!Model.IsMe)
         {
-            <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="compose">Message User</button>
-            <button class="btn btn-default btn-block @(Model.IsFavorite ? "is-favorited" : "")" data-toggle="favorite" data-id="@Model.Profile.Id"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Favorite User</button>
+            <button class="btn btn-primary btn-block" data-name="@Model.Profile.Nickname" data-id="@Model.Profile.Id" data-toggle="compose">@i18n.Button_MessageUser</button>
+            <button class="btn btn-default btn-block @(Model.IsFavorite ? "is-favorited" : "")" data-toggle="favorite" data-id="@Model.Profile.Id"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>  @i18n.Button_FavoriteUser</button>
         }        
     </div>
 </div>
@@ -49,14 +49,14 @@
 @foreach (var photo in photos.Take(4))
 {
     <div class="profile-header-photo">
-        <a href="~/photo/@userId">@Html.Avatar(photo.Thumb, Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>        
+        <a href="~/photo/@userId">@Html.Avatar(photo.Thumb, Model.Profile.Gender, Model.Profile.UserId, Model.Profile.Nickname, "profile-avatar")</a>        
     </div>
 }
 @if (photos.Count() < 4 && Model.IsMe)
 {
     //Show Add photo as long as user has less than 4 photos
     <div class="profile-header-photo">
-        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>
+        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, Model.Profile.Nickname, "profile-avatar")</a>
         @*<button class="btn btn-info profile-header-addphoto" data-toggle="modal" data-target="#photoUploadModal">@i18n.Photos_AddPhoto</button>*@
         <button class="btn btn-info profile-header-addphoto" data-toggle="photoupload">@i18n.Button_AddPhoto</button>
     </div>
@@ -65,7 +65,7 @@ else if (photos.Count() == 0)
 {
     //Show no avatar if user has no photos
     <div class="profile-header-photo">
-        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, "profile-avatar")</a>
+        <a href="~/photo/@userId">@Html.Avatar("", Model.Profile.Gender, Model.Profile.UserId, Model.Profile.Nickname, "profile-avatar")</a>
     </div>
 }
 

@@ -13,10 +13,12 @@ namespace okboba.Web.Controllers
     public class FavoritesController : OkbBaseController
     {
         private IFavoriteRepository _favRepo;
+        private ILocationRepository _locRepo;
 
         public FavoritesController()
         {
             _favRepo = EntityFavoriteRepository.Instance;
+            _locRepo = EntityLocationRepository.Instance;
         }
 
         // GET: Favorites
@@ -35,11 +37,15 @@ namespace okboba.Web.Controllers
             {
                 var match = matchClient.CalculateMatchAsync(fav.Id).Result;
 
-                vm.Add(new FavoriteViewModel
+                var model = new FavoriteViewModel
                 {
                     FavoriteProfile = fav,
                     MatchInfo = match
-                });
+                };
+
+                model.FavoriteProfile.LocationSring = _locRepo.GetLocationString(fav.LocationId1, fav.LocationId2);
+
+                vm.Add(model);                
             }
 
             return View(vm);

@@ -4,6 +4,6 @@
 <div class="active-users-box">
     @foreach (var profile in Model)
     {
-        <div>@Html.Avatar(profile.GetFirstHeadshot(true), profile.Gender, profile.UserId, "active-avatar")</div>
+        <a href="/profile/@profile.UserId">@Html.Avatar(profile, "active-avatar", true)</a>        
     }
 </div>

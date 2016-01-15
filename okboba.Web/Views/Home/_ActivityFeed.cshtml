@@ -5,14 +5,14 @@
 
 @foreach (var activity in Model)
 {
-    var photo = activity.Profile.GetFirstHeadshot(true);
+    //var photo = activity.Profile.GetFirstHeadshot(true);
 
     if (activity.Activity.CategoryId == (int)OkbConstants.ActivityCategories.Joined)
     {
         //Joined activity
         <div class="activity-feed-row">
             <div class="activity-feed-left">
-                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+                @Html.Avatar(activity.Profile, "activity-avatar", true)
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_Joined</p>
@@ -25,11 +25,11 @@
         //Edited profile text
         <div class="activity-feed-row">
             <div class="activity-feed-left">
-                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+                @Html.Avatar(activity.Profile, "activity-avatar", true)
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_EditedProfileText</p>
-                <div class="activity-profiletext">@activity.Activity.Field1</div>
+                <div class="activity-profiletext">@Html.Raw(activity.Activity.Field1)</div>
             </div>
             <a href="/profile/@activity.Profile.UserId" class="div-link"></a>
         </div>
@@ -39,7 +39,7 @@
         //Uploaded photo
         <div class="activity-feed-row">
             <div class="activity-feed-left">
-                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+                @Html.Avatar(activity.Profile, "activity-avatar", true)
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_UploadedPhoto</p>
@@ -53,11 +53,11 @@
         //answered question
         <div class="activity-feed-row">
             <div class="activity-feed-left">
-                @Html.Avatar(photo, activity.Profile.Gender, activity.Profile.UserId, "activity-avatar")
+                @Html.Avatar(activity.Profile, "activity-avatar", true)
             </div>
             <div class="activity-feed-content">
                 <p class="activity-summary">@activity.Profile.Nickname @i18n.Feed_AnsweredQuestion</p>
-                <div class="activity-question">
+                <div class="activity-question text-muted">
                     @activity.Activity.Field1
                     <ul>
                         <li>@activity.Activity.Field2</li>

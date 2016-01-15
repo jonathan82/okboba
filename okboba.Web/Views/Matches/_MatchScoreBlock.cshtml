@@ -1,0 +1,12 @@
+﻿@using okboba.Resources
+@model okboba.Repository.Models.MatchModel
+<div class="match-score-block pull-right">
+    <div class="match-info-score-match">
+        <div>@Model.MatchPercent%</div>
+        <div class="match-info-score-smaller">@i18n.Match_Match</div>
+    </div>
+    <div class="match-info-score-enemy">
+        <div>@Model.EnemyPercent%</div>
+        <div class="match-info-score-smaller">@i18n.Match_Enemy</div>
+    </div>
+</div>

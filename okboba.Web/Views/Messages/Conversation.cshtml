@@ -16,14 +16,14 @@
         <!-- Profile of the person we're taking with -->
         <div class="msg-profile-header">
             <div class="msg-row-left">
-                @Html.Avatar(Model.Other.GetFirstHeadshot(true), Model.Other.Gender, Model.Other.UserId, "msg-avatar")
+                @Html.Avatar(Model.Other, "msg-avatar", true)
             </div>
             <div class="msg-header-center">
                 <div class="msg-header-name">@Model.Other.Nickname</div>
                 <div class="msg-header-details">@Model.Other.GetAge() &#x2022; @Model.Other.LocationSring</div>
             </div>
             <div class="msg-header-right">
-                Match Score
+                @Html.Partial("~/Views/Matches/_MatchScoreBlock.cshtml", Model.MatchInfo)
             </div>
         </div>
 
@@ -44,7 +44,7 @@
 
                 <div class="msg-row">
                     <div class="msg-row-left">
-                        @Html.Avatar(profile.GetFirstHeadshot(true), profile.Gender, profile.UserId, "msg-avatar")
+                        @Html.Avatar(profile, "msg-avatar", true)
                     </div>
                     <div class="msg-row-right">
                         <div class="@(isMe ? "msg-dialog-me" : "msg-dialog-them")">
@@ -60,7 +60,7 @@
         <!-- Reply box -->
         <div class="msg-row">
             <div class="msg-row-left">
-                @Html.Avatar(Model.Me.GetFirstHeadshot(true), Model.Me.Gender, Model.Me.UserId, "msg-avatar")
+                @Html.Avatar(Model.Me, "msg-avatar", true)
             </div>
             <div class="msg-row-right">
                 <div class="msg-dialog-me">

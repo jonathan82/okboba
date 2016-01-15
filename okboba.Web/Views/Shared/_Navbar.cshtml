@@ -1,40 +1,68 @@
 ﻿@using okboba.Web.Helpers
+@using okboba.Resources
+    @model okboba.Web.Models.NavbarViewModel
 
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="~/home"><img src="~/Content/images/logo/boba-logo-sm.png" alt="Alternate Text" style="opacity:0.7" /></a>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid navbar-container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/home"><img src="~/Content/images/logo/boba-logo-sm.png" alt="Alternate Text" style="opacity:0.7" /></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <!-- Left navigation links -->
+
+                <ul class="nav navbar-nav">
+                    <li><a href="~/matches" class="okb-navbar-text">浏览匹配</a></li>
+                    <li><a href="~/question#questionBox" class="text-big">回答提问</a></li>
+                </ul>
+
+                <!-- Right navigation links -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/favorites"><span class="glyphicon glyphicon-star"></span></a></li>
+                    <li><a href="/messages"><span class="glyphicon glyphicon-envelope text-big"></span>@Html.UnreadCount(Model.UnreadCount)</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle navbar-avatar-link" data-toggle="dropdown">
+                            @Html.Avatar(Model.MyProfile, "navbar-avatar", true)
+                            @*<span class="caret" style="vertical-align:middle"></span>*@
+                        </a>                        
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile">@i18n.Nav_MyProfile</a></li>
+                            <li><a href="#">@i18n.Nav_Settings</a></li>
+                            <li><a href="/account/logoff">@i18n.Nav_Logoff</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    @if (!Model.HasPhoto || !Model.HasProfileText || Model.NumQuesAnswered < 5)
+    {
+        <div class="container container-alert">
+            <div class="alert alert-success">
+                <b>@i18n.Error_Welcome</b>
+                @if (!Model.HasPhoto)
+                {
+                    @Html.Raw(string.Format(i18n.Error_NoPhotos, "/photo"))
+                }
+                @if (!Model.HasProfileText)
+                {
+                    @Html.Raw(string.Format(i18n.Error_NoProfileText, "/profile"))
+                }
+                @if(Model.NumQuesAnswered < 5)
+                {
+                    @Html.Raw(string.Format(i18n.Error_NoQuestionsAnswered, Model.NumQuesAnswered, "/question"))
+                }
+                @*You don't have any photos yet, <a href="{0}"><b>Upload one!</b></a>
+            You haven't filled out your profile, do it now!
+            You've only answered 3 questions, answer more!*@
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!-- Left navigation links -->
-
-            <ul class="nav navbar-nav">
-                <li><a href="~/matches" class="okb-navbar-text">浏览匹配</a></li>
-                <li><a href="~/question#questionBox" class="text-big">回答提问</a></li>
-            </ul>
-
-            <!-- Right navigation links -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/favorites"><span class="glyphicon glyphicon-star"></span></a></li>
-                <li><a href="/messages"><span class="glyphicon glyphicon-envelope text-big"></span>@Html.UnreadCount((int)ViewBag.UnreadCount)</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user text-big"></span><span class="caret" style="vertical-align:middle"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/profile">My Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="/account/logoff">Sign Out</a></li>
-                    </ul>
-                </li>
-                <li><a href="/settings"><span class="glyphicon glyphicon-cog text-big"></span></a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
+    </div>
+    }

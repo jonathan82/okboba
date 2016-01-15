@@ -13,7 +13,7 @@
         @foreach (var m in Model.Matches)
         {
             <div class="match-result">
-                <a href="~/profile/@m.UserId">@Html.Avatar(m.Photo, m.Gender, m.UserId, "match-avatar")</a>
+                <a href="~/profile/@m.UserId">@Html.Avatar(m.Photo, m.Gender, m.UserId, m.Nickname, "match-avatar")</a>
                 <div class="match-info-wrapper">
                     <div class="match-info-name">@m.Nickname</div>
                     <div class="match-info-row2">@m.Age &#x2022; @m.Location</div>

@@ -18,12 +18,14 @@ namespace okboba.Web.Controllers
         private IActivityRepository _activityRepo;
         private IProfileRepository _profileRepo;
         private IRedisMatchRepository _matchCache;
+        private IQuestionRepository _quesRepo;
 
         public HomeController()
         {
             _activityRepo = EntityActivityRepository.Instance;
             _profileRepo = EntityProfileRepository.Instance;
             _matchCache = SXMatchRepository.Instance;
+            _quesRepo = EntityQuestionRepository.Instance;
         }
 
         [ChildActionOnly]
@@ -50,11 +52,9 @@ namespace okboba.Web.Controllers
 
         [ChildActionOnly]
         public ActionResult ActivityFeed()
-        {            
-            var profile = _profileRepo.GetProfile(GetProfileId());
-
-            //keep it simple and just use gender for now
-            var vm = _activityRepo.GetActivities(profile.LookingForGender, OkbConstants.NUM_ACTIVITIES_TO_SHOW);
+        {                    
+            //Get all activities for now
+            var vm = _activityRepo.GetActivities(OkbConstants.NUM_ACTIVITIES_TO_SHOW);
 
             return PartialView("_ActivityFeed",vm);
         }
@@ -69,7 +69,11 @@ namespace okboba.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var me = GetProfileId();
+
+            var ques = _quesRepo.Next2Questions(me);
+
+            return View(ques);
         }
 
     }

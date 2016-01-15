@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FriendlyTime.cs" />
-    <Compile Include="i18n.Designer.cs">
+    <Compile Include="i18n1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>i18n.resx</DependentUpon>
@@ -54,7 +54,7 @@
     <EmbeddedResource Include="i18n.en.resx" />
     <EmbeddedResource Include="i18n.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>i18n.Designer.cs</LastGenOutput>
+      <LastGenOutput>i18n1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="i18n.zh-TW.resx" />
   </ItemGroup>

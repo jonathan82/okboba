@@ -62,8 +62,8 @@
 .activity-question {
     margin-left: 20px;
     margin-bottom: 10px;
-    font-size: 1.4em;
-    color: @gray;
+    font-size: 1.3em;
+    //color: @gray;
 }
 
 /**********************************
@@ -73,7 +73,7 @@
 ***********************************/
 /* Removes the default 20px margin and creates some padding space for the indicators and controls */
 .carousel {
-    margin-bottom: 25px;
+    margin-bottom: 40px;
 	padding: 10px 40px 10px 40px;
     background-color: lighten(@gray-light, 20%);
     border-radius: 8px;
@@ -107,7 +107,7 @@
 }
 
 .carousel-match-card {
-    padding: 6px;
+    padding: 6px 10px;
     background-color: #FFF;
     position: relative;
     .shadow-z-1;
@@ -144,6 +144,28 @@
 
 .carousel-info-details {
     color: @gray-light;
+}
+
+/**********************************
+
+    Active user styles
+
+***********************************/
+.active-avatar {
+    .img-circle;
+    width: 60px;
+    height: 60px;
+    margin: 3px;
+    display: inline-block;
+    //border: 1px solid @bg-color;
+}
+
+.active-avatar:hover {
+    //border: 1px solid blue;
+}
+
+.active-users-box {
+    margin-bottom: 40px;
 }
 
 .home-question-box {

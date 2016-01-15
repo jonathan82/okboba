@@ -61,7 +61,7 @@ namespace okboba.Repository.EntityRepository
             db.SaveChanges();
         }
 
-        public IEnumerable<ActivityModel> GetActivities(byte gender, int numOfActivities)
+        public IEnumerable<ActivityModel> GetActivities(int numOfActivities)
         {
             //get the top N activities
             var db = new OkbDbContext();
@@ -69,7 +69,6 @@ namespace okboba.Repository.EntityRepository
             var result = from activity in db.ActivityFeed.AsNoTracking()
                          join profile in db.Profiles.AsNoTracking()
                          on activity.Who equals profile.Id
-                         where profile.Gender == gender
                          orderby activity.Timestamp descending
                          select new ActivityModel
                          {

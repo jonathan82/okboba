@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using okboba.Repository.EntityRepository;
 using System.Net;
 using okboba.Resources;
+using okboba.Web.Helpers;
 
 //some comments
 
@@ -169,7 +170,8 @@ namespace okboba.Web.Controllers
                     Birthdate = model.Birthdate,
                     Nickname = model.Nickname,
                     LocationId1 = model.LocationId1,
-                    LocationId2 = model.LocationId2
+                    LocationId2 = model.LocationId2,
+                    UserId = user.Id
                 };
 
                 user.Profile = profile;
@@ -186,6 +188,9 @@ namespace okboba.Web.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+                    //Update activity feed
+                    _feedRepo.JoinedActivity(GetProfileId());                      
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -198,6 +203,8 @@ namespace okboba.Web.Controllers
             model.JsonProvinces = JsonConvert.SerializeObject(prov);
             return View(model);
         }
+
+        
 
         #region Helpers
 

@@ -11,11 +11,24 @@ using System.Net;
 using okboba.Resources;
 using okboba.Repository.RedisRepository;
 using okboba.Repository.EntityRepository;
+using okboba.Web.Models;
+using okboba.Repository;
+using System.Threading;
+using okboba.Web.Helpers;
 
 namespace okboba.Web.Controllers
 {
     public class OkbBaseController : Controller
     {
+        private IProfileRepository _profileRepo;
+        private IMessageRepository _msgRepo;
+
+        public OkbBaseController()
+        {
+            _profileRepo = EntityProfileRepository.Instance;
+            _msgRepo = EntityMessageRepository.Instance;
+        }
+
         public string Truncate(string value, int maxChars)
         {
             return value.Length <= maxChars ? value : value.Substring(0, maxChars);
@@ -121,18 +134,50 @@ namespace okboba.Web.Controllers
             Session["Activity:" + category.ToString()] = DateTime.Now;
         }
 
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        /// <summary>
+        /// Sets the users language by looking at the cookie
+        /// </summary>
+        protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            if (!Request.IsAuthenticated)
-            {
-                return;
-            }
+            string cultureName = null;
 
-            //Get unread message count 
-            var msgRepo = EntityMessageRepository.Instance;
+            // Attempt to read the culture cookie from Request
+            HttpCookie cultureCookie = Request.Cookies["_culture"];
+            if (cultureCookie != null)
+                cultureName = cultureCookie.Value;
+            else
+                cultureName = Request.UserLanguages != null && Request.UserLanguages.Length > 0 ?
+                        Request.UserLanguages[0] :  // obtain it from HTTP header AcceptLanguages
+                        null;
+            // Validate culture name
+            cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
+
+            // Modify current thread's cultures            
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+
+            return base.BeginExecuteCore(callback, state);
+        }
+
+        [ChildActionOnly]
+        [Authorize]
+        public ActionResult Navbar()
+        {
             var me = GetProfileId();
-            ViewBag.UnreadCount = msgRepo.GetUnreadCount(me);
-            base.OnActionExecuted(filterContext);
+
+            var matchClient = GetMatchApiClient();
+
+            var vm = new NavbarViewModel();
+
+            var profileText = _profileRepo.GetProfileText(me);
+
+            vm.MyProfile = _profileRepo.GetProfile(me);
+            vm.UnreadCount = _msgRepo.GetUnreadCount(me);
+            vm.HasPhoto = vm.MyProfile.GetFirstHeadshot() != "";
+            vm.HasProfileText = !string.IsNullOrEmpty(profileText.Question1);
+            vm.NumQuesAnswered = matchClient.GetAnswerCountAsync(me).Result; 
+
+            return PartialView("_Navbar", vm);
         }
     }
 }
