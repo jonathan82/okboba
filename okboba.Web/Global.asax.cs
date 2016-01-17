@@ -23,8 +23,8 @@ namespace okboba
 
             //Increase performance by disabling WebForms view engine
             //http://encosia.com/a-harsh-reminder-about-the-importance-of-debug-false/
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new RazorViewEngine());
+            //ViewEngines.Engines.Clear();
+            //ViewEngines.Engines.Add(new RazorViewEngine());
 
             // Create singleton for Redis connection object
             var redisConnStr = ConfigurationManager.ConnectionStrings["RedisConnectionString"].ConnectionString;

@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxMin, Version=5.14.5506.26196, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxMin.5.14.5506.26202\lib\net40\AjaxMin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AspNetBundling, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNetBundling.2.0.3.0\lib\net45\AspNetBundling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ClearScript, Version=5.4.1.0, Culture=neutral, PublicKeyToken=935d0c957da47c73, processorArchitecture=MSIL">
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.1.2.4\lib\net40\ClearScript.dll</HintPath>
       <Private>True</Private>
@@ -248,6 +256,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="500.aspx.cs">
+      <DependentUpon>500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="500.aspx.designer.cs">
+      <DependentUpon>500.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -307,15 +329,23 @@
     <None Include="ClearScript.V8\v8-x64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="404.aspx" />
+    <Content Include="404.html" />
+    <Content Include="500.aspx" />
+    <Content Include="500.html" />
     <Content Include="Content\Admin.css">
       <DependentUpon>admin.less</DependentUpon>
     </Content>
     <Content Include="Content\Admin.min.css">
       <DependentUpon>Admin.css</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\boba.png" />
+    <Content Include="Content\images\cartoon_lady.png" />
+    <Content Include="Content\images\chat-curve-register.png" />
     <Content Include="Content\images\girl-studying-math.jpg" />
     <Content Include="Content\images\Head-Scratch.png" />
+    <Content Include="Content\images\logo\boba-logo-sm.png" />
     <Content Include="Content\images\logo\boba-sm.png" />
     <Content Include="Content\images\logo\okboba-logo-lg-2.png" />
     <Content Include="Content\images\logo\okboba-logo-lg.png" />
@@ -326,6 +356,7 @@
     <Content Include="Content\images\nomoney.png" />
     <Content Include="Content\images\sadface.png" />
     <Content Include="Content\images\Shanghai-Skyline.jpg" />
+    <Content Include="Content\images\spilled-drink.png" />
     <Content Include="Content\images\wedding_beach.jpg" />
     <Content Include="Content\images\wedding_bw.jpg" />
     <Content Include="Content\Site.css">
@@ -355,6 +386,10 @@
     <Content Include="Content\home.less" />
     <Content Include="Content\footer.less" />
     <Content Include="Content\favorite.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -414,7 +449,6 @@
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="lib\jquery\jquery-1.11.3.min.map" />
     <Content Include="lib\jsviews\jsviews.min.js.map" />
-    <None Include="Properties\PublishProfiles\okboba.pubxml" />
     <None Include="lib\jquery\jquery-1.10.2.intellisense.js" />
     <Content Include="lib\filereader\filereader.js" />
     <None Include="lib\jquery-validate\jquery.validate-vsdoc.js" />
@@ -493,7 +527,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LayoutAuth.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -551,6 +584,7 @@
     <Content Include="Views\Home\_ActiveUsers.cshtml" />
     <Content Include="Views\Favorites\Index.cshtml" />
     <Content Include="Views\Matches\_MatchScoreBlock.cshtml" />
+    <None Include="Properties\PublishProfiles\www-okboba - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

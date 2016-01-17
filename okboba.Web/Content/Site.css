@@ -104,7 +104,7 @@ body {
   background-color: #880E4F;
 }
 .body-splash {
-  background-image: url('Images/Shanghai-Skyline.jpg');
+  background-image: url('/content/Images/Shanghai-Skyline.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -267,6 +267,9 @@ button:focus {
   border-color: #FCE4EC;
   border-width: 0;
   background-image: none;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 .navbar-nav > li > a {
@@ -1053,7 +1056,7 @@ button:focus {
 }
 .photo-on-screen {
   max-width: 800px;
-  height: auto;
+  max-height: 900px;
 }
 .photo-sadface {
   width: 400px;

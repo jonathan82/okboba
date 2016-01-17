@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - OkBoba Dating</title>
-    @Styles.Render("~/bundles/css/all")
+    @Styles.Render("~/content/css")
 </head>
 
 <body class="body-auth">
@@ -25,16 +25,20 @@
 
     @Html.Partial("_Footer")
 
-    @Scripts.Render("~/bundles/js/vendor")    
-    <script src="@Html.ChatUrl()/hubs"></script>
+    @Scripts.Render("~/bundles/js/vendor")  
     @Scripts.Render("~/bundles/js/okboba")
+
     @RenderSection("scripts", required: false)
+
+    @* Disable Chat for now *@
+    @*<script src="@Html.ChatUrl()/hubs"></script>
 
     <script>
         //Initialize chat on every page
         $(function () {
             chatManager.initModule({ hubUrl: '@Html.ChatUrl()' });
         });
-    </script>
+    </script>*@
+
 </body>
 </html>

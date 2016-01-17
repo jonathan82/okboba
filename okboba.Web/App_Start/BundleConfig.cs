@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using AspNetBundling;
+using System.Web;
 using System.Web.Optimization;
 
 namespace okboba
@@ -8,7 +9,7 @@ namespace okboba
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/js/vendor").Include(
+            bundles.Add(new Bundle("~/bundles/js/vendor").Include(
                 "~/lib/jquery/jquery-{version}.js",
                 "~/lib/jquery-ui/jquery-ui.js",
                 "~/lib/jquery-validate/jquery.validate.js",
@@ -25,7 +26,7 @@ namespace okboba
                 "~/lib/spinner/jquery.spin.js",
                 "~/lib/photoswipe/photoswipe.js",
                 "~/lib/photoswipe/photoswipe-ui-default.js",
-                "~/lib/nicescroll/jquery.nicescroll.js",
+                //"~/lib/nicescroll/jquery.nicescroll.js",
                 "~/lib/throttle/jquery.ba-throttle-debounce.js",
                 "~/lib/signalr/jquery.signalR-2.2.0.js",
                 //"~/lib/ladda/spin.min.js", //spinner already added above
@@ -50,7 +51,7 @@ namespace okboba
                 "~/Scripts/messaging.js",
                 "~/Scripts/favorite.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/css/all").Include(
+            bundles.Add(new StyleBundle("~/content/css").Include(
                 "~/lib/bootstrap/css/bootstrap.css",
                 "~/lib/bootstrap/css/bootstrap-theme.css",
                 "~/lib/datepicker/css/bootstrap-datepicker3.css",

@@ -214,6 +214,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 加入！.
+        /// </summary>
+        public static string Button_Join {
+            get {
+                return ResourceManager.GetString("Button_Join", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 加载以前的消息.
         /// </summary>
         public static string Button_LoadMessages {
@@ -903,6 +912,24 @@ namespace okboba.Resources {
         public static string Messaging_You {
             get {
                 return ResourceManager.GetString("Messaging_You", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 浏览匹配.
+        /// </summary>
+        public static string Nav_BrowseMatches {
+            get {
+                return ResourceManager.GetString("Nav_BrowseMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 提高比赛.
+        /// </summary>
+        public static string Nav_ImproveMatches {
+            get {
+                return ResourceManager.GetString("Nav_ImproveMatches", resourceCulture);
             }
         }
         

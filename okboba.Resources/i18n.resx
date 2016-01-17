@@ -513,4 +513,13 @@
   <data name="Button_MessageUser" xml:space="preserve">
     <value>发信息</value>
   </data>
+  <data name="Button_Join" xml:space="preserve">
+    <value>加入！</value>
+  </data>
+  <data name="Nav_BrowseMatches" xml:space="preserve">
+    <value>浏览匹配</value>
+  </data>
+  <data name="Nav_ImproveMatches" xml:space="preserve">
+    <value>提高比赛</value>
+  </data>
 </root>

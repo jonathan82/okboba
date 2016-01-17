@@ -52,7 +52,8 @@ namespace okboba.Web.Controllers
 
                 if (user == null)
                 {
-                    // No profile exists for user!??!?
+                    // No profile exists for user. So we have a user account and they're logged in
+                    // but they have no profile. in this case we should
                     throw new Exception("No profile exists for user");
                 }
 

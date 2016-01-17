@@ -24,7 +24,6 @@
          *  - adding an "X" glyphicon to the input control
          */
         highlight: function (element, errorClass) {
-            console.log('hilight: ' + $(element).prop('name'));
             var fg = $(element).closest('.form-group');
             if (fg.hasClass('has-error')) {
                 //if element is already highlighted we don't do anything. prevent multiple "X"'s from being added
@@ -39,7 +38,6 @@
          * Unhighlight: we undo what highlight did
          */
         unhighlight: function (element, errorClass) {
-            console.log('unhighlight: ' + $(element).prop('name'));
             $(element).closest('.form-group').removeClass('has-error');
             $(element).closest('.form-group').removeClass('has-feedback');
             $(element).nextAll('.glyphicon-remove').remove();

@@ -17,6 +17,7 @@ var okbregister = (function ($) {
             bdayTextSel: '#BirthdateText',
             bdaySel: '#Birthdate',
             locationTextSel: '#locationText',
+            registerFormSel: '#registerForm',
             provinces: null //a JSON array of provinces used for initial state of location picker. 
         },
         validationOpts = {
@@ -26,7 +27,10 @@ var okbregister = (function ($) {
                 Email: {
                     required: true,
                     email: true,
-                    remote: '/account/verifyemail' //check with server to see if email already registered
+                    remote: {
+                        url: '/account/verifyemail', //check with server to see if email already registered 
+                        complete: function () { $(configMap.registerFormSel).valid();}
+                    }
                 },
                 Password: {
                     required: true,
@@ -117,7 +121,7 @@ var okbregister = (function ($) {
             });
         
         //Setup validation
-        $('#registerForm').validate(validationOpts);
+        $(configMap.registerFormSel).validate(validationOpts);
     }
 
     //// return Public Interface

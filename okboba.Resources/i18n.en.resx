@@ -513,4 +513,13 @@
   <data name="Button_MessageUser" xml:space="preserve">
     <value>Message User</value>
   </data>
+  <data name="Button_Join" xml:space="preserve">
+    <value>Join!</value>
+  </data>
+  <data name="Nav_BrowseMatches" xml:space="preserve">
+    <value>Browse Matches</value>
+  </data>
+  <data name="Nav_ImproveMatches" xml:space="preserve">
+    <value>Improve Matches</value>
+  </data>
 </root>

@@ -27,11 +27,13 @@ namespace okboba.Web.Controllers
     {
         private ILocationRepository _locationRepo;
         private IActivityRepository _feedRepo;
+        private IProfileRepository _profileRepo;
 
         public AccountController()
         {
             _locationRepo = EntityLocationRepository.Instance;
             _feedRepo = EntityActivityRepository.Instance;
+            _profileRepo = EntityProfileRepository.Instance;
         }
 
         public ApplicationSignInManager SignInManager
@@ -189,7 +191,8 @@ namespace okboba.Web.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //Update activity feed
-                    _feedRepo.JoinedActivity(GetProfileId());                      
+                    var profileId = _profileRepo.GetProfileId(user.Id);
+                    _feedRepo.JoinedActivity(profileId);
 
                     return RedirectToAction("Index", "Home");
                 }

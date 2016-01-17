@@ -57,6 +57,8 @@ var PhotoManager = (function ($) {
     }
 
     function loadPhotoError(msg) {
+        //clear the file input and re-establish handlers
+        theModal.find('input[type="file"]').val('');
         alert(msg);
     }
 
@@ -132,7 +134,7 @@ var PhotoManager = (function ($) {
 
         //Delete the photo
         $.post(configMap.deletePhotoApi, { photo: photo }).fail(function () {
-            alert('failed');
+            console.log('error deleting photo');
         });
 
         //optimistically remove photo

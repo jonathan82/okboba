@@ -1,4 +1,7 @@
-(function(root, factory) {
+/*
+ * JLIN: 1/15/2016 - added semicolon in beginning to terminate "bad" scripts included previously
+ */
+; (function (root, factory) {
     if (typeof exports === "object") {
         module.exports = factory();
     } else if (typeof define === "function" && define.amd) {
