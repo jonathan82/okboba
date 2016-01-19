@@ -63,5 +63,6 @@ namespace okboba.Repository
         void MarkAsRead(int profileId, int convId);
         Task<int> StartConversation(int from, int to, string subject, string message);
         Task Reply(int from, int convId, string message);
+        Conversation GetConversation(int id);
     }
 }

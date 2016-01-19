@@ -29,7 +29,7 @@ var okbregister = (function ($) {
                     email: true,
                     remote: {
                         url: '/account/verifyemail', //check with server to see if email already registered 
-                        complete: function () { $(configMap.registerFormSel).valid();}
+                        //complete: function () { $(configMap.registerFormSel).valid();}
                     }
                 },
                 Password: {
@@ -38,7 +38,9 @@ var okbregister = (function ($) {
                 },
                 Nickname: {
                     required: true,
-                    minlength: 2
+                    minlength: 2,
+                    maxlength: 15,
+                    pattern: /^[a-zA-Z0-9]{2,15}$/
                 },
                 BirthdateText: "required",
                 locationText: "required"

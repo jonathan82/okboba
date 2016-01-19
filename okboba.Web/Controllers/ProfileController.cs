@@ -1,4 +1,5 @@
-﻿using okboba.Entities;
+﻿
+using okboba.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -143,16 +144,19 @@ namespace okboba.Web.Controllers
 
         /// <summary>
         /// API: Update profile text
+        /// 
+        /// Accepts dangerous html and sanitizes it before saving to database. Returns the
+        /// saved profile text to the caller.
         /// </summary>
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult EditProfileText(string text, string whichQuestion)
+        public JsonResult EditProfileText(string text, string whichQuestion)
         {
             var me = GetProfileId();
 
-            //Massage the input
-            text = Truncate(text, OkbConstants.MAX_PROFILE_TEXT_SIZE);
+            //Massage the input            
             text = HttpContext.Server.HtmlEncode(text);
+            text = Truncate(text, OkbConstants.MAX_PROFILE_TEXT_SIZE);
 
             _profileRepo.EditProfileText(me, text, whichQuestion);
 
@@ -161,8 +165,8 @@ namespace okboba.Web.Controllers
                 _feedRepo.EditProfileTextActivity(me, text);
                 UpdateActivityLastAdded(OkbConstants.ActivityCategories.EditedProfileText);
             }
-            
-            return Content("{}");
+
+            return Json(text, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -2,7 +2,7 @@
 @using okboba.Web.Helpers
 @model okboba.Web.Models.MessagesHeaderViewModel
 
-<div class="section-header">Messages</div>
+<div class="section-header">Messages @(string.IsNullOrEmpty(Model.Subject) ? "" : " - " + Model.Subject)</div>
 
 <ul class="nav nav-tabs">
     @Html.NavTab(Model.Section, i18n.Nav_Messages_Received, "/messages")

@@ -150,7 +150,13 @@ namespace okboba.Web.Helpers
 
         private static string nl2br(string text)
         {
-            return text.Replace(Environment.NewLine, "<br>");
+            return text.Replace(Environment.NewLine, "<br/>");
+        }
+
+        public static HtmlString ProfileText(this HtmlHelper htmlHelper, string text)
+        {
+            if (string.IsNullOrEmpty(text)) return new HtmlString("");
+            return new HtmlString(nl2br(text));
         }
 
         public static HtmlString ProfileText(this HtmlHelper htmlHelper, string text, string qid, bool isMe)

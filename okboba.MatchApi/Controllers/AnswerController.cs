@@ -72,7 +72,7 @@ namespace okboba.MatchApi.Controllers
         /// <summary>
         /// Updates/Adds the users answer in the answer cache.
         /// </summary>
-        public void Post([FromBody]Answer answer)
+        public int Post([FromBody]Answer answer)
         {
             //We should be authenticated at this point.  Only allow users to update their own answers
             var profileId = GetProfileId();
@@ -80,7 +80,9 @@ namespace okboba.MatchApi.Controllers
             answer.ProfileId = profileId;
 
             //we don't do any validation since all of it is done upstream before we get here.
-            _matchCalc.AddOrUpdate(answer);
+            var count = _matchCalc.AddOrUpdate(answer);
+
+            return count;
         }
     }
 }

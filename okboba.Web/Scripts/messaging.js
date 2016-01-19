@@ -125,6 +125,9 @@ var messaging = (function ($) {
             //fade in new message
             $(html).hide().appendTo(_msgContainer).fadeIn(configMap.fadeInTime);
 
+            //clear old message
+            _replyBox.val('');
+
         }).fail(function (jqxhr, status, error) {
             alert('failed: ' + status + ' : ' + error);
         }).always(function () {

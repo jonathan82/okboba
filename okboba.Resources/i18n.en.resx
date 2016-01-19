@@ -130,7 +130,7 @@
     <value>Location</value>
   </data>
   <data name="Account_Nickname" xml:space="preserve">
-    <value>Nickname</value>
+    <value>Firstname</value>
   </data>
   <data name="Account_Password" xml:space="preserve">
     <value>Password</value>
@@ -430,16 +430,16 @@
     <value>About Yourself</value>
   </data>
   <data name="Profile_Question2" xml:space="preserve">
-    <value>What are you doing with your life? Work? School?</value>
+    <value>What’s your biggest goal in life right now?</value>
   </data>
   <data name="Profile_Question3" xml:space="preserve">
-    <value>What are your hobbies and interests?</value>
+    <value>Describe somewhere interesting you've traveled to</value>
   </data>
   <data name="Profile_Question4" xml:space="preserve">
-    <value>What makes you tick?</value>
+    <value>What did you do last weekend?</value>
   </data>
   <data name="Profile_Question5" xml:space="preserve">
-    <value>Describe your ideal match</value>
+    <value>You should message me if</value>
   </data>
   <data name="Profile_Question_Empty" xml:space="preserve">
     <value>User hasn't written anything</value>

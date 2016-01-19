@@ -469,6 +469,13 @@ namespace okboba.Repository.EntityRepository
                     db.SaveChanges();
                 }                
             }
-        }        
+        }
+
+        public Conversation GetConversation(int id)
+        {
+            var db = new OkbDbContext();
+            var conv =  db.Conversations.Find(id);
+            return conv;
+        }
     }
 }

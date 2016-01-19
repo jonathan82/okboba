@@ -78,6 +78,7 @@ namespace okboba.Web.Controllers
             var messages = _msgRepo.GetMessages(id,0, OkbConstants.INITIAL_NUM_MESSAGES);
             var profile = _profileRepo.GetProfile(map.Other);
             var myProfile = _profileRepo.GetProfile(me);
+            var conv = _msgRepo.GetConversation(id);
 
             //Calculate the match score
             var matchInfo = matchClient.CalculateMatchAsync(map.Other).Result;
@@ -88,7 +89,8 @@ namespace okboba.Web.Controllers
                 Me = myProfile,
                 Messages = messages,
                 Other = profile,
-                MatchInfo = matchInfo
+                MatchInfo = matchInfo,
+                Subject = conv.Subject
             };
 
             vm.Other.LocationSring = _locRepo.GetLocationString(profile.LocationId1, profile.LocationId2);

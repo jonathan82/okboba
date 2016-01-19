@@ -70,9 +70,9 @@ namespace okboba.Repository.WebClient
         /// <summary>
         /// Makes a web service call to add/update the answer in the memory cache
         /// </summary>
-        public async Task AnswerAsync(Answer answer)
+        public async Task<int> AnswerAsync(Answer answer)
         {
-            await CallMatchApiAsync<string>("/api/answer", true, answer).ConfigureAwait(false);
+            return await CallMatchApiAsync<int>("/api/answer", true, answer).ConfigureAwait(false);
         }
 
         /// <summary>

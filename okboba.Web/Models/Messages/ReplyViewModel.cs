@@ -14,5 +14,6 @@ namespace okboba.Web.Models
         public IEnumerable<Message> Messages { get; set; }
         public Profile Other { get; set; }
         public MatchModel MatchInfo { get; set; }
+        public string Subject { get; set; }
     }
 }

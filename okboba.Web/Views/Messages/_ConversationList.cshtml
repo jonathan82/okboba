@@ -24,7 +24,7 @@
                     @Html.Avatar(conv.OtherProfile, "conv-avatar", true)
                 </div>
                 <div class="conv-row-3">
-                    <div class="conv-name">@conv.OtherProfile.Nickname</div>
+                    <div class="conv-name truncate">@conv.OtherProfile.Nickname - @conv.Conversation.Subject</div>
                     <div class="conv-blurb truncate">@Html.Raw(conv.LastMessage.MessageText)</div>
                 </div>
                 <div class="conv-row-4">

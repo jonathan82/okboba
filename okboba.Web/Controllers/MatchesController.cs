@@ -30,15 +30,20 @@ namespace okboba.Web.Controllers
             _matchCache = SXMatchRepository.Instance;
         }
 
-        private async Task<IList<MatchModel>> GetMatchesAsync(int profileId, MatchCriteriaModel criteria, int page)
+        /// <summary>
+        /// Gets the matches for a give page.  Looks in the cache first and if not there calculates
+        /// matches and saves them there. If the forceRecalculation flag is true skip looking in the cache.
+        /// </summary>
+        private async Task<IList<MatchModel>> GetMatchesAsync(int profileId, MatchCriteriaModel criteria, int page, bool forceRecalc = false)
         {
             //check if matches in cache
             var matches = _matchCache.Get(profileId, criteria, page);
 
-            if (matches == null)
+            if (matches == null || forceRecalc)
             {
                 //cache miss
                 await _webClient.CalculateAndSaveMatchesAsync(criteria);
+                Session[OkbConstants.FORCE_RECALCULATE_MATCHES] = false;
             }
 
             //get matches from cache - 2nd try
@@ -75,19 +80,15 @@ namespace okboba.Web.Controllers
             //Get user's search criteria
             var criteria = _profileRepo.GetMatchCriteria(me);
 
-            ////check if matches in cache
-            //var matches = _matchCache.Get(me, criteria);
+            //check for forceRecalculation flag
+            bool forceRecalc = false;
+            if (Session[OkbConstants.FORCE_RECALCULATE_MATCHES] != null && 
+                (bool)Session[OkbConstants.FORCE_RECALCULATE_MATCHES] == true)
+            {
+                forceRecalc = true;
+            }            
 
-            //if (matches == null)
-            //{
-            //    //cache miss
-            //    await _webClient.CalculateAndSaveMatchesAsync(criteria);
-            //}
-
-            ////get matches from cache - 2nd try
-            //matches = _matchCache.Get(me, criteria);
-
-            var matches = await GetMatchesAsync(me, criteria, 1); //first page
+            var matches = await GetMatchesAsync(me, criteria, 1, forceRecalc); //first page
 
             var vm = new MatchesViewModel
             {

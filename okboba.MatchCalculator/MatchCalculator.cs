@@ -67,9 +67,9 @@ namespace okboba.MatchCalculator
 
         /// <summary>
         /// Adds or updates a users answer. Creates new user if they're not in the cache,
-        /// otherwise update answer.
+        /// otherwise update answer. returns the number of questions answered.
         /// </summary>        
-        public void AddOrUpdate(Answer updateAnswer)
+        public int AddOrUpdate(Answer updateAnswer)
         {
             List<CacheAnswer> listAnswers;
 
@@ -92,8 +92,11 @@ namespace okboba.MatchCalculator
                     a.ChoiceWeight = updateAnswer.ChoiceWeight;
                     a.LastAnswered = DateTime.Now;
 
+                    //copy back to list since structs are passed by value
+                    listAnswers[i] = a;
+
                     //found and updated answer, done
-                    return;
+                    return listAnswers.Count;
                 }
             }
 
@@ -106,6 +109,8 @@ namespace okboba.MatchCalculator
                 ChoiceWeight = updateAnswer.ChoiceWeight,
                 LastAnswered = DateTime.Now
             });
+
+            return listAnswers.Count;
         }
 
         /// <summary>

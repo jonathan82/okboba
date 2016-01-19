@@ -406,31 +406,46 @@ button:focus {
     Profile Text Styles
 
 ******************************************/
+.profile-text-box {
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+  background-color: #FFF;
+  padding: 5px 10px 10px;
+  margin-bottom: 15px;
+  position: relative;
+}
+.profile-text-question {
+  font-size: 1.3em;
+  color: #880E4F;
+  margin-bottom: 8px;
+}
 .profile-text {
   min-height: 100px;
   position: relative;
-  margin-top: 5px;
-  margin-bottom: 20px;
-  font-family: Georgia, "Times New Roman", SimSun, "宋体", STXihei, "华文细黑", serif;
-  font-size: 1.2em;
+  font-size: 1.1em;
   opacity: .87;
   color: #000;
 }
-.profile-text-edit {
-  width: 100%;
-  min-height: 200px;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-.profile-text-question {
-  font-size: 1.7em;
-  color: #880E4F;
-}
-.profile-text-placeholder {
+.profile-text:empty::after {
+  content: 'Nothing to see here';
   color: #9b9b9b;
-  font-size: 1.2em;
-  font-family: SimSun;
+  font-style: italic;
 }
+.profile-text-box textarea {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+}
+/*.profile-text-edit {
+    width: 100%;
+    min-height: 200px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.profile-text-placeholder {
+    color: @gray-light;
+    font-size: 1.2em;
+}*/
 /*****************************************
 
     Profile Detail Styles
@@ -882,7 +897,7 @@ button:focus {
 }
 .msg-header-right {
   display: table-cell;
-  width: 150px;
+  width: 160px;
   padding-right: 20px;
   vertical-align: middle;
 }
@@ -1524,8 +1539,8 @@ label.photo-upload-label input[type="file"] {
 ****************************************/
 .js-editinplace-editicon {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 5px;
+  top: 5px;
   background-color: #eeeeee;
   opacity: 0.7;
   font-size: 16px;
@@ -1600,4 +1615,33 @@ footer a:active {
 }
 .favorite-location {
   font-size: 16px;
+}
+/***********************************************************
+
+    Syles for mobile devices. overrides existing styles
+
+*************************************************************/
+@media only screen and (max-width: 768px) {
+  .container-auth,
+  .container-anon {
+    padding: 10px 10px;
+  }
+  .photo-thumbnail-full {
+    width: 100%;
+  }
+  .compose-window {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    background-color: #F7F2F7;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .compose-body-edit {
+    height: 120px;
+  }
+  .msg-row-left {
+    width: 80px;
+  }
 }

@@ -390,6 +390,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\mobile.less" />
     <None Include="Content\site.less" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.css" />
     <Content Include="lib\bootstrap\css\bootstrap-theme.min.css" />
@@ -510,6 +511,7 @@
     <Content Include="Scripts\messaging.js" />
     <Content Include="Scripts\photomanager.js" />
     <Content Include="Scripts\photoswipe.js" />
+    <Content Include="Scripts\profile.js" />
     <Content Include="Scripts\questionmanager.js" />
     <Content Include="Scripts\questionvalidation.js" />
     <Content Include="Scripts\register.js" />

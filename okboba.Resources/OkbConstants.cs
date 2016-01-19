@@ -8,6 +8,7 @@
 
         //Questions
         public const int NUM_QUES_PER_PAGE = 20;
+        public const string FORCE_RECALCULATE_MATCHES = "forceRecalculateMatches";
 
         //Matches
         public const int MAX_MATCH_RESULTS = 4000;

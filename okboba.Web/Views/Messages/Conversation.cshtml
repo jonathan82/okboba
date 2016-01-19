@@ -4,10 +4,10 @@
 @model okboba.Web.Models.ReplyViewModel
 
 @{
-    ViewBag.Title = "Conversation with ...";
+    ViewBag.Title = "Conversation";
 }
 
-@Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Reply })
+@Html.Partial("_MessagesHeader", new MessagesHeaderViewModel { Section = i18n.Nav_Messages_Reply, Subject = Model.Subject})
 
 @Html.Partial("_MessageRowTemplate")
 

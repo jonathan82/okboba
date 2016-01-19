@@ -1,0 +1,36 @@
+﻿@import (reference) "common.less";
+
+/***********************************************************
+
+    Syles for mobile devices. overrides existing styles
+
+*************************************************************/
+
+@media only screen and (max-width: 768px) {
+    .container-auth,
+    .container-anon {
+        padding: 10px 10px;
+    }
+
+    .photo-thumbnail-full {
+        width: 100%;
+    }
+
+    .compose-window {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+        background-color: @bg-color;
+        .shadow-z-2;
+    }
+
+    .compose-body-edit {
+        height: 120px;
+    }
+
+    .msg-row-left {
+        width: 80px;
+    }
+}

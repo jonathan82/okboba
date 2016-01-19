@@ -111,6 +111,7 @@ namespace okboba.Web.Controllers
         /// 
         ///   - If getNextFlag = true get the next 2 questions and return them as JSON
         ///   - Otherwise return the user's validated answer
+        ///   - Sets forceRecalculateMatches = true if user answered less than 10 questions (so new users can see results immediately)
         /// 
         /// More info about TransactionScope (limitations):
         /// https://msdn.microsoft.com/en-us/data/dn456843.aspx
@@ -156,15 +157,18 @@ namespace okboba.Web.Controllers
                 Timeout = TimeSpan.FromMinutes(5)
             };
 
+            int count;
+
             //Update DB and Cache in a transaction
             //By default if scope.Complete() isn't called the transaction is rolled back.
             using (var scope = new TransactionScope(TransactionScopeOption.Required, options, TransactionScopeAsyncFlowOption.Enabled))
             {
-                Task t1, t2;
-                t1 = _quesRepo.AnswerAsync(answer);
-                t2 = _matchApiClient.AnswerAsync(answer);
+                var t1 = _quesRepo.AnswerAsync(answer);
+                var t2 = _matchApiClient.AnswerAsync(answer);
 
-                await Task.WhenAll(t1, t2);
+                //await Task.WhenAll(t1, t2);
+                await t1;
+                count = await t2;
 
                 scope.Complete();
             }
@@ -178,6 +182,12 @@ namespace okboba.Web.Controllers
                 choiceText = ques.Choices[((int)answer.ChoiceIndex - 1) % ques.Choices.Count];               
                 _feedRepo.AnsweredQuestionActivity(profileId, ques.Text, choiceText);
                 UpdateActivityLastAdded(OkbConstants.ActivityCategories.AnsweredQuestion);
+            }
+
+            //set forceRecalculateMatches = true if answered less than 10 questions
+            if (count < 10)
+            {
+                Session[OkbConstants.FORCE_RECALCULATE_MATCHES] = true;
             }
 
             IList<QuestionModel> nextQuestions = null;

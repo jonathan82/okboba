@@ -8,5 +8,6 @@ namespace okboba.Web.Models
     public class MessagesHeaderViewModel
     {
         public string Section { get; set; }
+        public string Subject { get; set; }
     }
 }
