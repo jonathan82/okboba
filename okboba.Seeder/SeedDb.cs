@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace okboba.Seeder
@@ -160,6 +161,58 @@ namespace okboba.Seeder
                     provinceCount++;
                 }
             }
+        }
+
+        /// <summary>
+        /// Update the database with okboba questions
+        /// </summary>
+        public void SeedOkbQuestions(string filename)
+        {
+            string answerLine;
+
+            var stream = new StreamReader(filename);
+
+            var rgx = new Regex("^\\d+\\. (.*)");
+
+            var db = new OkbDbContext();
+
+            int count = 1;
+
+            while (!stream.EndOfStream)
+            {
+                var line = stream.ReadLine(); //question                
+                var match = rgx.Match(line);
+
+                var questionText = match.Groups[1].Value;
+
+                var ques = db.Questions.Find(count);
+                ques.Text = questionText;
+
+                int index = 1;
+
+                //delete old choices
+                db.QuestionChoices.RemoveRange(db.QuestionChoices.Where(c => c.QuestionId == count));
+
+                //Loop thru answers
+                while ((answerLine = stream.ReadLine()) != "" && !stream.EndOfStream)
+                {
+                    db.QuestionChoices.Add(new QuestionChoice
+                    {
+                        QuestionId = (short)count,
+                        Index = (byte)index,
+                        Score = 0,
+                        Text = answerLine
+                    });
+
+                    index++;
+                }
+
+                count++;
+
+                db.SaveChanges();
+            }
+
+            //db.SaveChanges();
         }
 
         /// <summary>

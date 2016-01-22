@@ -522,4 +522,25 @@
   <data name="Nav_ImproveMatches" xml:space="preserve">
     <value>提高比赛</value>
   </data>
+  <data name="Account_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Button_Upload" xml:space="preserve">
+    <value>上载</value>
+  </data>
+  <data name="Messaging_Sent" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="Nav_ChangePassword" xml:space="preserve">
+    <value>更改密码</value>
+  </data>
+  <data name="Section_Settings" xml:space="preserve">
+    <value>账户设置</value>
+  </data>
+  <data name="Nav_CompareQuestions" xml:space="preserve">
+    <value>比较答案</value>
+  </data>
+  <data name="Nav_MyQuestions" xml:space="preserve">
+    <value>我的问题</value>
+  </data>
 </root>

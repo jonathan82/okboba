@@ -1,0 +1,65 @@
+﻿@using okboba.Resources
+@using okboba.Web.Helpers
+@model okboba.Web.Models.SettingsViewModel
+
+<div class="section-header">@i18n.Section_Settings</div>
+
+<ul class="nav nav-tabs">
+    @Html.NavTab(i18n.Nav_Settings, i18n.Nav_Settings, "/settings")
+    @Html.NavTab("", i18n.Nav_ChangePassword, "/settings/changepassword")
+</ul>
+
+<div class="row">
+    <form action="/" method="post" class="form-horizontal col-md-6">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="">@i18n.Account_Email</label>
+            <div class="col-sm-9">
+                <input type="text" name="Email" class="form-control" value="@Model.Email" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Location">@i18n.Account_Location</label>
+            <div class="col-sm-6">
+                <input type="text" id="locationText" name="Location" class="form-control" value="@Model.LocationString" readonly />
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label" for="Language">@i18n.Account_Language</label>
+            <div class="col-sm-6">
+                <select name="Language" class="form-control">
+                    <option value="zh-CN">中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+
+        <input type="hidden" name="locationId1" value="" id="locationId1" />
+        <input type="hidden" name="locationId2" value="" id="locationId2" />
+
+        <br />
+        <br />
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-primary">@i18n.Button_Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@Html.Partial("~/Views/Account/_LocationPicker.cshtml")
+
+@section Scripts {
+    <script>
+        //Setup the location picker
+        $('#locationText').locationpicker(
+            @Html.JsonArray(Model.Provinces)
+            );
+    </script>
+}

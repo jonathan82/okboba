@@ -43,6 +43,7 @@ namespace okboba.Repository.EntityRepository
         private IQueryable<Profile> BuildSearchQuery(OkbDbContext db, MatchCriteriaModel criteria)
         {
             var query = from p in db.Profiles.AsNoTracking()
+                        where p.Deleted == false
                         select p;
 
             if (!(criteria.Gender == OkbConstants.UNKNOWN_GENDER))

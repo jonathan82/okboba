@@ -192,7 +192,7 @@ var messaging = (function ($) {
                     avatarUrl: avatarUrl,
                     messageText: msg.MessageText,
                     isMe: isMe,
-                    friendlyTime: msg.Timestamp
+                    friendlyTime: msg.FriendlyTime
                 });
             }
 

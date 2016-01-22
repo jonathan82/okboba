@@ -29,7 +29,7 @@ var okbregister = (function ($) {
                     email: true,
                     remote: {
                         url: '/account/verifyemail', //check with server to see if email already registered 
-                        //complete: function () { $(configMap.registerFormSel).valid();}
+                        //error: function () { $(configMap.registerFormSel).valid();}
                     }
                 },
                 Password: {
@@ -44,9 +44,14 @@ var okbregister = (function ($) {
                 },
                 BirthdateText: "required",
                 locationText: "required"
+            },
+            submitHandler: function (form) {
+                //Start the ladda button
+                $(form).find('button[type="submit"]').ladda().ladda('start');
+                form.submit();
             }
         },
-        initModule, Next, Back, SetupBirthdayPicker;
+        initModule, Next, Back, SetupBirthdayPicker, validator;
 
 
     //////////////////////// Private Methods ///////////////////////////////
@@ -123,7 +128,7 @@ var okbregister = (function ($) {
             });
         
         //Setup validation
-        $(configMap.registerFormSel).validate(validationOpts);
+        validator = $(configMap.registerFormSel).validate(validationOpts);
     }
 
     //// return Public Interface

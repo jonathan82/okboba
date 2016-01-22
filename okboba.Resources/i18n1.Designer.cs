@@ -88,6 +88,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 语言.
+        /// </summary>
+        public static string Account_Language {
+            get {
+                return ResourceManager.GetString("Account_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 城市.
         /// </summary>
         public static string Account_Location {
@@ -309,6 +318,15 @@ namespace okboba.Resources {
         public static string Button_UpdateAnswer {
             get {
                 return ResourceManager.GetString("Button_UpdateAnswer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 上载.
+        /// </summary>
+        public static string Button_Upload {
+            get {
+                return ResourceManager.GetString("Button_Upload", resourceCulture);
             }
         }
         
@@ -880,6 +898,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 发送.
+        /// </summary>
+        public static string Messaging_Sent {
+            get {
+                return ResourceManager.GetString("Messaging_Sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 消息发送！.
         /// </summary>
         public static string Messaging_Sent_Confirmation {
@@ -921,6 +948,24 @@ namespace okboba.Resources {
         public static string Nav_BrowseMatches {
             get {
                 return ResourceManager.GetString("Nav_BrowseMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 更改密码.
+        /// </summary>
+        public static string Nav_ChangePassword {
+            get {
+                return ResourceManager.GetString("Nav_ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 比较答案.
+        /// </summary>
+        public static string Nav_CompareQuestions {
+            get {
+                return ResourceManager.GetString("Nav_CompareQuestions", resourceCulture);
             }
         }
         
@@ -984,6 +1029,15 @@ namespace okboba.Resources {
         public static string Nav_MyProfile {
             get {
                 return ResourceManager.GetString("Nav_MyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 我的问题.
+        /// </summary>
+        public static string Nav_MyQuestions {
+            get {
+                return ResourceManager.GetString("Nav_MyQuestions", resourceCulture);
             }
         }
         
@@ -1245,6 +1299,15 @@ namespace okboba.Resources {
         public static string Section_RecommendeMatches {
             get {
                 return ResourceManager.GetString("Section_RecommendeMatches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 账户设置.
+        /// </summary>
+        public static string Section_Settings {
+            get {
+                return ResourceManager.GetString("Section_Settings", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
-﻿/******************
+﻿
+/******************
     Less Variables
 *******************/
 @bg-color: #F7F2F7;
@@ -282,3 +283,8 @@ a.div-link {
 
 /*Get rid of annoying blue outline around buttons in chrome*/
 button:focus {outline:0 !important;}
+
+//add colon to end of all labels
+.control-label::after {
+    content: ':';
+}

@@ -25,6 +25,7 @@
             <div class="msg-header-right">
                 @Html.Partial("~/Views/Matches/_MatchScoreBlock.cshtml", Model.MatchInfo)
             </div>
+            <a class="div-link" href="/profile/@Model.Other.UserId"></a>
         </div>
 
         <!-- Load previous messages button -->
@@ -49,7 +50,7 @@
                     <div class="msg-row-right">
                         <div class="@(isMe ? "msg-dialog-me" : "msg-dialog-them")">
                             @Html.Raw(msg.MessageText)
-                            <div class="msg-time">发送@(FriendlyTime.Format(msg.Timestamp))</div>
+                            <div class="msg-time">@i18n.Messaging_Sent @(FriendlyTime.Format(msg.Timestamp))</div>
                             <div class="@(isMe ? "msg-triangle-me" : "msg-triangle-them")"></div>
                         </div>
                     </div>

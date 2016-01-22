@@ -1,14 +1,23 @@
-﻿<!DOCTYPE html>
+﻿@using okboba.Resources
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>OkBoba.com - @ViewBag.Title</title>
+    <title>OkBoba - @ViewBag.Title</title>
     @Styles.Render("~/content/css")
 </head>
 <body class="body-anon">
     
-    @Html.Partial("_Navbar")
+    @if (Request.IsAuthenticated)
+    {
+        Html.RenderAction("Navbar");
+    }
+    else
+    {
+        Html.RenderPartial("_NavbarAnon");
+    }    
 
     <div class="container container-anon">
         @RenderBody()
@@ -20,5 +29,14 @@
     @Scripts.Render("~/bundles/js/okboba")
 
     @RenderSection("scripts", required: false)
+
+    <script>
+        $(function () {
+            //document ready
+            $('#loginModal').login({
+                loginErrMsg: '@i18n.Error_GenericLoginError'
+            });
+        });
+    </script>
 </body>
 </html>

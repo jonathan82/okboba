@@ -291,6 +291,7 @@
     <Compile Include="Controllers\OkbBaseController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StaticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -299,6 +300,7 @@
     <Compile Include="Helpers\OkbHtmlHelpers.cs" />
     <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Account\SettingsViewModel.cs" />
     <Compile Include="Models\Favorites\FavoritesViewModel.cs" />
     <Compile Include="Models\Matches\MatchesViewModel.cs" />
     <Compile Include="Models\Messages\MessagesHeaderViewModel.cs" />
@@ -340,6 +342,7 @@
       <DependentUpon>Admin.css</DependentUpon>
     </Content>
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\boba-loading.gif" />
     <Content Include="Content\images\boba.png" />
     <Content Include="Content\images\cartoon_lady.png" />
     <Content Include="Content\images\chat-curve-register.png" />
@@ -497,6 +500,7 @@
     <Content Include="lib\spinner\spin.min.js" />
     <Content Include="lib\throttle\jquery.ba-throttle-debounce.js" />
     <Content Include="lib\throttle\jquery.ba-throttle-debounce.min.js" />
+    <Content Include="Scripts\bobaloader.js" />
     <Content Include="Scripts\chatmanager.js" />
     <Content Include="Scripts\chatslider.js" />
     <Content Include="Scripts\editinplace.js" />
@@ -587,10 +591,11 @@
     <Content Include="Views\Favorites\Index.cshtml" />
     <Content Include="Views\Matches\_MatchScoreBlock.cshtml" />
     <None Include="Properties\PublishProfiles\www-okboba - Web Deploy.pubxml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Shared\_NavbarAnon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

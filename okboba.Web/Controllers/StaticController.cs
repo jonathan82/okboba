@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace okboba.Web.Controllers
 {
-    public class StaticController : Controller
+    public class StaticController : OkbBaseController
     {
         // GET: Static
         public ActionResult Page(string page)

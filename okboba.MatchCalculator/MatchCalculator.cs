@@ -123,6 +123,12 @@ namespace okboba.MatchCalculator
         /// 
         /// Friend Percent: Calculate score based on similarly answered questions. Disregards importance rankings.
         /// 
+        /// Enemy Percent v2: Calculate score based on how much the other user's answers "piss me off" and take the
+        ///                   geometric averages. 
+        ///     - their answer doesn't match my criteria AND
+        ///     - their answer is different than mine
+        ///     - increase enemyScore based on weight assigned to question.
+        /// 
         /// Enemy Percent : Calculate score based on how dissimilar users answered their questions.
         ///     case 1 - they answered differently AND either I'm not acceptable to them or they're 
         ///              not acceptable to me: increase enemyScore
@@ -137,6 +143,8 @@ namespace okboba.MatchCalculator
                 possibleScoreThem = 0,
                 friendScore = 0,
                 enemyScore = 0,
+                enemyScoreMe = 0,
+                enemyScoreThem = 0,
                 s = 0;
 
             var result = new MatchResult(); //default values are zero
@@ -162,12 +170,16 @@ namespace okboba.MatchCalculator
                 possibleScoreThem += _weights[them.ChoiceWeight % _weights.Length]; // modulo to prevent out of bounds
                 friendScore += me.ChoiceBit == them.ChoiceBit ? 1 : 0;
 
-                //enemy score: more complex
-                if( (me.ChoiceBit != them.ChoiceBit && (!meAccept || !themAccept)) || //case 1
-                    (me.ChoiceBit==them.ChoiceBit && Math.Abs(me.ChoiceWeight - them.ChoiceWeight) > 1) ) //case 2
-                {
-                    enemyScore++;
-                }
+                //enemy score v1
+                //if( (me.ChoiceBit != them.ChoiceBit && (!meAccept || !themAccept)) || //case 1
+                //    (me.ChoiceBit==them.ChoiceBit && Math.Abs(me.ChoiceWeight - them.ChoiceWeight) > 1) ) //case 2
+                //{
+                //    enemyScore++;
+                //}
+
+                //enemy score v2
+                enemyScoreMe += !meAccept && (me.ChoiceBit != them.ChoiceBit) ? _weights[me.ChoiceWeight % _weights.Length] : 0;
+                enemyScoreThem += !themAccept && (them.ChoiceBit != me.ChoiceBit) ? _weights[them.ChoiceWeight % _weights.Length] : 0;
 
                 s++;
             }
@@ -178,19 +190,28 @@ namespace okboba.MatchCalculator
                 return result;
             }
 
-            float pctMe, pctThem;
+            float pctMe, pctThem, enemyPctMe, enemyPctThem;
             pctMe = (float)scoreMe / possibleScoreMe;
-            pctThem = (float)scoreThem / possibleScoreThem;            
+            pctThem = (float)scoreThem / possibleScoreThem;
+
+            //enemy score v2
+            enemyPctMe = (float)enemyScoreMe / possibleScoreMe;
+            enemyPctThem = (float)enemyScoreThem / possibleScoreThem;
+
+            //Set minimum match percentage
+            pctMe = pctMe <= 0 ? (float)0.1 : pctMe;
+            pctThem = pctThem <= 0 ? (float)0.1 : pctThem;
 
             result.MatchPercent = (int)((Math.Sqrt(pctMe * pctThem) - ((float)1 / s)) * 100);
             result.FriendPercent = (int)((float)(friendScore - 1) / s * 100);
-            result.EnemeyPercent = (int)((float)(enemyScore - 1) / s * 100);
+            //result.EnemeyPercent = (int)((float)(enemyScore - 1) / s * 100);
+            result.EnemeyPercent = (int)((Math.Sqrt(enemyPctMe * enemyPctThem) - ((float)1 / s)) * 100); //v2
 
-            // Normalize negative numbers to zero
+            // Normalize scores
             result.MatchPercent = result.MatchPercent < 0 ? 0 : result.MatchPercent;
             result.FriendPercent = result.FriendPercent < 0 ? 0 : result.FriendPercent;
             result.EnemeyPercent = result.EnemeyPercent < 0 ? 0 : result.EnemeyPercent;
-
+            
             return result;
         }
 

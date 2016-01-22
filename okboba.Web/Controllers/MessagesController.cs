@@ -115,6 +115,12 @@ namespace okboba.Web.Controllers
 
             var msgs = _msgRepo.GetMessages(convId, low, OkbConstants.MESSAGES_PER_PAGE);
 
+            //Format the time to be more friendly
+            foreach (var msg in msgs)
+            {
+                msg.FriendlyTime = FriendlyTime.Format(msg.Timestamp);
+            }
+
             //use Json.NET serializer
             var json = JsonConvert.SerializeObject(msgs);
 

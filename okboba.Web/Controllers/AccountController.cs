@@ -207,8 +207,6 @@ namespace okboba.Web.Controllers
             return View(model);
         }
 
-        
-
         #region Helpers
 
         private void AddErrors(IdentityResult result)

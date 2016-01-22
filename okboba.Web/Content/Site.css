@@ -214,6 +214,9 @@ a.div-link {
 button:focus {
   outline: 0 !important;
 }
+.control-label::after {
+  content: ':';
+}
 /********************************************
     Bootstrap override - Navigation tab
 *********************************************/
@@ -844,7 +847,7 @@ button:focus {
   position: relative;
 }
 .msg-dialog-me {
-  background-color: #e7d9e7;
+  background-color: #e9dce9;
 }
 .msg-dialog-them {
   background-color: #FFF;
@@ -876,7 +879,7 @@ button:focus {
   position: absolute;
   top: 0;
   left: -20px;
-  border-top: 20px solid #e7d9e7;
+  border-top: 20px solid #e9dce9;
 }
 .msg-dialog-me textarea {
   width: 100%;
@@ -890,6 +893,7 @@ button:focus {
   margin-bottom: 20px;
   display: table;
   width: 100%;
+  position: relative;
 }
 .msg-header-center {
   display: table-cell;

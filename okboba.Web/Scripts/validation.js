@@ -48,7 +48,7 @@
     jQuery.validator.setDefaults(opt);
 
     //Bind ladda butons to submit
-    $('button[type=submit]').ladda('bind', { timeout: 2000 });
+    //$('button[type=submit]').ladda('bind', { timeout: 2000 });
 
 })(jQuery);
 

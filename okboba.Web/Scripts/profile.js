@@ -26,8 +26,6 @@
 
         $.post(configMap.editTextApi, data, function (result) {
 
-            console.log(result);
-
             $(target).html(nl2br(result));
             $(target).show();
 

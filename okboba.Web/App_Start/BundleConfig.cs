@@ -50,7 +50,8 @@ namespace okboba
                 "~/Scripts/login.js",
                 "~/Scripts/register.js",
                 "~/Scripts/messaging.js",
-                "~/Scripts/favorite.js"));
+                "~/Scripts/favorite.js",
+                "~/Scripts/bobaloader.js"));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                 "~/lib/bootstrap/css/bootstrap.css",

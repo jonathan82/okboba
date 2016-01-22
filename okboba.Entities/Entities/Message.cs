@@ -26,6 +26,10 @@ namespace okboba.Entities
         [ForeignKey("FromProfile")]
         public int From { get; set; }
 
+        //Convenience properties
+        [NotMapped]
+        public string FriendlyTime { get; set; }
+
         // Navigation properties
         [JsonIgnore] //Json.NET 
         public virtual Conversation Conversation { get; set; }

@@ -39,8 +39,10 @@ namespace okboba.Entities
 
         //Foreign key to users table.  we have to manually set this because EF doesn't alow
         //one to one foreign key relationshps. So there's no navigation property to User table.
-        [StringLength(128)]
+        [StringLength(11)]
         public string UserId { get; set; }
+
+        public bool Deleted { get; set; }
 
         //Navigation properties. We don't want to automatically serialize these properties so use JsonIgnore
         [JsonIgnore]
@@ -48,7 +50,7 @@ namespace okboba.Entities
         [JsonIgnore]
         public virtual ProfileText ProfileText { get; set; }
 
-        //Photo Helper methods
+        ////////////////// Photo Helper methods ////////////////////////////
         private IEnumerable<Photo> Photos(string suffix)
         {
             var photoList = new List<Photo>();

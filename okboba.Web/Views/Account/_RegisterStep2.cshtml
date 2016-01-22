@@ -19,7 +19,7 @@
 
             <!-- Email -->
             <div class="form-group">
-                <label for="Email" class="col-sm-3 control-label">@i18n.Account_Email:</label>
+                <label for="Email" class="col-sm-3 control-label">@i18n.Account_Email</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
@@ -29,7 +29,7 @@
 
             <!-- Password -->
             <div class="form-group">
-                <label for="Password" class="col-sm-3 control-label">@i18n.Account_Password:</label>
+                <label for="Password" class="col-sm-3 control-label">@i18n.Account_Password</label>
                 <div class="col-sm-9">
                     @*@Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
@@ -39,7 +39,7 @@
 
             <!-- Nickname -->
             <div class="form-group">
-                <label for="Nickname" class="col-sm-3 control-label">@i18n.Account_Nickname:</label>
+                <label for="Nickname" class="col-sm-3 control-label">@i18n.Account_Nickname</label>
                 <div class="col-sm-9">
                     @*@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })*@
@@ -49,7 +49,7 @@
 
             <!-- Birthdate -->
             <div class="form-group">
-                <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Account_Birthdate:</label>
+                <label for="BirthdateText" class="col-sm-3 control-label">@i18n.Account_Birthdate</label>
                 <div class="col-sm-9">
                     <input type="text" name="BirthdateText" value="" class="form-control" id="BirthdateText" required readonly />
                     <input type="hidden" name="Birthdate" value="" id="Birthdate" />
@@ -58,7 +58,7 @@
 
             <!-- City -->
             <div class="form-group">
-                <label for="locationText" class="col-sm-3 control-label">@i18n.Account_Location:</label>
+                <label for="locationText" class="col-sm-3 control-label">@i18n.Account_Location</label>
                 <div class="col-sm-9">
                     <input id="locationText" type="text" name="locationText" value="" class="form-control" required readonly />
                     <input type="hidden" name="locationId1" value="" id="locationId1" />
@@ -68,7 +68,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg ladda-button"><span class="ladda-label">@i18n.Button_Join</span></button>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg ladda-button" data-style="expand-right"><span class="ladda-label">@i18n.Button_Join</span></button>
                 </div>
             </div>
         </div>

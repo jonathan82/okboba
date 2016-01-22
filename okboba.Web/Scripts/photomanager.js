@@ -177,9 +177,10 @@ var PhotoManager = (function ($) {
         });
 
         //Submit handler
-        theModal.find('form').submit(function () {
+        theModal.find('form').submit(function (e) {
             setThumbnailVars();
             $(this).find('button[type="submit"]').ladda().ladda('start');
+            theModal.find('.modal-body').bobaloader('start');
         });
     }
 

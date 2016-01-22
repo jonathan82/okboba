@@ -73,5 +73,5 @@ else if (photos.Count() == 0)
 <ul class="nav nav-tabs">
     @Html.NavTab(Model.Section, i18n.Nav_Profile, "/profile/" + userId)
     @Html.NavTab(Model.Section, i18n.Nav_Photos, "/photo/" + userId)
-    @Html.NavTab(Model.Section, i18n.Nav_Questions, "/question/" + userId)
+    @Html.NavTab(Model.Section, Model.IsMe ? i18n.Nav_MyQuestions : i18n.Nav_CompareQuestions, "/question/" + userId)
 </ul>

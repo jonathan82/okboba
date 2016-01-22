@@ -1,8 +1,36 @@
-﻿<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
-<h1>hello world</h1>
+﻿<div class="section-header">How Matching Works</div>
+
+<p>OkBoba is a question and answer based dating site where you design your own algorithm for love.  You answer questions and based on how you answer and how you want the other person to answer you get a customized list of matches.  The more questions you answer the more accurate your matches are.</p>
+
+<p>Your match score is calculated based on how you answer, how your matches answer, what answers are acceptable to each of you, and how much weight you put on each question. For example,</p>
+
+Do you like spicy food?
+Yes
+No
+
+Which answers are acceptable to you?
+Yes
+No
+Any of the above
+
+<p>If you answer yes, and you choose "Yes" as an acceptable answer, then users who answer yes will increase your match score based on the importance ranking you assign to the question.  There's 3 importance levels:</p>
+
+<ul>
+    <li>A little important = 1</li>
+    <li>Somewhat important = 5</li>
+    <li>Very important     = 25</li>
+</ul>
+
+<p>So you can think of 5 "little important" questions is the same as 1 "somewhat important" question, and 5 "somewhat important" questions as equal to 1 "very important" question. If you choose "Any of above", that is the same as saying you don't care how the other person answers, so their answer won't contribute to the match score.</p>
+
+<p>Based on all this information, OkBoba will calculate two percentages for the match score - how well the other person matches you and how well you match the other person. Then it will take the geometric average of these 2 percentages and subtract a "margin of error". What does this mean?  Lets look at an example:</p>
+
+How well the other person matches you: 80%
+how well you match the other person: 40%
+number of questions both answered (S): 10
+
+<p>Final Match Score = Sqrt(80% * 40%) - (1 / 10) = 47%</p>
+
+<p>From the formula above, you can see that as you answer more questions the number 1/S gets smaller. This number is called in statistics the "margin of error", and the more questions you answer the smaller the margin of error and thus a higher match percentage is possible. So you can see that OkBoba is conservative in calculating a match score, so you can be confident that a high match score means that you both match well, at least based on the questions you answer.</p>
+
+<p>If all this sounds too complicated it is OK, you don't have to understand any of this to use OkBoba. Just know there's some math and computer algorithms running behind the scenes to give you the best chance at love possible!</p>

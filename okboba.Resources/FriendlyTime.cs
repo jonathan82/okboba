@@ -36,7 +36,7 @@ namespace okboba.Resources
             }
             else
             {
-                output = (now.Date - input.Date).Days.ToString() + i18n.Time_DaysAgo;
+                output = (now.Date - input.Date).Days.ToString() + " " + i18n.Time_DaysAgo;
             }
 
             return output;
