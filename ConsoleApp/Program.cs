@@ -42,8 +42,6 @@ namespace ConsoleApp
             //////////////////// Seed the database ///////////////////////
             var connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             SeedDb seeder = new SeedDb(connString);
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("你好");
 
             seeder.SeedOkbQuestions("../../../data/okb_1.txt");
 

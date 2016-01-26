@@ -781,6 +781,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 无效的名称.
+        /// </summary>
+        public static string Error_InvalidName {
+            get {
+                return ResourceManager.GetString("Error_InvalidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 你没有照片, &lt;a href=&quot;{0}&quot;&gt;上载一长&lt;/a&gt;!.
         /// </summary>
         public static string Error_NoPhotos {
@@ -813,6 +822,15 @@ namespace okboba.Resources {
         public static string Error_NothingHere {
             get {
                 return ResourceManager.GetString("Error_NothingHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 用户没有找到。也许他们删除他们的个人资料？.
+        /// </summary>
+        public static string Error_UserNotFound {
+            get {
+                return ResourceManager.GetString("Error_UserNotFound", resourceCulture);
             }
         }
         
@@ -1213,7 +1231,7 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How would you like your match to answer?.
+        ///   Looks up a localized string similar to 你会如何像其他人回答？.
         /// </summary>
         public static string Question_Prompt_Acceptable {
             get {
@@ -1222,7 +1240,7 @@ namespace okboba.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How important are your matches answers?.
+        ///   Looks up a localized string similar to 重要的是如何他们的答案？.
         /// </summary>
         public static string Question_Prompt_Importance {
             get {

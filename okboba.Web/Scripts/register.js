@@ -40,7 +40,9 @@ var okbregister = (function ($) {
                     required: true,
                     minlength: 2,
                     maxlength: 15,
-                    pattern: /^[a-zA-Z0-9]{2,15}$/
+                    remote: {
+                        url: '/account/verifynickname' //make sure name consists of english letters and chinese characters
+                    }
                 },
                 BirthdateText: "required",
                 locationText: "required"

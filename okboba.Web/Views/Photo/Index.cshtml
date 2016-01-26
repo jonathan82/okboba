@@ -7,9 +7,7 @@
 
 @Html.Action("ProfileHeader","Profile", new { profileId = Model.ProfileId, isMe = Model.IsMe, section = i18n.Nav_Photos })
 
-@Html.Action("ListPhotos", new {userId = Model.UserId, isMe = Model.IsMe })
-
-@Html.Partial("_UploadPhotoTemplate")
+@Html.Action("ListPhotos", new {profileId = Model.ProfileId, userId = Model.UserId, isMe = Model.IsMe })
 
 @Html.Partial("_Photoswipe")
 
@@ -18,7 +16,6 @@
     <script>
         $(function () {
             //Setup Photo modules
-            PhotoManager.initModule();
             $('.photo-thumbnail-full').photoswipe();
 
             //messaging

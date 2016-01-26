@@ -1,0 +1,15 @@
+Do you like spicy food?
+Yes
+No
+
+Do you feel horny when you wake up in the morning?
+Very Often
+Sometimes
+Almost Never
+
+Does the air pollution in your country bother you?
+Yes, and it makes me angry
+Yes
+A little bit
+I don't care
+

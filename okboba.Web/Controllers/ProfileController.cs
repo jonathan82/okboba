@@ -66,7 +66,7 @@ namespace okboba.Web.Controllers
         [ChildActionOnly]
         public ActionResult ProfileHeader(int profileId, bool isMe, string section)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             // Get profile info
             var profile = _profileRepo.GetProfile(profileId);
@@ -101,7 +101,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public ActionResult Index(string userId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
             var vm = new ProfileViewModel();            
 
             if (string.IsNullOrEmpty(userId) || userId == User.Identity.GetUserId())
@@ -135,7 +135,7 @@ namespace okboba.Web.Controllers
         [HttpPost]
         public ActionResult EditDetail(ProfileDetail details, int section)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             _profileRepo.EditDetails(details, (OkbConstants.ProfileDetailSections)section, me);
 
@@ -152,7 +152,7 @@ namespace okboba.Web.Controllers
         [ValidateInput(false)]
         public JsonResult EditProfileText(string text, string whichQuestion)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             //Massage the input            
             text = HttpContext.Server.HtmlEncode(text);

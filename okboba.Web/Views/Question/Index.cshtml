@@ -12,8 +12,6 @@
 <!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
 
-@Html.Partial("~/Views/Photo/_UploadPhotoTemplate.cshtml")
-
 @Html.Partial("_QuestionTemplate")
 @Html.Partial("_AnswerTemplate")
 
@@ -107,9 +105,6 @@
 
             //messaging
             messaging.initModule();
-
-            //photos
-            PhotoManager.initModule();
         });
         
     </script>

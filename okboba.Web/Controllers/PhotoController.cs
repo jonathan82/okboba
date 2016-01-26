@@ -29,11 +29,11 @@ namespace okboba.Web.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult ListPhotos(string userId, bool isMe)
+        public ActionResult ListPhotos(int profileId, string userId, bool isMe)
         {
             var vm = new ListPhotosViewModel();
 
-            var profile = _profileRepo.GetProfile(userId);
+            var profile = _profileRepo.GetProfile(profileId);
 
             vm.UserId = userId;
             vm.IsMe = isMe;
@@ -51,7 +51,7 @@ namespace okboba.Web.Controllers
             {
                 //Viewing own profile
                 vm.IsMe = true;
-                vm.ProfileId = GetProfileId();
+                vm.ProfileId = GetMyProfileId();
                 vm.UserId = User.Identity.GetUserId();
             }
             else
@@ -67,7 +67,7 @@ namespace okboba.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Upload(HttpPostedFileBase upload, int topThumb, int leftThumb, int widthThumb, int photoScreenWidth)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
             var userId = User.Identity.GetUserId();
 
             //Check if file size too big
@@ -116,7 +116,7 @@ namespace okboba.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string photo)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
             var userId = User.Identity.GetUserId();
 
             await _photoRepo.DeleteAsync(photo, me, userId);

@@ -31,7 +31,7 @@ namespace okboba.Web.Controllers
         [ChildActionOnly]
         public ActionResult RecommendedMatches()
         {            
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var criteria = _profileRepo.GetMatchCriteria(me);
 
@@ -52,9 +52,13 @@ namespace okboba.Web.Controllers
 
         [ChildActionOnly]
         public ActionResult ActivityFeed()
-        {                    
-            //Get all activities for now
-            var vm = _activityRepo.GetActivities(OkbConstants.NUM_ACTIVITIES_TO_SHOW);
+        {
+            var me = GetMyProfileId();
+
+            var myProfile = _profileRepo.GetProfile(me);
+
+            //Get activities for the gender that person is looking for
+            var vm = _activityRepo.GetActivities(OkbConstants.NUM_ACTIVITIES_TO_SHOW, myProfile.LookingForGender, me);
 
             return PartialView("_ActivityFeed",vm);
         }
@@ -69,7 +73,7 @@ namespace okboba.Web.Controllers
 
         public ActionResult Index()
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var ques = _quesRepo.Next2Questions(me);
 

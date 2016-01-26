@@ -59,7 +59,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public async Task<ActionResult> Get(MatchCriteriaModel criteria, int page = 1)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var matches = await GetMatchesAsync(me, criteria, page);
 
@@ -75,7 +75,7 @@ namespace okboba.Web.Controllers
         {
             _webClient = GetMatchApiClient(); //need to initialize here since we're using cookie authentication
 
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             //Get user's search criteria
             var criteria = _profileRepo.GetMatchCriteria(me);

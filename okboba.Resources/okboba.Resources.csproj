@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="FriendlyTime.cs" />
     <Compile Include="i18n1.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -36,7 +36,7 @@ namespace okboba.Web.Controllers
         {
             var vm = new SettingsViewModel();
 
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var user = UserManager.FindByName(User.Identity.Name);
             var profile = _profileRepo.GetProfile(me);

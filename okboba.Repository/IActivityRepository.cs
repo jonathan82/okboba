@@ -14,7 +14,7 @@ namespace okboba.Repository
         void UploadPhotoActivity(int who, string what);
         void JoinedActivity(int who);
         void AnsweredQuestionActivity(int who, string quesText, string choiceText);
-        IEnumerable<ActivityModel> GetActivities(int numOfActivities);
+        IEnumerable<ActivityModel> GetActivities(int numOfActivities, byte lookingGender, int me);
         IList<Profile> GetActiveUsers();
     }
 }

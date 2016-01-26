@@ -331,10 +331,10 @@
     <value>选择你的笑脸</value>
   </data>
   <data name="Question_Prompt_Acceptable" xml:space="preserve">
-    <value>How would you like your match to answer?</value>
+    <value>你会如何像其他人回答？</value>
   </data>
   <data name="Question_Prompt_Importance" xml:space="preserve">
-    <value>How important are your matches answers?</value>
+    <value>重要的是如何他们的答案？</value>
   </data>
   <data name="Profile_Female" xml:space="preserve">
     <value>女</value>
@@ -542,5 +542,11 @@
   </data>
   <data name="Nav_MyQuestions" xml:space="preserve">
     <value>我的问题</value>
+  </data>
+  <data name="Error_UserNotFound" xml:space="preserve">
+    <value>用户没有找到。也许他们删除他们的个人资料？</value>
+  </data>
+  <data name="Error_InvalidName" xml:space="preserve">
+    <value>无效的名称</value>
   </data>
 </root>

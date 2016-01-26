@@ -217,6 +217,9 @@ button:focus {
 .control-label::after {
   content: ':';
 }
+.text-primary {
+  color: #880E4F;
+}
 /********************************************
     Bootstrap override - Navigation tab
 *********************************************/

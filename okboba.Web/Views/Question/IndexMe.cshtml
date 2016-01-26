@@ -12,8 +12,6 @@
 <!--Named anchor for navigating directly to question box (from Navbar) -->
 <a name="questionBox"></a>
 
-@Html.Partial("~/Views/Photo/_UploadPhotoTemplate.cshtml")
-
 @Html.Partial("_QuestionTemplate")
 @Html.Partial("_AnswerTemplate")
 
@@ -56,9 +54,9 @@
     <div class="col-md-4">
         <div class="question-stats question-stats-me">
             <p>最高的匹配实现：</p>
-            <div class="question-highest-match">@Model.HighestMatchPercent%</div>
+            <div class="question-highest-match" id="question-stats-highest-percent">@Model.HighestMatchPercent%</div>
             <p>
-                您回答： <b>@Model.Questions.TotalItemCount</b> 问题<br />
+                您回答： <b id="question-stats-num-answered">@Model.Questions.TotalItemCount</b> 问题<br />
                 (如果你回答多问题，匹配更高)
             </p>
         </div>
@@ -85,9 +83,6 @@
 
             //messaging
             messaging.initModule();
-
-            //photos
-            PhotoManager.initModule();
         });
     </script>
 }

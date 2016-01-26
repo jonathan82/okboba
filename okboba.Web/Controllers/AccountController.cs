@@ -17,6 +17,7 @@ using okboba.Repository.EntityRepository;
 using System.Net;
 using okboba.Resources;
 using okboba.Web.Helpers;
+using System.Text.RegularExpressions;
 
 //some comments
 
@@ -58,6 +59,23 @@ namespace okboba.Web.Controllers
             {
                 return HttpContext.GetOwinContext().Authentication;
             }
+        }
+
+        /// <summary>
+        /// API: Validates a user's nickname by making sure it consists of letters only 
+        /// (chinese and english letters)
+        /// </summary>
+        [AllowAnonymous]
+        public JsonResult VerifyNickname(string nickname)
+        {
+            var rgx = new Regex("^\\p{L}{2,15}$");
+            if(!rgx.IsMatch(nickname))
+            {
+                return Json(i18n.Error_InvalidName, JsonRequestBehavior.AllowGet);
+            }
+
+            //name OK
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         //

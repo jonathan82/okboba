@@ -543,4 +543,10 @@
   <data name="Nav_MyQuestions" xml:space="preserve">
     <value>My Questions</value>
   </data>
+  <data name="Error_UserNotFound" xml:space="preserve">
+    <value>User not found. Maybe they deleted their profile?</value>
+  </data>
+  <data name="Error_InvalidName" xml:space="preserve">
+    <value>Invalid Name</value>
+  </data>
 </root>

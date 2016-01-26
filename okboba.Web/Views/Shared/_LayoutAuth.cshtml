@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - OkBoba Dating</title>
+    <title>OK波霸约会</title>
     @Styles.Render("~/content/css")
 </head>
 
@@ -39,6 +39,13 @@
             chatManager.initModule({ hubUrl: '@Html.ChatUrl()' });
         });
     </script>*@
+
+    <script>
+        $(function () {
+            //Initialize photo manager
+            PhotoManager.initModule();
+        });
+    </script>
 
 </body>
 </html>

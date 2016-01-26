@@ -134,6 +134,11 @@ namespace okboba.Repository.RedisRepository
             }
 
             var key = KeyMatches(profileId);
+
+            var length = db.ListLength(key);
+
+            numConsidered = numConsidered > length ? (int)length : numConsidered;
+
             var list = new List<MatchModel>();
 
             for (int i = 0; i < numReturn; i++)

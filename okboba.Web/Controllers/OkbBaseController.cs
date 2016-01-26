@@ -15,6 +15,7 @@ using okboba.Web.Models;
 using okboba.Repository;
 using System.Threading;
 using okboba.Web.Helpers;
+using okboba.Resources.Exceptions;
 
 namespace okboba.Web.Controllers
 {
@@ -39,7 +40,7 @@ namespace okboba.Web.Controllers
         /// there looks up in DB and caches in the session to speed up lookups next time.
         /// The User Id is stored in the Identity object of the current thread.
         /// </summary>
-        protected int GetProfileId()
+        protected int GetMyProfileId()
         {            
             int profileId;
 
@@ -165,7 +166,7 @@ namespace okboba.Web.Controllers
         [Authorize]
         public ActionResult Navbar()
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var matchClient = GetMatchApiClient();
 
@@ -180,6 +181,18 @@ namespace okboba.Web.Controllers
             vm.NumQuesAnswered = matchClient.GetAnswerCountAsync(me).Result; 
 
             return PartialView("_Navbar", vm);
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            if(filterContext.Exception is UserNotFoundException)
+            {
+                //show error page
+                filterContext.ExceptionHandled = true;
+                filterContext.Result = View("UserNotFound");
+            }
+
+            //base.OnException(filterContext);    
         }
     }
 }

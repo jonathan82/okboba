@@ -47,7 +47,7 @@ namespace okboba.Web.Controllers
 
             var vm = new QuestionIndexViewModel();
 
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             if (string.IsNullOrEmpty(userId) || userId == User.Identity.GetUserId())
             {
@@ -86,7 +86,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public async Task<JsonResult> Skip(AnswerViewModel input)
         {
-            var profileId = GetProfileId();
+            var profileId = GetMyProfileId();
 
             var answer = new Answer
             {
@@ -119,7 +119,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public async Task<JsonResult> Answer(AnswerViewModel input, bool getNextFlag = true)
         {
-            var profileId = GetProfileId();
+            var profileId = GetMyProfileId();
 
             _matchApiClient = GetMatchApiClient();
 

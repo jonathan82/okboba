@@ -1,6 +1,7 @@
 ﻿using okboba.Entities;
 using okboba.Repository.Models;
 using okboba.Resources;
+using okboba.Resources.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -137,7 +138,11 @@ namespace okboba.Repository.EntityRepository
         {
             var db = new OkbDbContext();
             var user = db.Users.Find(userId);
-            return user == null ? -1 : user.Profile.Id;
+            if (user==null)
+            {
+                throw new UserNotFoundException();
+            }
+            return (int)user.ProfileId;
         }
 
         public void EditDetails(ProfileDetail details, OkbConstants.ProfileDetailSections section, int profileId)
@@ -235,13 +240,6 @@ namespace okboba.Repository.EntityRepository
             }
 
             db.SaveChanges();
-        }
-
-        public Profile GetProfile(string userId)
-        {
-            var db = new OkbDbContext();
-            var user = db.Users.Find(userId);
-            return db.Profiles.Find(user.ProfileId);
         }
 
         /// <summary>

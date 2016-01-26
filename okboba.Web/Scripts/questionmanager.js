@@ -19,9 +19,23 @@ var QuestionManager = (function () {
     }
     var questionTemplate,
         answerMeTemplate,
-        answerOtherTemplate;
+        answerOtherTemplate,
+        mainQuestionForm;
 
     /////////////////// Private functions ///////////////
+    function incNumQuestionsAnswered() {
+        var str, numAnswered, pct;
+
+        //update # of questions answerd
+        str = $('#question-stats-num-answered').text();
+        numAnswered = parseInt(str, 10) + 1;
+        $('#question-stats-num-answered').text(numAnswered);
+
+        //update highest % possible
+        pct = numAnswered == 0 ? 0 : Math.round((1 - 1 / numAnswered) * 100);
+        $('#question-stats-highest-percent').text(pct + '%');
+    }
+
     /*
      * Returns true if the index matches the acceptable of the answer
      */
@@ -184,6 +198,8 @@ var QuestionManager = (function () {
      * Shows the next question by rendering it to the DOM.
      * Setup the vaidation and triggers, as well as handlers for
      * handling them.
+     * 
+     * Side Effect: destroys the current question form (cont)
      */
     function showNextQuestion(ques, cont) {
         var quesForm;
@@ -199,6 +215,8 @@ var QuestionManager = (function () {
         quesForm.on('question:skip', function () {
             skip(quesForm);
         });
+
+        return quesForm;
     }
     
     /*
@@ -208,26 +226,32 @@ var QuestionManager = (function () {
     function answer(form) {
         var nextQues, nextQuesForm;
 
+        //submit the question
+        submitQuestion(form, true).done(function (result) {
+            configMap.nextQuestions = result;
+
+            //provide realtime feedback -update the # of questions answered on the page 
+            //add to list of questions on page
+            incNumQuestionsAnswered();
+
+        }).fail(function () {
+            //show the previous questions
+            console.log('answer question failed');
+            showNextQuestion(configMap.nextQuestions[0], nextQuesForm);
+        });
+
         //optimistically show the next question
         if (configMap.nextQuestions.length >= 2) {
 
             //we have more questions to show
             nextQues = configMap.nextQuestions[1];
 
-            showNextQuestion(nextQues, form);
+            nextQuesForm = showNextQuestion(nextQues, form);
 
         } else {
             //no more questions to show
             alert('no more questiosn to show!');
-        }
-
-        //submit the question
-        submitQuestion(form, true).done(function (result) {
-            configMap.nextQuestions = result;
-        }).fail(function () {
-            //show the previous questions
-            alert('failed');
-        });        
+        }                
     }
 
     function skip(form) {

@@ -26,7 +26,7 @@ namespace okboba.Web.Controllers
         {
             var matchClient = GetMatchApiClient();
 
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var favorites = _favRepo.GetFavorites(me);
 
@@ -57,7 +57,7 @@ namespace okboba.Web.Controllers
         [HttpPost]
         public JsonResult Save(int favoriteId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             _favRepo.Save(me, favoriteId);
 
@@ -70,7 +70,7 @@ namespace okboba.Web.Controllers
         [HttpPost]
         public JsonResult Remove(int favoriteId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             _favRepo.Remove(me, favoriteId);
 

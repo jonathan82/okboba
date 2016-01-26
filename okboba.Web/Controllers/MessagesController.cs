@@ -40,7 +40,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public ActionResult Index()
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var vm = _msgRepo.GetConversations(me);
 
@@ -52,7 +52,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public ActionResult Sent()
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var msgs = _msgRepo.GetSent(me);
 
@@ -66,7 +66,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public ActionResult Conversation(int id)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var matchClient = GetMatchApiClient();
 
@@ -107,7 +107,7 @@ namespace okboba.Web.Controllers
         /// </summary>
         public ActionResult Previous(int low, int convId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             //make sure we're getting our own conversation
             var map = _msgRepo.GetConversationMap(me, convId);
@@ -135,7 +135,7 @@ namespace okboba.Web.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> Reply(string message, int convId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             //sanitize input
             message = Server.HtmlEncode(message);
@@ -157,7 +157,7 @@ namespace okboba.Web.Controllers
         [ValidateInput(false)]
         public async Task<ActionResult> StartConversation(int to, string subject, string message)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             //sanitize the input
             subject = Server.HtmlEncode(subject);
@@ -172,7 +172,7 @@ namespace okboba.Web.Controllers
 
         public async Task<ActionResult> Delete(int convId)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             await _msgRepo.DeleteConversationAsync(me, convId);
 

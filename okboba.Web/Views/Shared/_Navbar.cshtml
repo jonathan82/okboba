@@ -28,7 +28,7 @@
             <!-- Right navigation links -->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/favorites"><span class="glyphicon glyphicon-star"></span></a></li>
-                <li><a href="/messages"><span class="glyphicon glyphicon-envelope text-big"></span>@Html.UnreadCount(Model.UnreadCount)</a></li>
+                <li><a href="/messages"><span class="glyphicon glyphicon-envelope text-big"></span>@Html.UnreadCount(Model.UnreadCount)</a></li>                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle navbar-avatar-link" data-toggle="dropdown">
                         @Html.Avatar(Model.MyProfile, "navbar-avatar", true)
@@ -40,6 +40,10 @@
                         <li><a href="/account/logoff">@i18n.Nav_Logoff</a></li>
                     </ul>
                 </li>
+                @if (!Model.HasPhoto)
+                {
+                    <li><button type="button" class="btn btn-info navbar-btn" data-toggle="photoupload">@i18n.Button_AddPhoto</button></li>
+                }                
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -68,3 +72,5 @@
         </div>
     </div>
 }
+
+@Html.Partial("~/Views/Photo/_UploadPhotoTemplate.cshtml")
