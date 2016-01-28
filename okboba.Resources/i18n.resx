@@ -549,4 +549,13 @@
   <data name="Error_InvalidName" xml:space="preserve">
     <value>无效的名称</value>
   </data>
+  <data name="Messaging_Notification_Subject" xml:space="preserve">
+    <value>{0} 给你发了消息！</value>
+  </data>
+  <data name="Messaging_Notification_Body" xml:space="preserve">
+    <value>您收到新的消息 {0}。点击下图查看和回复信息。</value>
+  </data>
+  <data name="Button_Send" xml:space="preserve">
+    <value>发送</value>
+  </data>
 </root>

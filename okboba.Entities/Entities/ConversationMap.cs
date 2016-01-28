@@ -27,6 +27,8 @@ namespace okboba.Entities
 
         public bool HasReplies { get; set; }
 
+        public bool HasBeenEmailed { get; set; }
+
         //Navigation properties
         public virtual Conversation Conversation { get; set; }
         public virtual Profile Profile { get; set; }

@@ -313,6 +313,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\MachineKeyDataProtector.cs" />
     <Compile Include="Helpers\OkbHtmlHelpers.cs" />
     <Compile Include="Helpers\QuestionHtmlHelper.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />

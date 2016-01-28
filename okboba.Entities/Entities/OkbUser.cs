@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using okboba.Entities.Helpers;
+using okboba.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,7 +24,12 @@ namespace okboba.Entities
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+
             // Add custom user claims here
+
+            // Profile Id claim
+            userIdentity.AddClaim(new Claim(OkbConstants.PROFILEID_CLAIM, ProfileId.ToString()));
+
             return userIdentity;
         }
 

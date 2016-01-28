@@ -64,5 +64,7 @@ namespace okboba.Repository
         Task<int> StartConversation(int from, int to, string subject, string message);
         Task Reply(int from, int convId, string message);
         Conversation GetConversation(int id);
+        IEnumerable<UnreadConversationModel> GetUnreadConversations();
+        void MarkAllAsEmailed();
     }
 }

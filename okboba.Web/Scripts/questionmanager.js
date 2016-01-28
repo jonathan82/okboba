@@ -118,6 +118,8 @@ var QuestionManager = (function () {
      * 
      *   - If isCancelable = true then hide the container instead of destroying it. That
      *     way we can restore it later.  Question form will have "Cancel" button
+     * 
+     *   - If isCancelable = false then current form will be destroyed and replaced with new form
      */
     function showQuestion(ques, container, isCancelable) {
         var html, newQuestion, savedElement;
@@ -195,39 +197,36 @@ var QuestionManager = (function () {
     }
 
     /*
-     * Shows the next question by rendering it to the DOM.
+     * Shows the next main question by rendering it to the DOM.
      * Setup the vaidation and triggers, as well as handlers for
-     * handling them.
+     * handling them. 
      * 
-     * Side Effect: destroys the current question form (cont)
+     * update mainQuestionForm to point to new new question
      */
-    function showNextQuestion(ques, cont) {
-        var quesForm;
+    function showNextQuestion(ques) {
 
-        quesForm = showQuestion(ques, cont, false);
+        mainQuestionForm = showQuestion(ques, mainQuestionForm, false);
 
-        setupQuestionForm(quesForm);
+        setupQuestionForm(mainQuestionForm);
 
-        quesForm.on('question:submit', function () {
-            answer(quesForm);
+        mainQuestionForm.on('question:submit', function () {
+            answer();
         });
 
-        quesForm.on('question:skip', function () {
-            skip(quesForm);
+        mainQuestionForm.on('question:skip', function () {
+            skip();
         });
-
-        return quesForm;
     }
     
     /*
      * Handler for when the user answers the main question form. Gets the next 2 questions
      * and shows the next question optimistically.
      */
-    function answer(form) {
-        var nextQues, nextQuesForm;
+    function answer() {
+        var nextQues;
 
         //submit the question
-        submitQuestion(form, true).done(function (result) {
+        submitQuestion(mainQuestionForm, true).done(function (result) {
             configMap.nextQuestions = result;
 
             //provide realtime feedback -update the # of questions answered on the page 
@@ -236,8 +235,8 @@ var QuestionManager = (function () {
 
         }).fail(function () {
             //show the previous questions
-            console.log('answer question failed');
-            showNextQuestion(configMap.nextQuestions[0], nextQuesForm);
+            console.log('answer main question failed');
+            showNextQuestion(configMap.nextQuestions[0]);
         });
 
         //optimistically show the next question
@@ -246,7 +245,7 @@ var QuestionManager = (function () {
             //we have more questions to show
             nextQues = configMap.nextQuestions[1];
 
-            nextQuesForm = showNextQuestion(nextQues, form);
+            showNextQuestion(nextQues);
 
         } else {
             //no more questions to show
@@ -254,11 +253,11 @@ var QuestionManager = (function () {
         }                
     }
 
-    function skip(form) {
-        var nextQues, nextQuesForm;
+    function skip() {
+        var nextQues;
 
         //submit the question
-        skipQuestion(form).done(function (result) {
+        skipQuestion(mainQuestionForm).done(function (result) {
 
             if(result==null || result.length < 1) {
                 //no more questions to show
@@ -271,11 +270,10 @@ var QuestionManager = (function () {
 
             nextQues = configMap.nextQuestions[0];
 
-            showNextQuestion(nextQues, form);
+            showNextQuestion(nextQues);
 
         }).fail(function () {
-            //show the previous questions
-            alert('failed');
+            alert('skip question failed');
         });
     }
 
@@ -327,12 +325,13 @@ var QuestionManager = (function () {
         $('[data-toggle="updateanswer"]').click(function () { answerOrUpdate('update', this) });
 
         //setup main question form
-        setupQuestionForm($('.question-form'));
-        $('.question-form').on('question:submit', function () {
-            answer($(this));
+        mainQuestionForm = $('.question-form'); //there's only one "main" question form on the page
+        setupQuestionForm(mainQuestionForm);
+        mainQuestionForm.on('question:submit', function () {
+            answer();
         });
-        $('.question-form').on('question:skip', function () {
-            skip($(this));
+        mainQuestionForm.on('question:skip', function () {
+            skip();
         });
 
         //var savedTop = $('.question-stats').offset().top;

@@ -49,7 +49,7 @@ namespace okboba.MatchApi.Controllers
         [System.Web.Http.HttpGet]    
         public MatchModel CalculateMatch(int otherProfileId)
         {
-            var myProfileId = GetProfileId();
+            var myProfileId = GetMyProfileId();
             var result = _matchRepo.Calculate(myProfileId, otherProfileId);
             return result;
         }
@@ -60,7 +60,7 @@ namespace okboba.MatchApi.Controllers
         [System.Web.Http.HttpGet]
         public bool CalculateAndSaveMatches([FromUri]MatchCriteriaModel criteria)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var matches = _matchRepo.Search(me, criteria);
 
@@ -76,7 +76,7 @@ namespace okboba.MatchApi.Controllers
         public HttpResponseMessage GetMatches([FromUri]MatchCriteriaModel criteria, int page = 1)
         {
             //We should be authenticated at this point.  Only allow users to get their own matches
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             string json = "";
 
@@ -115,7 +115,7 @@ namespace okboba.MatchApi.Controllers
         [System.Web.Http.HttpGet]
         public IList<MatchModel> Recommended([FromUri]MatchCriteriaModel criteria)
         {
-            var me = GetProfileId();
+            var me = GetMyProfileId();
 
             var recommended = _redisRepo.Recommended(me, criteria, OkbConstants.MATCHES_RECOMMENDED_RETURN, OkbConstants.MATCHES_RECOMMENDED_CONSIDERED);
 

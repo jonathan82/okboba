@@ -16,6 +16,7 @@ using okboba.Repository;
 using System.Threading;
 using okboba.Web.Helpers;
 using okboba.Resources.Exceptions;
+using System.Security.Claims;
 
 namespace okboba.Web.Controllers
 {
@@ -36,37 +37,23 @@ namespace okboba.Web.Controllers
         }
 
         /// <summary>
-        /// Gets the profile Id of the logged in user. First looks in the Session and if not
-        /// there looks up in DB and caches in the session to speed up lookups next time.
-        /// The User Id is stored in the Identity object of the current thread.
+        /// Gets the profile Id of the logged in user. Profile Id is stored as a Claim in the user's cookie.
         /// </summary>
         protected int GetMyProfileId()
         {            
-            int profileId;
+            //Get profile Id from claims
+            var identity = User.Identity as ClaimsIdentity;
 
-            //Check if ProfileId in session, if not cache it there
-            if (Session["ProfileId"] == null)
+            foreach (var claim in identity.Claims)
             {
-                var db = new OkbDbContext();
-                var userId = User.Identity.GetUserId();
-                var user = db.Users.Find(userId);
-
-                if (user == null)
+                if (claim.Type == OkbConstants.PROFILEID_CLAIM)
                 {
-                    // No profile exists for user. So we have a user account and they're logged in
-                    // but they have no profile. in this case we should
-                    throw new Exception("No profile exists for user");
+                    return Convert.ToInt32(claim.Value);
                 }
-
-                profileId = user.Profile.Id;
-                Session["ProfileId"] = profileId;
-            }
-            else
-            {
-                profileId = (int)Session["ProfileId"];
             }
 
-            return profileId;
+            //Error if we got here - no claim found
+            throw new Exception("No profile Id found for logged in user: " + User.Identity.Name);            
         }
 
         /// <summary>

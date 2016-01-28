@@ -143,6 +143,7 @@ namespace okboba.Repository.EntityRepository
             }
                         
             mapOther.HasBeenRead = false;
+            mapOther.HasBeenEmailed = false;
 
             if (!mapMe.HasReplies || !mapOther.HasReplies)
             {
@@ -476,6 +477,42 @@ namespace okboba.Repository.EntityRepository
             var db = new OkbDbContext();
             var conv =  db.Conversations.Find(id);
             return conv;
+        }
+
+        /// <summary>
+        /// Gets all the unread conversations in the database that haven't been sent to email.
+        /// Used by the Mail Job to notify users of unread mail.
+        /// </summary>
+        public IEnumerable<UnreadConversationModel> GetUnreadConversations()
+        {
+            var db = new OkbDbContext();
+
+            var result = from map in db.ConversationMap.AsNoTracking()
+                         where map.HasBeenRead == false && map.HasBeenEmailed == false
+                         join otherProfile in db.Profiles.AsNoTracking() on map.Other equals otherProfile.Id
+                         join profile in db.Profiles.AsNoTracking() on map.ProfileId equals profile.Id
+                         join user in db.Users.AsNoTracking() on profile.UserId equals user.Id
+                         select new UnreadConversationModel
+                         {
+                             Map = map,
+                             OtherProfile = otherProfile,
+                             Email = user.Email,
+                             UserId = user.Id,
+                             Name = profile.Nickname
+                         };
+
+            return result.ToList();
+        }
+
+        /// <summary>
+        /// Marks all the conversations as emailed. called by the mail job after it has finished 
+        /// emailing all the users their unread conversations.
+        /// </summary>
+        public void MarkAllAsEmailed()
+        {
+            var db = new OkbDbContext();
+            var sql = "update ConversationMaps set HasBeenEmailed = 1 where HasBeenEmailed = 0";
+            db.Database.ExecuteSqlCommand(sql);            
         }
     }
 }

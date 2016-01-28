@@ -286,6 +286,15 @@ namespace okboba.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 发送.
+        /// </summary>
+        public static string Button_Send {
+            get {
+                return ResourceManager.GetString("Button_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 跳过问题.
         /// </summary>
         public static string Button_SkipQuestion {
@@ -912,6 +921,24 @@ namespace okboba.Resources {
         public static string Messaging_Compose_Placeholder {
             get {
                 return ResourceManager.GetString("Messaging_Compose_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 您收到新的消息 {0}。点击下图查看和回复信息。.
+        /// </summary>
+        public static string Messaging_Notification_Body {
+            get {
+                return ResourceManager.GetString("Messaging_Notification_Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} 给你发了消息！.
+        /// </summary>
+        public static string Messaging_Notification_Subject {
+            get {
+                return ResourceManager.GetString("Messaging_Notification_Subject", resourceCulture);
             }
         }
         

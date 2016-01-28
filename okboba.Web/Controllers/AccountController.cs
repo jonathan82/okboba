@@ -104,6 +104,28 @@ namespace okboba.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// GET: /account/login 
+        /// Logs in a user via a generated security token and redirects them to the given url
+        /// </summary>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(string code, string userId, string url)
+        {
+            bool result = await UserManager.VerifyUserTokenAsync(userId, OkbConstants.ONECLICK_LOGIN_PURPOSE, code);
+
+            if (result)
+            {
+                //sign in user
+                var user = UserManager.FindById(userId);
+                SignInManager.SignIn(user, true, true);
+                return Redirect(url);
+            }
+
+            //bad login attempt
+            return Redirect("/");
+        }
+
         //
         // POST: /Account/Login
         [HttpPost]

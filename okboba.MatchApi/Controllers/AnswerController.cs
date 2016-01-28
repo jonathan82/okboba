@@ -75,7 +75,7 @@ namespace okboba.MatchApi.Controllers
         public int Post([FromBody]Answer answer)
         {
             //We should be authenticated at this point.  Only allow users to update their own answers
-            var profileId = GetProfileId();
+            var profileId = GetMyProfileId();
 
             answer.ProfileId = profileId;
 

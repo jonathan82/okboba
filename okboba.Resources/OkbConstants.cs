@@ -5,6 +5,8 @@
     {
         //Miscellaneous
         public const int CACHE_DEFAULT_EXPIRATION = 30; //default time in minutes for items to expire in redis cache
+        public const string ONECLICK_LOGIN_PURPOSE = "OneClickLogin";
+        public const string PROFILEID_CLAIM = "ProfileId";
 
         //Questions
         public const int NUM_QUES_PER_PAGE = 20;
@@ -22,6 +24,7 @@
         public const int MAX_SUBJECT_LENGTH = 100;
         public const int MESSAGES_PER_PAGE = 20; //number of messages to show per "load" request
         public const int INITIAL_NUM_MESSAGES = 4; //number of messages show initially
+        public const int MAIL_NOTIFICATION_INTERVAL = 8; //number of minutes between sending mail notification
 
         //Activity Feed
         public enum ActivityCategories { Joined = 1, UploadedPhoto = 2, EditedProfileText = 3, AnsweredQuestion = 4 }

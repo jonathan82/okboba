@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using okboba.Web.Models;
 using okboba.Entities;
 using okboba.Entities.Helpers;
+using okboba.Web.Helpers;
 
 namespace okboba
 {
@@ -80,11 +81,17 @@ namespace okboba
             });
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
-            var dataProtectionProvider = options.DataProtectionProvider;
+
+            //var dataProtectionProvider = options.DataProtectionProvider;
+            var dataProtectionProvider = new MachineKeyProtectionProvider(); //use machinekey to generate tokens
+
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<OkbUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider =
+                    new DataProtectorTokenProvider<OkbUser>(dataProtectionProvider.Create("ASP.NET Identity"))
+                    {
+                        TokenLifespan = TimeSpan.FromDays(180) //set token expiration date to 6 months
+                    };
             }
             return manager;
         }
@@ -99,7 +106,7 @@ namespace okboba
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(OkbUser user)
-        {
+        {            
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
         }
 

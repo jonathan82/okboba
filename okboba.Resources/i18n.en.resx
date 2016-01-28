@@ -381,9 +381,6 @@
   <data name="Messaging_Sent_Confirmation" xml:space="preserve">
     <value>Message Sent!</value>
   </data>
-  <data name="Messaging_Subject_Placeholder" xml:space="preserve">
-    <value>Message Subject</value>
-  </data>
   <data name="Messaging_Them" xml:space="preserve">
     <value>Them</value>
   </data>
@@ -548,5 +545,8 @@
   </data>
   <data name="Error_InvalidName" xml:space="preserve">
     <value>Invalid Name</value>
+  </data>
+  <data name="Button_Send" xml:space="preserve">
+    <value>Send</value>
   </data>
 </root>
